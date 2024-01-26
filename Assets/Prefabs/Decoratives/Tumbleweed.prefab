@@ -113,6 +113,10 @@ PrefabInstance:
       value: Tumbleweed
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5cf47dd0a87b9954aaa207717c43df1b, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5cf47dd0a87b9954aaa207717c43df1b, type: 3}
       propertyPath: m_TagString
       value: Tumbleweed
       objectReference: {fileID: 0}
@@ -249,5 +253,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe089c298cdfd4f47b162ece12b5f0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 14
-  lifetime: 45
+  _speed: 15
+  _lifetime: 45
