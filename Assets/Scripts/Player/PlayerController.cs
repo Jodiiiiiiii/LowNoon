@@ -13,6 +13,8 @@ public class PlayerCharacterInputs
 {
     public float MoveAxisForward;
     public bool DashDown;
+    public float LookAxisRight;
+    public float LookAxisUp;
 }
 
 public class PlayerController : MonoBehaviour
@@ -82,7 +84,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(State);
         GatherInput();
         UpdateState();
 
@@ -93,6 +94,8 @@ public class PlayerController : MonoBehaviour
     #region GATHER-INPUT
     // input constants
     private const string VERTICAL_INPUT = "Vertical";
+    private const string MOUSE_RIGHT = "Mouse X";
+    private const string MOUSE_UP = "Mouse Y";
 
     public PlayerCharacterInputs PlayerInput { get; private set; } = new PlayerCharacterInputs();
 
@@ -101,8 +104,13 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void GatherInput()
     {
+        // Character inputs
         PlayerInput.MoveAxisForward = Input.GetAxisRaw(VERTICAL_INPUT);
         PlayerInput.DashDown = Input.GetKeyDown(KeyCode.LeftShift);
+
+        // Camera inputs
+        PlayerInput.LookAxisRight = Input.GetAxisRaw(MOUSE_RIGHT);
+        PlayerInput.LookAxisUp = Input.GetAxisRaw(MOUSE_UP);
     }
     #endregion
 
