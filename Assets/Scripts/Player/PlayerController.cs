@@ -144,6 +144,11 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region UPDATE-ROTATION
+    [Header("Rotation")]
+    [SerializeField, Tooltip("used for rotating player towards camera angle")] private Transform _cameraTransform;
+    [SerializeField, Tooltip("'snappiness' of character seeking camera angle while moving")] private float _movingRotationSharpness = 1f;
+    [SerializeField, Tooltip("'snappiness' of character seeking camera angle while stationary")] private float _stationaryRotationSharpness = 2f;
+
     /// <summary>
     /// Update player velocity based on inputs
     /// </summary>
@@ -152,8 +157,12 @@ public class PlayerController : MonoBehaviour
         switch (State)
         {
             case CharacterState.Moving: // character tracks rotation to camera at a certain rate
+                Quaternion m_planarCameraQuaternion = Quaternion.Euler(new Vector3(0f, _cameraTransform.rotation.eulerAngles.y, 0f));
+                transform.rotation = Quaternion.Slerp(transform.rotation, m_planarCameraQuaternion, 1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime));
                 break;
             case CharacterState.Stationary: // character rotates faster tracking camera
+                Quaternion s_planarCameraQuaternion = Quaternion.Euler(new Vector3(0f, _cameraTransform.rotation.eulerAngles.y, 0f));
+                transform.rotation = Quaternion.Slerp(transform.rotation, s_planarCameraQuaternion, 1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime));
                 break;
             case CharacterState.Dash: // camera locked at current 'dashing' direction
                 break;
@@ -163,7 +172,8 @@ public class PlayerController : MonoBehaviour
 
     #region UPDATE-VELOCITY
     [Header("Velocity")]
-    [SerializeField] private float _movementForce = 5f;
+    [SerializeField, Tooltip("strength of force applied to make character move forwards")] private float _movementForce = 5f;
+    [SerializeField, Tooltip("terminal speed that character is capped at")] private float _maxSpeed = 5f;
 
     /// <summary>
     /// Update player velocity based on inputs.
@@ -175,7 +185,10 @@ public class PlayerController : MonoBehaviour
         {
             case CharacterState.Moving: // moves forwards (in direction of player facing) only
 
+                // apply moving force
                 _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _movementForce * Time.deltaTime);
+                // check for max speed
+                if (_rb.velocity.magnitude > _maxSpeed) _rb.velocity = _rb.velocity.normalized * _maxSpeed;
 
                 break;
             case CharacterState.Stationary: // no velocity (hence, stationary)
