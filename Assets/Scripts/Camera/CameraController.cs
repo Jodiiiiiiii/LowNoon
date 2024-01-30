@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Player objects - used for camera tracking and inputs
-    [SerializeField] private PlayerController _player;
+    [Header("Player")]
+    [SerializeField, Tooltip("used for camera tracking and inputs")] private PlayerController _player;
     private Transform _followTransform;
 
     [Header("Rotation Parameters / Constraints")]
@@ -19,17 +19,26 @@ public class CameraController : MonoBehaviour
     [SerializeField, Tooltip("maximum distance from followTransform")] private float _maxDistance = 3f;
     [SerializeField, Tooltip("framing offset from followed target")] private Vector2 _framingOffset = Vector2.zero;
 
+    [Header("Obstructions")]
+    [SerializeField, Tooltip("camera zoom 'snappiness'")] private float _zoomSharpness = 1000f;
+    [SerializeField, Tooltip("radius of sphere cast for obstruction detection")] private float _obstructionCheckRadius = 2f;
+    [SerializeField, Tooltip("maximum number of obstructing objects detected in a single sphere cast")] private int _maxObstructions = 32;
+    [SerializeField, Tooltip("layers considered for obstruction checks")] private LayerMask _obstructionLayers;
+
     // rotation calculation variables
     private Vector3 _targetPlanarDir = Vector3.forward;
     private float _targetVertAngle = 0f;
     // position calculation variables
     private Vector3 _currentFollowPosition; // smoothed panning origin
+    private float _currentDistance;
 
     // Start is called before the first frame update
     void Start()
     {
         _followTransform = _player.gameObject.transform;
+
         _currentFollowPosition = _followTransform.position;
+        _currentDistance = _maxDistance;
     }
 
     // Update is called once per frame
@@ -57,14 +66,29 @@ public class CameraController : MonoBehaviour
         // smoothly lerp central follow position to followTransform
         _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, _followTransform.position, 1f - Mathf.Exp(-_followingSharpness * Time.deltaTime));
 
+        // framing offset - shifts in screen view before obstruction checking
+        _currentFollowPosition += transform.right * _framingOffset.x;
+        _currentFollowPosition += transform.up * _framingOffset.y;
+
         // Handle Obstructions
+        RaycastHit closestHit = new RaycastHit();
+        closestHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
+        RaycastHit[] obstructions = new RaycastHit[_maxObstructions];
+        int obstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, _obstructionCheckRadius, -transform.forward, obstructions, _maxDistance, _obstructionLayers, QueryTriggerInteraction.Ignore);
+        // find closest obstruction
+        for(int i = 0; i < obstructionCount; i++)
+        {
+            if (obstructions[i].distance < closestHit.distance && obstructions[i].distance > 0) closestHit = obstructions[i];
+        }
 
-        // calculate orbit position based on smoothed rotation, smoothed follow position, and distance
-        Vector3 targetPosition = _currentFollowPosition - (targetRotation * Vector3.forward * _maxDistance);
+        // smoothly lerp to desired zoom distance (either max or nearest obstruction)
+        if (closestHit.distance < Mathf.Infinity)
+            _currentDistance = Mathf.Lerp(_currentDistance, closestHit.distance, 1 - Mathf.Exp(-_zoomSharpness * Time.deltaTime));
+        else
+            _currentDistance = Mathf.Lerp(_currentDistance, _maxDistance, 1 - Mathf.Exp(-_zoomSharpness * Time.deltaTime));
 
-        // framing offset - shifts in screen view relative to final position on target
-        targetPosition += transform.right * _framingOffset.x;
-        targetPosition += transform.up * _framingOffset.y;
+        // calculate orbit position based on smoothed rotation, smoothed follow position, and smoothed distance
+        Vector3 targetPosition = _currentFollowPosition - (targetRotation * Vector3.forward * _currentDistance);
 
         // Apply calculated position
         transform.position = targetPosition;
