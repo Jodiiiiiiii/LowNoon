@@ -921,7 +921,7 @@ MonoBehaviour:
   _cameraTransform: {fileID: 963194228}
   _movingRotationSharpness: 1
   _stationaryRotationSharpness: 4
-  _movementForce: 5000
+  _movementForce: 7000
   _maxSpeed: 15
 --- !u!4 &1906806684
 Transform:
@@ -931,7 +931,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906806682}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.74, y: -0.36, z: -2.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -939,7 +939,7 @@ Transform:
   - {fileID: 467401048}
   - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &1906806685
 Rigidbody:
   m_ObjectHideFlags: 0
