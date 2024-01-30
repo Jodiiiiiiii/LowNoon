@@ -123,6 +123,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void UpdateState()
     {
+        // TODO: refine state system (will make more sense when a dash is somewhat implemented)
+
         // Enter Moving (clarify where from - may be different for different states)
         if(PlayerInput.MoveAxisForward > 0f) // player holding input to move
         {
@@ -157,12 +159,16 @@ public class PlayerController : MonoBehaviour
         switch (State)
         {
             case CharacterState.Moving: // character tracks rotation to camera at a certain rate
+
                 Quaternion m_planarCameraQuaternion = Quaternion.Euler(new Vector3(0f, _cameraTransform.rotation.eulerAngles.y, 0f));
                 transform.rotation = Quaternion.Slerp(transform.rotation, m_planarCameraQuaternion, 1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime));
+
                 break;
             case CharacterState.Stationary: // character rotates faster tracking camera
+
                 Quaternion s_planarCameraQuaternion = Quaternion.Euler(new Vector3(0f, _cameraTransform.rotation.eulerAngles.y, 0f));
                 transform.rotation = Quaternion.Slerp(transform.rotation, s_planarCameraQuaternion, 1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime));
+
                 break;
             case CharacterState.Dash: // camera locked at current 'dashing' direction
                 break;
@@ -191,7 +197,8 @@ public class PlayerController : MonoBehaviour
                 if (_rb.velocity.magnitude > _maxSpeed) _rb.velocity = _rb.velocity.normalized * _maxSpeed;
 
                 break;
-            case CharacterState.Stationary: // no velocity (hence, stationary)
+            case CharacterState.Stationary: 
+                // no change - comes to a stop by friction (hence, stationary)
                 break;
             case CharacterState.Dash: // fixed velocity in fixed direction
                 break;
