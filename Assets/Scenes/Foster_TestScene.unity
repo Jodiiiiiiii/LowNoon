@@ -931,7 +931,7 @@ GameObject:
   - component: {fileID: 1264376281}
   - component: {fileID: 1264376280}
   m_Layer: 6
-  m_Name: Ramp 4
+  m_Name: Ramp 4 - too steep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1310,7 +1310,7 @@ MonoBehaviour:
   _slopeCollisionLayers:
     serializedVersion: 2
     m_Bits: 64
-  _slopeRotationSharpness: 50
+  _slopeRotationSharpness: 5
   _movementForce: 7000
   _maxSpeed: 15
   _gravityForce: 100

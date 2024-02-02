@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     // Components
     private Rigidbody _rb;
 
-    public CharacterState State { get; private set; }
+    public CharacterState State { get; private set; } // tracks the players current state; likely useful for animator
+    public Vector3 ForwardDirection { get; private set; } // current direction of (possible) player movement
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         State = CharacterState.Stationary;
+        ForwardDirection = transform.forward;
     }
 
     #region CHARACTER-STATES
@@ -190,15 +192,19 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(transform.position + transform.forward * _slopeRaycastForwardOffset, Vector3.down, out slopeHit,
             _slopeRaycastLength, _slopeCollisionLayers, QueryTriggerInteraction.Ignore))
         {
-            // calculate forward direction projected onto slope
-            Vector3 slopeMoveDirection = Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
+            // Update Forward Direction
+            ForwardDirection = Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
             // save initial rotation
             Quaternion oldRot = _wormModel.transform.rotation;
             // determine rotation for model which is flat on the plan
-            _wormModel.transform.LookAt(_wormModel.transform.position + slopeMoveDirection, slopeHit.normal);
+            _wormModel.transform.LookAt(_wormModel.transform.position + ForwardDirection, slopeHit.normal);
             Quaternion newRot = _wormModel.transform.rotation;
             // lerp between old and new rotations for slope rotations
             _wormModel.transform.rotation = Quaternion.Slerp(oldRot, newRot, 1f - Mathf.Exp(-_slopeRotationSharpness * Time.deltaTime));
+
+            // velocity smoothing - so no momentum is lost on changing slope angle
+            Quaternion change = Quaternion.FromToRotation(_rb.velocity, ForwardDirection);
+            _rb.velocity = change * _rb.velocity;
 
             IsGrounded = true;
         }
@@ -228,7 +234,7 @@ public class PlayerController : MonoBehaviour
                 if(IsGrounded)
                 {
                     // apply moving force
-                    _rb.AddForce(PlayerInput.MoveAxisForward * _wormModel.transform.forward * _movementForce * Time.deltaTime);
+                    _rb.AddForce(PlayerInput.MoveAxisForward * ForwardDirection * _movementForce * Time.deltaTime);
                     // check for max speed
                     if (_rb.velocity.magnitude > _maxSpeed) _rb.velocity = _rb.velocity.normalized * _maxSpeed;
                 } else // falling - loss of movement controls
