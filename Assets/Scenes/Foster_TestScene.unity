@@ -1301,19 +1301,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movingThreshold: 0.01
-  _wormModel: {fileID: 152756862}
   _cameraTransform: {fileID: 963194228}
-  _movingRotationSharpness: 1
-  _stationaryRotationSharpness: 4
+  _movingRotationSharpness: 2
+  _stationaryRotationSharpness: 8
+  _wormModel: {fileID: 152756862}
   _slopeRaycastLength: 1.5
   _slopeRaycastForwardOffset: 0.5
   _slopeCollisionLayers:
     serializedVersion: 2
     m_Bits: 64
+  _slopeRotationSharpness: 50
   _movementForce: 7000
   _maxSpeed: 15
   _gravityForce: 100
-  _terminalSpeed: 10
 --- !u!4 &1906806684
 Transform:
   m_ObjectHideFlags: 0

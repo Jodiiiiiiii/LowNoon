@@ -213,6 +213,7 @@ public class PlayerController : MonoBehaviour
     [Header("Velocity")]
     [SerializeField, Tooltip("strength of force applied to make character move forwards")] private float _movementForce = 5f;
     [SerializeField, Tooltip("terminal speed that character is capped at")] private float _maxSpeed = 5f;
+    [SerializeField, Tooltip("force due to gravity applied when not grounded")] private float _gravityForce = 100f;
 
     /// <summary>
     /// Update player velocity based on inputs.
@@ -224,10 +225,17 @@ public class PlayerController : MonoBehaviour
         {
             case CharacterState.Moving: // moves forwards (in direction of player facing) only
 
-                // apply moving force
-                _rb.AddForce(PlayerInput.MoveAxisForward * _wormModel.transform.forward * _movementForce * Time.deltaTime);
-                // check for max speed
-                if (_rb.velocity.magnitude > _maxSpeed) _rb.velocity = _rb.velocity.normalized * _maxSpeed;
+                if(IsGrounded)
+                {
+                    // apply moving force
+                    _rb.AddForce(PlayerInput.MoveAxisForward * _wormModel.transform.forward * _movementForce * Time.deltaTime);
+                    // check for max speed
+                    if (_rb.velocity.magnitude > _maxSpeed) _rb.velocity = _rb.velocity.normalized * _maxSpeed;
+                } else // falling - loss of movement controls
+                {
+                    // apply gravity force
+                    _rb.AddForce(Vector3.down * _gravityForce * Time.deltaTime);
+                }
 
                 break;
             case CharacterState.Stationary: 
