@@ -1542,7 +1542,7 @@ MonoBehaviour:
   _movingRotationSharpness: 2
   _stationaryRotationSharpness: 8
   _wormModel: {fileID: 152756862}
-  _slopeRotationSharpness: 20
+  _slopeRotationSharpness: 10
   _maxSlopeAngle: 25
   _groundCollisionLayers:
     serializedVersion: 2
