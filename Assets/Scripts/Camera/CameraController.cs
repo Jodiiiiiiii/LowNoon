@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField, Tooltip("used for camera tracking and inputs")] private PlayerController _player;
-    private Transform _followTransform;
+    [SerializeField, Tooltip("the geometry around which the camera tracks")] private Transform _followTransform;
 
     [Header("Rotation Parameters / Constraints")]
     [SerializeField, Tooltip("look sensitivity")] private float _rotationSpeed = 1f;
@@ -35,7 +35,6 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _followTransform = _player.gameObject.transform;
 
         _currentFollowPosition = _followTransform.position;
         _currentDistance = _maxDistance;
@@ -71,7 +70,7 @@ public class CameraController : MonoBehaviour
         _currentFollowPosition += transform.up * _framingOffset.y;
 
         // Handle Obstructions
-        RaycastHit closestHit = new RaycastHit();
+        RaycastHit closestHit = new();
         closestHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
         RaycastHit[] obstructions = new RaycastHit[_maxObstructions];
         int obstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, _obstructionCheckRadius, -transform.forward, obstructions, _maxDistance, _obstructionLayers, QueryTriggerInteraction.Ignore);
