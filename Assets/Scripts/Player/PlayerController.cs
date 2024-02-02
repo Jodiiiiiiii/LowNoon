@@ -146,32 +146,65 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region UPDATE-ROTATION
-    [Header("Rotation")]
+    [Header("Planar Rotation")]
     [SerializeField, Tooltip("used for rotating player towards camera angle")] private Transform _cameraTransform;
     [SerializeField, Tooltip("'snappiness' of character seeking camera angle while moving")] private float _movingRotationSharpness = 1f;
     [SerializeField, Tooltip("'snappiness' of character seeking camera angle while stationary")] private float _stationaryRotationSharpness = 2f;
+
+    [Header("Slope Rotation")]
+    [SerializeField, Tooltip("allows aligning of the worm model with the surface without changing rotation of player collider/camera")] private GameObject _wormModel;
+    [SerializeField, Tooltip("distance from player transform down that raycast checks for slope")] private float _slopeRaycastLength = 1f;
+    [SerializeField, Tooltip("Forward offset to check for slope slightly before the collider gets stuck on an edge")] private float _slopeRaycastForwardOffset = 0.5f;
+    [SerializeField, Tooltip("layers which act as physical objects for the player which can be stood on")] private LayerMask _slopeCollisionLayers;
+    [SerializeField, Tooltip("'snappiness' of character matching angle of surface slope")] private float _slopeRotationSharpness = 5f;
+
+    public bool IsGrounded { get; private set; } = true;
 
     /// <summary>
     /// Update player velocity based on inputs
     /// </summary>
     void UpdateRotation()
     {
+        // planar rotation (world space) - aligns player transform with camera planar angle
+        Quaternion planarCameraQuaternion = Quaternion.Euler(new Vector3(0f, _cameraTransform.rotation.eulerAngles.y, 0f));
+
         switch (State)
         {
             case CharacterState.Moving: // character tracks rotation to camera at a certain rate
-
-                Quaternion m_planarCameraQuaternion = Quaternion.Euler(new Vector3(0f, _cameraTransform.rotation.eulerAngles.y, 0f));
-                transform.rotation = Quaternion.Slerp(transform.rotation, m_planarCameraQuaternion, 1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime));
+                // smoothing planar rotation
+                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime));
 
                 break;
             case CharacterState.Stationary: // character rotates faster tracking camera
-
-                Quaternion s_planarCameraQuaternion = Quaternion.Euler(new Vector3(0f, _cameraTransform.rotation.eulerAngles.y, 0f));
-                transform.rotation = Quaternion.Slerp(transform.rotation, s_planarCameraQuaternion, 1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime));
+                // smooth planar rotation
+                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime));
 
                 break;
             case CharacterState.Dash: // camera locked at current 'dashing' direction
+                // no rotation change while dashing
                 break;
+        }
+
+        // Slope rotation - aligns worm model with angle of surface (regardless of state
+        RaycastHit slopeHit;
+        if (Physics.Raycast(transform.position + transform.forward * _slopeRaycastForwardOffset, Vector3.down, out slopeHit,
+            _slopeRaycastLength, _slopeCollisionLayers, QueryTriggerInteraction.Ignore))
+        {
+            // calculate forward direction projected onto slope
+            Vector3 slopeMoveDirection = Vector3.ProjectOnPlane(transform.forward, slopeHit.normal).normalized;
+            // save initial rotation
+            Quaternion oldRot = _wormModel.transform.rotation;
+            // determine rotation for model which is flat on the plan
+            _wormModel.transform.LookAt(_wormModel.transform.position + slopeMoveDirection, slopeHit.normal);
+            Quaternion newRot = _wormModel.transform.rotation;
+            // lerp between old and new rotations for slope rotations
+            _wormModel.transform.rotation = Quaternion.Slerp(oldRot, newRot, 1f - Mathf.Exp(-_slopeRotationSharpness * Time.deltaTime));
+
+            IsGrounded = true;
+        }
+        else
+        {
+            IsGrounded = false;
         }
     }
     #endregion
@@ -192,7 +225,7 @@ public class PlayerController : MonoBehaviour
             case CharacterState.Moving: // moves forwards (in direction of player facing) only
 
                 // apply moving force
-                _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _movementForce * Time.deltaTime);
+                _rb.AddForce(PlayerInput.MoveAxisForward * _wormModel.transform.forward * _movementForce * Time.deltaTime);
                 // check for max speed
                 if (_rb.velocity.magnitude > _maxSpeed) _rb.velocity = _rb.velocity.normalized * _maxSpeed;
 
