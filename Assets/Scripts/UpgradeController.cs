@@ -6,8 +6,6 @@ public class UpgradeController : MonoBehaviour
 {
     // TODO
     // Look at player
-    // A method that applies the effect of the upgrade to the player
-        // OnTriggerEnter? Are we doing a player or item centric approach?
     // Devise a way to spawn 3 of these and destroy them all when one is chosen
 
     public enum UpgradeType
@@ -71,5 +69,37 @@ public class UpgradeController : MonoBehaviour
             modelOptions[4].SetActive(true);
         else if(type == UpgradeType.Light)
             modelOptions[5].SetActive(true);
+    }
+
+    private void OnTriggerEnter(Collider other) // For checking if the player has touched the upgrade
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (Type == UpgradeType.Health)
+            {
+                // Insert call to appropriate function
+            }
+            else if (Type == UpgradeType.Armor)
+            {
+                // Insert call to appropriate function
+            }
+            else if (Type == UpgradeType.Damage)
+            {
+                // Insert call to appropriate function
+            }
+            else if (Type == UpgradeType.FireSpeed)
+            {
+                // Insert call to appropriate function
+            }
+            else if (Type == UpgradeType.MoveSpeed)
+            {
+                // Insert call to appropriate function
+            }
+            else if (Type == UpgradeType.Light)
+            {
+                // Insert call to appropriate function
+            }
+            Destroy(this.gameObject);
+        }
     }
 }
