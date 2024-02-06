@@ -435,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a10e6b2c670c04d99133ad187fe31c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelOptions:
+  _modelOptions:
   - {fileID: 4286680337513089583}
   - {fileID: 8975455783923256938}
   - {fileID: 9212179300304456089}
