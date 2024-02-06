@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _length: 75
   _spawnInterval: 10
-  _tumbleweedPrefab: {fileID: 6341798677418182186, guid: 8ff2fec82ea899f4392c1af2442faab8, type: 3}
+  _tumbleweedPrefab: {fileID: 3178522512273346393, guid: 8ff2fec82ea899f4392c1af2442faab8, type: 3}
