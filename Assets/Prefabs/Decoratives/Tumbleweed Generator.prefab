@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b5ede8411d6af45804304d4358553d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 75
-  spawnInterval: 10
-  tumbleweedPrefab: {fileID: 6341798677418182186, guid: 8ff2fec82ea899f4392c1af2442faab8, type: 3}
+  _length: 75
+  _spawnInterval: 10
+  _tumbleweedPrefab: {fileID: 3178522512273346393, guid: 8ff2fec82ea899f4392c1af2442faab8, type: 3}
