@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1190798601653159236}
   m_Layer: 0
   m_Name: testBullet
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,4 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c6a01fad73654527a8964703f605561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  DamageLevel: 1
+  InitialForce: 50
+  BulletLifetime: 3

@@ -5,11 +5,12 @@ using UnityEngine;
 public class EnemyDamage : MonoBehaviour
 {
     // Enemy health stored
-    public float healthLevel = 5;
+    public float HealthLevel = 5;
     // Damaging object stored (with some amount of damage)
-    public GameObject damager;
+    [Tooltip("stores prefab of damaging object")] public GameObject DamagerObject;
+
     // Start is called before the first frame update
-    public float knockbackDistance = 10.0f;
+    
 
     void Start()
     {
@@ -24,26 +25,26 @@ public class EnemyDamage : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        damager = collision.gameObject;
+        DamagerObject = collision.gameObject;
 
-        if (damager.tag == "bullet")
+        if (DamagerObject.tag == "bullet")
         {
-            //Die?
+            //Die
+            Bullet damage = DamagerObject.GetComponent<Bullet>();
 
-            if (healthLevel == 1)
+            HealthLevel -= damage.DamageLevel;
+
+            if (HealthLevel <= 0)
             {
                 Destroy(gameObject);
-                Destroy(damager); // if like a bullet or whatnot?
+                Destroy(DamagerObject); 
                 
             }
 
             
-            Bullet damage = damager.GetComponent<Bullet>();
+            
 
-            healthLevel -= damage.damage;
-
-            //Knockback enemies
-            gameObject.transform.Translate(-1.0f * knockbackDistance * gameObject.transform.forward);
+            
 
             
 
