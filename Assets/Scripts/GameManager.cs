@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
                 // create new game manager object
                 GameObject newManager = new();
                 newManager.AddComponent<GameManager>();
-                Instantiate(newManager);
                 DontDestroyOnLoad(newManager);
                 _instance = newManager.GetComponent<GameManager>();
 

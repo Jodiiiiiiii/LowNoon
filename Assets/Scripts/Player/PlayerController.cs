@@ -180,12 +180,16 @@ public class PlayerController : MonoBehaviour
         {
             case CharacterState.Moving: // character tracks rotation to camera at a certain rate
                 // smoothing planar rotation
-                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime));
+                // turning speed also scales with move speed stat
+                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
+                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed));
 
                 break;
             case CharacterState.Stationary: // character rotates faster tracking camera
                 // smooth planar rotation
-                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime));
+                // speed also scales with move speed stat
+                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
+                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed));
 
                 break;
             case CharacterState.Dash: // camera locked at current 'dashing' direction
@@ -253,9 +257,13 @@ public class PlayerController : MonoBehaviour
                 if(IsGrounded)
                 {
                     // apply moving force
-                    _rb.AddForce(PlayerInput.MoveAxisForward * ForwardDirection * _movementForce * Time.deltaTime);
+                    // move speed force also scales with move speed stat
+                    _rb.AddForce(PlayerInput.MoveAxisForward * ForwardDirection * _movementForce * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed);
+
                     // check for max speed
-                    if (_rb.velocity.magnitude > _maxSpeed) _rb.velocity = _rb.velocity.normalized * _maxSpeed;
+                    // scales max speed with move speed stat
+                    float actualMaxSpeed = _maxSpeed * GameManager.Instance.PlayerData.MoveSpeed;
+                    if (_rb.velocity.magnitude > actualMaxSpeed) _rb.velocity = _rb.velocity.normalized * actualMaxSpeed;
                 } else // falling - loss of movement controls
                 {
                     // apply gravity force

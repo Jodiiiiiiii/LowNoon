@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField, Tooltip("Multiplied factor per bullet cooldown upgrade")] private float _bulletCooldownUpgradeFactor = 0.8f;
 
     [Header("Move Speed")]
-    [SerializeField, Tooltip("Base move speed stat - influences move force, max speed, and turning speeds")] private float _baseMoveSpeed = 1f;
+    [SerializeField, Tooltip("Base move speed stat - influences move force, max speed, and turning speeds multiplicatively")] private float _baseMoveSpeed = 1f;
     [SerializeField, Tooltip("Move speed per upgrade")] private float _moveSpeedPerUpgrade = 0.1f;
     [SerializeField, Tooltip("Base dash damage stat")] private float _baseDashDamage = 2f;
     [SerializeField, Tooltip("Dash damage per upgrade")] private float _dashDamagePerUpgrade = 1f;
