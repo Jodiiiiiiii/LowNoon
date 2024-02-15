@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public class PlayerShooting : MonoBehaviour
 {
     // Stores prefab of bullet object
     [Tooltip("stores prefab of bullet object")] public GameObject BulletObject;

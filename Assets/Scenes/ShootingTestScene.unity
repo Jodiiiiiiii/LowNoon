@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.9927365, g: 0.5922375, b: 0.3102902, a: 1}
+  m_IndirectSpecularColor: {r: 0.9927911, g: 0.5922297, b: 0.3104112, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -837,8 +837,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cd12fc83617463e9f3a5b665be5e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 5
-  damager: {fileID: 4230674095138438074, guid: b8533a1d0dfcf402b82884529ed43741, type: 3}
+  HealthLevel: 5
+  DamagerObject: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,7 +1732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61d33ca232a74c19a4e8dc3638914f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 4230674095138438074, guid: b8533a1d0dfcf402b82884529ed43741, type: 3}
+  BulletObject: {fileID: 4230674095138438074, guid: b8533a1d0dfcf402b82884529ed43741, type: 3}
+  CooldownTime: 1.5
 --- !u!1 &1912475429
 GameObject:
   m_ObjectHideFlags: 0
