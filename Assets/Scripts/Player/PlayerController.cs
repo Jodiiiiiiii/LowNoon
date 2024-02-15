@@ -81,6 +81,13 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    private void Awake()
+    {
+        // hide cursor and lock it to center - prevents mouse from moving around as you move character
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     // Update is called once per frame
     void Update()
     {

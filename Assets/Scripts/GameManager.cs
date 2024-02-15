@@ -138,12 +138,12 @@ public class GameManager : MonoBehaviour
     {
         // TODO: remove this in place of some sort of a pause menu with a quit button
         // quit application from any scene with escape
-        if (Input.GetKeyDown(KeyCode.Escape))
+        /*if (Input.GetKeyDown(KeyCode.Escape))
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
             Application.Quit();
-        }
+        }*/
     }
 }
