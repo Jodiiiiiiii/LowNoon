@@ -30,7 +30,7 @@ public class EnemyDamage : MonoBehaviour
         if (DamagerObject.tag == "bullet")
         {
             //Die
-            Bullet damage = DamagerObject.GetComponent<Bullet>();
+            BulletStats damage = DamagerObject.GetComponent<BulletStats>();
 
             HealthLevel -= damage.DamageLevel;
 
