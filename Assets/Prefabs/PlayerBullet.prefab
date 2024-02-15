@@ -147,5 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageLevel: 1
-  InitialForce: 50
+  InitialForce: 200
   BulletLifetime: 0.5
