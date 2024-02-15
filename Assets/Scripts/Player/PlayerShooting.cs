@@ -12,13 +12,16 @@ public class PlayerShooting : MonoBehaviour
 
     [Tooltip("how long before player can shoot again (seconds)")] public float CooldownTime = 0.0f;
 
-    float _timer = 0.0f;
     PlayerController _playerController;
-    
+
+    float _timer;
+
     // Start is called before the first frame update
     void Start()
     {
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+
+        _timer = CooldownTime; // start off cooldown
     }
 
     // Update is called once per frame

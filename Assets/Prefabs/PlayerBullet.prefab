@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4723445224794814414}
   - component: {fileID: 1190798601653159236}
   m_Layer: 0
-  m_Name: testBullet
+  m_Name: PlayerBullet
   m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,9 +143,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4230674095138438074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c6a01fad73654527a8964703f605561, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d79296893da5e24cbf7dc1cf0c74f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DamageLevel: 1
   InitialForce: 50
-  BulletLifetime: 3
+  BulletLifetime: 0.5
