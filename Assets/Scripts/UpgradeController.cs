@@ -64,30 +64,8 @@ public class UpgradeController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (Type == UpgradeType.Health)
-            {
-                // Insert call to appropriate function
-            }
-            else if (Type == UpgradeType.Armor)
-            {
-                // Insert call to appropriate function
-            }
-            else if (Type == UpgradeType.Damage)
-            {
-                // Insert call to appropriate function
-            }
-            else if (Type == UpgradeType.FireSpeed)
-            {
-                // Insert call to appropriate function
-            }
-            else if (Type == UpgradeType.MoveSpeed)
-            {
-                // Insert call to appropriate function
-            }
-            else if (Type == UpgradeType.Light)
-            {
-                // Insert call to appropriate function
-            }
+            GameManager.Instance.ApplyUpgradeToStats(Type);
+            
             Destroy(this.gameObject);
         }
     }
