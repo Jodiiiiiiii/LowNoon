@@ -230,7 +230,6 @@ public class PlayerController : MonoBehaviour
             _rb.velocity = change * _rb.velocity;
 
             IsGrounded = true;
-            Debug.Log(closestHit.normal.y);
         }
     }
     #endregion
