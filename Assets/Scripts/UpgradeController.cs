@@ -33,9 +33,11 @@ public class UpgradeController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        // late update ensures smoothness with respect to camera
+        // align upgrade towards player camera
+        transform.LookAt(Camera.main.transform, Vector3.up);
     }
 
     private void RandomlyChooseType()
