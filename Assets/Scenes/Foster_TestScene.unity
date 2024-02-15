@@ -1516,11 +1516,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1906806684}
+  - component: {fileID: 1906806686}
   - component: {fileID: 1906806683}
+  - component: {fileID: 1906806687}
   - component: {fileID: 1906806685}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1597,6 +1599,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1906806686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906806682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608b35f17f46302438979b53ef775a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseHealth: 20
+  _healthPerUpgrade: 5
+  _baseArmor: 0
+  _armorPerUpgrade: 1
+  _baseBulletDamage: 1
+  _bulletDamagePerUpgrade: 0.5
+  _baseBulletCooldown: 0.8
+  _bulletCooldownUpgradeFactor: 0.8
+  _baseMoveSpeed: 1
+  _moveSpeedPerUpgrade: 0.1
+  _baseDashDamage: 2
+  _dashDamagePerUpgrade: 1
+  _baseLightFOV: 45
+  _lightFOVLerpRatio: 0.3
+  _baseLightIntensity: 0.5
+  _lightIntensityLerpRatio: 0.3
+--- !u!114 &1906806687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906806682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f61d33ca232a74c19a4e8dc3638914f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletObject: {fileID: 4230674095138438074, guid: b8533a1d0dfcf402b82884529ed43741, type: 3}
+  CooldownTime: 0.5
 --- !u!1 &1912475429
 GameObject:
   m_ObjectHideFlags: 0
