@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rb;
 
     public CharacterState State { get; private set; } // tracks the players current state; likely useful for animator
-    public Vector3 ForwardDirection { get; private set; } // current direction of (possible) player movement
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +30,6 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         State = CharacterState.Stationary;
-        ForwardDirection = transform.forward;
     }
 
     #region CHARACTER-STATES
@@ -82,6 +80,13 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
+
+    private void Awake()
+    {
+        // hide cursor and lock it to center - prevents mouse from moving around as you move character
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -152,22 +157,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("used for rotating player towards camera angle")] private Transform _cameraTransform;
     [SerializeField, Tooltip("'snappiness' of character seeking camera angle while moving")] private float _movingRotationSharpness = 1f;
     [SerializeField, Tooltip("'snappiness' of character seeking camera angle while stationary")] private float _stationaryRotationSharpness = 2f;
-
-    [Header("Slope Rotation")]
-    [SerializeField, Tooltip("allows aligning of the worm model with the surface without changing rotation of player collider/camera")] private GameObject _wormModel;
-    [SerializeField, Tooltip("'snappiness' of character matching angle of surface slope")] private float _slopeRotationSharpness = 5f;
-    [SerializeField, Tooltip("max surface slope angle in degrees")] private float _maxSlopeAngle = 45f;
-
-    [Header("IsGrounded SphereCast")]
-    [SerializeField, Tooltip("layers which act as physical objects for the player which can be stood on")] private LayerMask _groundCollisionLayers;
-    [SerializeField, Tooltip("radius of the spherecast for IsGrounded check")] private float _groundCastRadius = 0.1f;
-    [SerializeField, Tooltip("distance from player transform down that spherecast checks for a surface")] private float _groundCastDistance = 1f;
-    [SerializeField, Tooltip("forward offset to check for slope slightly before the collider gets stuck on an edge")] private float _groundCastForwardOffset = 0.5f;
-    [SerializeField, Tooltip("max number of objects which can be detected by the downwards sphere cast")] private int _groundCastMaxHits = 16;
     
-
-    public bool IsGrounded { get; private set; } = true;
-
     /// <summary>
     /// Update player velocity based on inputs
     /// </summary>
@@ -180,57 +170,21 @@ public class PlayerController : MonoBehaviour
         {
             case CharacterState.Moving: // character tracks rotation to camera at a certain rate
                 // smoothing planar rotation
-                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime));
+                // turning speed also scales with move speed stat
+                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
+                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed));
 
                 break;
             case CharacterState.Stationary: // character rotates faster tracking camera
                 // smooth planar rotation
-                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime));
+                // speed also scales with move speed stat
+                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
+                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed));
 
                 break;
             case CharacterState.Dash: // camera locked at current 'dashing' direction
                 // no rotation change while dashing
                 break;
-        }
-
-        // IsGrounded check
-        RaycastHit closestHit = new();
-        closestHit.distance = Mathf.Infinity;
-        RaycastHit[] hits = new RaycastHit[_groundCastMaxHits];
-        int hitCount = Physics.SphereCastNonAlloc(transform.position + transform.forward * _groundCastForwardOffset, _groundCastRadius, 
-            Vector3.down, hits, _groundCastDistance, _groundCollisionLayers, QueryTriggerInteraction.Ignore);
-        // find the closest valid hit
-        for (int i = 0; i < hitCount; i++)
-        {
-            // verify distance and confirm within surface slope bounds
-            if (hits[i].distance < closestHit.distance && hits[i].distance > 0 && hits[i].normal.y > Mathf.Sin(Mathf.Deg2Rad * (90f - _maxSlopeAngle)))
-                closestHit = hits[i];
-        }
-        // no hit found in range (in the air)
-        if(closestHit.distance == Mathf.Infinity)
-        {
-            IsGrounded = false;
-        }
-        else // it hit something
-        {
-            // Update Forward Direction
-            ForwardDirection = Vector3.ProjectOnPlane(transform.forward, closestHit.normal).normalized;
-
-            // Rotate worm model to match surface
-            // save initial rotation
-            Quaternion oldRot = _wormModel.transform.rotation;
-            // determine rotation for model which is flat on the plan
-            _wormModel.transform.LookAt(_wormModel.transform.position + ForwardDirection, closestHit.normal);
-            Quaternion newRot = _wormModel.transform.rotation;
-            // lerp between old and new rotations for slope rotations
-            _wormModel.transform.rotation = Quaternion.Slerp(oldRot, newRot, 1f - Mathf.Exp(-_slopeRotationSharpness * Time.deltaTime));
-
-            // velocity smoothing - so no momentum is lost on changing slope angle
-            Quaternion change = Quaternion.FromToRotation(_rb.velocity, ForwardDirection);
-            _rb.velocity = change * _rb.velocity;
-
-            IsGrounded = true;
-            Debug.Log(closestHit.normal.y);
         }
     }
     #endregion
@@ -239,7 +193,6 @@ public class PlayerController : MonoBehaviour
     [Header("Velocity")]
     [SerializeField, Tooltip("strength of force applied to make character move forwards")] private float _movementForce = 5f;
     [SerializeField, Tooltip("terminal speed that character is capped at")] private float _maxSpeed = 5f;
-    [SerializeField, Tooltip("force due to gravity applied when not grounded")] private float _gravityForce = 100f;
 
     /// <summary>
     /// Update player velocity based on inputs.
@@ -250,19 +203,14 @@ public class PlayerController : MonoBehaviour
         switch (State)
         {
             case CharacterState.Moving: // moves forwards (in direction of player facing) only
-
-                if(IsGrounded)
-                {
                     // apply moving force
-                    _rb.AddForce(PlayerInput.MoveAxisForward * ForwardDirection * _movementForce * Time.deltaTime);
-                    // check for max speed
-                    if (_rb.velocity.magnitude > _maxSpeed) _rb.velocity = _rb.velocity.normalized * _maxSpeed;
-                } else // falling - loss of movement controls
-                {
-                    // apply gravity force
-                    _rb.AddForce(Vector3.down * _gravityForce * Time.deltaTime);
-                }
+                    // move speed force also scales with move speed stat
+                    _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _movementForce * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed);
 
+                    // check for max speed
+                    // scales max speed with move speed stat
+                    float actualMaxSpeed = _maxSpeed * GameManager.Instance.PlayerData.MoveSpeed;
+                    if (_rb.velocity.magnitude > actualMaxSpeed) _rb.velocity = _rb.velocity.normalized * actualMaxSpeed;
                 break;
             case CharacterState.Stationary: 
                 // no change - comes to a stop by friction (hence, stationary)

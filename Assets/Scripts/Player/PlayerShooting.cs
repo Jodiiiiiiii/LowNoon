@@ -10,8 +10,6 @@ public class PlayerShooting : MonoBehaviour
 
     [Tooltip("stores prefab of bullet object")] public GameObject BulletObject;
 
-    [Tooltip("how long before player can shoot again (seconds)")] public float CooldownTime = 0.0f;
-
     PlayerController _playerController;
 
     float _timer;
@@ -21,14 +19,14 @@ public class PlayerShooting : MonoBehaviour
     {
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
-        _timer = CooldownTime; // start off cooldown
+        _timer = GameManager.Instance.PlayerData.BulletCooldown; // start with no cooldown
     }
 
     // Update is called once per frame
     void Update()
     {
         // shooting input AND not during cooldown time AND in stationary state
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > CooldownTime && _playerController.State == CharacterState.Stationary)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > GameManager.Instance.PlayerData.BulletCooldown && _playerController.State == CharacterState.Stationary)
         {
             GameObject newBullet = Instantiate(BulletObject);
 
