@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
         State = CharacterState.Stationary;
         ForwardDirection = transform.forward;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     #region CHARACTER-STATES
