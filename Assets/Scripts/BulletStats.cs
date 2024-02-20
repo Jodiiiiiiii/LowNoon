@@ -8,7 +8,7 @@ using UnityEngine;
 public class BulletStats : MonoBehaviour
 {
 
-    [Tooltip("Amount of damage dealt on impact to damage reciever")] public float DamageLevel = 1.0f;
+    [Tooltip("Amount of damage dealt on impact to damage reciever")] public int DamageLevel = 1;
     [Tooltip("Impulse force magnitude used to launch projectile")] public float InitialForce = 50.0f;
     [Tooltip ("How long before bullet is destroyed (seconds)")] public float BulletLifetime = 3.0f;
     

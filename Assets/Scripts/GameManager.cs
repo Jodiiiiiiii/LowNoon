@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
     }
     private Stats _playerData;
 
-    public Stats PlayerData 
+    public Stats PlayerData
     {
         get
         {
