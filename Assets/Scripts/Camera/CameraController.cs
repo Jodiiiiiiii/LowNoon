@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+
     [Header("Player")]
     [SerializeField, Tooltip("used for camera tracking and inputs")] private PlayerController _player;
     [SerializeField, Tooltip("the geometry around which the camera tracks")] private Transform _followTransform;
@@ -25,6 +26,9 @@ public class CameraController : MonoBehaviour
     [SerializeField, Tooltip("maximum number of obstructing objects detected in a single sphere cast")] private int _maxObstructions = 32;
     [SerializeField, Tooltip("layers considered for obstruction checks")] private LayerMask _obstructionLayers;
 
+    // rigidbody (update instead of changing transform)
+    private Rigidbody _rb;
+
     // rotation calculation variables
     private Vector3 _targetPlanarDir = Vector3.forward;
     private float _targetVertAngle = 0f;
@@ -35,6 +39,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _rb = GetComponent<Rigidbody>();
 
         _currentFollowPosition = _followTransform.position;
         _currentDistance = _maxDistance;
@@ -55,15 +60,16 @@ public class CameraController : MonoBehaviour
         Quaternion verticalRot = Quaternion.Euler(_targetVertAngle, 0, 0); // quaternion representation of _targetVertAngle
 
         // smoothly interpolate target rotation
-        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, planarRot * verticalRot, 1f - Mathf.Exp(-_rotationSharpness * Time.deltaTime));
+        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, planarRot * verticalRot, 1f - Mathf.Exp(-_rotationSharpness * Time.fixedDeltaTime));
 
         // apply calculated rotation
-        transform.rotation = targetRotation;
+        //Debug.Log(targetRotation);
+        _rb.MoveRotation(targetRotation);
         #endregion
 
         #region position
         // smoothly lerp central follow position to followTransform
-        _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, _followTransform.position, 1f - Mathf.Exp(-_followingSharpness * Time.deltaTime));
+        _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, _followTransform.position, 1f - Mathf.Exp(-_followingSharpness * Time.fixedDeltaTime));
 
         // framing offset - shifts in screen view before obstruction checking
         Vector3 offsetFollowPosition = _currentFollowPosition;
@@ -83,15 +89,15 @@ public class CameraController : MonoBehaviour
 
         // smoothly lerp to desired zoom distance (either max or nearest obstruction)
         if (closestHit.distance < Mathf.Infinity)
-            _currentDistance = Mathf.Lerp(_currentDistance, closestHit.distance, 1 - Mathf.Exp(-_zoomSharpness * Time.deltaTime));
+            _currentDistance = Mathf.Lerp(_currentDistance, closestHit.distance, 1 - Mathf.Exp(-_zoomSharpness * Time.fixedDeltaTime));
         else
-            _currentDistance = Mathf.Lerp(_currentDistance, _maxDistance, 1 - Mathf.Exp(-_zoomSharpness * Time.deltaTime));
+            _currentDistance = Mathf.Lerp(_currentDistance, _maxDistance, 1 - Mathf.Exp(-_zoomSharpness * Time.fixedDeltaTime));
 
         // calculate orbit position based on smoothed rotation, smoothed follow position, and smoothed distance
         Vector3 targetPosition = offsetFollowPosition - (targetRotation * Vector3.forward * _currentDistance);
 
         // Apply calculated position
-        transform.position = targetPosition;
+        _rb.MovePosition(targetPosition);
         #endregion
     }
 }

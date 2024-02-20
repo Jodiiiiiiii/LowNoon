@@ -93,7 +93,10 @@ public class PlayerController : MonoBehaviour
     {
         GatherInput();
         UpdateState();
+    }
 
+    private void FixedUpdate()
+    {
         UpdateRotation();
         UpdateVelocity();
     }
@@ -171,15 +174,15 @@ public class PlayerController : MonoBehaviour
             case CharacterState.Moving: // character tracks rotation to camera at a certain rate
                 // smoothing planar rotation
                 // turning speed also scales with move speed stat
-                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
-                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed));
+                _rb.MoveRotation(Quaternion.Slerp(transform.rotation, planarCameraQuaternion,
+                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed)));
 
                 break;
             case CharacterState.Stationary: // character rotates faster tracking camera
                 // smooth planar rotation
                 // speed also scales with move speed stat
-                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
-                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed));
+                _rb.MoveRotation(Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
+                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed)));
 
                 break;
             case CharacterState.Dash: // camera locked at current 'dashing' direction
@@ -205,7 +208,7 @@ public class PlayerController : MonoBehaviour
             case CharacterState.Moving: // moves forwards (in direction of player facing) only
                     // apply moving force
                     // move speed force also scales with move speed stat
-                    _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _movementForce * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed);
+                    _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _movementForce * GameManager.Instance.PlayerData.MoveSpeed);
 
                     // check for max speed
                     // scales max speed with move speed stat
