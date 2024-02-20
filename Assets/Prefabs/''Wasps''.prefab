@@ -151,6 +151,7 @@ MonoBehaviour:
   MoveSpeed: 5
   ZipSpeed: 50
   HoverSpeed: 1.5
+  VelocitySharpness: 2
   MinDistFromPlayer: 5
   MaxDistFromPlayer: 10
   MinDistRandom: 0

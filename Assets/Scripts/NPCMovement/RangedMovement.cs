@@ -26,6 +26,7 @@ public class RangedMovement : MonoBehaviour
     public float MoveSpeed;
     public float ZipSpeed;
     public float HoverSpeed;
+    public float VelocitySharpness;
 
     [Header("Enemy Distance")]
     public float MinDistFromPlayer;
@@ -190,8 +191,7 @@ public class RangedMovement : MonoBehaviour
         }
 
         direction.y = _hoverDirection * transform.up.y * HoverSpeed;
-        _rigidBody.velocity = direction;
-
+        _rigidBody.velocity = Vector3.Lerp(_rigidBody.velocity, direction, 1f - Mathf.Exp(-VelocitySharpness * Time.deltaTime));
     }
 
     float ChangeMaxHover()

@@ -302,6 +302,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 5
+  _obstructionCheckRadius: 0.2
+  _maxObstructions: 32
+  _obstructionLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _aggroRange: 50
 --- !u!54 &276764654
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -691,15 +697,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 238df44416262fd4db31c3f58a08d521, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.46
+      value: -4.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 238df44416262fd4db31c3f58a08d521, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.07
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 238df44416262fd4db31c3f58a08d521, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.04
+      value: -11.82
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 238df44416262fd4db31c3f58a08d521, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1108,18 +1114,6 @@ PrefabInstance:
     - target: {fileID: 2266889165913323094, guid: 8c4dda1715753ac4398995e0ba774b74, type: 3}
       propertyPath: m_Name
       value: Sphere
-      objectReference: {fileID: 0}
-    - target: {fileID: 7342240563325101585, guid: 8c4dda1715753ac4398995e0ba774b74, type: 3}
-      propertyPath: MoveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7342240563325101585, guid: 8c4dda1715753ac4398995e0ba774b74, type: 3}
-      propertyPath: MaxDistFromPlayer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7342240563325101585, guid: 8c4dda1715753ac4398995e0ba774b74, type: 3}
-      propertyPath: MinDistFromPlayer
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7882880709509760850, guid: 8c4dda1715753ac4398995e0ba774b74, type: 3}
       propertyPath: m_LocalPosition.x
