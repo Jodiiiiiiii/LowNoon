@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void LateUpdate() // TODO: test what this looks like if LateUpdate() is FixedUpdate() instead
     {
         #region rotation
         // planar/horizontal rotation input
@@ -71,16 +71,12 @@ public class CameraController : MonoBehaviour
         // smoothly lerp central follow position to followTransform
         _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, _followTransform.position, 1f - Mathf.Exp(-_followingSharpness * Time.fixedDeltaTime));
 
-        // framing offset - shifts in screen view before obstruction checking
-        Vector3 offsetFollowPosition = _currentFollowPosition;
-        offsetFollowPosition += transform.right * _framingOffset.x;
-        offsetFollowPosition += transform.up * _framingOffset.y;
-
         // Handle Obstructions
         RaycastHit closestHit = new();
         closestHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
         RaycastHit[] obstructions = new RaycastHit[_maxObstructions];
-        int obstructionCount = Physics.SphereCastNonAlloc(offsetFollowPosition, _obstructionCheckRadius, -transform.forward, obstructions, _maxDistance, _obstructionLayers, QueryTriggerInteraction.Ignore);
+        int obstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, _obstructionCheckRadius, -transform.forward, 
+            obstructions, _maxDistance, _obstructionLayers, QueryTriggerInteraction.Ignore);
         // find closest obstruction
         for(int i = 0; i < obstructionCount; i++)
         {
@@ -94,10 +90,35 @@ public class CameraController : MonoBehaviour
             _currentDistance = Mathf.Lerp(_currentDistance, _maxDistance, 1 - Mathf.Exp(-_zoomSharpness * Time.fixedDeltaTime));
 
         // calculate orbit position based on smoothed rotation, smoothed follow position, and smoothed distance
-        Vector3 targetPosition = offsetFollowPosition - (targetRotation * Vector3.forward * _currentDistance);
+        Vector3 targetPosition = _currentFollowPosition - (targetRotation * Vector3.forward * _currentDistance);
+        #endregion
+
+        #region framing offset
+        // framing offset - shifts in screen view before obstruction checking
+        targetPosition += transform.up * _framingOffset.y; // so that raycast sends from top of player to offset position (prevents weird movement when obstructed)
+        Vector3 offsetTargetPosition = targetPosition;
+        offsetTargetPosition += transform.right * _framingOffset.x;
+        Vector3 offsetDirection = offsetTargetPosition - targetPosition;
+
+        // Raycast from target position to intended framing offset - to test if 
+        RaycastHit closestOffsetHit = new();
+        closestOffsetHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
+        RaycastHit[] offsetObstructions = new RaycastHit[_maxObstructions];
+        int offsetObstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, _obstructionCheckRadius, offsetDirection.normalized, 
+            offsetObstructions, offsetDirection.magnitude, _obstructionLayers, QueryTriggerInteraction.Ignore);
+        // find closest obstruction
+        for (int i = 0; i < offsetObstructionCount; i++)
+        {
+            if (offsetObstructions[i].distance < closestOffsetHit.distance && offsetObstructions[i].distance > 0) closestOffsetHit = offsetObstructions[i];
+        }
+        // Set framing point either to max range or nearest obstruction
+        if (closestOffsetHit.distance < Mathf.Infinity)
+            targetPosition = targetPosition + closestOffsetHit.distance * offsetDirection.normalized;
+        else
+            targetPosition = offsetTargetPosition; // no obstructions
+        #endregion
 
         // Apply calculated position
         _rb.MovePosition(targetPosition);
-        #endregion
     }
 }
