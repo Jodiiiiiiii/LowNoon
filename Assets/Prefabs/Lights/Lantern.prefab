@@ -485,9 +485,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.4088122, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.40784314, b: 0, a: 1}
   m_Intensity: 1.5
-  m_Range: 1000
+  m_Range: 500
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -563,7 +563,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.87, y: 0.32, z: -4.96}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4805870900328625800}
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b914dbe0e5959954bb996090671069a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lit: 1
+  IsLit: 0
   _candleLight: {fileID: 3296054208069416680}
   _candleAnim: {fileID: 6222780561144465542}
   _minIntensity: 0.3
