@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2063803544641493541}
   - component: {fileID: 7342240563325101585}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: '''''Wasps'''''
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -129,7 +129,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -165,3 +165,9 @@ MonoBehaviour:
   ZippyTimerMax: 1
   StillTimerMin: -1
   StillTimerMax: 1
+  _obstructionCheckRadius: 0.2
+  _maxObstructions: 32
+  _obstructionLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _aggroRange: 50

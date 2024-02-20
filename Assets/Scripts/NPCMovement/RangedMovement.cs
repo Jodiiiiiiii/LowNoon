@@ -12,6 +12,7 @@ public class RangedMovement : MonoBehaviour
         STILL,
         AWAY,
         TOWARDS,
+        IDLE,
     }
 
     [Header("Move State")]
@@ -54,6 +55,12 @@ public class RangedMovement : MonoBehaviour
     private float _zippyVar;
     private float _stillVar;
 
+    [Header("Player Detection")]
+    [SerializeField, Tooltip("radius of sphere cast for obstruction detection")] private float _obstructionCheckRadius = 2f;
+    [SerializeField, Tooltip("maximum number of obstructing objects detected in a single sphere cast")] private int _maxObstructions = 32;
+    [SerializeField, Tooltip("layers considered for obstruction checks")] private LayerMask _obstructionLayers;
+    [SerializeField, Tooltip("Range within which player causes enemy to enter attack mode")] private float _aggroRange = 50f;
+
 
     private Rigidbody _rigidBody;
     private int _leftOrRight;
@@ -61,7 +68,7 @@ public class RangedMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = _player = GameObject.FindWithTag("Player");
+        _player = GameObject.FindWithTag("Player");
         _rigidBody = GetComponent<Rigidbody>();
 
         _leftOrRight = ChangeDirection();
@@ -79,6 +86,8 @@ public class RangedMovement : MonoBehaviour
 
         _zippyVar = ZippyRando();
         _stillVar = StillRando();
+
+        EnemyMoveState = RangeEnemyMoveState.IDLE;
     }
 
     // Update is called once per frame
@@ -90,6 +99,7 @@ public class RangedMovement : MonoBehaviour
             _timer = 0;
             StayStill = false;
             _zippyVar = ZippyRando();
+            _leftOrRight = ChangeDirection();
         }
         else if (_timer > ZippyTimer + _zippyVar && !StayStill)
         {
@@ -98,31 +108,55 @@ public class RangedMovement : MonoBehaviour
             _stillVar = StillRando();
         }
         _playerPosition = _player.transform.position;
-
-        // Set enemy rotation to face player
-        transform.LookAt(_playerPosition);
-        Vector3 eulerAngles = transform.rotation.eulerAngles;
-        transform.rotation = Quaternion.Euler(0, eulerAngles.y, 0);
+        
 
         // The enemies will first try to move away from the enemy 
         // Ranged enemies will spawn with a random direction either left or right
         // They will circle around the player in the direction they spawned with
-        if (Vector3.Distance(_playerPosition, transform.position) < MinDistFromPlayer + _distVar)
+        if (EnemyMoveState != RangeEnemyMoveState.IDLE)
         {
-            EnemyMoveState = RangeEnemyMoveState.AWAY;
-        }
-        else if (Vector3.Distance(_playerPosition, transform.position) > MaxDistFromPlayer + _distVar)
-        {
-            EnemyMoveState= RangeEnemyMoveState.TOWARDS;
-        }
-        else if (StayStill)
-        {
-            EnemyMoveState = RangeEnemyMoveState.STILL;
+            // Set enemy rotation to face player
+            transform.LookAt(_playerPosition);
+            Vector3 eulerAngles = transform.rotation.eulerAngles;
+            transform.rotation = Quaternion.Euler(0, eulerAngles.y, 0);
+
+            if (Vector3.Distance(_playerPosition, transform.position) < MinDistFromPlayer + _distVar)
+            {
+                EnemyMoveState = RangeEnemyMoveState.AWAY;
+            }
+            else if (Vector3.Distance(_playerPosition, transform.position) > MaxDistFromPlayer + _distVar)
+            {
+                EnemyMoveState = RangeEnemyMoveState.TOWARDS;
+            }
+            else if (StayStill)
+            {
+                EnemyMoveState = RangeEnemyMoveState.STILL;
+            }
+            else
+            {
+                EnemyMoveState = RangeEnemyMoveState.ZIPPY;
+            }
         }
         else
         {
-            EnemyMoveState = RangeEnemyMoveState.ZIPPY;
+            // Handle Obstructions
+            RaycastHit closestHit = new();
+            closestHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
+            RaycastHit[] obstructions = new RaycastHit[_maxObstructions];
+            int obstructionCount = Physics.SphereCastNonAlloc(transform.position, _obstructionCheckRadius, (_playerPosition - transform.position).normalized, 
+                obstructions, _aggroRange, _obstructionLayers, QueryTriggerInteraction.Ignore);
+            // find closest obstruction
+            for (int i = 0; i < obstructionCount; i++)
+            {
+                if (obstructions[i].distance < closestHit.distance && obstructions[i].distance > 0) closestHit = obstructions[i];
+            }
+
+            // exit idle mode if player detected with no obstructions
+            if (closestHit.distance < Mathf.Infinity && closestHit.collider.CompareTag("Player"))
+                EnemyMoveState = RangeEnemyMoveState.STILL;
+
         }
+        
 
         Vector3 direction;
         if (EnemyMoveState == RangeEnemyMoveState.AWAY)
