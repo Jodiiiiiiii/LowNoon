@@ -26,7 +26,7 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         // shooting input AND not during cooldown time AND in stationary state
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > GameManager.Instance.PlayerData.BulletCooldown && _playerController.State == CharacterState.Stationary)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > GameManager.Instance.PlayerData.BulletCooldown && _playerController.State == CharacterState.STATIONARY)
         {
             GameObject newBullet = Instantiate(BulletObject);
 
