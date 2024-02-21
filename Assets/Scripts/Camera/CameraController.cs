@@ -34,7 +34,6 @@ public class CameraController : MonoBehaviour
     private float _targetVertAngle = 0f;
     // position calculation variables
     private Vector3 _currentFollowPosition; // smoothed panning origin
-    private float _currentDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +41,6 @@ public class CameraController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         _currentFollowPosition = _followTransform.position;
-        _currentDistance = _maxDistance;
     }
 
     // Update is called once per frame
@@ -71,11 +69,16 @@ public class CameraController : MonoBehaviour
         // smoothly lerp central follow position to followTransform
         _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, _followTransform.position, 1f - Mathf.Exp(-_followingSharpness * Time.fixedDeltaTime));
 
+        // calculate ideal goal camera position with no obstructions
+        Vector3 targetPosition = _currentFollowPosition - (targetRotation * Vector3.forward * _maxDistance);
+        targetPosition += transform.up * _framingOffset.y;
+        targetPosition += transform.right * _framingOffset.x;
+
         // Handle Obstructions
         RaycastHit closestHit = new();
         closestHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
         RaycastHit[] obstructions = new RaycastHit[_maxObstructions];
-        int obstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, _obstructionCheckRadius, -transform.forward, 
+        int obstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, _obstructionCheckRadius, (targetPosition - _currentFollowPosition).normalized, 
             obstructions, _maxDistance, _obstructionLayers, QueryTriggerInteraction.Ignore);
         // find closest obstruction
         for(int i = 0; i < obstructionCount; i++)
@@ -83,42 +86,13 @@ public class CameraController : MonoBehaviour
             if (obstructions[i].distance < closestHit.distance && obstructions[i].distance > 0) closestHit = obstructions[i];
         }
 
-        // smoothly lerp to desired zoom distance (either max or nearest obstruction)
+        // set target to closest hit distance
         if (closestHit.distance < Mathf.Infinity)
-            _currentDistance = Mathf.Lerp(_currentDistance, closestHit.distance, 1 - Mathf.Exp(-_zoomSharpness * Time.fixedDeltaTime));
-        else
-            _currentDistance = Mathf.Lerp(_currentDistance, _maxDistance, 1 - Mathf.Exp(-_zoomSharpness * Time.fixedDeltaTime));
-
-        // calculate orbit position based on smoothed rotation, smoothed follow position, and smoothed distance
-        Vector3 targetPosition = _currentFollowPosition - (targetRotation * Vector3.forward * _currentDistance);
+            targetPosition = _currentFollowPosition + (targetPosition - _currentFollowPosition).normalized * closestHit.distance;
         #endregion
 
-        #region framing offset
-        // framing offset - shifts in screen view before obstruction checking
-        targetPosition += transform.up * _framingOffset.y; // so that raycast sends from top of player to offset position (prevents weird movement when obstructed)
-        Vector3 offsetTargetPosition = targetPosition;
-        offsetTargetPosition += transform.right * _framingOffset.x;
-        Vector3 offsetDirection = offsetTargetPosition - targetPosition;
-
-        // Raycast from target position to intended framing offset - to test if 
-        RaycastHit closestOffsetHit = new();
-        closestOffsetHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
-        RaycastHit[] offsetObstructions = new RaycastHit[_maxObstructions];
-        int offsetObstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, _obstructionCheckRadius, offsetDirection.normalized, 
-            offsetObstructions, offsetDirection.magnitude, _obstructionLayers, QueryTriggerInteraction.Ignore);
-        // find closest obstruction
-        for (int i = 0; i < offsetObstructionCount; i++)
-        {
-            if (offsetObstructions[i].distance < closestOffsetHit.distance && offsetObstructions[i].distance > 0) closestOffsetHit = offsetObstructions[i];
-        }
-        // Set framing point either to max range or nearest obstruction
-        if (closestOffsetHit.distance < Mathf.Infinity)
-            targetPosition = targetPosition + closestOffsetHit.distance * offsetDirection.normalized;
-        else
-            targetPosition = offsetTargetPosition; // no obstructions
-        #endregion
-
-        // Apply calculated position
-        _rb.MovePosition(targetPosition);
+        // Apply calculated position (smoothed)
+        Vector3 smoothTarget = Vector3.Lerp(_rb.position, targetPosition, 1f - Mathf.Exp(-_zoomSharpness * Time.fixedDeltaTime));
+        _rb.MovePosition(smoothTarget);
     }
 }

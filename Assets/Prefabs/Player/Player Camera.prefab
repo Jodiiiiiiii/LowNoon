@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7336861757631111624}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.16, y: 3.94, z: -13.7300005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -113,8 +113,8 @@ MonoBehaviour:
   _minVertAngle: -45
   _maxVertAngle: 70
   _followingSharpness: 10000
-  _maxDistance: 15
-  _framingOffset: {x: 4, y: 2.5}
+  _maxDistance: 16
+  _framingOffset: {x: 5, y: 0}
   _zoomSharpness: 1000
   _obstructionCheckRadius: 0.2
   _maxObstructions: 32
