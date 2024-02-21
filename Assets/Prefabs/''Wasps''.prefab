@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.5686035, y: 4.7062273, z: -8.253498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: cd2bca1eb7f94ea498e31334825740f5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,21 +148,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyMoveState: 0
   StayStill: 0
-  MoveSpeed: 5
+  MoveSpeed: 8
   ZipSpeed: 30
   HoverSpeed: 1.5
   VelocitySharpness: 20
-  MinDistFromPlayer: 5
-  MaxDistFromPlayer: 10
-  MinDistRandom: 0
-  MaxDistRandom: 0
+  MinDistFromPlayer: 25
+  MaxDistFromPlayer: 40
+  MinDistRandom: -10
+  MaxDistRandom: 10
   MinHoverFromGround: 2
   MaxHoverFromGround: 5
   MinHoverRandom: -1
   MaxHoverRandom: 2
   _zippyHoverFactor: 5
   ZippyTimer: 0.2
-  StillTimer: 4
+  StillTimer: 1.5
   ZippyTimerMin: -0.05
   ZippyTimerMax: 0.05
   StillTimerMin: -1
@@ -172,4 +172,4 @@ MonoBehaviour:
   _obstructionLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  _aggroRange: 50
+  _aggroRange: 75
