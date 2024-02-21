@@ -149,9 +149,9 @@ MonoBehaviour:
   EnemyMoveState: 0
   StayStill: 0
   MoveSpeed: 5
-  ZipSpeed: 50
+  ZipSpeed: 30
   HoverSpeed: 1.5
-  VelocitySharpness: 2
+  VelocitySharpness: 20
   MinDistFromPlayer: 5
   MaxDistFromPlayer: 10
   MinDistRandom: 0
@@ -160,10 +160,11 @@ MonoBehaviour:
   MaxHoverFromGround: 5
   MinHoverRandom: -1
   MaxHoverRandom: 2
-  ZippyTimer: 2.5
-  StillTimer: 5
-  ZippyTimerMin: -1
-  ZippyTimerMax: 1
+  _zippyHoverFactor: 5
+  ZippyTimer: 0.2
+  StillTimer: 4
+  ZippyTimerMin: -0.05
+  ZippyTimerMax: 0.05
   StillTimerMin: -1
   StillTimerMax: 1
   _obstructionCheckRadius: 0.2

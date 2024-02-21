@@ -42,6 +42,7 @@ public class RangedMovement : MonoBehaviour
     public float MaxHoverRandom;
     private int _hoverDirection;
     private float _hoverVar;
+    [SerializeField, Tooltip("factor by which hovering speed increases while in zippy state")] private float _zippyHoverFactor;
 
     [Header("Timers")]
     public float ZippyTimer;
@@ -155,11 +156,9 @@ public class RangedMovement : MonoBehaviour
             // exit idle mode if player detected with no obstructions
             if (closestHit.distance < Mathf.Infinity && closestHit.collider.CompareTag("Player"))
                 EnemyMoveState = RangeEnemyMoveState.STILL;
-
         }
-        
 
-        Vector3 direction;
+        Vector3 direction = Vector3.zero; // stays zero if in still state
         if (EnemyMoveState == RangeEnemyMoveState.AWAY)
         {
             direction = (-transform.forward + transform.right * _leftOrRight).normalized * MoveSpeed;
@@ -172,13 +171,6 @@ public class RangedMovement : MonoBehaviour
         {
             direction = (transform.right * _leftOrRight).normalized * ZipSpeed;
         }
-        else
-        {
-            direction.x = 0;
-            direction.z = 0;
-        }
-
-
 
         if (transform.position.y > MaxHoverFromGround + _hoverVar)
         {
@@ -190,7 +182,7 @@ public class RangedMovement : MonoBehaviour
             _hoverVar = ChangeMaxHover();
         }
 
-        direction.y = _hoverDirection * transform.up.y * HoverSpeed;
+        direction.y = _hoverDirection * HoverSpeed * (EnemyMoveState == RangeEnemyMoveState.ZIPPY ? _zippyHoverFactor : 1);
         _rigidBody.velocity = Vector3.Lerp(_rigidBody.velocity, direction, 1f - Mathf.Exp(-VelocitySharpness * Time.deltaTime));
     }
 
