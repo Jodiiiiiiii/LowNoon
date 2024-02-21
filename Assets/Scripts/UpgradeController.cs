@@ -5,7 +5,6 @@ using UnityEngine;
 public class UpgradeController : MonoBehaviour
 {
     // TODO
-    // Look at player
     // Devise a way to spawn 3 of these and destroy them all when one is chosen
 
     public enum UpgradeType

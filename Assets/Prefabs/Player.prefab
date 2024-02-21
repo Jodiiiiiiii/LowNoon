@@ -170,8 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608b35f17f46302438979b53ef775a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseHealth: 20
-  _healthPerUpgrade: 5
+  _baseHealth: 5
+  _healthPerUpgrade: 1
   _baseArmor: 0
   _armorPerUpgrade: 1
   _baseBulletDamage: 1
