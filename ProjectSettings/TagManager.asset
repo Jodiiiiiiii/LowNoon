@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tumbleweed
   - bullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
