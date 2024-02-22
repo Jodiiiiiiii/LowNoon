@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour
     [SerializeField, Tooltip("highest possible look angle")] private float _maxVertAngle = 85f;
 
     [Header("Position Parameters / Constraints")]
-    [SerializeField, Tooltip("camera panning 'snappiness'")] private float _followingSharpness = 1000f;
     [SerializeField, Tooltip("maximum distance from followTransform")] private float _maxDistance = 3f;
     [SerializeField, Tooltip("framing offset from followed target")] private Vector2 _framingOffset = Vector2.zero;
 
@@ -61,13 +60,12 @@ public class CameraController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Slerp(transform.rotation, planarRot * verticalRot, 1f - Mathf.Exp(-_rotationSharpness * Time.fixedDeltaTime));
 
         // apply calculated rotation
-        //Debug.Log(targetRotation);
         _rb.MoveRotation(targetRotation);
         #endregion
 
         #region position
-        // smoothly lerp central follow position to followTransform
-        _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, _followTransform.position, 1f - Mathf.Exp(-_followingSharpness * Time.fixedDeltaTime));
+        // update follow position (no smoothing here - causes jittering)
+        _currentFollowPosition = _followTransform.position;
 
         // calculate ideal goal camera position with no obstructions
         Vector3 targetPosition = _currentFollowPosition - (targetRotation * Vector3.forward * _maxDistance);
@@ -79,7 +77,7 @@ public class CameraController : MonoBehaviour
         closestHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
         RaycastHit[] obstructions = new RaycastHit[_maxObstructions];
         int obstructionCount = Physics.SphereCastNonAlloc(_currentFollowPosition, _obstructionCheckRadius, (targetPosition - _currentFollowPosition).normalized, 
-            obstructions, _maxDistance, _obstructionLayers, QueryTriggerInteraction.Ignore);
+            obstructions, (targetPosition - _currentFollowPosition).magnitude, _obstructionLayers, QueryTriggerInteraction.Ignore);
         // find closest obstruction
         for(int i = 0; i < obstructionCount; i++)
         {
