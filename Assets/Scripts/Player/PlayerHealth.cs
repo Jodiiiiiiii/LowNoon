@@ -24,7 +24,7 @@ public class NewBehaviourScript : MonoBehaviour
         if (DamagerObject.CompareTag("EnemyBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
-            GameManager.Instance.PlayerData.CurrHealth--;
+            
 
             // destroy bullet always on impact with damage receiver
             Destroy(DamagerObject);
@@ -32,9 +32,10 @@ public class NewBehaviourScript : MonoBehaviour
 
             // check if player reaches 0 health
             GameManager.Instance.PlayerData.CurrHealth -= bulletStats.DamageLevel;
+
             if (GameManager.Instance.PlayerData.CurrHealth <= 0)
             {
-                Debug.Log("dead");
+                Debug.Log("dead"); // player dies
             }
         }
     }
