@@ -66,6 +66,7 @@ public class UpgradeController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.Instance.ApplyUpgradeToStats(Type);
+            ViewManager.GetView<InGameUIView>().CallItemCard((int)Type);
             
             Destroy(this.gameObject);
         }
