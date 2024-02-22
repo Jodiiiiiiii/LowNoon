@@ -38,10 +38,10 @@ public class NewBehaviourScript : MonoBehaviour
                 Debug.Log("dead"); // player dies
             }
         }
-<<<<<<< Updated upstream
-=======
+
+
 
         //if armor upgrade?? then currHealth += armor. then same effect happens?
->>>>>>> Stashed changes
+
     }
 }
