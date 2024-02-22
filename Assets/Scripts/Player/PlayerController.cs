@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // Not DASH -> STATIONARY
-                if (PlayerInput.MoveAxisForward == 0f && _rb.velocity.magnitude < _movingThreshold)
+                if (PlayerInput.MoveAxisForward <= 0f && _rb.velocity.magnitude < _movingThreshold)
                 {
                     TransitionToState(CharacterState.STATIONARY);
                 }
