@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.74, y: -0.36, z: -2.17}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7801281183218926668}
   - {fileID: 1638875879560726705}
@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608b35f17f46302438979b53ef775a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseHealth: 20
-  _healthPerUpgrade: 5
+  _baseHealth: 5
+  _healthPerUpgrade: 1
   _baseArmor: 0
   _armorPerUpgrade: 1
   _baseBulletDamage: 1

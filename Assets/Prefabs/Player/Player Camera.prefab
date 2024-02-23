@@ -112,7 +112,6 @@ MonoBehaviour:
   _rotationSharpness: 100
   _minVertAngle: -45
   _maxVertAngle: 70
-  _followingSharpness: 10000
   _maxDistance: 16
   _framingOffset: {x: 5, y: 0}
   _zoomSharpness: 1000
