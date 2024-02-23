@@ -15,7 +15,6 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField, Tooltip("angle added to camera angle to determine final trajectory")] private float _fireAngle = 30f;
     [SerializeField, Tooltip("max ranged of the shootcast from the camera to detect what the target position is")] private float _maxShootCastRange = 100f;
     
-    private CameraController _cameraController;
     private PlayerController _playerController;
 
     float _timer;
@@ -24,7 +23,6 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        _cameraController = Camera.main.GetComponent<CameraController>();
 
         _timer = GameManager.Instance.PlayerData.BulletCooldown; // start with no cooldown
     }
@@ -35,27 +33,31 @@ public class PlayerShooting : MonoBehaviour
         // shooting input AND not during cooldown time AND in stationary state
         if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > GameManager.Instance.PlayerData.BulletCooldown && _playerController.State == CharacterState.STATIONARY)
         {
+            // create new bullet
             GameObject newBullet = Instantiate(BulletObject);
 
-            // TODO: add configurable parameters so that bullet spawns coming out of gun
+            // set position of new bullet
             newBullet.transform.position = _gunPosition.position;
 
-            // rotate player transform to camera angle
-            //Vector3 shootDirection = _playerController.transform.forward;
-            //Quaternion rotation = Quaternion.AngleAxis(_cameraController.TargetVertAngle - _fireAngle, Vector3.Cross(Vector3.up, _playerController.transform.forward));
-            //shootDirection = rotation * shootDirection;
-
-            RaycastHit hitInfo;
             Vector3 projectileDirection;
 
-            Ray shootDirection = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-            if(Physics.Raycast(shootDirection, out hitInfo))
+            // Calculate planar angle offset of player from camera
+            float playerAngleOffset = Mathf.Abs(Camera.main.transform.rotation.eulerAngles.y - _playerController.transform.rotation.eulerAngles.y);
+            if (playerAngleOffset > 180) playerAngleOffset = 360 - playerAngleOffset;
+            if (Camera.main.transform.rotation.eulerAngles.y - _playerController.transform.rotation.eulerAngles.y > 0) playerAngleOffset *= -1;
+
+            // calculate shoot direction based on 
+            Vector3 shootDir = Quaternion.AngleAxis(playerAngleOffset, Vector3.up) * Camera.main.transform.forward;
+
+            // raycast to find projectile direction (actual trajectory) from shoot direction (raycast from camera)
+            Ray shootRay = new(Camera.main.transform.position, shootDir);
+            if(Physics.Raycast(shootRay, out RaycastHit hitInfo))
             {
                 projectileDirection = (hitInfo.point - _gunPosition.position).normalized;
             }
             else
             {
-                projectileDirection = (shootDirection.GetPoint(_maxShootCastRange) - _gunPosition.position).normalized;
+                projectileDirection = (shootRay.GetPoint(_maxShootCastRange) - _gunPosition.position).normalized;
             }
 
             Debug.DrawRay(_gunPosition.position, projectileDirection);
