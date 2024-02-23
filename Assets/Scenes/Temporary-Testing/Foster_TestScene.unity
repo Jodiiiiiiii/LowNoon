@@ -1199,10 +1199,6 @@ PrefabInstance:
       propertyPath: _followTransform
       value: 
       objectReference: {fileID: 1209571851}
-    - target: {fileID: 4648469501292085120, guid: a2c0ed2b8c9f441448cd3b84e8dcf809, type: 3}
-      propertyPath: _followingSharpness
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7336861757631111624, guid: a2c0ed2b8c9f441448cd3b84e8dcf809, type: 3}
       propertyPath: m_Name
       value: Player Camera
