@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [Header("Max Health")]
-    [SerializeField, Tooltip("Base health stat")] private int _baseHealth = 20;
-    [SerializeField, Tooltip("Max health gained per upgrade")] private int _healthPerUpgrade = 5;
+    [SerializeField, Tooltip("Base health stat")] private int _baseHealth = 5;
+    [SerializeField, Tooltip("Max health gained per upgrade")] private int _healthPerUpgrade = 1;
 
     [Header("Armor")]
     [SerializeField, Tooltip("Base armor stat")] private int _baseArmor = 0;
@@ -19,6 +19,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Fire Rate")]
     [SerializeField, Tooltip("Base bullet cooldown stat")] private float _baseBulletCooldown = 0.8f;
     [SerializeField, Tooltip("Multiplied factor per bullet cooldown upgrade")] private float _bulletCooldownUpgradeFactor = 0.8f;
+    private int _baseFireRateUpgradeCount = 0;
 
     [Header("Move Speed")]
     [SerializeField, Tooltip("Base move speed stat - influences move force, max speed, and turning speeds multiplicatively")] private float _baseMoveSpeed = 1f;
@@ -31,6 +32,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField, Tooltip("Interpolation ratio for increasing FOV from current to max (90 degrees)")] private float _lightFOVLerpRatio = 0.3f;
     [SerializeField, Tooltip("Base light intensity")] private float _baseLightIntensity = 0.5f;
     [SerializeField, Tooltip("Interpolation ratio for increasing intensity from current to max (= 1)")] private float _lightIntensityLerpRatio = 0.3f;
+    private int _baseLightUpgradeCount = 0;
 
     /// <summary>
     /// generates set of player data with base stats
@@ -48,12 +50,14 @@ public class PlayerStats : MonoBehaviour
         baseData.BulletDamage = _baseBulletDamage;
         // fire rate
         baseData.BulletCooldown = _baseBulletCooldown;
+        baseData.FireRateUpgradeCount = _baseFireRateUpgradeCount;
         // move speed
         baseData.MoveSpeed = _baseMoveSpeed;
         baseData.DashDamage = _baseDashDamage;
         // light
         baseData.LightFOV = _baseLightFOV;
         baseData.LightIntensity = _baseLightIntensity;
+        baseData.LightUpgradeCount = _baseLightUpgradeCount;
 
         return baseData;
     }
@@ -70,15 +74,18 @@ public class PlayerStats : MonoBehaviour
             case UpgradeController.UpgradeType.Health:
                 playerData.MaxHealth += _healthPerUpgrade;
                 playerData.CurrHealth += _healthPerUpgrade;
+                ViewManager.GetView<InGameUIView>().MaxHPUp();
                 break;
             case UpgradeController.UpgradeType.Armor:
                 playerData.Armor += _armorPerUpgrade;
+                ViewManager.GetView<InGameUIView>().ArmorUp();
                 break;
             case UpgradeController.UpgradeType.Damage:
                 playerData.BulletDamage += _bulletDamagePerUpgrade;
                 break;
             case UpgradeController.UpgradeType.FireSpeed:
                 playerData.BulletCooldown *= _bulletCooldownUpgradeFactor;
+                playerData.FireRateUpgradeCount++;
                 break;
             case UpgradeController.UpgradeType.MoveSpeed:
                 playerData.MoveSpeed += _moveSpeedPerUpgrade;
@@ -87,9 +94,23 @@ public class PlayerStats : MonoBehaviour
             case UpgradeController.UpgradeType.Light:
                 playerData.LightFOV = Mathf.Lerp(playerData.LightFOV, 90, _lightFOVLerpRatio); // 90 = max FOV
                 playerData.LightIntensity = Mathf.Lerp(playerData.LightIntensity, 1, _lightIntensityLerpRatio); // 1 = max intensity
+                playerData.LightUpgradeCount++;
                 break;
         }
 
         return playerData;
     }
+
+    public int getDamageUpgradeCount()
+    {
+        GameManager.Stats playerData = GameManager.Instance.PlayerData;
+        return (int)((playerData.BulletDamage - _baseBulletDamage) / _bulletDamagePerUpgrade);
+    }
+
+    public int getMoveSpdUpgradeCount()
+    {
+        GameManager.Stats playerData = GameManager.Instance.PlayerData;
+        return (int)((playerData.MoveSpeed- _baseMoveSpeed) / _moveSpeedPerUpgrade);
+    }
+
 }
