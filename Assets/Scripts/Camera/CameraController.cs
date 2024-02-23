@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -30,7 +28,7 @@ public class CameraController : MonoBehaviour
 
     // rotation calculation variables
     private Vector3 _targetPlanarDir = Vector3.forward;
-    private float _targetVertAngle = 0f;
+    public float TargetVertAngle { get; private set; } = 0f;
     // position calculation variables
     private Vector3 _currentFollowPosition; // smoothed panning origin
 
@@ -52,9 +50,9 @@ public class CameraController : MonoBehaviour
         Quaternion planarRot = Quaternion.LookRotation(_targetPlanarDir, _followTransform.up); // quaternion representation of _targetPlanarDir
 
         // process vertical rotation input
-        _targetVertAngle -= _player.PlayerInput.LookAxisUp * _rotationSpeed; // vertical change
-        _targetVertAngle = Mathf.Clamp(_targetVertAngle, _minVertAngle, _maxVertAngle);
-        Quaternion verticalRot = Quaternion.Euler(_targetVertAngle, 0, 0); // quaternion representation of _targetVertAngle
+        TargetVertAngle -= _player.PlayerInput.LookAxisUp * _rotationSpeed; // vertical change
+        TargetVertAngle = Mathf.Clamp(TargetVertAngle, _minVertAngle, _maxVertAngle);
+        Quaternion verticalRot = Quaternion.Euler(TargetVertAngle, 0, 0); // quaternion representation of _targetVertAngle
 
         // smoothly interpolate target rotation
         Quaternion targetRotation = Quaternion.Slerp(transform.rotation, planarRot * verticalRot, 1f - Mathf.Exp(-_rotationSharpness * Time.fixedDeltaTime));
