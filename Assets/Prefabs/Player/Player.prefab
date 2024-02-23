@@ -134,7 +134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletObject: {fileID: 4230674095138438074, guid: b8533a1d0dfcf402b82884529ed43741, type: 3}
   _gunPosition: {fileID: 209009088689183073}
-  _fireAngle: 30
   _maxShootCastRange: 100
 --- !u!136 &5815269249637768015
 CapsuleCollider:
