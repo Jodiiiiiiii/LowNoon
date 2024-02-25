@@ -110,10 +110,10 @@ MonoBehaviour:
   _followTransform: {fileID: 0}
   _rotationSpeed: 1
   _rotationSharpness: 100
-  _minVertAngle: -45
-  _maxVertAngle: 70
-  _maxDistance: 16
-  _framingOffset: {x: 5, y: 0}
+  _minVertAngle: -30
+  _maxVertAngle: 50
+  _maxDistance: 10
+  _framingOffset: {x: 1.7, y: 2}
   _zoomSharpness: 1000
   _obstructionCheckRadius: 0.2
   _maxObstructions: 32
