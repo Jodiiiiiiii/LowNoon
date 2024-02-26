@@ -6,7 +6,7 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public bool InvulnerableState = false;
     public float InvulnerableTime = 5.0f;
-    public float timer = 0.0f;
+    float timer = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
