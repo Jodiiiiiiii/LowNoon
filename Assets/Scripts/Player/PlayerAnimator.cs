@@ -42,10 +42,19 @@ public class PlayerAnimator : MonoBehaviour
             _animator.SetBool("isMoving", false);
             _gun.SetActive(true);
         }
-        else if(_playerController.State == CharacterState.MOVING)
+        else
         {
             _animator.SetBool("isMoving", true);
             _gun.SetActive(false);
+        }
+
+        if (_playerController.State == CharacterState.DASH)
+        {
+            _animator.SetBool("isDashing", true);
+        }
+        else
+        {
+            _animator.SetBool("isDashing", false);
         }
     }
 
