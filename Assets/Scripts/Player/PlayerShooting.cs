@@ -20,6 +20,9 @@ public class PlayerShooting : MonoBehaviour
 
     float _timer;
 
+    public delegate void OnBulletFire();
+    public static event OnBulletFire onBulletFire; // Event for when the bullet fires
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +69,7 @@ public class PlayerShooting : MonoBehaviour
             newBullet.GetComponent<Rigidbody>().AddForce(newBullet.GetComponent<BulletStats>().InitialForce * projectileDirection, ForceMode.Impulse);
 
             _timer = 0.0f; // reset cooldown timer
+            onBulletFire?.Invoke();
         }
 
         _timer += Time.deltaTime;
