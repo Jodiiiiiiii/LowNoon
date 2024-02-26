@@ -958,14 +958,6 @@ PrefabInstance:
       propertyPath: _cameraTransform
       value: 
       objectReference: {fileID: 688371988281936480}
-    - target: {fileID: 5754108205002651285, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: _movingThreshold
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5754108205002651285, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: _velocitySharpness
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6196059899672709530, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.74
@@ -1460,9 +1452,10 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 705507995}
-  - {fileID: 4228180517415483283}
+  - {fileID: 1956569111}
   - {fileID: 1209571850}
+  - {fileID: 4228180517415483283}
+  - {fileID: 705507995}
   - {fileID: 8795183433457113036}
   - {fileID: 1112675580}
   - {fileID: 8746599112756713201}
@@ -1477,4 +1470,3 @@ SceneRoots:
   - {fileID: 246586016}
   - {fileID: 22529031}
   - {fileID: 1774356085}
-  - {fileID: 1956569111}

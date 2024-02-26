@@ -7,10 +7,16 @@ using UnityEngine;
 /// </summary>
 public class PlayerShooting : MonoBehaviour
 {
-
+    [Header("Bullet")]
     [Tooltip("stores prefab of bullet object")] public GameObject BulletObject;
 
-    PlayerController _playerController;
+    [Header("Trajectory")]
+    [SerializeField, Tooltip("origin of bullets being fired")] private Transform _gunPosition;
+    [SerializeField, Tooltip("max ranged of the shootcast from the camera to detect what the target position is")] private float _maxShootCastRange = 100f;
+
+    public float PlayerAngleOffset { get; private set; } = 0;
+
+    private PlayerController _playerController;
 
     float _timer;
 
@@ -25,16 +31,41 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Calculate planar angle offset of player from camera - calculated every frame for external use
+        PlayerAngleOffset = _playerController.transform.rotation.eulerAngles.y - Camera.main.transform.rotation.eulerAngles.y;
+        if (PlayerAngleOffset < -180) PlayerAngleOffset += 360;
+        else if (PlayerAngleOffset > 180) PlayerAngleOffset -= 360;
+
         // shooting input AND not during cooldown time AND in stationary state
         if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > GameManager.Instance.PlayerData.BulletCooldown && _playerController.State == CharacterState.STATIONARY)
         {
+            // create new bullet
             GameObject newBullet = Instantiate(BulletObject);
 
-            // TODO: add configurable parameters so that bullet spawns coming out of gun
-            newBullet.transform.position = transform.position + (0.5f * transform.forward); // temporary
-            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.GetComponent<BulletStats>().InitialForce * transform.forward, ForceMode.Impulse);
+            // set position of new bullet
+            newBullet.transform.position = _gunPosition.position;
 
-            _timer = 0.0f;
+            Vector3 projectileDirection;
+
+            // calculate shoot direction based on 
+            Vector3 shootDir = Quaternion.AngleAxis(PlayerAngleOffset, Vector3.up) * Camera.main.transform.forward;
+
+            // raycast to find projectile direction (actual trajectory) from shoot direction (raycast from camera)
+            Ray shootRay = new(Camera.main.transform.position, shootDir);
+            if(Physics.Raycast(shootRay, out RaycastHit hitInfo))
+            {
+                projectileDirection = (hitInfo.point - _gunPosition.position).normalized;
+            }
+            else
+            {
+                projectileDirection = (shootRay.GetPoint(_maxShootCastRange) - _gunPosition.position).normalized;
+            }
+
+            Debug.DrawRay(_gunPosition.position, projectileDirection);
+
+            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.GetComponent<BulletStats>().InitialForce * projectileDirection, ForceMode.Impulse);
+
+            _timer = 0.0f; // reset cooldown timer
         }
 
         _timer += Time.deltaTime;
