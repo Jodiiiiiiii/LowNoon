@@ -25,7 +25,7 @@ public class DamageReceiver : MonoBehaviour
     {
         GameObject DamagerObject = collision.gameObject;
 
-        if (DamagerObject.CompareTag("bullet"))
+        if (DamagerObject.CompareTag("PlayerBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
 

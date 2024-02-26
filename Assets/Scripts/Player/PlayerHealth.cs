@@ -2,24 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    public bool InvulnerableState = false;
-    public float InvulnerableTime = 5.0f;
-    float timer = 0.0f;
+    public bool IsInvulnerable { get; private set; } = false;
+    [Tooltip("Time after taking damage during which the player cannot take more damage")] public float InvulnerabilityDuration = 5.0f;
+    float _timer = 0.0f;
+
     // Start is called before the first frame update
     void Start()
-    {
-        
-    }
+    {   }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > InvulnerableTime)
+        _timer += Time.deltaTime;
+        if (_timer > InvulnerabilityDuration) // check for invulnerability time expiration
         {
-            InvulnerableState = false;
+            IsInvulnerable = false;
         }
     }
 
@@ -27,36 +26,30 @@ public class NewBehaviourScript : MonoBehaviour
     {
         GameObject DamagerObject = collision.gameObject;
         
-
         if (DamagerObject.CompareTag("EnemyBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
             
-
             // destroy bullet always on impact with player
             Destroy(DamagerObject);
 
-
-            if (!InvulnerableState)
+            if (!IsInvulnerable)
             {
-                GameManager.Instance.PlayerData.Armor -= bulletStats.DamageLevel;
-                if (GameManager.Instance.PlayerData.Armor < 0)
-                {
-                    GameManager.Instance.PlayerData.CurrHealth += GameManager.Instance.PlayerData.Armor;
-                    GameManager.Instance.PlayerData.Armor = 0;
-                }
-                InvulnerableState = true;
-                timer = 0.0f; // resets timer
+                // consume 1 armor if any present, otherwise simply apply damage to health
+                if (GameManager.Instance.PlayerData.Armor > 0) GameManager.Instance.PlayerData.Armor -= 1;
+                else GameManager.Instance.PlayerData.CurrHealth -= (int) bulletStats.DamageLevel;
+
+                IsInvulnerable = true;
+                _timer = 0.0f; // resets timer
             }
             
             // check if player reaches 0 health
             if (GameManager.Instance.PlayerData.CurrHealth <= 0)
             {
                 // player dies
+                // TODO: integrate animations and death state transition to restart scene
+                gameObject.SetActive(false); // temporary death behavior for testing purposes
             }
         }
-
-        
-
     }
 }
