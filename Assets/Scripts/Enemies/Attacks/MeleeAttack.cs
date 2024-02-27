@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class MeleeAttack : MonoBehaviour
 {
-    public GameObject AttackCollider;
-    public float AttackTime;
-    public float AttackCooldown;
+    [Header("References")]
+    [Tooltip("Reference to attack object under the enemy")]public GameObject AttackCollider;
+    [Header("Timers")]
+    [Tooltip("How long the attack animation takes")]public float AttackTime;
+    [Tooltip("How long between each attack")]public float AttackCooldown;
+
     private GameObject _player;
     private float _attackTimer;
     private bool _duringAttack;
@@ -33,7 +36,6 @@ public class MeleeAttack : MonoBehaviour
 
         if (Vector3.Distance(_player.transform.position, transform.position) <= 2f)
         {
-            //Deal Damage here
             if (!_duringAttack && _attackTimer > AttackCooldown)
             {
                 _duringAttack = true;
