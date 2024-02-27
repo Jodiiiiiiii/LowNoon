@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum CharacterState
 {
-    Moving,
-    Stationary,
-    Dash
+    MOVING,
+    STATIONARY,
+    DASH
 }
 
 public class PlayerCharacterInputs
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
 
-        State = CharacterState.Stationary;
+        State = CharacterState.STATIONARY;
     }
 
     #region CHARACTER-STATES
@@ -53,11 +53,11 @@ public class PlayerController : MonoBehaviour
     {
         switch(state)
         {
-            case CharacterState.Moving:
+            case CharacterState.MOVING:
                 break;
-            case CharacterState.Stationary:
+            case CharacterState.STATIONARY:
                 break;
-            case CharacterState.Dash:
+            case CharacterState.DASH:
                 break;
         }
     }
@@ -71,11 +71,11 @@ public class PlayerController : MonoBehaviour
     {
         switch (state)
         {
-            case CharacterState.Moving:
+            case CharacterState.MOVING:
                 break;
-            case CharacterState.Stationary:
+            case CharacterState.STATIONARY:
                 break;
-            case CharacterState.Dash:
+            case CharacterState.DASH:
                 break;
         }
     }
@@ -93,7 +93,10 @@ public class PlayerController : MonoBehaviour
     {
         GatherInput();
         UpdateState();
+    }
 
+    private void FixedUpdate()
+    {
         UpdateRotation();
         UpdateVelocity();
     }
@@ -125,35 +128,61 @@ public class PlayerController : MonoBehaviour
     [Header("Player State")]
     [SerializeField, Tooltip("speed which player must be below to be considered 'stationary'")] private float _movingThreshold = 0.01f;
 
+    [Header("Dashing")]
+    [SerializeField, Tooltip("Cooldown for activating player dash")] private float _dashCooldown = 5f;
+    [SerializeField, Tooltip("strength of force applied to make character dash forwards")] private float _dashForce = 8f;
+    [SerializeField, Tooltip("terminal dash speed that character is capped at")] private float _maxDashSpeed = 15f;
+    [SerializeField, Tooltip("time from starting dash when dashing will stop")] private float _dashDuration = 1.5f;
+
+    private float _dashTimer = 0f; // used both for cooldown (when not dashing) and dash duration (when dashing)
+
     /// <summary>
     /// Sets player state based on inputs, rigidbody, or other data
     /// </summary>
     void UpdateState()
     {
-        // TODO: refine state system (will make more sense when a dash is somewhat implemented)
-
-        // Enter Moving (clarify where from - may be different for different states)
-        if(PlayerInput.MoveAxisForward > 0f) // player holding input to move
+        // DASH state
+        if(State == CharacterState.DASH)
         {
-            TransitionToState(CharacterState.Moving);
+            // DASH -> STATIONARY
+            if (_dashTimer <= 0 && _rb.velocity.magnitude < _movingThreshold) // dash has hit max duration and player has come to a stop
+            {
+                _dashTimer = _dashCooldown; // start dash cooldown cooldown timer
+                TransitionToState(CharacterState.STATIONARY);
+            }
+            else // update duration timer
+                _dashTimer -= Time.deltaTime;
         }
-
-        // Any -> Stationary
-        if(PlayerInput.MoveAxisForward == 0f && _rb.velocity.magnitude < _movingThreshold)
+        else // NOT DASH state
         {
-            TransitionToState(CharacterState.Stationary);
-        }
+            // Not DASH -> DASH
+            if (PlayerInput.DashDown && _dashTimer <= 0f)
+            {
+                _dashTimer = _dashDuration; // start dash duration timer
+                TransitionToState(CharacterState.DASH);
+            }
+            else // update dash cooldown timer + handle other states
+            {
+                _dashTimer -= Time.deltaTime;
 
-        // Any -> Stationary
-        if(PlayerInput.DashDown)
-        {
-            TransitionToState(CharacterState.Dash);
+                // Not DASH -> MOVING
+                if (PlayerInput.MoveAxisForward > 0f) // player holding input to move
+                {
+                    TransitionToState(CharacterState.MOVING);
+                }
+
+                // Not DASH -> STATIONARY
+                if (PlayerInput.MoveAxisForward <= 0f && _rb.velocity.magnitude < _movingThreshold)
+                {
+                    TransitionToState(CharacterState.STATIONARY);
+                }
+            }
         }
     }
     #endregion
 
     #region UPDATE-ROTATION
-    [Header("Planar Rotation")]
+    [Header("Rotation")]
     [SerializeField, Tooltip("used for rotating player towards camera angle")] private Transform _cameraTransform;
     [SerializeField, Tooltip("'snappiness' of character seeking camera angle while moving")] private float _movingRotationSharpness = 1f;
     [SerializeField, Tooltip("'snappiness' of character seeking camera angle while stationary")] private float _stationaryRotationSharpness = 2f;
@@ -168,21 +197,21 @@ public class PlayerController : MonoBehaviour
 
         switch (State)
         {
-            case CharacterState.Moving: // character tracks rotation to camera at a certain rate
+            case CharacterState.MOVING: // character tracks rotation to camera at a certain rate
                 // smoothing planar rotation
                 // turning speed also scales with move speed stat
-                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
-                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed));
+                _rb.MoveRotation(Quaternion.Slerp(transform.rotation, planarCameraQuaternion,
+                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed)));
 
                 break;
-            case CharacterState.Stationary: // character rotates faster tracking camera
+            case CharacterState.STATIONARY: // character rotates faster tracking camera
                 // smooth planar rotation
                 // speed also scales with move speed stat
-                transform.rotation = Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
-                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed));
+                _rb.MoveRotation(Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
+                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed)));
 
                 break;
-            case CharacterState.Dash: // camera locked at current 'dashing' direction
+            case CharacterState.DASH: // camera locked at current 'dashing' direction
                 // no rotation change while dashing
                 break;
         }
@@ -190,9 +219,9 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region UPDATE-VELOCITY
-    [Header("Velocity")]
-    [SerializeField, Tooltip("strength of force applied to make character move forwards")] private float _movementForce = 5f;
-    [SerializeField, Tooltip("terminal speed that character is capped at")] private float _maxSpeed = 5f;
+    [Header("Movement")]
+    [SerializeField, Tooltip("strength of force applied to make character move forwards")] private float _moveForce = 5f;
+    [SerializeField, Tooltip("terminal move speed that character is capped at")] private float _maxMoveSpeed = 5f;
 
     /// <summary>
     /// Update player velocity based on inputs.
@@ -202,20 +231,35 @@ public class PlayerController : MonoBehaviour
     {
         switch (State)
         {
-            case CharacterState.Moving: // moves forwards (in direction of player facing) only
-                    // apply moving force
-                    // move speed force also scales with move speed stat
-                    _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _movementForce * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed);
+            case CharacterState.MOVING: // moves forwards (in direction of player facing) only
 
-                    // check for max speed
-                    // scales max speed with move speed stat
-                    float actualMaxSpeed = _maxSpeed * GameManager.Instance.PlayerData.MoveSpeed;
-                    if (_rb.velocity.magnitude > actualMaxSpeed) _rb.velocity = _rb.velocity.normalized * actualMaxSpeed;
+                // apply moving force
+                // move speed force scales with move speed stat
+                _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _moveForce * GameManager.Instance.PlayerData.MoveSpeed);
+
+                // scales max move speed with move speed stat
+                float actualMaxMoveSpeed = _maxMoveSpeed * GameManager.Instance.PlayerData.MoveSpeed;
+                // check for max move speed
+                if (_rb.velocity.magnitude > actualMaxMoveSpeed)
+                    _rb.velocity = _rb.velocity.normalized * actualMaxMoveSpeed;
+
                 break;
-            case CharacterState.Stationary: 
+            case CharacterState.STATIONARY: 
                 // no change - comes to a stop by friction (hence, stationary)
                 break;
-            case CharacterState.Dash: // fixed velocity in fixed direction
+            case CharacterState.DASH: // fixed velocity in fixed direction
+                
+                // apply dashing force (only if dash duration hasn't expired)
+                if(_dashTimer > 0)
+                    // dash speed scales with move speed stat
+                    _rb.AddForce(transform.forward * _dashForce * GameManager.Instance.PlayerData.MoveSpeed);
+
+                // scales max dash speed with move speed stat
+                float actualMaxDashSpeed = _maxDashSpeed * GameManager.Instance.PlayerData.MoveSpeed;
+                // check for max dash speed
+                if (_rb.velocity.magnitude > actualMaxDashSpeed)
+                    _rb.velocity = _rb.velocity.normalized * actualMaxDashSpeed;
+
                 break;
         }
     }

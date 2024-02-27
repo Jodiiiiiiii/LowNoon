@@ -56,16 +56,18 @@ public class GameManager : MonoBehaviour
         public float BulletDamage; // Base Damage + Damage Upgrades
         // Fire Speed
         public float BulletCooldown; // Base Cooldown + Fire Speed Upgrades
+        public int FireRateUpgradeCount; // How many fire rate upgrades we have
         // Move Speed
         public float MoveSpeed; // Base MoveSpeed + MoveSpeed Upgrades
         public float DashDamage; // Basse Damage + MoveSpeed Upgrades
         // Light
         public float LightFOV; // Base FOV + Light Upgrades
         public float LightIntensity; // Base Intensity + Light Upgrades
+        public int LightUpgradeCount;   // How many light upgrades we have
     }
     private Stats _playerData;
 
-    public Stats PlayerData 
+    public Stats PlayerData
     {
         get
         {

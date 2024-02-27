@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tumbleweed
-  - bullet
+  - EnemyBullet
+  - Enemy
+  - Ground
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX
@@ -15,8 +18,8 @@ TagManager:
   - UI
   - Terrain
   - Tumbleweeds
-  - 
-  - 
+  - Player
+  - PlayerBullet
   - 
   - 
   - 
