@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLight : MonoBehaviour
 {
-    public Light light;
+    public Light PlayerLightSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +14,14 @@ public class PlayerLight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (light.range != GameManager.Instance.PlayerData.LightFOV)
+        if (PlayerLightSource.spotAngle != GameManager.Instance.PlayerData.LightFOV)
         {
-            light.range = GameManager.Instance.PlayerData.LightFOV;
+           PlayerLightSource.spotAngle = GameManager.Instance.PlayerData.LightFOV;
         }
 
-        if (light.intensity != GameManager.Instance.PlayerData.LightIntensity)
+        if (PlayerLightSource.intensity != GameManager.Instance.PlayerData.LightIntensity)
         {
-            light.intensity = GameManager.Instance.PlayerData.LightIntensity;
+            PlayerLightSource.intensity = GameManager.Instance.PlayerData.LightIntensity;
         }
 
 

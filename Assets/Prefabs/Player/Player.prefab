@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 5815269249637768015}
   - component: {fileID: 6423213657449628845}
   - component: {fileID: 7179307920419429564}
+  - component: {fileID: 8847152209835682657}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -98,7 +99,8 @@ MonoBehaviour:
   _dashDamagePerUpgrade: 1
   _baseLightFOV: 45
   _lightFOVLerpRatio: 0.3
-  _baseLightIntensity: 0.5
+  _baseLightIntensity: 1
+  _maxIntensity: 4
   _lightIntensityLerpRatio: 0.3
 --- !u!114 &5754108205002651285
 MonoBehaviour:
@@ -149,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fde55f389c14df193bfbd8f61f010a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InvulnerableTime: 5
+  InvulnerabilityDuration: 5
 --- !u!136 &5815269249637768015
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -217,6 +219,19 @@ MonoBehaviour:
   _hat: {fileID: 3273946969388959765}
   _lamp: {fileID: 6514855181963100602}
   _gunAnimator: {fileID: 4832801874756153617}
+--- !u!114 &8847152209835682657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051004514797975844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6386a2c8f25824bab87aec0b628bc235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerLightSource: {fileID: 422679481552368775}
 --- !u!1 &8874824682023365059
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,8 +332,12 @@ PrefabInstance:
       value: Wilkinson Six-Shooter
       objectReference: {fileID: 0}
     - target: {fileID: -2936760149060610672, guid: 84acc183667579a438163a0c23ba1cdb, type: 3}
+      propertyPath: m_Range
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -2936760149060610672, guid: 84acc183667579a438163a0c23ba1cdb, type: 3}
       propertyPath: m_Intensity
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 84acc183667579a438163a0c23ba1cdb, type: 3}
       propertyPath: m_Name
@@ -339,6 +358,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4832801874756153617}
   m_SourcePrefab: {fileID: 100100000, guid: 84acc183667579a438163a0c23ba1cdb, type: 3}
+--- !u!108 &422679481552368775 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: -2936760149060610672, guid: 84acc183667579a438163a0c23ba1cdb, type: 3}
+  m_PrefabInstance: {fileID: 5972653314402050327}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1809174502764677538 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3749147645851604811, guid: 84acc183667579a438163a0c23ba1cdb, type: 3}
