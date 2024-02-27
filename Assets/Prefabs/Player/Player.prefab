@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 2799808020346322729}
   - component: {fileID: 5754108205002651285}
   - component: {fileID: 8586370262174561017}
+  - component: {fileID: 9080262972005425276}
   - component: {fileID: 5815269249637768015}
   - component: {fileID: 6423213657449628845}
   - component: {fileID: 7179307920419429564}
@@ -136,6 +137,19 @@ MonoBehaviour:
   BulletObject: {fileID: 4230674095138438074, guid: b8533a1d0dfcf402b82884529ed43741, type: 3}
   _gunPosition: {fileID: 209009088689183073}
   _maxShootCastRange: 100
+--- !u!114 &9080262972005425276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051004514797975844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60fde55f389c14df193bfbd8f61f010a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvulnerableTime: 5
 --- !u!136 &5815269249637768015
 CapsuleCollider:
   m_ObjectHideFlags: 0
