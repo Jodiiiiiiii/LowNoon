@@ -40,9 +40,12 @@ public class RangedAttack : MonoBehaviour
                 _shotTimerRandom = ShotTimer + TimerRandom();
                 _cooldownTimer = 0;
                 GameObject bullet = Instantiate(BulletObject);
-                bullet.AddComponent<BulletScript>();
+                bullet.AddComponent<DestroyOnCollision>();
+                // Disable enemy and enemy bullet collision
                 bullet.transform.position = transform.position + transform.forward * 4f;
-                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * BulletForce);
+                bullet.transform.LookAt(_player.transform.position);
+                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletForce);
+                // Add bullet spread
             }
         }
 

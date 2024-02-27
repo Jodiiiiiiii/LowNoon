@@ -13,6 +13,7 @@ public class BulletStats : MonoBehaviour
     [Tooltip ("How long before bullet is destroyed (seconds)")] public float BulletLifetime = 3.0f;
     
     float _timer = 0.0f;
+    public bool IsBullet;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class BulletStats : MonoBehaviour
     void Update()
     {
         _timer += Time.deltaTime;
-        if(_timer > BulletLifetime)
+        if(_timer > BulletLifetime && IsBullet)
         {
             Destroy(gameObject);
         }

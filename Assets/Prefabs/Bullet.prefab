@@ -152,3 +152,4 @@ MonoBehaviour:
   DamageLevel: 1
   InitialForce: 500
   BulletLifetime: 0.5
+  IsBullet: 1
