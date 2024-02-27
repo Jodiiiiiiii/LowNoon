@@ -2673,7 +2673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02327c8055fa164e8811ea98a25a35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHorizontalOffset: 5000
+  _maxHorizontalOffset: 2000
   _maxFadeDistance: 500
   _maxAlpha: 0.6
   _transparencySharpness: 10
