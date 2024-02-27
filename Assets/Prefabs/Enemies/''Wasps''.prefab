@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8275222334151173918}
   - component: {fileID: 2063803544641493541}
   - component: {fileID: 7342240563325101585}
+  - component: {fileID: 194165153339643760}
   m_Layer: 0
   m_Name: '''''Wasps'''''
   m_TagString: Untagged
@@ -173,3 +174,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   _aggroRange: 75
+--- !u!114 &194165153339643760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266889165913323094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3c85842d236834e84ebfa657396aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RangedMovement: {fileID: 7342240563325101585}
+  BulletObject: {fileID: 810306296418750875, guid: c43674987985c499ba29ce257b91c62c, type: 3}
+  BulletForce: 1e+9
+  ShotTimer: 5
+  MinShotVar: -2
+  MaxShotVar: 3
