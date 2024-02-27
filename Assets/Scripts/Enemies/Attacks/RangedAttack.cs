@@ -10,6 +10,7 @@ public class RangedAttack : MonoBehaviour
 
     [Header("Bullet Stats")]
     [Tooltip("The force of the bullet when it spawns")] public float BulletForce;
+    [Tooltip("How far away from the player left and right the bullet will hit")] public float BulletSpread;
 
     [Header("Bullet Timer")]
     [Tooltip("How much time should pass between each shot")] public float ShotTimer;
@@ -41,12 +42,12 @@ public class RangedAttack : MonoBehaviour
                 _cooldownTimer = 0;
                 GameObject bullet = Instantiate(BulletObject);
                 bullet.AddComponent<DestroyOnTrigger>();
-                // Disable enemy and enemy bullet collision
-
                 bullet.transform.position = transform.position + transform.forward * 4f;
                 bullet.transform.LookAt(_player.transform.position);
-                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletForce);
-                // Add bullet spread
+                Vector3 bulletRotation = bullet.transform.rotation.eulerAngles;
+                bulletRotation.y += Random.Range(-BulletSpread, BulletSpread);
+                bullet.transform.rotation = Quaternion.Euler(bulletRotation);
+                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletForce, ForceMode.Impulse);
             }
         }
 
