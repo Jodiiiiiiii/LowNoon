@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 988918636372412548}
+  - component: {fileID: -6772366764259614931}
+  - component: {fileID: -4457954298535779603}
   - component: {fileID: 6716029583509054182}
   - component: {fileID: 9056253614684199031}
   - component: {fileID: 5754423811558055864}
-  - component: {fileID: -6772366764259614931}
   - component: {fileID: 8982862525169235857}
   m_Layer: 0
   m_Name: EnemyBullet
@@ -36,6 +37,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6772366764259614931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810306296418750875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d79296893da5e24cbf7dc1cf0c74f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageLevel: 1
+  InitialForce: 0
+  BulletLifetime: 10
+  IsBullet: 1
+--- !u!114 &-4457954298535779603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810306296418750875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae88536b6fef20439d870cddeae136e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &6716029583509054182
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -107,22 +136,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6772366764259614931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810306296418750875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d79296893da5e24cbf7dc1cf0c74f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamageLevel: 1
-  InitialForce: 0
-  BulletLifetime: 20
-  IsBullet: 1
 --- !u!54 &8982862525169235857
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,4 +162,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2

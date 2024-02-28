@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8783212379702021717}
+  - component: {fileID: 1190798601653159236}
+  - component: {fileID: -6934583119343369674}
   - component: {fileID: 4517299647287124447}
   - component: {fileID: 3197316679784125484}
   - component: {fileID: 4547923993007748067}
   - component: {fileID: 4723445224794814414}
-  - component: {fileID: 1190798601653159236}
-  - component: {fileID: -6934583119343369674}
   m_Layer: 9
   m_Name: PlayerBullet
   m_TagString: PlayerBullet
@@ -37,6 +37,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1190798601653159236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230674095138438074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d79296893da5e24cbf7dc1cf0c74f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageLevel: 1
+  InitialForce: 200
+  BulletLifetime: 10
+  IsBullet: 1
+--- !u!114 &-6934583119343369674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230674095138438074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae88536b6fef20439d870cddeae136e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &4517299647287124447
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -135,31 +163,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &1190798601653159236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4230674095138438074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d79296893da5e24cbf7dc1cf0c74f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamageLevel: 1
-  InitialForce: 200
-  BulletLifetime: 20
-  IsBullet: 1
---- !u!114 &-6934583119343369674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4230674095138438074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae88536b6fef20439d870cddeae136e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
