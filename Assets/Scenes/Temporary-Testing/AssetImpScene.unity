@@ -389,14 +389,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5754108205002651285, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: _moveForce
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 5754108205002651285, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: _frictionForce
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 5754108205002651285, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
       propertyPath: _cameraTransform
       value: 
       objectReference: {fileID: 954013445}

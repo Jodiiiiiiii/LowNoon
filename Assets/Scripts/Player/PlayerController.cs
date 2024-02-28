@@ -259,6 +259,9 @@ public class PlayerController : MonoBehaviour
                 if(_dashTimer > 0)
                     // dash speed scales with move speed stat
                     _rb.AddForce(transform.forward * _dashForce * GameManager.Instance.PlayerData.MoveSpeed);
+                else
+                    // apply backwards friction - only if not still adding force
+                    _rb.AddForce(-_rb.velocity.normalized * _frictionForce);
 
                 // scales max dash speed with move speed stat
                 float actualMaxDashSpeed = _maxDashSpeed * GameManager.Instance.PlayerData.MoveSpeed;
