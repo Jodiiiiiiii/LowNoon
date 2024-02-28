@@ -21,16 +21,13 @@ public class DamageReceiver : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         GameObject DamagerObject = collision.gameObject;
 
         if (DamagerObject.CompareTag("PlayerBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
-
-            // destroy bullet always on impact with damage receiver
-            Destroy(DamagerObject);
 
             if (!IsImmune)
             {

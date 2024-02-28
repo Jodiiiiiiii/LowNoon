@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fde55f389c14df193bfbd8f61f010a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InvulnerabilityDuration: 5
+  InvulnerabilityDuration: 2
 --- !u!136 &5815269249637768015
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -64,9 +64,9 @@ public class PlayerShooting : MonoBehaviour
                 projectileDirection = (shootRay.GetPoint(_maxShootCastRange) - _gunPosition.position).normalized;
             }
 
-            Debug.DrawRay(_gunPosition.position, projectileDirection);
-
-            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.GetComponent<BulletStats>().InitialForce * projectileDirection, ForceMode.Impulse);
+            // align and apply force
+            newBullet.transform.LookAt(newBullet.transform.position + projectileDirection);
+            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.GetComponent<BulletStats>().InitialForce * newBullet.transform.forward, ForceMode.Impulse);
 
             _timer = 0.0f; // reset cooldown timer
             onBulletFire?.Invoke();
