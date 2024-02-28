@@ -90,7 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RangedMovement: {fileID: 7342240563325101585}
   BulletObject: {fileID: 810306296418750875, guid: c43674987985c499ba29ce257b91c62c, type: 3}
-  BulletSpread: 15
+  BulletSpread: 10
   ShotTimer: 5
   MinShotVar: -2
   MaxShotVar: 3
