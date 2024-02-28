@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7597071614010721525}
   - component: {fileID: 6548930474584843604}
   - component: {fileID: 4353200242768244826}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DamageCollider
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 4947981975907929731}
   - component: {fileID: 4338583278994059385}
   - component: {fileID: 7996783083641616903}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AntEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

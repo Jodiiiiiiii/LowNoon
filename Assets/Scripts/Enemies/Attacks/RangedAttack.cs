@@ -7,9 +7,9 @@ public class RangedAttack : MonoBehaviour
     [Header("Reference Objects")]
     [Tooltip("Stores the ranged movement script on the Enemy")] public RangedMovement RangedMovement;
     [Tooltip("Stores bullet predab")] public GameObject BulletObject;
+    private BulletStats _bulletStats; // retrieved from BulletObject above
 
     [Header("Bullet Stats")]
-    [Tooltip("The force of the bullet when it spawns")] public float BulletForce;
     [Tooltip("How far away from the player left and right the bullet will hit")] public float BulletSpread;
 
     [Header("Bullet Timer")]
@@ -27,6 +27,8 @@ public class RangedAttack : MonoBehaviour
         _player = GameObject.FindWithTag("Player");
         _cooldownTimer = ShotTimer + TimerRandom();
         _shotTimerRandom = ShotTimer + TimerRandom();
+
+        _bulletStats = BulletObject.GetComponent<BulletStats>();
     }
 
     // Update is called once per frame
@@ -34,21 +36,24 @@ public class RangedAttack : MonoBehaviour
     {
         bool isStill = RangedMovement.StayStill;
 
-        if (isStill)
+        if (isStill && _cooldownTimer > _shotTimerRandom)
         {
-            if (_cooldownTimer > _shotTimerRandom)
-            {
-                _shotTimerRandom = ShotTimer + TimerRandom();
-                _cooldownTimer = 0;
-                GameObject bullet = Instantiate(BulletObject);
-                bullet.AddComponent<DestroyOnTrigger>();
-                bullet.transform.position = transform.position + transform.forward * 4f;
-                bullet.transform.LookAt(_player.transform.position);
-                Vector3 bulletRotation = bullet.transform.rotation.eulerAngles;
-                bulletRotation.y += Random.Range(-BulletSpread, BulletSpread);
-                bullet.transform.rotation = Quaternion.Euler(bulletRotation);
-                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * BulletForce, ForceMode.Impulse);
-            }
+            // reset cooldown
+            _shotTimerRandom = ShotTimer + TimerRandom();
+            _cooldownTimer = 0;
+
+            // create bullet at enemy, facing player
+            GameObject bullet = Instantiate(BulletObject);
+            bullet.transform.position = transform.position; // TODO: parameters/equation to make bullet align with enemy gun
+            bullet.transform.LookAt(_player.transform.position);
+
+            // randomize y (planar) rotation within BulletSpread range
+            Vector3 bulletRotation = bullet.transform.rotation.eulerAngles;
+            bulletRotation.y += Random.Range(-BulletSpread, BulletSpread);
+            bullet.transform.rotation = Quaternion.Euler(bulletRotation);
+
+            // apply bullet force
+            bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * _bulletStats.InitialForce, ForceMode.Impulse);
         }
 
         _cooldownTimer += Time.deltaTime;
