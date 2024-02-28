@@ -121,8 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageLevel: 1
   InitialForce: 0
-  BulletLifetime: 200
-  IsBullet: 0
+  BulletLifetime: 20
+  IsBullet: 1
 --- !u!54 &8982862525169235857
 Rigidbody:
   m_ObjectHideFlags: 0
