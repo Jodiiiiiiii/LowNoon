@@ -12,7 +12,7 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField, Tooltip("The model for the player's gun")] private GameObject _gun;
     [SerializeField, Tooltip("The model for the player's hat")] private GameObject _hat;
     [SerializeField, Tooltip("The model for the player's lamp")] private GameObject _lamp;
-    [SerializeField] private Animator _gunAnimator;  // The gun animator is used for having the gun be either idle or firing
+    //[SerializeField] private Animator _gunAnimator;  // The gun animator is used for having the gun be either idle or firing
     private Animator _hatAnimator;  // The hat and lamp animators are used p. much exclusively for the death animation
     private Animator _lampAnimator;
 
@@ -33,7 +33,7 @@ public class PlayerAnimator : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
 
         //_gunAnimator = _gun.GetComponent<Animator>();
-        _gun.SetActive(false);
+        //_gun.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class PlayerAnimator : MonoBehaviour
             {
                 StopAllCoroutines();
                 _animator.SetBool("isDashing", true);
-                _gun.SetActive(false);
+                //_gun.SetActive(false);
                 
                 
             }
@@ -53,7 +53,7 @@ public class PlayerAnimator : MonoBehaviour
             {
                 _animator.SetBool("isDashing", false);
                 _animator.SetBool("isMoving", false);
-                _gun.SetActive(true);
+                //_gun.SetActive(true);
             }
             
         }
@@ -63,8 +63,8 @@ public class PlayerAnimator : MonoBehaviour
             {
                 StopAllCoroutines();
                 _animator.SetBool("isDashing", true);
-                _gunAnimator.SetBool("fire", false);
-                _gun.SetActive(false);
+               // _gunAnimator.SetBool("fire", false);
+                //_gun.SetActive(false);
                 
             }
             else
@@ -72,7 +72,7 @@ public class PlayerAnimator : MonoBehaviour
                 StopAllCoroutines();
                 _animator.SetBool("isDashing", false);
                 _animator.SetBool("isMoving", true);
-                _gun.SetActive(false);
+                //_gun.SetActive(false);
             }
             
         }
@@ -92,12 +92,12 @@ public class PlayerAnimator : MonoBehaviour
     private IEnumerator DoFireGun()
     {
         _animator.Play("Fire", 0, 0);
-        _gunAnimator.Play("Gunfire", 0, 0);
+       // _gunAnimator.Play("Gunfire", 0, 0);
         yield return new WaitForSeconds(.5f);
         
         //yield return new WaitForSeconds(.5f);
         _animator.Play("Idle", 0, 0);
-        _gunAnimator.Play("Idle", 0, 0);
+        //_gunAnimator.Play("Idle", 0, 0);
 
     }
 }
