@@ -16,6 +16,8 @@ public class PlayerAnimator : MonoBehaviour
     private Animator _hatAnimator;  // The hat and lamp animators are used p. much exclusively for the death animation
     private Animator _lampAnimator;
 
+
+
     private void OnEnable()
     {
         PlayerShooting.onBulletFire += fireGun;
@@ -39,39 +41,63 @@ public class PlayerAnimator : MonoBehaviour
     {
         if(_playerController.State == CharacterState.STATIONARY)
         {
-            _animator.SetBool("isMoving", false);
-            _gun.SetActive(true);
+            if (_playerController.State == CharacterState.DASH)
+            {
+                StopAllCoroutines();
+                _animator.SetBool("isDashing", true);
+                _gun.SetActive(false);
+                
+                
+            }
+            else
+            {
+                _animator.SetBool("isDashing", false);
+                _animator.SetBool("isMoving", false);
+                _gun.SetActive(true);
+            }
+            
         }
         else
         {
-            _animator.SetBool("isMoving", true);
-            _gun.SetActive(false);
+            if (_playerController.State == CharacterState.DASH)
+            {
+                StopAllCoroutines();
+                _animator.SetBool("isDashing", true);
+                _gunAnimator.SetBool("fire", false);
+                _gun.SetActive(false);
+                
+            }
+            else
+            {
+                StopAllCoroutines();
+                _animator.SetBool("isDashing", false);
+                _animator.SetBool("isMoving", true);
+                _gun.SetActive(false);
+            }
+            
         }
 
-        if (_playerController.State == CharacterState.DASH)
-        {
-            _animator.SetBool("isDashing", true);
-        }
-        else
-        {
-            _animator.SetBool("isDashing", false);
-        }
+        //Debug.Log(_animator.GetBool("isDashing"));
+
+   
     }
 
     private void fireGun()
     {
+        StopAllCoroutines();
+        _animator.Play("Idle", 0, 0);
         StartCoroutine(DoFireGun());
     }
 
     private IEnumerator DoFireGun()
     {
         _animator.Play("Fire", 0, 0);
-        _gunAnimator.SetBool("fire", true);
-        yield return new WaitForSeconds(.75f);
+        _gunAnimator.Play("Gunfire", 0, 0);
+        yield return new WaitForSeconds(.5f);
         
         //yield return new WaitForSeconds(.5f);
         _animator.Play("Idle", 0, 0);
-        _gunAnimator.SetBool("fire", false);
+        _gunAnimator.Play("Idle", 0, 0);
 
     }
 }

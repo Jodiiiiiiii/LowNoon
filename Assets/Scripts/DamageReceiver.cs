@@ -28,7 +28,6 @@ public class DamageReceiver : MonoBehaviour
         if (DamagerObject.CompareTag("PlayerBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
-
             // destroy bullet always on impact with damage receiver
             Destroy(DamagerObject);
 

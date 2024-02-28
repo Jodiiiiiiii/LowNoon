@@ -136,6 +136,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 909dd639b4672fd49b9bca6145b74e67, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7812557996602551515}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 909dd639b4672fd49b9bca6145b74e67, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3556254803923511216}
   m_SourcePrefab: {fileID: 100100000, guid: 909dd639b4672fd49b9bca6145b74e67, type: 3}
 --- !u!1 &3178522512273346393 stripped
 GameObject:
@@ -227,3 +230,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 7.5
   _lifetime: 45
+  deathParticles: {fileID: 4080424677022064478, guid: 99643338bb38446429f3e0948ab8caa2, type: 3}
+--- !u!114 &3556254803923511216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3178522512273346393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15cd12fc83617463e9f3a5b665be5e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthLevel: 1
+  IsDirectlyDestroyed: 0
+  IsImmune: 0
