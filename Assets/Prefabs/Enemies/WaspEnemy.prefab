@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7342240563325101585}
   - component: {fileID: 194165153339643760}
   m_Layer: 0
-  m_Name: '''''Wasps'''''
+  m_Name: WaspEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
