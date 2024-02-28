@@ -6,9 +6,11 @@ public class MeleeAttack : MonoBehaviour
 {
     [Header("References")]
     [Tooltip("Reference to attack object under the enemy")]public GameObject AttackCollider;
+
     [Header("Timers")]
-    [Tooltip("How long the attack animation takes")]public float AttackTime;
+    [Tooltip("How long the attack animation takes; duration that damage hitbox is out")]public float AttackTime;
     [Tooltip("How long between each attack")]public float AttackCooldown;
+    [Tooltip("Distance from the player when the enemy will initiate an attack")] public float AttackRange;
 
     private GameObject _player;
     private float _attackTimer;
@@ -27,17 +29,19 @@ public class MeleeAttack : MonoBehaviour
     {
         _attackTimer += Time.deltaTime;
 
-        if (_duringAttack && _attackTimer > AttackTime)
+        if (_duringAttack && _attackTimer > AttackTime) // if attack is completed
         {
+            // end attack state
             _duringAttack = false;
             AttackCollider.SetActive(false);
             _attackTimer = 0;
         }
 
-        if (Vector3.Distance(_player.transform.position, transform.position) <= 2f)
+        if (Vector3.Distance(_player.transform.position, transform.position) <= AttackRange) // if close to player
         {
-            if (!_duringAttack && _attackTimer > AttackCooldown)
+            if (!_duringAttack && _attackTimer > AttackCooldown) // if attack is off cooldown and ready
             {
+                // initiate attack
                 _duringAttack = true;
                 AttackCollider.SetActive(true);
                 _attackTimer = 0;
