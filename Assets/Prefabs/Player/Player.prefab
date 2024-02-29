@@ -117,15 +117,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movingThreshold: 0.5
-  _dashCooldown: 2
-  _dashForce: 200
+  _dashCooldown: 1.5
+  _dashForce: 100
   _maxDashSpeed: 45
   _dashDuration: 0.5
   _cameraTransform: {fileID: 0}
   _movingRotationSharpness: 1.5
   _stationaryRotationSharpness: 5
-  _moveForce: 140
+  _moveForce: 180
   _maxMoveSpeed: 15
+  _frictionForce: 80
 --- !u!114 &8586370262174561017
 MonoBehaviour:
   m_ObjectHideFlags: 0
