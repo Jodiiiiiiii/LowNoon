@@ -22,13 +22,16 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnCollisionEnter(Collision collision)
     {
-        GameObject DamagerObject = collider.gameObject;
+        GameObject DamagerObject = collision.gameObject;
         
         if (DamagerObject.CompareTag("EnemyBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
+            
+            // destroy bullet always on impact with player
+            Destroy(DamagerObject);
 
             if (!IsInvulnerable)
             {
