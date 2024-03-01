@@ -20,8 +20,8 @@ TagManager:
   - Tumbleweeds
   - Player
   - PlayerBullet
-  - 
-  - 
+  - Enemy
+  - EnemyBullet
   - 
   - 
   - 
