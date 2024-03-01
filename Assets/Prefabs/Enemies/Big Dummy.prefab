@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c674880caf58d847a5d608e81a67624, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.6445742
+      value: -4.38
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c674880caf58d847a5d608e81a67624, type: 3}
       propertyPath: m_LocalRotation.w
@@ -64,9 +64,29 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7341042740874832934, guid: 6c674880caf58d847a5d608e81a67624, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -3133498875991405556, guid: 6c674880caf58d847a5d608e81a67624, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6c674880caf58d847a5d608e81a67624, type: 3}
       propertyPath: m_Name
-      value: Dummy1
+      value: Big Dummy
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c674880caf58d847a5d608e81a67624, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c674880caf58d847a5d608e81a67624, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913082053635059393, guid: 6c674880caf58d847a5d608e81a67624, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
