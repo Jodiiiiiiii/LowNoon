@@ -15,6 +15,7 @@ public class InGameUIView : View
     private PlayerStats _playerStats;   // PlayerStats (for accessing upgrade count methods)
     [SerializeField] private ObtainedItemCard card; // The info card that pops up when we get an item
     [SerializeField, Tooltip("How long the card stays active for (includes startup time")] private float cardTime = 3f;
+    private int _currUIHealth;          // player's health level displayed on UI
 
 
     public override void Initialize()
@@ -42,6 +43,7 @@ public class InGameUIView : View
         _leftBookend.transform.position = new Vector2(_hpUnits[0].GetComponent<RectTransform>().position.x - 70, _hpUnits[0].GetComponent<RectTransform>().position.y - 45);
         _rightBookend.transform.position = new Vector2(_hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.x + 90, _hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.y - 45);
 
+        _currUIHealth = _stats.CurrHealth; // start at max
     }
 
     void Start()
@@ -52,12 +54,29 @@ public class InGameUIView : View
     // Update is called once per frame
     void Update()
     {
+        // re-gather new player stats every frame
+        _stats = GameManager.Instance.PlayerData;
+
         _leftBookend.transform.position = new Vector2(_hpUnits[0].GetComponent<RectTransform>().position.x - 70, _hpUnits[0].GetComponent<RectTransform>().position.y - 45);
         _rightBookend.transform.position = new Vector2(_hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.x + 90, _hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.y - 45);
         _upgrades[0].setUpgradeCount(_playerStats.getDamageUpgradeCount());
         _upgrades[1].setUpgradeCount(_stats.FireRateUpgradeCount);
         _upgrades[2].setUpgradeCount(_playerStats.getMoveSpdUpgradeCount());
         _upgrades[3].setUpgradeCount(_stats.LightUpgradeCount);
+        
+        // check for health decrement
+        while(_stats.CurrHealth < _currUIHealth)
+        {
+            CurrHPDown();
+            _currUIHealth--;
+        }
+
+        // check for health increment
+        while (_stats.CurrHealth > _currUIHealth)
+        {
+            CurrHPUp();
+            _currUIHealth++;
+        }
     }
 
     public void MaxHPUp()

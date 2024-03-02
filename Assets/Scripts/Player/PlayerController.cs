@@ -223,6 +223,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField, Tooltip("strength of force applied to make character move forwards")] private float _moveForce = 5f;
     [SerializeField, Tooltip("terminal move speed that character is capped at")] private float _maxMoveSpeed = 5f;
+    [SerializeField, Tooltip("strength of force applied by friction; no distinction between static/dynamic")] private float _frictionForce = 2f;
 
     /// <summary>
     /// Update player velocity based on inputs.
@@ -238,6 +239,9 @@ public class PlayerController : MonoBehaviour
                 // move speed force scales with move speed stat
                 _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _moveForce * GameManager.Instance.PlayerData.MoveSpeed);
 
+                // apply backwards friction
+                _rb.AddForce(-_rb.velocity.normalized * _frictionForce);
+
                 // scales max move speed with move speed stat
                 float actualMaxMoveSpeed = _maxMoveSpeed * GameManager.Instance.PlayerData.MoveSpeed;
                 // check for max move speed
@@ -245,8 +249,10 @@ public class PlayerController : MonoBehaviour
                     _rb.velocity = _rb.velocity.normalized * actualMaxMoveSpeed;
 
                 break;
-            case CharacterState.STATIONARY: 
-                // no change - comes to a stop by friction (hence, stationary)
+            case CharacterState.STATIONARY:
+                // no change
+                _rb.velocity = Vector3.zero; // ensure a complete stop after crossing threshold speed for stationary
+
                 break;
             case CharacterState.DASH: // fixed velocity in fixed direction
                 
@@ -254,6 +260,9 @@ public class PlayerController : MonoBehaviour
                 if(_dashTimer > 0)
                     // dash speed scales with move speed stat
                     _rb.AddForce(transform.forward * _dashForce * GameManager.Instance.PlayerData.MoveSpeed);
+                else
+                    // apply backwards friction - only if not still adding force
+                    _rb.AddForce(-_rb.velocity.normalized * _frictionForce);
 
                 // scales max dash speed with move speed stat
                 float actualMaxDashSpeed = _maxDashSpeed * GameManager.Instance.PlayerData.MoveSpeed;

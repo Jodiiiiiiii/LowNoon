@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7882880709509760850}
+  - component: {fileID: 7342240563325101585}
+  - component: {fileID: 194165153339643760}
   - component: {fileID: 4791973203542740861}
   - component: {fileID: 1985777913282204425}
   - component: {fileID: 8275222334151173918}
   - component: {fileID: 2063803544641493541}
-  - component: {fileID: 7342240563325101585}
-  m_Layer: 0
-  m_Name: '''''Wasps'''''
+  m_Layer: 10
+  m_Name: WaspEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,6 +37,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7342240563325101585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266889165913323094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f8e99d6def58f40a5649870ca4c32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyMoveState: 0
+  StayStill: 0
+  MoveSpeed: 8
+  ZipSpeed: 30
+  HoverSpeed: 1.5
+  VelocitySharpness: 20
+  MinDistFromPlayer: 25
+  MaxDistFromPlayer: 40
+  MinDistRandom: -10
+  MaxDistRandom: 10
+  MinHoverFromGround: 2
+  MaxHoverFromGround: 5
+  MinHoverRandom: -1
+  MaxHoverRandom: 2
+  _zippyHoverFactor: 5
+  ZippyTimer: 0.2
+  StillTimer: 1.5
+  ZippyTimerMin: -0.05
+  ZippyTimerMax: 0.05
+  StillTimerMin: -1
+  StillTimerMax: 1
+  _obstructionCheckRadius: 0.2
+  _maxObstructions: 32
+  _obstructionLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _aggroRange: 75
+--- !u!114 &194165153339643760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266889165913323094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3c85842d236834e84ebfa657396aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RangedMovement: {fileID: 7342240563325101585}
+  BulletObject: {fileID: 810306296418750875, guid: c43674987985c499ba29ce257b91c62c, type: 3}
+  BulletSpread: 10
+  ShotTimer: 5
+  MinShotVar: -2
+  MaxShotVar: 3
 --- !u!33 &4791973203542740861
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -134,42 +192,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7342240563325101585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266889165913323094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f8e99d6def58f40a5649870ca4c32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyMoveState: 0
-  StayStill: 0
-  MoveSpeed: 8
-  ZipSpeed: 30
-  HoverSpeed: 1.5
-  VelocitySharpness: 20
-  MinDistFromPlayer: 25
-  MaxDistFromPlayer: 40
-  MinDistRandom: -10
-  MaxDistRandom: 10
-  MinHoverFromGround: 2
-  MaxHoverFromGround: 5
-  MinHoverRandom: -1
-  MaxHoverRandom: 2
-  _zippyHoverFactor: 5
-  ZippyTimer: 0.2
-  StillTimer: 1.5
-  ZippyTimerMin: -0.05
-  ZippyTimerMax: 0.05
-  StillTimerMin: -1
-  StillTimerMax: 1
-  _obstructionCheckRadius: 0.2
-  _maxObstructions: 32
-  _obstructionLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  _aggroRange: 75
