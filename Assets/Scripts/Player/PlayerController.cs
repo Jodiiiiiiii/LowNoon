@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         State = CharacterState.STATIONARY;
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        DontDestroyOnLoad(player);
+        GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        DontDestroyOnLoad(camera);
     }
 
     #region CHARACTER-STATES
