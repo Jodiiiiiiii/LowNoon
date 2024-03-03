@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneEntry : MonoBehaviour
+public class SetPlayerSpawnPosition : MonoBehaviour
 {
     public GameObject PlayerObject;
     
