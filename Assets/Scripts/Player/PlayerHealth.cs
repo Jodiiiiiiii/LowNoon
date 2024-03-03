@@ -22,10 +22,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnCollisionEnter(Collision collision)
     {
-        GameObject DamagerObject = collider.gameObject;
-        
+        GameObject DamagerObject = collision.gameObject;
+
         if (DamagerObject.CompareTag("EnemyBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
@@ -34,12 +34,12 @@ public class PlayerHealth : MonoBehaviour
             {
                 // consume 1 armor if any present, otherwise simply apply damage to health
                 if (GameManager.Instance.PlayerData.Armor > 0) GameManager.Instance.PlayerData.Armor -= 1;
-                else GameManager.Instance.PlayerData.CurrHealth -= (int) bulletStats.DamageLevel;
+                else GameManager.Instance.PlayerData.CurrHealth -= (int)bulletStats.DamageLevel;
 
                 IsInvulnerable = true;
                 _timer = 0.0f; // resets timer
             }
-            
+
             // check if player reaches 0 health
             if (GameManager.Instance.PlayerData.CurrHealth <= 0)
             {
