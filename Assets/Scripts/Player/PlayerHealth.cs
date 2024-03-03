@@ -30,6 +30,8 @@ public class PlayerHealth : MonoBehaviour
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
 
+            Destroy(DamagerObject); // supposed to slightly mitigate effecct of bullet pushing player when it hits briefly
+
             if (!IsInvulnerable)
             {
                 // consume 1 armor if any present, otherwise simply apply damage to health
