@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SceneEntry : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject PlayerObject;
     
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = gameObject.transform.position;
-        player.transform.rotation = gameObject.transform.rotation;
+        PlayerObject = GameObject.FindGameObjectWithTag("Player");
+        PlayerObject.transform.position = gameObject.transform.position;
+        PlayerObject.transform.rotation = gameObject.transform.rotation;
     }
 
     // Update is called once per frame
