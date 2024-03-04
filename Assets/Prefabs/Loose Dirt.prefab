@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e231dfec054b4f1687c7b4c7a105a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: HeadlightTestingScene
+  SceneName: SceneName
 --- !u!33 &665705252202585903
 MeshFilter:
   m_ObjectHideFlags: 0
