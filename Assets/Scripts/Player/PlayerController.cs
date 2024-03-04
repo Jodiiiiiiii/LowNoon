@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviour
                 // check for max move speed
                 if (_rb.velocity.magnitude > actualMaxMoveSpeed)
                     _rb.velocity = _rb.velocity.normalized * actualMaxMoveSpeed;
-                Debug.Log(_rb.velocity.magnitude);
+           
                 break;
             case CharacterState.STATIONARY:
                 // no change

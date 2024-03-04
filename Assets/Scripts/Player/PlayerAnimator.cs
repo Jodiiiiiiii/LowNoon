@@ -6,13 +6,20 @@ public class PlayerAnimator : MonoBehaviour
 {
     // Player animations essentials
     private PlayerController _playerController;
+    private AudioSource _audioSource;
     [SerializeField] private Animator _animator;
+    [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
+    // Audio clip order list
+    // 0 = Standard gunshot
+    // 1 = Standard reload
+    // 2 = Six shot reload
 
     // Accessory animation essentials
     [SerializeField, Tooltip("The model for the player's hat")] private GameObject _hat;
     [SerializeField, Tooltip("The model for the player's lamp")] private GameObject _lamp;
     private Animator _hatAnimator;  // The hat and lamp animators are used p. much exclusively for the death animation
     private Animator _lampAnimator;
+    private int _sixShotCount;
 
     // Gun GameObject and animator no longer required now that gun is parented to player + doesn't need the firing animation
 
@@ -30,6 +37,8 @@ public class PlayerAnimator : MonoBehaviour
     void Start()
     {
         _playerController = GetComponent<PlayerController>();
+        _audioSource = GetComponent<AudioSource>();
+        _sixShotCount = 0;
     }
 
     // Update is called once per frame
@@ -90,8 +99,20 @@ public class PlayerAnimator : MonoBehaviour
 
     private IEnumerator DoFireGun() // Unique sequence for firing the gun
     {
+        _audioSource.PlayOneShot(_clips[0]);
         _animator.Play("Fire", 0, 0);
+        _sixShotCount++;
         yield return new WaitForSeconds(.5f);
+        if(_sixShotCount == 6)
+        {
+            _audioSource.PlayOneShot(_clips[2]);
+            _sixShotCount = 0;
+        }
+        else
+        {
+            _audioSource.PlayOneShot(_clips[1]);
+        }
+            
         _animator.Play("Idle", 0, 0);
 
     }

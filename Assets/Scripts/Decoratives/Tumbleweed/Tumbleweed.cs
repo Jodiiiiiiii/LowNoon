@@ -11,13 +11,17 @@ public class Tumbleweed : MonoBehaviour
     [SerializeField] private GameObject deathParticles;
 
     private DamageReceiver _receiver;
+    private AudioSource _audioSource;
 
     private Rigidbody _rb;
     void Start()
     {
         _rb = this.GetComponent<Rigidbody>();
         _receiver = this.GetComponent<DamageReceiver>();
+        _audioSource = this.GetComponent<AudioSource>();
         Invoke("DestroyMe", _lifetime);
+       // InvokeRepeating("PlaySound", .9167f, 2f);
+       // InvokeRepeating("PlaySound", 2f, 2f);
     }
 
     void Update()
@@ -33,6 +37,11 @@ public class Tumbleweed : MonoBehaviour
     private void DestroyMe()
     {
         Destroy(this.gameObject);
+    }
+
+    private void PlaySound()
+    {
+        _audioSource.Play();
     }
 
 

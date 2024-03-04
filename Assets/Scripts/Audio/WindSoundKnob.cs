@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class exists to adjust the volume of the desert ambiance based on how close the worm is to the saloon.
+
 public class WindSoundKnob : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] private Transform _saloonSoundSource;
     private Transform _player;
 
@@ -15,7 +16,6 @@ public class WindSoundKnob : MonoBehaviour
         _soundSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Vector3.Distance(_saloonSoundSource.position, _player.position) < 10f)
