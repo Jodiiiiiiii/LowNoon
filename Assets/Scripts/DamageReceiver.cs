@@ -21,7 +21,7 @@ public class DamageReceiver : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
         GameObject DamagerObject = collision.gameObject;
 
@@ -38,9 +38,7 @@ public class DamageReceiver : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-            
+
         }
     }
-
-    
 }
