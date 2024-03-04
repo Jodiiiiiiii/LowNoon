@@ -83,9 +83,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        // hide cursor and lock it to center - prevents mouse from moving around as you move character
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Moved cursor lock to in game UI view
     }
 
     // Update is called once per frame
@@ -172,6 +170,7 @@ public class PlayerController : MonoBehaviour
                     TransitionToState(CharacterState.MOVING);
                 }
 
+                //Debug.Log(_rb.velocity.magnitude); Fluctuates between .58 and .93 after tapping W
                 // Not DASH -> STATIONARY
                 if (PlayerInput.MoveAxisForward <= 0f && _rb.velocity.magnitude < _movingThreshold)
                 {
@@ -241,13 +240,13 @@ public class PlayerController : MonoBehaviour
 
                 // apply backwards friction
                 _rb.AddForce(-_rb.velocity.normalized * _frictionForce);
-
+                
                 // scales max move speed with move speed stat
                 float actualMaxMoveSpeed = _maxMoveSpeed * GameManager.Instance.PlayerData.MoveSpeed;
                 // check for max move speed
                 if (_rb.velocity.magnitude > actualMaxMoveSpeed)
                     _rb.velocity = _rb.velocity.normalized * actualMaxMoveSpeed;
-
+                Debug.Log(_rb.velocity.magnitude);
                 break;
             case CharacterState.STATIONARY:
                 // no change

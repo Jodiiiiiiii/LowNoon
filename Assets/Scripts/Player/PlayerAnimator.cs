@@ -37,37 +37,47 @@ public class PlayerAnimator : MonoBehaviour
     {
         _animator.SetFloat("moveSpdMult", GameManager.Instance.PlayerData.MoveSpeed); // Move speed multiplier so animation stays tuned to actual speed
 
-        // Player animator is primarily controlled by whether the player is (a) dashing and (b) moving
-        if(_playerController.State == CharacterState.STATIONARY)
+        if(_playerController.enabled == false)  // If the player lacks control, default the animation to the idle
         {
-            if (_playerController.State == CharacterState.DASH)
-            {
-                StopAllCoroutines();
-                _animator.SetBool("isDashing", true);             
-            }
-            else
-            {
-                _animator.SetBool("isDashing", false);
-                _animator.SetBool("isMoving", false);
-            }
-            
+            _animator.SetBool("isDashing", false);
+            _animator.SetBool("isMoving", false);
         }
         else
         {
-            if (_playerController.State == CharacterState.DASH)
+            // Player animator is primarily controlled by whether the player is (a) dashing and (b) moving
+            if (_playerController.State == CharacterState.STATIONARY)
             {
-                StopAllCoroutines();
-                _animator.SetBool("isDashing", true);
-                
+                _animator.SetBool("isMoving", false);
+                if (_playerController.State == CharacterState.DASH)
+                {
+                    StopAllCoroutines();
+                    _animator.SetBool("isDashing", true);
+                }
+                else
+                {
+                    _animator.SetBool("isDashing", false);
+                    
+                }
+
             }
             else
             {
-                StopAllCoroutines();
-                _animator.SetBool("isDashing", false);
-                _animator.SetBool("isMoving", true);
+                if (_playerController.State == CharacterState.DASH)
+                {
+                    StopAllCoroutines();
+                    _animator.SetBool("isDashing", true);
+
+                }
+                else
+                {
+                    StopAllCoroutines();
+                    _animator.SetBool("isDashing", false);
+                    _animator.SetBool("isMoving", true);
+                }
+
             }
-            
         }
+        
    
     }
 
