@@ -31,8 +31,9 @@ public class MainMenuView : View
     }
     private void OnDisable()
     {
-        
-        
+        _playerController.enabled = true;
+        _cameraController.enabled = true;
+
     }
 
     void Start()
