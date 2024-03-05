@@ -18,7 +18,7 @@ public class MainMenuView : View
         _optionsMenu.SetActive(false);
 
         
-        _manualCameraController = GameObject.Find("Player Camera").GetComponent<ManualCameraController>();
+        
     }
 
     private void OnEnable()
@@ -27,11 +27,11 @@ public class MainMenuView : View
         _playerController.enabled = false;
         _cameraController = GameObject.Find("Player Camera").GetComponent<CameraController>();
         _cameraController.enabled = false;
+        _manualCameraController = GameObject.Find("Player Camera").GetComponent<ManualCameraController>();
     }
     private void OnDisable()
     {
-        _playerController.enabled = true;
-        _cameraController.enabled = true;
+        
         
     }
 
@@ -82,6 +82,11 @@ public class MainMenuView : View
     {
         GameObject.Find("Ambient Audio").GetComponent<MusicController>().FadeIn();
         GameObject.Find("Title Music Audio").GetComponent<MusicController>().FadeOut();
+        _manualCameraController.moveToGameStart();
+        _mainMenu.SetActive(false);
+        yield return new WaitUntil(() => !_manualCameraController.activeCoroutine);
+
+        
         _playerController.enabled = true;
         _cameraController.enabled = true;
         ViewManager.Show<InGameUIView>(false);

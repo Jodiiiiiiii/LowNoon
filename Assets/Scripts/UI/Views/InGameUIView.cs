@@ -85,18 +85,19 @@ public class InGameUIView : View
         }
 
         // check for health increment
-        while (_stats.CurrHealth > _currUIHealth)
+       /* while (_stats.CurrHealth > _currUIHealth)
         {
             CurrHPUp();
             _currUIHealth++;
-        }
+        }*/
     }
 
     public void MaxHPUp()
     {
-            GameObject unit = Instantiate(_hpUnit, _hpParent);
-            unit.GetComponent<HPUnit>().toggleEmptyFull();
-            _hpUnits.Add(unit);
+        GameObject unit = Instantiate(_hpUnit, _hpParent);
+        unit.GetComponent<HPUnit>().toggleEmptyFull();
+        _hpUnits.Add(unit);
+        //_hpUnits.Insert(_hpUnits.Count, unit);
     }
 
     public void CurrHPUp()

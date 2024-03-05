@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class ManualCameraController : MonoBehaviour
 {
+
+    public bool activeCoroutine;
     private CameraController _cameraController;
+    private Transform _playerTransform;
+    // Scripted transform positions (or transform values relative to the player) for certain scenarios
+    Vector3 _openingLogoPosition;
+    Vector3 _mainMenuPosition = new Vector3(-6.33f, .68f, 2.05f);
+    Vector3 _playerCameraPosition = new Vector3(1.7f, 4.015f, -10f);
+
+    // Scripted rotational positions for certain scenarios
+    private Vector3 _openingLogoRotation;                               // Rotation for the opening shot of the logo
+    private Vector3 _mainMenuRotation = new Vector3(-13.925f, 90, 0);   // Rotation in main menu
+    private Vector3 _playerCameraRotation = Vector3.zero;                              // Rotation to travel to before giving the player control
     void Start()
     {
         _cameraController = GetComponent<CameraController>();
+        _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        _mainMenuPosition = _playerTransform.position + _mainMenuPosition;
+        _playerCameraPosition = _playerTransform.position + _playerCameraPosition;
     }
 
     // Update is called once per frame
@@ -16,10 +31,22 @@ public class ManualCameraController : MonoBehaviour
         
     }
 
+    public void moveToMainMenu()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DoCamPosition(_mainMenuPosition, 1f, _mainMenuRotation));
+    }
+
+    public void moveToGameStart()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DoCamPosition(_playerCameraPosition, 1f, _playerCameraRotation));
+    }
+
     // The camera movement coroutine that all of the bespoke camera movements use
     IEnumerator DoCamPosition(Vector3 targetPos, float travelTime, Vector3 targetRotation)
     {
-        //activeCoroutine = true;
+        activeCoroutine = true;
 
         float xAngle;
         float yAngle;
@@ -41,7 +68,7 @@ public class ManualCameraController : MonoBehaviour
             transform.eulerAngles = new Vector3(xAngle, yAngle, zAngle);    // Change camera rotation
             yield return null;
         }
-        //activeCoroutine = false;
+        activeCoroutine = false;
         yield return null;
     }
 }
