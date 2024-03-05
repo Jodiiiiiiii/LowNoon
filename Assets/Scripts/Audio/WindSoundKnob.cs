@@ -10,25 +10,31 @@ public class WindSoundKnob : MonoBehaviour
     private Transform _player;
 
     private AudioSource _soundSource;
+    private MusicController _musicController;
     void Start()
     {
         _player = GameObject.Find("WormFinal1").GetComponent<Transform>();
         _soundSource = GetComponent<AudioSource>();
+        _musicController = GetComponent<MusicController>();
     }
 
     void Update()
     {
-        if(Vector3.Distance(_saloonSoundSource.position, _player.position) < 10f)
+        if (_musicController.IsOn)
         {
-            _soundSource.volume = 0;
+            if (Vector3.Distance(_saloonSoundSource.position, _player.position) < 10f)
+            {
+                _soundSource.volume = 0;
+            }
+            else if (Vector3.Distance(_saloonSoundSource.position, _player.position) > 50f)
+            {
+                _soundSource.volume = 1;
+            }
+            else
+            {
+                _soundSource.volume = ((Vector3.Distance(_saloonSoundSource.position, _player.position) - 10) / 40f);
+            }
         }
-        else if(Vector3.Distance(_saloonSoundSource.position, _player.position) > 50f)
-        {
-            _soundSource.volume = 1;
-        }
-        else
-        {
-            _soundSource.volume = ((Vector3.Distance(_saloonSoundSource.position, _player.position) - 10) / 40f);
-        }
+        
     }
 }

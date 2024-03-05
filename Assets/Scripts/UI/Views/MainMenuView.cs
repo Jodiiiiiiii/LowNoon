@@ -32,6 +32,7 @@ public class MainMenuView : View
     {
         _playerController.enabled = true;
         _cameraController.enabled = true;
+        
     }
 
     void Start()
@@ -48,6 +49,7 @@ public class MainMenuView : View
     public void StartButton()
     {
         StartCoroutine(DoStartGame());
+
     }
 
     public void QuitButton()
@@ -78,6 +80,8 @@ public class MainMenuView : View
 
     IEnumerator DoStartGame()
     {
+        GameObject.Find("Ambient Audio").GetComponent<MusicController>().FadeIn();
+        GameObject.Find("Title Music Audio").GetComponent<MusicController>().FadeOut();
         _playerController.enabled = true;
         _cameraController.enabled = true;
         ViewManager.Show<InGameUIView>(false);
