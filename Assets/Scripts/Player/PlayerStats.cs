@@ -80,7 +80,6 @@ public class PlayerStats : MonoBehaviour
                 break;
             case UpgradeController.UpgradeType.Armor:
                 playerData.Armor += _armorPerUpgrade;
-                ViewManager.GetView<InGameUIView>().ArmorUp();
                 break;
             case UpgradeController.UpgradeType.Damage:
                 playerData.BulletDamage += _bulletDamagePerUpgrade;
