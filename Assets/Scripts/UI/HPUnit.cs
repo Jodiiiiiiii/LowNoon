@@ -19,15 +19,21 @@ public class HPUnit : MonoBehaviour
         
     }
 
-    // Methods for toggling whether an HP unit is empty/full
-    public void toggleEmptyFull()
+
+    /// <summary>
+    /// set health to full (has health) or empty (no health)
+    /// </summary>
+    public void setHPState(bool state)
     {
-        _fullHPImg.SetActive(!_fullHPImg.activeSelf);
+        _fullHPImg.SetActive(state);
     }
 
-    public void toggleFullArmor()
+    /// <summary>
+    /// set armor to present or not-present
+    /// </summary>
+    public void setArmorState(bool state)
     {
-        _armorHPImg.SetActive(!_armorHPImg.activeSelf);
+        _armorHPImg.SetActive(state);
     }
 
     // Getters for determining status of a unit

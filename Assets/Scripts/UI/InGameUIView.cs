@@ -5,7 +5,6 @@ using UnityEngine;
 public class InGameUIView : View
 {
     // Variables needed
-
     [SerializeField] private GameObject _hpUnit;    // Prefab for HP Unit
     [SerializeField] private GameObject _leftBookend, _rightBookend;    // The silly worm bookends
     [SerializeField] private Transform _hpParent;               // The transform with the Horizontal Layout Group
@@ -15,7 +14,8 @@ public class InGameUIView : View
     private PlayerStats _playerStats;   // PlayerStats (for accessing upgrade count methods)
     [SerializeField] private ObtainedItemCard card; // The info card that pops up when we get an item
     [SerializeField, Tooltip("How long the card stays active for (includes startup time")] private float cardTime = 3f;
-    private int _currUIHealth;          // player's health level displayed on UI
+    private int _prevUIHealth;          // player's health level displayed on UI in previous frame
+    private int _prevUIArmor;           // amount of current armor displayed on UI in previous frame
 
 
     public override void Initialize()
@@ -23,27 +23,16 @@ public class InGameUIView : View
         _hpUnits = new List<GameObject>();
         _stats = GameManager.Instance.PlayerData;
         _playerStats = GameObject.Find("Player").GetComponent<PlayerStats>();
-        int fullCount = _stats.CurrHealth;
-        int arCount = _stats.Armor;
-        for (int i = 0; i < _stats.MaxHealth; i++)
-        {
-            GameObject unit = Instantiate(_hpUnit, _hpParent);
-            if(fullCount > 0)
-            {
-                unit.GetComponent<HPUnit>().toggleEmptyFull();
-                fullCount--;
-            }
-            if (arCount > 0)
-            {
-                unit.GetComponent<HPUnit>().toggleFullArmor();
-                arCount--;
-            }
-            _hpUnits.Add(unit);
-        }
-        _leftBookend.transform.position = new Vector2(_hpUnits[0].GetComponent<RectTransform>().position.x - 70, _hpUnits[0].GetComponent<RectTransform>().position.y - 45);
-        _rightBookend.transform.position = new Vector2(_hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.x + 90, _hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.y - 45);
 
-        _currUIHealth = _stats.CurrHealth; // start at max
+        // create starting health HP units
+        for (int i = 0; i < _stats.MaxHealth; i++)
+            _hpUnits.Add(Instantiate(_hpUnit, _hpParent));
+        UpdateHealthUI();
+        _prevUIHealth = _stats.CurrHealth; // start at max for prev value
+        _prevUIArmor = _stats.Armor;
+
+        _leftBookend.transform.position = new Vector2(_hpUnits[0].GetComponent<RectTransform>().position.x - 70, _hpUnits[0].GetComponent<RectTransform>().position.y - 45);
+        _rightBookend.transform.position = new Vector2(_hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.x + 90, _hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.y - 45);       
     }
 
     void Start()
@@ -63,78 +52,49 @@ public class InGameUIView : View
         _upgrades[1].setUpgradeCount(_stats.FireRateUpgradeCount);
         _upgrades[2].setUpgradeCount(_playerStats.getMoveSpdUpgradeCount());
         _upgrades[3].setUpgradeCount(_stats.LightUpgradeCount);
-        
-        // check for health decrement
-        while(_stats.CurrHealth < _currUIHealth)
-        {
-            CurrHPDown();
-            _currUIHealth--;
-        }
 
-        // check for health increment
-        while (_stats.CurrHealth > _currUIHealth)
-        {
-            CurrHPUp();
-            _currUIHealth++;
-        }
+        // update HPUnits (if necessary)
+        if (_prevUIHealth != _stats.CurrHealth || _prevUIArmor != _stats.Armor)
+            UpdateHealthUI();
+        _prevUIHealth = _stats.CurrHealth; // update HP amount for next frame
+        _prevUIArmor = _stats.Armor; // update Armor amount for next frame
     }
 
     public void MaxHPUp()
     {
-            GameObject unit = Instantiate(_hpUnit, _hpParent);
-            unit.GetComponent<HPUnit>().toggleEmptyFull();
-            _hpUnits.Add(unit);
+        GameObject unit = Instantiate(_hpUnit, _hpParent);
+        unit.GetComponent<HPUnit>().setHPState(true);
+        unit.GetComponent<HPUnit>().setArmorState(false);
+        _hpUnits.Add(unit);
     }
 
-    public void CurrHPUp()
+    /// <summary>
+    /// sets HP units in UI to active or inactive based on current health
+    /// </summary>
+    private void UpdateHealthUI()
     {
-        // If we gained HP, find the FIRST empty container and make it full
-        for (int i = 0; i < _hpUnits.Count; i++)
+        int hpCount = _stats.CurrHealth;
+        int arCount = _stats.Armor;
+        for (int i = 0; i < _stats.MaxHealth; i++)
         {
-            if (_hpUnits[i].GetComponent<HPUnit>().getEmpty())
+            HPUnit currUnit = _hpUnits[i].GetComponent<HPUnit>();
+            // set HP state
+            if (hpCount > 0)
             {
-                _hpUnits[i].GetComponent<HPUnit>().toggleEmptyFull();
-                break;
+                currUnit.setHPState(true);
+                hpCount--;
             }
-        }
-    }
+            else
+                currUnit.setHPState(false);
 
-    public void CurrHPDown()
-    {
-            // If we lost HP, find the LAST full container and make it empty
-            for (int i = _hpUnits.Count - 1; i >= 0; i--)
+            // set Armor state
+            if (arCount > 0)
             {
-                if (_hpUnits[i].GetComponent<HPUnit>().getFull())
-                {
-                    _hpUnits[i].GetComponent<HPUnit>().toggleEmptyFull();
-                    break;
-                }
+                currUnit.setArmorState(true);
+                arCount--;
             }
-    }
-
-    public void ArmorUp()
-    {
-        // If we gained armor, find the FIRST full container and make it armored
-        for (int i = 0; i < _hpUnits.Count; i++)
-        {
-            if (_hpUnits[i].GetComponent<HPUnit>().getFull() && !_hpUnits[i].GetComponent<HPUnit>().getArmor())
-            {
-                _hpUnits[i].GetComponent<HPUnit>().toggleFullArmor();
-                break;
-            }
-        }
-    }
-
-    public void ArmorDown()
-    {
-        // If we lost armor, find the LAST armored container and de-armor it
-        for (int i = _hpUnits.Count - 1; i >= 0; i--)
-        {
-            if (_hpUnits[i].GetComponent<HPUnit>().getArmor())
-            {
-                _hpUnits[i].GetComponent<HPUnit>().toggleFullArmor();
-                break;
-            }
+            else
+                currUnit.setArmorState(false);
         }
     }
 
