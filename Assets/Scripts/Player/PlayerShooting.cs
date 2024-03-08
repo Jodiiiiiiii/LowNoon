@@ -14,6 +14,8 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField, Tooltip("origin of bullets being fired")] private Transform _gunPosition;
     [SerializeField, Tooltip("max ranged of the shootcast from the camera to detect what the target position is")] private float _maxShootCastRange = 100f;
 
+    [Header("Raycast Exclusions")]
+    [SerializeField, Tooltip("Layer that the raycast should not hit")] private LayerMask _ignoreMask;
     public float PlayerAngleOffset { get; private set; } = 0;
 
     private PlayerController _playerController;
@@ -55,7 +57,7 @@ public class PlayerShooting : MonoBehaviour
 
             // raycast to find projectile direction (actual trajectory) from shoot direction (raycast from camera)
             Ray shootRay = new(Camera.main.transform.position, shootDir);
-            if(Physics.Raycast(shootRay, out RaycastHit hitInfo))
+            if(Physics.Raycast(shootRay, out RaycastHit hitInfo, _maxShootCastRange, ~_ignoreMask))
             {
                 projectileDirection = (hitInfo.point - _gunPosition.position).normalized;
             }
