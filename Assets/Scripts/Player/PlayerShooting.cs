@@ -57,7 +57,7 @@ public class PlayerShooting : MonoBehaviour
 
             // raycast to find projectile direction (actual trajectory) from shoot direction (raycast from camera)
             Ray shootRay = new(Camera.main.transform.position, shootDir);
-            if(Physics.Raycast(shootRay, out RaycastHit hitInfo, ~_ignoreMask))
+            if(Physics.Raycast(shootRay, out RaycastHit hitInfo, _maxShootCastRange, ~_ignoreMask))
             {
                 projectileDirection = (hitInfo.point - _gunPosition.position).normalized;
             }

@@ -8,11 +8,11 @@ public class PlayerAnimator : MonoBehaviour
     private PlayerController _playerController;
     private AudioSource _audioSource;
     [SerializeField] private Animator _animator;
+    [Tooltip("Audio clip order list: 0 = standard gunshot; 1 = Standard reload; 2 = six shot reload")]
     [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
-    // Audio clip order list
-    // 0 = Standard gunshot
-    // 1 = Standard reload
-    // 2 = Six shot reload
+
+    // TODO: figure out actual value to make click sound time out best; currently 0 because of fire animation interruption issue (there is a bug card on Trello)
+    [SerializeField, Tooltip("time before reload is ready that the audio clip starts playing")] private float _reloadClickOffset = 0.0f;
 
     // Accessory animation essentials
     [SerializeField, Tooltip("The model for the player's hat")] private GameObject _hat;
@@ -51,43 +51,27 @@ public class PlayerAnimator : MonoBehaviour
             _animator.SetBool("isDashing", false);
             _animator.SetBool("isMoving", false);
         }
-        else
+        else // player has control
         {
             // Player animator is primarily controlled by whether the player is (a) dashing and (b) moving
             if (_playerController.State == CharacterState.STATIONARY)
             {
                 _animator.SetBool("isMoving", false);
-                if (_playerController.State == CharacterState.DASH)
-                {
-                    StopAllCoroutines();
-                    _animator.SetBool("isDashing", true);
-                }
-                else
-                {
-                    _animator.SetBool("isDashing", false);
-                    
-                }
+                _animator.SetBool("isDashing", false);
+            }
+            else if (_playerController.State == CharacterState.DASH)
+            {
+                StopAllCoroutines();
+                _animator.SetBool("isDashing", true);
 
             }
-            else
+            else // moving (not STATIONARY or DASH)
             {
-                if (_playerController.State == CharacterState.DASH)
-                {
-                    StopAllCoroutines();
-                    _animator.SetBool("isDashing", true);
-
-                }
-                else
-                {
-                    StopAllCoroutines();
-                    _animator.SetBool("isDashing", false);
-                    _animator.SetBool("isMoving", true);
-                }
-
+                StopAllCoroutines();
+                _animator.SetBool("isDashing", false);
+                _animator.SetBool("isMoving", true);
             }
         }
-        
-   
     }
 
     private void fireGun() // Method that does prep for the coroutine and calls it (can't call a coroutine with a delegate)
@@ -102,7 +86,8 @@ public class PlayerAnimator : MonoBehaviour
         _audioSource.PlayOneShot(_clips[0]);
         _animator.Play("Fire", 0, 0);
         _sixShotCount++;
-        yield return new WaitForSeconds(.5f);
+        
+        yield return new WaitForSeconds(GameManager.Instance.PlayerData.BulletCooldown - _reloadClickOffset); // make sure click finishes right when you can fire again
         if(_sixShotCount == 6)
         {
             _audioSource.PlayOneShot(_clips[2]);
@@ -114,6 +99,5 @@ public class PlayerAnimator : MonoBehaviour
         }
             
         _animator.Play("Idle", 0, 0);
-
     }
 }

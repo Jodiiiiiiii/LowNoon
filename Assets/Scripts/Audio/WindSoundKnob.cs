@@ -6,7 +6,11 @@ using UnityEngine;
 
 public class WindSoundKnob : MonoBehaviour
 {
+    [SerializeField, Tooltip("threshold distance where if player is this distance or closer to the saloon, volume = 0")] private float _tooCloseDistance = 10f;
+    [SerializeField, Tooltip("distance from saloon where volume = 1 (max)")] private float _maxVolumeDistance = 50f;
+
     [SerializeField] private Transform _saloonSoundSource;
+
     private Transform _player;
 
     private AudioSource _soundSource;
@@ -22,17 +26,17 @@ public class WindSoundKnob : MonoBehaviour
     {
         if (_musicController.IsOn)
         {
-            if (Vector3.Distance(_saloonSoundSource.position, _player.position) < 10f)
+            if (Vector3.Distance(_saloonSoundSource.position, _player.position) < _tooCloseDistance)
             {
                 _soundSource.volume = 0;
             }
-            else if (Vector3.Distance(_saloonSoundSource.position, _player.position) > 50f)
+            else if (Vector3.Distance(_saloonSoundSource.position, _player.position) > _maxVolumeDistance)
             {
                 _soundSource.volume = 1;
             }
             else
             {
-                _soundSource.volume = ((Vector3.Distance(_saloonSoundSource.position, _player.position) - 10) / 40f);
+                _soundSource.volume = ((Vector3.Distance(_saloonSoundSource.position, _player.position) - _tooCloseDistance) / _maxVolumeDistance);
             }
         }
         

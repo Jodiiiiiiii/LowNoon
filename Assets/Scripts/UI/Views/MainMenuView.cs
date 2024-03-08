@@ -16,9 +16,6 @@ public class MainMenuView : View
         _mainMenu.SetActive(true);
         _creditsMenu.SetActive(false);
         _optionsMenu.SetActive(false);
-
-        
-        
     }
 
     private void OnEnable()
@@ -29,11 +26,12 @@ public class MainMenuView : View
         _cameraController.enabled = false;
         _manualCameraController = GameObject.Find("Player Camera").GetComponent<ManualCameraController>();
     }
+
     private void OnDisable()
     {
+        // necessary so that the camera is properly in normal player tracking mode when entering a new scene without main menu
         _playerController.enabled = true;
         _cameraController.enabled = true;
-
     }
 
     void Start()

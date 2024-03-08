@@ -17,6 +17,9 @@ public class ManualCameraController : MonoBehaviour
     private Vector3 _openingLogoRotation;                               // Rotation for the opening shot of the logo
     private Vector3 _mainMenuRotation = new Vector3(-13.925f, 90, 0);   // Rotation in main menu
     private Vector3 _playerCameraRotation = Vector3.zero;                              // Rotation to travel to before giving the player control
+
+    [SerializeField, Tooltip("Distance from targetPos at which camera will stop smoothing and snap to goal")] private float _cameraSmoothingThreshold = 0.05f;
+
     void Start()
     {
         _cameraController = GetComponent<CameraController>();
@@ -57,7 +60,7 @@ public class ManualCameraController : MonoBehaviour
         float yVelocity = 0f;
         float zVelocity = 0f;
 
-        while (Vector3.Distance(transform.position, targetPos) >= .05f)
+        while (Vector3.Distance(transform.position, targetPos) >= _cameraSmoothingThreshold)
         {
             transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, travelTime); // Move camera position
 
@@ -68,6 +71,7 @@ public class ManualCameraController : MonoBehaviour
             transform.eulerAngles = new Vector3(xAngle, yAngle, zAngle);    // Change camera rotation
             yield return null;
         }
+        transform.position = targetPos; // snap to goal value
         activeCoroutine = false;
         yield return null;
     }

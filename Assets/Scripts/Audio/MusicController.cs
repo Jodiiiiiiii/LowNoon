@@ -6,9 +6,9 @@ public class MusicController : MonoBehaviour
 {
     private AudioSource _music;
     [SerializeField] private float _fadeRate = 3;
-    // Start is called before the first frame update
-
     public bool IsOn;
+
+    // Start is called before the first frame update
     void Start()
     {
         _music = GetComponent<AudioSource>();
@@ -45,6 +45,7 @@ public class MusicController : MonoBehaviour
             _music.volume += Time.deltaTime * _fadeRate;
             yield return null;
         }
+        _music.volume = 1; // clamp to 1
         IsOn = true;
     }
 
@@ -55,6 +56,7 @@ public class MusicController : MonoBehaviour
             _music.volume -= Time.deltaTime * _fadeRate;
             yield return null;
         }
+        _music.volume = 0; // clamp to 0
         IsOn = false;
     }
 }

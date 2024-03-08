@@ -147,7 +147,6 @@ public class PlayerController : MonoBehaviour
             {
                 _dashTimer = _dashCooldown; // start dash cooldown cooldown timer
                 TransitionToState(CharacterState.STATIONARY);
-
             }
             else // update duration timer
                 _dashTimer -= Time.deltaTime;
