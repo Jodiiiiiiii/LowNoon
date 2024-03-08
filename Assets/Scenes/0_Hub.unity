@@ -4979,8 +4979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a38506e80575e4488081d4d13f95f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tooCloseDistance: 10
-  _maxVolumeDistance: 50
+  _tooCloseDistance: 30
+  _maxVolumeDistance: 100
   _saloonSoundSource: {fileID: 1144355832}
 --- !u!114 &555402929
 MonoBehaviour:
@@ -5480,29 +5480,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4001428483753509600, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 112.99998
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249230340832612176, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7653165854891223724, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_Name
       value: UI Views
-      objectReference: {fileID: 0}
-    - target: {fileID: 8475538568335068298, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8533221300468682420, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 113
-      objectReference: {fileID: 0}
-    - target: {fileID: 9167532836184098999, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 112.99998
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9533,7 +9513,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 10
-  MaxDistance: 130
+  MaxDistance: 70
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -9543,49 +9523,31 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.1
+      time: 0.14285715
       value: 1
-      inSlope: -10.0039835
-      outSlope: -10.0039835
+      inSlope: -2.3272061
+      outSlope: -2.3272061
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.23667058
     - serializedVersion: 3
-      time: 0.17444916
-      value: 0.43295288
-      inSlope: -2.5009959
-      outSlope: -2.5009959
+      time: 0.48664743
+      value: 0.35105014
+      inSlope: -1.0609614
+      outSlope: -1.0609614
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.226951
+      outWeight: 0.20377366
     - serializedVersion: 3
-      time: 0.37444916
-      value: 0.18295288
-      inSlope: -0.62524897
-      outSlope: -0.62524897
+      time: 1
+      value: 0
+      inSlope: -0.46522555
+      outSlope: -0.46522555
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.77444917
-      value: 0.05795288
-      inSlope: -0.15631224
-      outSlope: -0.15631224
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.97444916
-      value: 0.037719727
-      inSlope: -0.10003988
-      outSlope: -0.10003988
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
+      inWeight: 0.3304182
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -14157,10 +14119,6 @@ PrefabInstance:
     - target: {fileID: 6196059899672709530, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8586370262174561017, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: _ignoreMask.m_Bits
-      value: 4096
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -13,6 +13,7 @@ public class PlayerAnimator : MonoBehaviour
 
     // TODO: figure out actual value to make click sound time out best; currently 0 because of fire animation interruption issue (there is a bug card on Trello)
     [SerializeField, Tooltip("time before reload is ready that the audio clip starts playing")] private float _reloadClickOffset = 0.0f;
+    [SerializeField] private float _gunFireVolume = 0.4f;
 
     // Accessory animation essentials
     [SerializeField, Tooltip("The model for the player's hat")] private GameObject _hat;
@@ -83,12 +84,12 @@ public class PlayerAnimator : MonoBehaviour
 
     private IEnumerator DoFireGun() // Unique sequence for firing the gun
     {
-        _audioSource.PlayOneShot(_clips[0]);
+        _audioSource.PlayOneShot(_clips[0], _gunFireVolume);
         _animator.Play("Fire", 0, 0);
         _sixShotCount++;
         
         yield return new WaitForSeconds(GameManager.Instance.PlayerData.BulletCooldown - _reloadClickOffset); // make sure click finishes right when you can fire again
-        if(_sixShotCount == 6)
+        if(_sixShotCount >= 6) // >= so that it doesn't skip 6 when it skips audio due to moving (why does it do this exactly?)
         {
             _audioSource.PlayOneShot(_clips[2]);
             _sixShotCount = 0;

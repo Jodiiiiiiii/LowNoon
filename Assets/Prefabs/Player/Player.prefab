@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 8847152209835682657}
   - component: {fileID: 1181210963044027971}
   - component: {fileID: 7941970932746470323}
+  - component: {fileID: 5437179062950495881}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -143,6 +144,9 @@ MonoBehaviour:
   BulletObject: {fileID: 4230674095138438074, guid: b8533a1d0dfcf402b82884529ed43741, type: 3}
   _gunPosition: {fileID: 209009088689183073}
   _maxShootCastRange: 100
+  _ignoreMask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!114 &9080262972005425276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +227,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 98bae596eaef4114d8e913df1f342262, type: 3}
   - {fileID: 8300000, guid: 3c1a20c95d0dadb46980e762e51a3522, type: 3}
   - {fileID: 8300000, guid: 20ec375b98f4b8f41a5617f7d9d9ff1d, type: 3}
+  _reloadClickOffset: 0.3
   _hat: {fileID: 3273946969388959765}
   _lamp: {fileID: 6514855181963100602}
 --- !u!114 &8847152209835682657
@@ -347,6 +352,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &5437179062950495881
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051004514797975844}
+  m_Enabled: 1
 --- !u!1 &8874824682023365059
 GameObject:
   m_ObjectHideFlags: 0
