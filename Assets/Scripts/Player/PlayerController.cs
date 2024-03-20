@@ -150,10 +150,10 @@ public class PlayerController : MonoBehaviour
             // Not DASH -> DASH
             if (PlayerInput.DashDown && _dashTimer <= 0f)
             {
-                // divide by move speed so dash is shorter with more move speed (force is higher so it still happens faster!)
-                _dashTimer = _dashDuration / GameManager.Instance.PlayerData.MoveSpeed; // start dash duration timer
+                // start dash duration timer
+                _dashTimer = _dashDuration;
                 // set velocity to zero first to ensure consistent dash behavior/distance whether dashing from moving or stationary
-                _rb.velocity = Vector3.zero;
+                _rb.velocity = Vector3.zero; // there may be a better way to do this
 
                 TransitionToState(CharacterState.DASH);
             }
@@ -167,7 +167,6 @@ public class PlayerController : MonoBehaviour
                     TransitionToState(CharacterState.MOVING);
                 }
 
-                //Debug.Log(_rb.velocity.magnitude); Fluctuates between .58 and .93 after tapping W
                 // Not DASH -> STATIONARY
                 if (PlayerInput.MoveAxisForward <= 0f && _rb.velocity.magnitude < actualMovingThreshold)
                 {
