@@ -118,17 +118,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57e6b77a401afd4b863f5196e132c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movingThreshold: 0.5
-  _dashCooldown: 1.5
-  _dashForce: 100
-  _maxDashSpeed: 45
-  _dashDuration: 0.5
   _cameraTransform: {fileID: 0}
   _movingRotationSharpness: 1.5
   _stationaryRotationSharpness: 5
   _moveForce: 180
   _maxMoveSpeed: 15
   _frictionForce: 80
+  _dashCooldown: 1.5
+  _dashForce: 300
+  _maxDashSpeed: 30
+  _dashDuration: 0.5
+  _movingThreshold: 3
+  _stoppingSharpness: 5
+  _stoppingThreshold: 0.1
 --- !u!114 &8586370262174561017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +211,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &7179307920419429564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +230,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3c1a20c95d0dadb46980e762e51a3522, type: 3}
   - {fileID: 8300000, guid: 20ec375b98f4b8f41a5617f7d9d9ff1d, type: 3}
   _reloadClickOffset: 0.3
+  _gunFireVolume: 0.4
   _hat: {fileID: 3273946969388959765}
   _lamp: {fileID: 6514855181963100602}
 --- !u!114 &8847152209835682657
