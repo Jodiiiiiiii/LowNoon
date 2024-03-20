@@ -127,9 +127,9 @@ MonoBehaviour:
   _dashCooldown: 1.5
   _dashForce: 300
   _maxDashSpeed: 30
-  _dashDuration: 0.5
+  _dashDuration: 0.8
   _movingThreshold: 3
-  _stoppingSharpness: 5
+  _stoppingSharpness: 4
   _stoppingThreshold: 0.1
 --- !u!114 &8586370262174561017
 MonoBehaviour:
