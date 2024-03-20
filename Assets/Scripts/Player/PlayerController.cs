@@ -219,6 +219,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField, Tooltip("strength of force applied to make character move forwards")] private float _moveForce = 5f;
     [SerializeField, Tooltip("terminal move speed that character is capped at")] private float _maxMoveSpeed = 5f;
+
+    [Header("Friction")]
     [SerializeField, Tooltip("strength of force applied by friction; no distinction between static/dynamic")] private float _frictionForce = 2f;
 
     [Header("Dashing")]
@@ -247,7 +249,7 @@ public class PlayerController : MonoBehaviour
                 _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _moveForce * GameManager.Instance.PlayerData.MoveSpeed);
 
                 // apply backwards friction
-                _rb.AddForce(-_rb.velocity.normalized * _frictionForce);
+                _rb.AddForce(-_rb.velocity.normalized * _frictionForce * _rb.velocity.magnitude);
 
                 // scales max move speed with move speed stat
                 float actualMaxMoveSpeed = _maxMoveSpeed * GameManager.Instance.PlayerData.MoveSpeed;
@@ -284,7 +286,7 @@ public class PlayerController : MonoBehaviour
                 else // coming to a stop
                 {
                     // apply backwards friction - only if not still adding force
-                    _rb.AddForce(-_rb.velocity.normalized * _frictionForce, ForceMode.Force);
+                    _rb.AddForce(-_rb.velocity.normalized * _frictionForce * _rb.velocity.magnitude, ForceMode.Force);
                 }
                 break;
         }

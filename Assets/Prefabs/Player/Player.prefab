@@ -123,7 +123,7 @@ MonoBehaviour:
   _stationaryRotationSharpness: 5
   _moveForce: 180
   _maxMoveSpeed: 15
-  _frictionForce: 80
+  _frictionForce: 5
   _dashCooldown: 1.5
   _dashForce: 300
   _maxDashSpeed: 30
