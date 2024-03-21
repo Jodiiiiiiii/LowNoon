@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1.18
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.9622642, g: 0.5021655, b: 0.22331783, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a5b57ab3ac532e047bcf10f1ba42ff19, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171056578}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.004783831, z: -0, w: -0.99998856}
   m_LocalPosition: {x: 10.962044, y: 0.0600031, z: 14.581524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -222,7 +222,7 @@ Transform:
   - {fileID: 2088342181}
   - {fileID: 233820189}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -359.452, z: 0}
 --- !u!1001 &189787159
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1065,6 +1065,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room6
       objectReference: {fileID: 0}
+    - target: {fileID: 3137336197728392002, guid: cf30d7d9d0e9c4a439f5d3eec52d6d28, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1121,10 +1125,6 @@ PrefabInstance:
     - target: {fileID: 1897740026231119267, guid: b1e41a8bedd4f4645b02df609753a788, type: 3}
       propertyPath: m_Name
       value: Room1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1897740026231119267, guid: b1e41a8bedd4f4645b02df609753a788, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1380,7 +1380,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2062779341}
-  - {fileID: 171056579}
   - {fileID: 1923448217417883619}
   - {fileID: 6814544370351168128}
   - {fileID: 1185302769}
@@ -1392,3 +1391,4 @@ SceneRoots:
   - {fileID: 3232831306690764829}
   - {fileID: 3291476826194914862}
   - {fileID: 1011664803906844936}
+  - {fileID: 171056579}
