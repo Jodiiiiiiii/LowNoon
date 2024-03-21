@@ -123,15 +123,6 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region UPDATE-STATE
-    [Header("Player State")]
-    [SerializeField, Tooltip("speed which player must be below to be considered 'stationary'")] private float _movingThreshold = 0.01f;
-
-    [Header("Dashing")]
-    [SerializeField, Tooltip("Cooldown for activating player dash")] private float _dashCooldown = 5f;
-    [SerializeField, Tooltip("strength of force applied to make character dash forwards")] private float _dashForce = 8f;
-    [SerializeField, Tooltip("terminal dash speed that character is capped at")] private float _maxDashSpeed = 15f;
-    [SerializeField, Tooltip("time from starting dash when dashing will stop")] private float _dashDuration = 1.5f;
-
     private float _dashTimer = 0f; // used both for cooldown (when not dashing) and dash duration (when dashing)
 
     /// <summary>
@@ -139,11 +130,14 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void UpdateState()
     {
+        // necessary to ensure same transition behavior regardless of move speed upgrades
+        float actualMovingThreshold = _movingThreshold * GameManager.Instance.PlayerData.MoveSpeed;
+
         // DASH state
         if(State == CharacterState.DASH)
         {
             // DASH -> STATIONARY
-            if (_dashTimer <= 0 && _rb.velocity.magnitude < _movingThreshold) // dash has hit max duration and player has come to a stop
+            if (_dashTimer <= 0 && _rb.velocity.magnitude < actualMovingThreshold) // dash has hit max duration and player has come to a stop
             {
                 _dashTimer = _dashCooldown; // start dash cooldown cooldown timer
                 TransitionToState(CharacterState.STATIONARY);
@@ -156,7 +150,11 @@ public class PlayerController : MonoBehaviour
             // Not DASH -> DASH
             if (PlayerInput.DashDown && _dashTimer <= 0f)
             {
-                _dashTimer = _dashDuration; // start dash duration timer
+                // start dash duration timer
+                _dashTimer = _dashDuration;
+                // set velocity to zero first to ensure consistent dash behavior/distance whether dashing from moving or stationary
+                _rb.velocity = Vector3.zero; // there may be a better way to do this
+
                 TransitionToState(CharacterState.DASH);
             }
             else // update dash cooldown timer + handle other states
@@ -169,9 +167,8 @@ public class PlayerController : MonoBehaviour
                     TransitionToState(CharacterState.MOVING);
                 }
 
-                //Debug.Log(_rb.velocity.magnitude); Fluctuates between .58 and .93 after tapping W
                 // Not DASH -> STATIONARY
-                if (PlayerInput.MoveAxisForward <= 0f && _rb.velocity.magnitude < _movingThreshold)
+                if (PlayerInput.MoveAxisForward <= 0f && _rb.velocity.magnitude < actualMovingThreshold)
                 {
                     TransitionToState(CharacterState.STATIONARY);
                 }
@@ -221,7 +218,20 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField, Tooltip("strength of force applied to make character move forwards")] private float _moveForce = 5f;
     [SerializeField, Tooltip("terminal move speed that character is capped at")] private float _maxMoveSpeed = 5f;
+
+    [Header("Friction")]
     [SerializeField, Tooltip("strength of force applied by friction; no distinction between static/dynamic")] private float _frictionForce = 2f;
+
+    [Header("Dashing")]
+    [SerializeField, Tooltip("Cooldown for activating player dash")] private float _dashCooldown = 1.5f;
+    [SerializeField, Tooltip("strength of force applied to make character dash forwards")] private float _dashForce = 300f;
+    [SerializeField, Tooltip("terminal dash speed that character is capped at")] private float _maxDashSpeed = 30f;
+    [SerializeField, Tooltip("time from starting dash when dashing will stop")] private float _dashDuration = 0.5f;
+
+    [Header("Stationary")]
+    [SerializeField, Tooltip("speed which player must be below to be considered 'stationary'")] private float _movingThreshold = 0.5f;
+    [SerializeField, Tooltip("interpolation rate for slowing the player down")] private float _stoppingSharpness = 10f;
+    [SerializeField, Tooltip("threshold below which velocity is snapped to 0")] private float _stoppingThreshold = 0.01f;
 
     /// <summary>
     /// Update player velocity based on inputs.
@@ -238,8 +248,8 @@ public class PlayerController : MonoBehaviour
                 _rb.AddForce(PlayerInput.MoveAxisForward * transform.forward * _moveForce * GameManager.Instance.PlayerData.MoveSpeed);
 
                 // apply backwards friction
-                _rb.AddForce(-_rb.velocity.normalized * _frictionForce);
-                
+                _rb.AddForce(-_rb.velocity.normalized * _frictionForce * _rb.velocity.magnitude);
+
                 // scales max move speed with move speed stat
                 float actualMaxMoveSpeed = _maxMoveSpeed * GameManager.Instance.PlayerData.MoveSpeed;
                 // check for max move speed
@@ -249,25 +259,34 @@ public class PlayerController : MonoBehaviour
                 break;
             case CharacterState.STATIONARY:
                 // no change
-                _rb.velocity = Vector3.zero; // ensure a complete stop after crossing threshold speed for stationary
+                if (_rb.velocity.magnitude < _stoppingThreshold)
+                    _rb.velocity = Vector3.zero; // ensure a complete stop after crossing threshold speed for stationary
+                else
+                    _rb.velocity = _rb.velocity.normalized * Mathf.Lerp(_rb.velocity.magnitude, 0, 1f - Mathf.Exp(-_stoppingSharpness * Time.deltaTime));
 
                 break;
             case CharacterState.DASH: // fixed velocity in fixed direction
-                
+
                 // apply dashing force (only if dash duration hasn't expired)
-                if(_dashTimer > 0)
+                if (_dashTimer > 0)
+                {
                     // dash speed scales with move speed stat
                     _rb.AddForce(transform.forward * _dashForce * GameManager.Instance.PlayerData.MoveSpeed);
-                else
+
+                    // scales max dash speed with move speed stat
+                    float actualMaxDashSpeed = _maxDashSpeed * GameManager.Instance.PlayerData.MoveSpeed;
+                    // check for max dash speed
+
+                    if (_rb.velocity.magnitude > actualMaxDashSpeed)
+                    {
+                        _rb.velocity = _rb.velocity.normalized * actualMaxDashSpeed;
+                    }
+                }   
+                else // coming to a stop
+                {
                     // apply backwards friction - only if not still adding force
-                    _rb.AddForce(-_rb.velocity.normalized * _frictionForce);
-
-                // scales max dash speed with move speed stat
-                float actualMaxDashSpeed = _maxDashSpeed * GameManager.Instance.PlayerData.MoveSpeed;
-                // check for max dash speed
-                if (_rb.velocity.magnitude > actualMaxDashSpeed)
-                    _rb.velocity = _rb.velocity.normalized * actualMaxDashSpeed;
-
+                    _rb.AddForce(-_rb.velocity.normalized * _frictionForce * _rb.velocity.magnitude, ForceMode.Force);
+                }
                 break;
         }
     }
