@@ -3,7 +3,12 @@ guid: 84acc183667579a438163a0c23ba1cdb
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Worm
+    second: {fileID: 2100000, guid: 16d6984f83c0c4c429cb7f6c39461129, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
