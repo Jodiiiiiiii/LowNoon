@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Temporary-Testing/AssetImpScene.unity
     guid: da8f45b417af19e4a902b06d577f6986
   - enabled: 0
@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Temporary-Testing/HeadlightTestingScene.unity
     guid: b14c7187bba324406ac7e3429119e74e
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Temporary-Testing/RoomTestingScene'.unity
     guid: 1e4eddd29923a294ba1cdc78419452f2
   - enabled: 0
