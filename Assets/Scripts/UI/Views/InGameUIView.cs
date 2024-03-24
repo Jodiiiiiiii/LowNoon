@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InGameUIView : View
@@ -16,6 +18,8 @@ public class InGameUIView : View
     [SerializeField, Tooltip("How long the card stays active for (includes startup time")] private float cardTime = 3f;
     private int _prevUIHealth;          // player's health level displayed on UI in previous frame
     private int _prevUIArmor;           // amount of current armor displayed on UI in previous frame
+
+
 
 
     public override void Initialize()
@@ -70,6 +74,12 @@ public class InGameUIView : View
             UpdateHealthUI();
         _prevUIHealth = _stats.CurrHealth; // update HP amount for next frame
         _prevUIArmor = _stats.Armor; // update Armor amount for next frame
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            ViewManager.Show<PauseMenuView>(true);
+        }
     }
 
     public void MaxHPUp()
