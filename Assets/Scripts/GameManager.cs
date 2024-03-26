@@ -149,6 +149,5 @@ public class GameManager : MonoBehaviour
 #endif
             Application.Quit();
         }*/
-        Debug.Log("Is Game Paused?\n" + IsPaused);
     }
 }

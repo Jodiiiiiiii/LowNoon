@@ -5453,7 +5453,7 @@ PrefabInstance:
     - target: {fileID: 2647753080575191667, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: startingView
       value: 
-      objectReference: {fileID: 1549731477}
+      objectReference: {fileID: 642870631}
     - target: {fileID: 2894776623557861686, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12084,17 +12084,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3103943869909266530, guid: c54d44a747db8a64d91c7b070007d017, type: 3}
   m_PrefabInstance: {fileID: 1536842713}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1549731477 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5684296065610793620, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-  m_PrefabInstance: {fileID: 642870630}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6672fe987e8f3424ebb5ec7c513c7e3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1556312843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16112,3 +16101,4 @@ SceneRoots:
   - {fileID: 2017788219}
   - {fileID: 1944732616}
   - {fileID: 987229166}
+  - {fileID: 1739461297}
