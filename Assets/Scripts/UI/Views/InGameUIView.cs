@@ -77,7 +77,6 @@ public class InGameUIView : View
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 0;
             ViewManager.Show<PauseMenuView>(true);
         }
     }

@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static bool IsPaused = false;
+
     #region PLAYER DATA
     // Player Data (saved between scenes)
     [System.Serializable]
@@ -147,5 +149,6 @@ public class GameManager : MonoBehaviour
 #endif
             Application.Quit();
         }*/
+        Debug.Log("Is Game Paused?\n" + IsPaused);
     }
 }

@@ -30,7 +30,8 @@ public class PauseMenuView : View
 
     public void BackButton()
     {
-        Time.timeScale = 1f;
+        _pauseMenu.SetActive(true);
+        _wormFacts.SetActive(false);
         ViewManager.ShowLast();
     }
 
@@ -55,5 +56,17 @@ public class PauseMenuView : View
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    void OnEnable()
+    {
+        Time.timeScale = 0;
+        GameManager.IsPaused = true;
+    }
+
+    void OnDisable()
+    {
+        Time.timeScale = 1f;
+        GameManager.IsPaused = false;
     }
 }

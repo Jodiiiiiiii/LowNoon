@@ -3050,7 +3050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2195943898826826081}
   m_Layer: 5
-  m_Name: Worm Facts
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4204,7 +4204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Worm Facts
+  m_text: Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4985,7 +4985,7 @@ GameObject:
   - component: {fileID: 2974948223223471338}
   - component: {fileID: 293018020616365885}
   m_Layer: 5
-  m_Name: Worm Facts
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5741,7 +5741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7164138483254709601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6771,7 +6771,7 @@ GameObject:
   - component: {fileID: 8247411530029930242}
   - component: {fileID: 1981190162947856026}
   m_Layer: 5
-  m_Name: Exit Worm Facts
+  m_Name: Exit Settings  Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
