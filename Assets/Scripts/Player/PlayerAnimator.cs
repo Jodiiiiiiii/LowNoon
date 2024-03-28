@@ -18,21 +18,26 @@ public class PlayerAnimator : MonoBehaviour
     // Accessory animation essentials
     [SerializeField, Tooltip("The model for the player's hat")] private GameObject _hat;
     [SerializeField, Tooltip("The model for the player's lamp")] private GameObject _lamp;
+
     private Animator _hatAnimator;  // The hat and lamp animators are used p. much exclusively for the death animation
     private Animator _lampAnimator;
     private int _sixShotCount;
+    private bool _isActiveCoroutine;    // Used to turn off standard animation logic when a unique animation is playing
 
-    // Gun GameObject and animator no longer required now that gun is parented to player + doesn't need the firing animation
-
+    // Unique animation durations
+    public float BurrowDownDuration = 1.5167f;
+    public float RoomEnterDuration = 1.2083f;
 
     private void OnEnable()
     {
         PlayerShooting.onBulletFire += fireGun;
+        SceneTransitionObject.onSceneTransition += burrowDown;
     }
 
     private void OnDisable()
     {
         PlayerShooting.onBulletFire -= fireGun;
+        SceneTransitionObject.onSceneTransition -= burrowDown;
     }
 
     void Start()
@@ -45,43 +50,61 @@ public class PlayerAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _animator.SetFloat("moveSpdMult", GameManager.Instance.PlayerData.MoveSpeed); // Move speed multiplier so animation stays tuned to actual speed
+        if (!_isActiveCoroutine)
+        {
+            _animator.SetFloat("moveSpdMult", GameManager.Instance.PlayerData.MoveSpeed); // Move speed multiplier so animation stays tuned to actual speed
 
-        if(_playerController.enabled == false)  // If the player lacks control, default the animation to the idle
-        {
-            _animator.SetBool("isDashing", false);
-            _animator.SetBool("isMoving", false);
-        }
-        else // player has control
-        {
-            // Player animator is primarily controlled by whether the player is (a) dashing and (b) moving
-            if (_playerController.State == CharacterState.STATIONARY)
+            if (_playerController.enabled == false)  // If the player lacks control, default the animation to the idle
             {
+                _animator.SetBool("isDashing", false);
                 _animator.SetBool("isMoving", false);
-                _animator.SetBool("isDashing", false);
             }
-            else if (_playerController.State == CharacterState.DASH)
+            else // player has control
             {
-                StopAllCoroutines();
-                _animator.SetBool("isDashing", true);
+                // Player animator is primarily controlled by whether the player is (a) dashing and (b) moving
+                if (_playerController.State == CharacterState.STATIONARY)
+                {
+                    _animator.SetBool("isMoving", false);
+                    _animator.SetBool("isDashing", false);
+                }
+                else if (_playerController.State == CharacterState.DASH)
+                {
+                    StopAllCoroutines();
+                    _animator.SetBool("isDashing", true);
 
-            }
-            else // moving (not STATIONARY or DASH)
-            {
-                StopAllCoroutines();
-                _animator.SetBool("isDashing", false);
-                _animator.SetBool("isMoving", true);
+                }
+                else // moving (not STATIONARY or DASH)
+                {
+                    StopAllCoroutines();
+                    _animator.SetBool("isDashing", false);
+                    _animator.SetBool("isMoving", true);
+                }
             }
         }
+        
     }
 
-    private void fireGun() // Method that does prep for the coroutine and calls it (can't call a coroutine with a delegate)
+    private void fireGun() // Methods that do prep for the coroutines and call them (can't call a coroutine with a delegate)
     {
         StopAllCoroutines();
         _animator.Play("Idle", 0, 0);
         StartCoroutine(DoFireGun());
     }
 
+    private void burrowDown()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DoBurrowDown());
+    }
+
+    private void roomEnter()
+    {
+        StopAllCoroutines();
+        //_animator.Play("Idle", 0, 0);
+        StartCoroutine(DoRoomEnter());
+    }
+
+    #region COROUTINES
     private IEnumerator DoFireGun() // Unique sequence for firing the gun
     {
         _audioSource.PlayOneShot(_clips[0], _gunFireVolume);
@@ -101,4 +124,20 @@ public class PlayerAnimator : MonoBehaviour
             
         _animator.Play("Idle", 0, 0);
     }
+
+    private IEnumerator DoBurrowDown() // Unique sequence for leaving a room
+    {
+        _isActiveCoroutine = true;
+        _animator.SetBool("isBurrowDown", true);
+        yield return new WaitForSeconds(BurrowDownDuration); // Unity, why is there not a way to tell when an animation is done, it would save me so much heartache
+    }
+
+    private IEnumerator DoRoomEnter() // Unique sequence for entering a room
+    {
+        _isActiveCoroutine = true;
+        _animator.Play("RoomEnter", 0, 0);
+        yield return new WaitForSeconds(RoomEnterDuration);
+        _isActiveCoroutine = false;
+    }
+    #endregion
 }
