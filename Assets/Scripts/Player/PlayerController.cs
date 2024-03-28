@@ -86,6 +86,16 @@ public class PlayerController : MonoBehaviour
         // Moved cursor lock to in game UI view
     }
 
+    private void OnEnable()
+    {
+        SceneTransitionObject.onSceneTransition += HaltAndDisable;
+    }
+
+    private void OnDisable()
+    {
+        SceneTransitionObject.onSceneTransition -= HaltAndDisable;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -291,4 +301,11 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
+
+    private void HaltAndDisable()   // For stopping player motion (for death, scene transitions)
+    {
+        State = CharacterState.STATIONARY;
+        _rb.velocity = Vector3.zero;
+        this.enabled = false;
+    }
 }
