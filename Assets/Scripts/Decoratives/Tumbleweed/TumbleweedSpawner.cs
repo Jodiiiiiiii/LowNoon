@@ -29,6 +29,8 @@ public class TumbleweedSpawner : MonoBehaviour
 
     void SpawnTumbleweed()
     {
-        Instantiate(_tumbleweedPrefab, new Vector3(Random.Range(_min, _max + 1), this.transform.position.y, this.transform.position.z), new Quaternion());
+        GameObject tumbleweed = Instantiate(_tumbleweedPrefab, new Vector3(Random.Range(_min, _max + 1), this.transform.position.y, this.transform.position.z), _tumbleweedPrefab.transform.rotation);
+        tumbleweed.transform.LookAt(tumbleweed.transform.position + transform.forward);
+        tumbleweed.GetComponent<Rigidbody>().velocity = tumbleweed.transform.forward * tumbleweed.GetComponent<Tumbleweed>().Speed;
     }
 }
