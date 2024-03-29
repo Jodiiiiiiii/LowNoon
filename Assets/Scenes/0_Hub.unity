@@ -30596,7 +30596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527905283604438029, guid: 4fb3b141e11889b4cbbc59afb2eb0a80, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2886951351980483243, guid: 4fb3b141e11889b4cbbc59afb2eb0a80, type: 3}
       propertyPath: _moveDelay
