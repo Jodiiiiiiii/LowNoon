@@ -85,8 +85,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: RANDOM_Fence
       objectReference: {fileID: 0}
+    - target: {fileID: 6900993994590844077, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+      propertyPath: _numToActivate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 170813234939511030, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 7232712427277098823, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 7770355254021095271, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 7174223007276796227, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 1362213789901168428, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 9071947875856267082, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 5309284897088306092, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 8763933247400736330, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 883329648763341643, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 3016775438696800713, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 1578852400593896666, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 2826946168848909947, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 3221330770606842894, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+    - {fileID: 1676843279304073732, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}

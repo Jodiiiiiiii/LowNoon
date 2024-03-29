@@ -35,19 +35,23 @@ public class LanternController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Logic for flickering the candlelight
-        if (_isLightRising)
-            _candleLight.intensity += _actualFlickerSpeed;
-        else
-            _candleLight.intensity -= _actualFlickerSpeed;
-
-        if(_candleLight.intensity > _maxIntensity)
-            _isLightRising = false;
-        if (_candleLight.intensity < _minIntensity)
+        if (isActiveAndEnabled)
         {
-            _isLightRising = true;
-            _actualFlickerSpeed = Random.Range(_flickerSpeedMin, _flickerSpeedMax);
-        }
+            // Logic for flickering the candlelight
+            if (_isLightRising)
+                _candleLight.intensity += _actualFlickerSpeed;
+            else
+                _candleLight.intensity -= _actualFlickerSpeed;
 
+            if (_candleLight.intensity > _maxIntensity)
+                _isLightRising = false;
+            if (_candleLight.intensity < _minIntensity)
+            {
+                _isLightRising = true;
+                _actualFlickerSpeed = Random.Range(_flickerSpeedMin, _flickerSpeedMax);
+            }
+        }
+        else
+            _candleLight.intensity = 0;
     }
 }
