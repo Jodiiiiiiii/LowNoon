@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 827769140448814351}
+  - component: {fileID: 7320586138077501573}
   m_Layer: 0
   m_Name: Hanging Lamp
   m_TagString: Untagged
@@ -33,6 +34,22 @@ Transform:
   - {fileID: 2244213472475712724}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7320586138077501573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050816350660735686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e01dfe16d9318469732ef8f0ccaefd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _numToActivate: 2
+  _requiredObjsInGroup:
+  - {fileID: 820005208492380442}
+  - {fileID: 8281046930633094037}
 --- !u!1001 &3626068209495067425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,6 +130,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3276207721011333109, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
   m_PrefabInstance: {fileID: 3626068209495067425}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8281046930633094037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4665256002427500724, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
+  m_PrefabInstance: {fileID: 3626068209495067425}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6593852279636889008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,11 +187,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lantern
       objectReference: {fileID: 0}
+    - target: {fileID: 5828554922055998634, guid: 5d6d0234656e60f4b89a6e7ccde6146e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d6d0234656e60f4b89a6e7ccde6146e, type: 3}
+--- !u!1 &820005208492380442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5828554922055998634, guid: 5d6d0234656e60f4b89a6e7ccde6146e, type: 3}
+  m_PrefabInstance: {fileID: 6593852279636889008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4946563017733337602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2244949225525510066, guid: 5d6d0234656e60f4b89a6e7ccde6146e, type: 3}
