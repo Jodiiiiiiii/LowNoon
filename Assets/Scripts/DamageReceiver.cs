@@ -21,10 +21,7 @@ public class DamageReceiver : MonoBehaviour
     {
         IsImmune = false;
         chance = Random.Range(0,1.0f);
-        if(IsGoldenBarrel){
-            pickup = Instantiate(SpawnObject);
-            pickup.transform.position = gameObject.transform.position;
-        }
+        
     }
 
     // Update is called once per frame
@@ -50,25 +47,29 @@ public class DamageReceiver : MonoBehaviour
                     if(IsDirectlyDestroyed)
                         Destroy(gameObject);
                     if(IsGoldenBarrel){
-                        
+                        pickup = Instantiate(SpawnObject);
+                        pickup.transform.position = gameObject.transform.position;
+
                         pickup.transform.rotation = Player.transform.rotation;
                         
                         
                         GameObject pickup2 = Instantiate(SpawnObject);
-                        pickup2.transform.position = pickup.transform.position + (3.0f * Player.transform.right);
+                        pickup2.transform.position = pickup.transform.position;// + (3.0f * Player.transform.right);
+                        UpgradeMove upgrade1 = pickup2.AddComponent<UpgradeMove>();
+                        upgrade1.Direction = -1.0f;
                         
                         
-                        
-                        StartCoroutine(DoUpgradeMove(pickup2));//, (-1.0f * Player.transform.right)));
+                        //StartCoroutine(DoUpgradeMove(pickup2));//, (-1.0f * Player.transform.right)));
                         
                         
                         GameObject pickup3 = Instantiate(SpawnObject);
-                        pickup3.transform.position = pickup.transform.position + (-3.0f * Player.transform.right);
+                        pickup3.transform.position = pickup.transform.position;// + (-3.0f * Player.transform.right);
+                        UpgradeMove upgrade2 = pickup3.AddComponent<UpgradeMove>();
+                        upgrade2.Direction = 1.0f;
                         
                         
                         
-                        
-                        StartCoroutine(DoUpgradeMove(pickup3));//, Player.transform.right));
+                        //StartCoroutine(DoUpgradeMove(pickup3));//, Player.transform.right));
                         
     
                     }
@@ -83,23 +84,7 @@ public class DamageReceiver : MonoBehaviour
             }
 
         }
-    private IEnumerator DoUpgradeMove(GameObject item){//}, Vector3 direction){
-        float goalPosition = 3.0f;
-        float increment = 0.1f;
-        //Vector3 change = (increment*direction);
-        float counter = 0.0f;
-
-        while(counter <= goalPosition){
-            //item.transform.position = (increment*direction) + item.transform.position;
-            //counter += increment;
-            //Debug.Log(counter);
-            counter++;
-            yield return null;
-        }
-
-        yield return null;
-        
-    }
+    
 
     private void Spawn(){
         
