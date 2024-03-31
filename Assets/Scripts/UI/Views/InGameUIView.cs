@@ -21,7 +21,6 @@ public class InGameUIView : View
 
     [SerializeField] private Animator _sceneTransitionAnimator; // Animator for our scene transition element
 
-
     public override void Initialize()
     {
         _hpUnits = new List<GameObject>();
