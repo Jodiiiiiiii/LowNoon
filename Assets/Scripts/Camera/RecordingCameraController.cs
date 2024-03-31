@@ -21,20 +21,32 @@ public class RecordingCameraController : MonoBehaviour
 
     [SerializeField, Tooltip("Distance from targetPos at which camera will stop smoothing and snap to goal")] private float _cameraSmoothingThreshold = 0.05f;
 
+    [SerializeField, Tooltip("Delay before movement ACTUALLY starts")] private float _moveDelay = 0f;
+    private float _delayTimer = 0f;
+    bool isStarted = false;
+
     void Start()
     {
         if(!_isAtStartPos)
             this.transform.position = _startPosition;
         if (!_isAtStartRot)
             transform.eulerAngles = _startRotation;
-
-        moveCamera();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!isStarted)
+        {
+            if (_delayTimer >= _moveDelay)
+            {
+                moveCamera();
+                isStarted = true;
+            }
 
+            _delayTimer += Time.deltaTime;
+        }
+        
     }
 
     public void moveCamera()
