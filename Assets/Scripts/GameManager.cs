@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static bool IsPaused = false;
+
     #region PLAYER DATA
     // Player Data (saved between scenes)
     [System.Serializable]

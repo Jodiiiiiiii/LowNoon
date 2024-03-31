@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Ground
   - PlayerBullet
+  - EntryPoint
+  - Recording Camera
   layers:
   - Default
   - TransparentFX

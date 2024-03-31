@@ -48,7 +48,6 @@ GameObject:
   - component: {fileID: 6423213657449628845}
   - component: {fileID: 7179307920419429564}
   - component: {fileID: 8847152209835682657}
-  - component: {fileID: 1181210963044027971}
   - component: {fileID: 7941970932746470323}
   - component: {fileID: 5437179062950495881}
   m_Layer: 8
@@ -233,20 +232,9 @@ MonoBehaviour:
   _gunFireVolume: 0.4
   _hat: {fileID: 3273946969388959765}
   _lamp: {fileID: 6514855181963100602}
+  BurrowDownDuration: 1.5167
+  RoomEnterDuration: 1.2083
 --- !u!114 &8847152209835682657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2051004514797975844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6386a2c8f25824bab87aec0b628bc235, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerLightSource: {fileID: 422679481552368775}
---- !u!114 &1181210963044027971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
