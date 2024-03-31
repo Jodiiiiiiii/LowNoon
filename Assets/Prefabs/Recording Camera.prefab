@@ -105,3 +105,4 @@ MonoBehaviour:
   _startRotation: {x: 0, y: 0, z: 0}
   _endRotation: {x: 0, y: 90, z: 0}
   _cameraSmoothingThreshold: 0.05
+  _moveDelay: 0
