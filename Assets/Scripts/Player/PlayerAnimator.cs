@@ -32,12 +32,14 @@ public class PlayerAnimator : MonoBehaviour
     {
         PlayerShooting.onBulletFire += fireGun;
         SceneTransitionObject.onSceneTransition += burrowDown;
+        GameManager.onSceneBegin += roomEnter;
     }
 
     private void OnDisable()
     {
         PlayerShooting.onBulletFire -= fireGun;
         SceneTransitionObject.onSceneTransition -= burrowDown;
+        GameManager.onSceneBegin -= roomEnter;
     }
 
     void Start()
@@ -137,6 +139,7 @@ public class PlayerAnimator : MonoBehaviour
         _isActiveCoroutine = true;
         _animator.Play("RoomEnter", 0, 0);
         yield return new WaitForSeconds(RoomEnterDuration);
+        _playerController.Reenable();   // Give the player back control
         _isActiveCoroutine = false;
     }
     #endregion
