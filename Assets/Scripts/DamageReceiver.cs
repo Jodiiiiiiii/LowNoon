@@ -49,27 +49,23 @@ public class DamageReceiver : MonoBehaviour
                     if(IsGoldenBarrel){
                         pickup = Instantiate(SpawnObject);
                         pickup.transform.position = gameObject.transform.position;
-
                         pickup.transform.rotation = Player.transform.rotation;
                         
                         
                         GameObject pickup2 = Instantiate(SpawnObject);
-                        pickup2.transform.position = pickup.transform.position;// + (3.0f * Player.transform.right);
+                        pickup2.transform.position = pickup.transform.position;
                         UpgradeMove upgrade1 = pickup2.AddComponent<UpgradeMove>();
                         upgrade1.Direction = -1.0f;
                         
                         
-                        //StartCoroutine(DoUpgradeMove(pickup2));//, (-1.0f * Player.transform.right)));
                         
                         
                         GameObject pickup3 = Instantiate(SpawnObject);
-                        pickup3.transform.position = pickup.transform.position;// + (-3.0f * Player.transform.right);
+                        pickup3.transform.position = pickup.transform.position;
                         UpgradeMove upgrade2 = pickup3.AddComponent<UpgradeMove>();
                         upgrade2.Direction = 1.0f;
                         
-                        
-                        
-                        //StartCoroutine(DoUpgradeMove(pickup3));//, Player.transform.right));
+                           
                         
     
                     }

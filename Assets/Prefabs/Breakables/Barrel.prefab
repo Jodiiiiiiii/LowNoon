@@ -95,6 +95,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9183900114694320716}
   - component: {fileID: 2374121777274947933}
+  - component: {fileID: 78994829339054719}
+  - component: {fileID: -7505356661173046398}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -141,3 +143,35 @@ CapsuleCollider:
   m_Height: 2.74292
   m_Direction: 1
   m_Center: {x: 0, y: -0.062867165, z: -0.027122498}
+--- !u!114 &78994829339054719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8374466401145350390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8a63b85322a43b9907aab166c6929c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WoodParticles: {fileID: 3581966198562017846, guid: 186de8bb85053054ca0b0d25479a670a, type: 3}
+--- !u!114 &-7505356661173046398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8374466401145350390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15cd12fc83617463e9f3a5b665be5e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthLevel: 1
+  IsDirectlyDestroyed: 0
+  IsImmune: 0
+  DropRate: 1
+  SpawnObject: {fileID: 0}
+  IsGoldenBarrel: 0
+  Player: {fileID: 0}
