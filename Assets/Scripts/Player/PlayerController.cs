@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
         else // NOT DASH state
         {
             // Not DASH -> DASH
-            if (PlayerInput.DashDown && _dashTimer <= 0f)
+            if (PlayerInput.DashDown && _dashTimer <= 0f && !GameManager.IsPaused)
             {
                 // start dash duration timer
                 _dashTimer = _dashDuration;
