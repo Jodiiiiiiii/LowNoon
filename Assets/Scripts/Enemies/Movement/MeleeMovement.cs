@@ -25,6 +25,7 @@ public class MeleeMovement : MonoBehaviour
     [Header("Movement Smoothing")]
     [SerializeField, Tooltip("'snappiness' of rotating to goal position")] private float _rotationSharpness = 10f;
     [SerializeField, Tooltip("'snappiness' of velocity changes")] private float _velocitySharpness = 10f;
+    [SerializeField, Tooltip("'snappiness' of coming to a stop when at target position")] private float _stoppingSharpness = 10f;
     [SerializeField, Tooltip("speed at which velocity is snapped back to zero")] private float _stoppingSpeedThreshold = 0.1f;
 
 
@@ -83,7 +84,7 @@ public class MeleeMovement : MonoBehaviour
             else
             {
                 // stop - within stopping range (with smoothing)
-                _rigidBody.velocity = Vector3.Lerp(_rigidBody.velocity, Vector3.zero, 1f - Mathf.Exp(-_velocitySharpness * Time.deltaTime));
+                _rigidBody.velocity = Vector3.Lerp(_rigidBody.velocity, Vector3.zero, 1f - Mathf.Exp(-_stoppingSharpness * Time.deltaTime));
                 if (_rigidBody.velocity.magnitude < _stoppingSpeedThreshold) _rigidBody.velocity = Vector3.zero;
 
                 // re-enter idle if at target position but still no player visible
