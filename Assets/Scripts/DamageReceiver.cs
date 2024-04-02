@@ -11,9 +11,11 @@ public class DamageReceiver : MonoBehaviour
     [Tooltip("Likelihood that object spawns health pickup")] public float DropRate = 1.0f;
     public GameObject SpawnObject;
     public bool IsGoldenBarrel;
+    public bool Animated;
     public GameObject Player;
     double chance;
     GameObject pickup;
+    public GameObject EffectParticles;
 
 
     // Start is called before the first frame update
@@ -73,6 +75,7 @@ public class DamageReceiver : MonoBehaviour
                         
                         Spawn(); 
                     }
+                    Destroy(gameObject);
                         
                 }
 
@@ -88,6 +91,14 @@ public class DamageReceiver : MonoBehaviour
         healthPickup.transform.position = gameObject.transform.position;
         
         
+        
+    }
+    
+    public void OnDestroy(){
+            if(Animated){
+            Instantiate(EffectParticles, gameObject.transform.position, gameObject.transform.rotation);
+            }
+            
         
     }
 }
