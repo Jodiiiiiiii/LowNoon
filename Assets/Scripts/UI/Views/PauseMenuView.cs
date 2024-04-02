@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class PauseMenuView : View
 {
     [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private GameObject _wormFacts;
+    [SerializeField] private GameObject _settings;
     public override void Initialize()
     {
         _pauseMenu.SetActive(true);
-        _wormFacts.SetActive(false);
+        _settings.SetActive(false);
     }
 
 
@@ -31,7 +31,7 @@ public class PauseMenuView : View
     public void BackButton()
     {
         _pauseMenu.SetActive(true);
-        _wormFacts.SetActive(false);
+        _settings.SetActive(false);
         ViewManager.ShowLast();
     }
 
@@ -43,13 +43,13 @@ public class PauseMenuView : View
     public void WormFacts()
     {
         _pauseMenu.SetActive(false);
-        _wormFacts.SetActive(true);
+        _settings.SetActive(true);
     }
 
     public void ExitWormFacts()
     {
         _pauseMenu.SetActive(true);
-        _wormFacts.SetActive(false);
+        _settings.SetActive(false);
     }
 
     public void ExitGame()

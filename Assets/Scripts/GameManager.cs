@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.IO;
 using UnityEngine;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     #region PLAYER DATA
     // Player Data (saved between scenes)
     [System.Serializable]
+
     public class Stats
     {
         // Health
@@ -119,8 +121,38 @@ public class GameManager : MonoBehaviour
     public class Data
     {
         public int NumOfRuns; // adds one each time the player dies
+        public float MasterVolume;
+        public float PlayerVolume;
+        public float EnemyVolume;
+        public float EnvironmentVolume;
+        public float MusicVolume;
     }
     public Data SaveData { get; private set; }
+
+    public float GetMasterVolume()
+    {
+        return SaveData.MasterVolume;
+    }
+
+    public float GetPlayerVolume()
+    {
+        return SaveData.PlayerVolume * SaveData.MasterVolume;
+    }
+
+    public float GetEnemyVolume()
+    {
+        return SaveData.EnemyVolume * SaveData.MasterVolume;
+    }
+
+    public float GetEnvironmentVolume()
+    {
+        return SaveData.EnvironmentVolume * SaveData.MasterVolume;
+    }
+
+    public float GetMusicVolume()
+    {
+        return SaveData.MusicVolume * SaveData.MasterVolume;
+    }
 
     private void OnApplicationQuit()
     {
