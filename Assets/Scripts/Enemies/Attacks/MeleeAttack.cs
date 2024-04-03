@@ -15,6 +15,7 @@ public class MeleeAttack : MonoBehaviour
     private GameObject _player;
     private float _attackTimer;
     private bool _duringAttack;
+    public bool DuringAttack => _duringAttack;
     
     // Start is called before the first frame update
     void Start()
