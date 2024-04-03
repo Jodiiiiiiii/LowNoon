@@ -486,8 +486,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.40784314, b: 0, a: 1}
-  m_Intensity: 1.5
-  m_Range: 50
+  m_Intensity: 0.4
+  m_Range: 30
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -584,12 +584,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b914dbe0e5959954bb996090671069a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsLit: 0
+  IsLit: 1
   _candleLight: {fileID: 3296054208069416680}
   _candleAnim: {fileID: 6222780561144465542}
   _minIntensity: 0.3
-  _maxIntensity: 1.5
-  _flickerSpeed: 0.002
+  _maxIntensity: 0.7
+  _flickerSpeedMin: 0.0002
+  _flickerSpeedMax: 0.0008
 --- !u!1 &5901753014004102090
 GameObject:
   m_ObjectHideFlags: 0

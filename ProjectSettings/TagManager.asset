@@ -11,6 +11,7 @@ TagManager:
   - PlayerBullet
   - EntryPoint
   - Recording Camera
+  - MeleeAttack
   layers:
   - Default
   - TransparentFX
