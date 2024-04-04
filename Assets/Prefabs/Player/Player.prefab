@@ -121,11 +121,11 @@ MonoBehaviour:
   _movingRotationSharpness: 1.5
   _stationaryRotationSharpness: 5
   _moveForce: 180
-  _maxMoveSpeed: 15
+  _maxMoveSpeed: 10
   _frictionForce: 5
   _dashCooldown: 1.5
   _dashForce: 300
-  _maxDashSpeed: 30
+  _maxDashSpeed: 18
   _dashDuration: 0.8
   _movingThreshold: 3
   _stoppingSharpness: 4
