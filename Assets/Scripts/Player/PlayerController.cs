@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 {
     // Components
     private Rigidbody _rb;
+    [SerializeField] private Texture _gummyWorm;
 
     public CharacterState State { get; private set; } // tracks the players current state; likely useful for animator
 
@@ -30,6 +31,11 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         State = CharacterState.STATIONARY;
+
+        if (GameManager.IsGummy)
+        {
+            GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material.mainTexture = _gummyWorm;
+        }
     }
 
     #region CHARACTER-STATES
