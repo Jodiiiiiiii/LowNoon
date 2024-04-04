@@ -33,6 +33,7 @@ public class PlayerAnimator : MonoBehaviour
         PlayerShooting.onBulletFire += fireGun;
         SceneTransitionObject.onSceneTransition += burrowDown;
         GameManager.onSceneBegin += roomEnter;
+        GameManager.onHubRevive += hubEnter;
     }
 
     private void OnDisable()
@@ -40,6 +41,7 @@ public class PlayerAnimator : MonoBehaviour
         PlayerShooting.onBulletFire -= fireGun;
         SceneTransitionObject.onSceneTransition -= burrowDown;
         GameManager.onSceneBegin -= roomEnter;
+        GameManager.onHubRevive -= hubEnter;
     }
 
     void Start()
@@ -103,7 +105,14 @@ public class PlayerAnimator : MonoBehaviour
     {
         StopAllCoroutines();
         //_animator.Play("Idle", 0, 0);
-        StartCoroutine(DoRoomEnter());
+        StartCoroutine(DoRoomEnter(0));
+    }
+
+    private void hubEnter()
+    {
+        StopAllCoroutines();
+        //_animator.Play("Idle", 0, 0);
+        StartCoroutine(DoRoomEnter(4));
     }
 
     #region COROUTINES
@@ -134,15 +143,18 @@ public class PlayerAnimator : MonoBehaviour
         yield return new WaitForSeconds(BurrowDownDuration); // Unity, why is there not a way to tell when an animation is done, it would save me so much heartache
     }
 
-    private IEnumerator DoRoomEnter() // Unique sequence for entering a room
+    private IEnumerator DoRoomEnter(float waitTime) // Unique sequence for entering a room
     {
         _isActiveCoroutine = true;
         _animator.Play("RoomEnter", 0, 0);
+        _animator.SetFloat("roomEnterPause", 0);
+        yield return new WaitForSeconds(waitTime);
+        _animator.SetFloat("roomEnterPause", 1);
+        //_animator.Play("RoomEnter", 0, 0);
         yield return new WaitForSeconds(RoomEnterDuration);
         _playerController.Reenable();   // Give the player back control
         _animator.Play("Idle", 0, 0);
-        _isActiveCoroutine = false;
-        
+        _isActiveCoroutine = false; 
     }
     #endregion
 }

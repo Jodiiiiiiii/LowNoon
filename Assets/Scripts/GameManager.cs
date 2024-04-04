@@ -12,8 +12,11 @@ public class GameManager : MonoBehaviour
     // singleton instance
     private static GameManager _instance;
 
+    public bool IsMainMenuLoaded;
     public delegate void OnSceneBegin();
     public static event OnSceneBegin onSceneBegin;
+    public delegate void OnHubRevive();
+    public static event OnHubRevive onHubRevive;
 
     public static GameManager Instance
     {
@@ -164,7 +167,29 @@ public class GameManager : MonoBehaviour
         // If the scene is the hub
         if(scene.name == "0_Hub")
         {
-            // We need to decide whether we're loading the main menu, or busting out of the coffin
+            if (!IsMainMenuLoaded) // If we have not been on the main menu yet, make a note of it
+            {
+                IsMainMenuLoaded = true;
+            }
+            else // If we have loaded the main menu before, that means that any re-entry of the hub is out of the coffin
+            {
+                //Set the UI view to InGame
+                ViewManager.Show<InGameUIView>(false);
+
+
+                // Invoke onHubRevive, which
+                // Plays the coffin-burst sequence for the coffin
+                // Plays the coffin-burst sequence for the fake worm
+                // Plays the coffin-burst sequence for the real worm
+                // Disables the player until the animation is done
+
+                // And still needs to
+                // Lock the camera until the animation is done
+                // Correctly position the player in front of the grave
+                onHubRevive?.Invoke();
+
+                
+            }
         }
 
         // Otherwise
@@ -172,10 +197,11 @@ public class GameManager : MonoBehaviour
         {
             //Invoke onSceneBegin, which
             // Plays the player "burrow down" enter animation
+            // Disables the player until the animation is done
 
             // This event also needs to (but doesn't currently)
             // Locks the camera until the animation is done
-            // Disables the player until the animation is done
+
 
             onSceneBegin?.Invoke();
         }
