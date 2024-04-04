@@ -140,7 +140,9 @@ public class PlayerAnimator : MonoBehaviour
         _animator.Play("RoomEnter", 0, 0);
         yield return new WaitForSeconds(RoomEnterDuration);
         _playerController.Reenable();   // Give the player back control
+        _animator.Play("Idle", 0, 0);
         _isActiveCoroutine = false;
+        
     }
     #endregion
 }
