@@ -12,7 +12,7 @@ public class DamageReceiver : MonoBehaviour
     public GameObject SpawnObject;
     public bool IsGoldenBarrel;
     public bool Animated;
-    public GameObject Player;
+    private GameObject Player;
     double chance;
     GameObject pickup;
     public GameObject EffectParticles;
@@ -23,28 +23,14 @@ public class DamageReceiver : MonoBehaviour
     {
         IsImmune = false;
         chance = Random.Range(0,1.0f);
+        Player = GameObject.FindWithTag("Player");
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        GameObject DamagerObject = collision.gameObject;
-
-        if (DamagerObject.CompareTag("PlayerBullet"))
-        {
-            BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
-
-            if (!IsImmune)
-            {
-                // destroy damage receiver only if it reaches 0 health
-                HealthLevel -= bulletStats.DamageLevel;
-                if (HealthLevel <= 0)
+        if (HealthLevel <= 0)
                 {
                     if(IsDirectlyDestroyed)
                         Destroy(gameObject);
@@ -71,11 +57,28 @@ public class DamageReceiver : MonoBehaviour
                         
     
                     }
-                    else if(chance < DropRate)
-                        
+                    else if(chance < DropRate){
+                        //Debug.Log("drop");
                         Spawn(); 
                     }
                     Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject DamagerObject = collision.gameObject;
+
+        if (DamagerObject.CompareTag("PlayerBullet"))
+        {
+            BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
+
+            if (!IsImmune)
+            {
+                // destroy damage receiver only if it reaches 0 health
+                HealthLevel -= bulletStats.DamageLevel;
+                
+                    
                         
                 }
 
@@ -94,7 +97,7 @@ public class DamageReceiver : MonoBehaviour
         
     }
     
-    public void OnDestroy(){
+    private void OnDestroy(){
             if(Animated){
             Instantiate(EffectParticles, gameObject.transform.position, gameObject.transform.rotation);
             }

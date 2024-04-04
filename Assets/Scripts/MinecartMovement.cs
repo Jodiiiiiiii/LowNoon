@@ -8,11 +8,12 @@ public class MinecartMovement : MonoBehaviour
     public GameObject StartPosition;
     public GameObject EndPosition;
     public float Speed = 1.0f;
+    public GameObject ExplosionParticles;
     private Rigidbody _rb;
     void Start()
     {
         
-        transform.position = new Vector3(StartPosition.transform.position.x, 20.0f, StartPosition.transform.position.z);
+        transform.position = new Vector3(StartPosition.transform.position.x, 1.0f, StartPosition.transform.position.z);
         transform.rotation = StartPosition.transform.rotation;
     }
 
@@ -23,6 +24,13 @@ public class MinecartMovement : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, EndPosition.transform.position, Speed*Time.deltaTime);
         }
         
+    }
+
+    void OnCollisionEnter(Collision collision){
+        if(collision.collider.tag == "Player" || collision.collider.tag == "Enemy"){
+            Instantiate(ExplosionParticles, gameObject.transform.position, gameObject.transform.rotation);
+            Destroy(gameObject);
+        }
     }
 
 }

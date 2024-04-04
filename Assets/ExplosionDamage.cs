@@ -6,6 +6,7 @@ public class ExplosionDamage : MonoBehaviour
 {
     public float ExplosionRadius;
     public int DamageAmount;
+    //public GameObject EffectParticles;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +20,12 @@ public class ExplosionDamage : MonoBehaviour
     }
 
     void OnDestroy(){
+        
         Collider[] damagedObjects = Physics.OverlapSphere(transform.position, ExplosionRadius);
         foreach (var obj in damagedObjects)
         {
             if(obj.tag == "Player"){
-                Debug.Log("ow");
+                
 
                 //decrement health by dmg
                 if (GameManager.Instance.PlayerData.Armor > 0) {
@@ -33,13 +35,17 @@ public class ExplosionDamage : MonoBehaviour
                     GameManager.Instance.PlayerData.CurrHealth -= DamageAmount;
                     }
 
+                Debug.Log("Health: " + GameManager.Instance.PlayerData.CurrHealth);
+
+
                 
             }
-            else if(obj.tag == "Enemy"){
+            else if(obj.GetComponent<DamageReceiver>() != null){
                 Debug.Log("enemy");
                 // question mark question mark question mark
-                healthLevel = obj.GetComponent<DamageReceiver>();
+                DamageReceiver healthLevel = obj.GetComponent<DamageReceiver>();
                 healthLevel.HealthLevel -= (float)DamageAmount;
+                Debug.Log("Other health: " + healthLevel.HealthLevel);
 
             }
         }
