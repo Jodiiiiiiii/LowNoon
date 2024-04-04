@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 9150870018711325563}
   - component: {fileID: 8989173672543683484}
   - component: {fileID: 1544500835280764630}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Tumbleweed Destroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

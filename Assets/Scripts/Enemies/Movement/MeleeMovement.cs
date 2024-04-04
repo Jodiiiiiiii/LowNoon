@@ -9,8 +9,12 @@ public class MeleeMovement : MonoBehaviour
     private Collider _playerCollider;
     private Vector3 _trackingPosition;
     private bool _isIdle;
+    private bool _isAtPlayer; // Exists for animation purposes
+    public bool IsIdle => _isIdle;
+    public bool IsAtPlayer => _isAtPlayer;  
 
     private Rigidbody _rigidBody;
+    private DamageReceiver _damageReceiver;
 
     [Header("Player Detection")]
     [SerializeField, Tooltip("radius of sphere cast for obstruction detection")] private float _obstructionCheckRadius = .2f;
@@ -34,8 +38,9 @@ public class MeleeMovement : MonoBehaviour
     {
         _playerCollider = GameObject.Find("Player").GetComponent<Collider>();
         _rigidBody = GetComponent<Rigidbody>();
+        _damageReceiver = GetComponent<DamageReceiver>();
         _isIdle = true;
-
+        _isAtPlayer = false;
         _trackingPosition = transform.position; // starts with no tracking
     }
 
@@ -65,6 +70,11 @@ public class MeleeMovement : MonoBehaviour
             _isIdle = false;
         }
 
+        if(_damageReceiver.HealthLevel <= 0) // Ant should not be moving if dead
+        {
+            _isIdle = true;
+        }
+
         if (!_isIdle)
         {
             // Smoothly rotate to goal
@@ -75,22 +85,31 @@ public class MeleeMovement : MonoBehaviour
             // If enemy is within 1 unit of player, stop moving
             if (Vector3.Distance(_trackingPosition, transform.position) > _stoppingRange)
             {
+                _isAtPlayer = false;
                 // smoothly change velocity towards goal
                 Vector3 goalVelocity = (_trackingPosition - transform.position).normalized;
                 goalVelocity.y = 0;
                 goalVelocity *= _moveSpeed;
-                _rigidBody.velocity = Vector3.Lerp(_rigidBody.velocity, goalVelocity, 1f - Mathf.Exp(-_velocitySharpness *  Time.deltaTime));
+                _rigidBody.velocity = Vector3.Lerp(_rigidBody.velocity, goalVelocity, 1f - Mathf.Exp(-_velocitySharpness * Time.deltaTime));
             }
             else
             {
                 // stop - within stopping range (with smoothing)
+                _isAtPlayer = true;
                 _rigidBody.velocity = Vector3.Lerp(_rigidBody.velocity, Vector3.zero, 1f - Mathf.Exp(-_stoppingSharpness * Time.deltaTime));
                 if (_rigidBody.velocity.magnitude < _stoppingSpeedThreshold) _rigidBody.velocity = Vector3.zero;
 
                 // re-enter idle if at target position but still no player visible
                 if (Vector3.Distance(transform.position, _playerCollider.ClosestPoint(transform.position)) > _stoppingRange)
+                {
                     _isIdle = true;
+                    _isAtPlayer = false;
+                }
+
             }
+        }
+        else{
+            _rigidBody.velocity = Vector3.zero; // complete stop - idle
         }
     }
 }

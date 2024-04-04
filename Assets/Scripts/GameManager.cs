@@ -1,6 +1,7 @@
 using System.Collections;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Manages player data saved between scenes
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
 {
     // singleton instance
     private static GameManager _instance;
+
+    public delegate void OnSceneBegin();
+    public static event OnSceneBegin onSceneBegin;
 
     public static GameManager Instance
     {
@@ -149,5 +153,36 @@ public class GameManager : MonoBehaviour
 #endif
             Application.Quit();
         }*/
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) // These are the parameters that the sceneLoaded event gives
+    {
+        // If the scene is the hub
+        if(scene.name == "0_Hub")
+        {
+            // We need to decide whether we're loading the main menu, or busting out of the coffin
+        }
+
+        // Otherwise
+        else
+        {
+            //Invoke onSceneBegin, which
+            // Plays the player "burrow down" enter animation
+
+            // This event also needs to (but doesn't currently)
+            // Locks the camera until the animation is done
+            // Disables the player until the animation is done
+
+            onSceneBegin?.Invoke();
+        }
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

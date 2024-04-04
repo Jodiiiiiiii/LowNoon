@@ -31,10 +31,11 @@ public class SceneTransitionObject : MonoBehaviour
         // Invoke the scene transtion event, which
         //      Sets velocity to 0 and disables the player controller
         //      Triggers the burrow down animation  
+        //      Pulls down the UI curtain
         onSceneTransition?.Invoke();
 
-        // Wait until the player animation is done, then load in the next scene
-        yield return new WaitForSeconds(player.GetComponent<PlayerAnimator>().BurrowDownDuration);
+        // Wait until the player animation and UI scene transition animation are done
+        yield return new WaitForSeconds(player.GetComponent<PlayerAnimator>().BurrowDownDuration + 1f);
 
         SceneManager.LoadScene(SceneName);
         yield return null;
