@@ -9,7 +9,7 @@ public class EnemyAnimator : MonoBehaviour
         // isDead
 
     protected DamageReceiver _damageReceiver;
-    protected Animator _animator;
+    [SerializeField] protected Animator _animator;
     protected float prevHP;
 
     [Header("Bespoke Animation Durations")]
@@ -20,7 +20,10 @@ public class EnemyAnimator : MonoBehaviour
     protected void Start()
     {
         _damageReceiver = GetComponent<DamageReceiver>();
-        _animator = GetComponent<Animator>();
+        if (GetComponent<Animator>() != null)
+        {
+            _animator = GetComponent<Animator>();
+        }
         prevHP = _damageReceiver.HealthLevel;
     }
 

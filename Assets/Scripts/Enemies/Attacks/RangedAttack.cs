@@ -20,6 +20,8 @@ public class RangedAttack : MonoBehaviour
     private GameObject _player;
     private float _cooldownTimer;
     private float _shotTimerRandom;
+
+    public bool IsAttacking;    // Used for animation
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,8 @@ public class RangedAttack : MonoBehaviour
 
         if (isStill && _cooldownTimer > _shotTimerRandom)
         {
+            // Tell the animator we're attacking
+            IsAttacking = true;
             // reset cooldown
             _shotTimerRandom = ShotTimer + TimerRandom();
             _cooldownTimer = 0;
@@ -54,6 +58,10 @@ public class RangedAttack : MonoBehaviour
 
             // apply bullet force
             bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * _bulletStats.InitialForce, ForceMode.Impulse);
+        }
+        else
+        {
+            IsAttacking = false;
         }
 
         _cooldownTimer += Time.deltaTime;

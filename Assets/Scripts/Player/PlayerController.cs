@@ -6,7 +6,8 @@ public enum CharacterState
 {
     MOVING,
     STATIONARY,
-    DASH
+    DASH,
+    DISABLED
 }
 
 public class PlayerCharacterInputs
@@ -59,6 +60,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case CharacterState.DASH:
                 break;
+            case CharacterState.DISABLED:
+                break;
         }
     }
 
@@ -77,6 +80,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case CharacterState.DASH:
                 break;
+            case CharacterState.DISABLED:
+                break;
         }
     }
     #endregion
@@ -89,11 +94,13 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         SceneTransitionObject.onSceneTransition += HaltAndDisable;
+        GameManager.onSceneBegin += HaltAndDisable;
     }
 
     private void OnDisable()
     {
         SceneTransitionObject.onSceneTransition -= HaltAndDisable;
+        GameManager.onSceneBegin -= HaltAndDisable;
     }
 
     // Update is called once per frame
@@ -143,47 +150,51 @@ public class PlayerController : MonoBehaviour
         // necessary to ensure same transition behavior regardless of move speed upgrades
         float actualMovingThreshold = _movingThreshold * GameManager.Instance.PlayerData.MoveSpeed;
 
-        // DASH state
-        if(State == CharacterState.DASH)
+        if(State != CharacterState.DISABLED) // The DISABLED state prevents any other states from happening
         {
-            // DASH -> STATIONARY
-            if (_dashTimer <= 0 && _rb.velocity.magnitude < actualMovingThreshold) // dash has hit max duration and player has come to a stop
+            // DASH state
+            if (State == CharacterState.DASH)
             {
-                _dashTimer = _dashCooldown; // start dash cooldown cooldown timer
-                TransitionToState(CharacterState.STATIONARY);
-            }
-            else // update duration timer
-                _dashTimer -= Time.deltaTime;
-        }
-        else // NOT DASH state
-        {
-            // Not DASH -> DASH
-            if (PlayerInput.DashDown && _dashTimer <= 0f)
-            {
-                // start dash duration timer
-                _dashTimer = _dashDuration;
-                // set velocity to zero first to ensure consistent dash behavior/distance whether dashing from moving or stationary
-                _rb.velocity = Vector3.zero; // there may be a better way to do this
-
-                TransitionToState(CharacterState.DASH);
-            }
-            else // update dash cooldown timer + handle other states
-            {
-                _dashTimer -= Time.deltaTime;
-
-                // Not DASH -> MOVING
-                if (PlayerInput.MoveAxisForward > 0f) // player holding input to move
+                // DASH -> STATIONARY
+                if (_dashTimer <= 0 && _rb.velocity.magnitude < actualMovingThreshold) // dash has hit max duration and player has come to a stop
                 {
-                    TransitionToState(CharacterState.MOVING);
-                }
-
-                // Not DASH -> STATIONARY
-                if (PlayerInput.MoveAxisForward <= 0f && _rb.velocity.magnitude < actualMovingThreshold)
-                {
+                    _dashTimer = _dashCooldown; // start dash cooldown cooldown timer
                     TransitionToState(CharacterState.STATIONARY);
                 }
+                else // update duration timer
+                    _dashTimer -= Time.deltaTime;
+            }
+            else // NOT DASH state
+            {
+                // Not DASH -> DASH
+                if (PlayerInput.DashDown && _dashTimer <= 0f)
+                {
+                    // start dash duration timer
+                    _dashTimer = _dashDuration;
+                    // set velocity to zero first to ensure consistent dash behavior/distance whether dashing from moving or stationary
+                    _rb.velocity = Vector3.zero; // there may be a better way to do this
+
+                    TransitionToState(CharacterState.DASH);
+                }
+                else // update dash cooldown timer + handle other states
+                {
+                    _dashTimer -= Time.deltaTime;
+
+                    // Not DASH -> MOVING
+                    if (PlayerInput.MoveAxisForward > 0f) // player holding input to move
+                    {
+                        TransitionToState(CharacterState.MOVING);
+                    }
+
+                    // Not DASH -> STATIONARY
+                    if (PlayerInput.MoveAxisForward <= 0f && _rb.velocity.magnitude < actualMovingThreshold)
+                    {
+                        TransitionToState(CharacterState.STATIONARY);
+                    }
+                }
             }
         }
+        
     }
     #endregion
 
@@ -298,14 +309,21 @@ public class PlayerController : MonoBehaviour
                     _rb.AddForce(-_rb.velocity.normalized * _frictionForce * _rb.velocity.magnitude, ForceMode.Force);
                 }
                 break;
+            case CharacterState.DISABLED:
+                _rb.velocity = Vector3.zero;
+                break;
         }
     }
     #endregion
 
     private void HaltAndDisable()   // For stopping player motion (for death, scene transitions)
     {
-        State = CharacterState.STATIONARY;
+        State = CharacterState.DISABLED;
         _rb.velocity = Vector3.zero;
-        this.enabled = false;
+    }
+
+    public void Reenable() // For giving the player their agency back
+    {
+        State = CharacterState.STATIONARY;
     }
 }
