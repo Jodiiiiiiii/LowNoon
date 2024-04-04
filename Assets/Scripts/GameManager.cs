@@ -172,7 +172,6 @@ public class GameManager : MonoBehaviour
         {
             //Invoke onSceneBegin, which
             // Plays the player "burrow down" enter animation
-            //
 
             // This event also needs to (but doesn't currently)
             // Locks the camera until the animation is done
@@ -180,10 +179,6 @@ public class GameManager : MonoBehaviour
 
             onSceneBegin?.Invoke();
         }
-
-
-
-
     }
 
     private void OnDisable()
