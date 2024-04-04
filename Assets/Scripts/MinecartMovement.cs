@@ -6,23 +6,23 @@ public class MinecartMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject StartPosition;
-    public float Speed = 20f;
+    public GameObject EndPosition;
+    public float Speed = 1.0f;
     private Rigidbody _rb;
     void Start()
     {
-        _rb = this.GetComponent<Rigidbody>();
-        transform.position = StartPosition.transform.position;
+        
+        transform.position = new Vector3(StartPosition.transform.position.x, 20.0f, StartPosition.transform.position.z);
         transform.rotation = StartPosition.transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _rb.velocity = new Vector3(this._rb.velocity.x, this._rb.velocity.y, _speed);
+        if(transform.position != EndPosition.transform.position){
+            transform.position = Vector3.MoveTowards(transform.position, EndPosition.transform.position, Speed*Time.deltaTime);
+        }
         
     }
 
-    void OnCollisionEnter(Collision collision){
-        //if collision object is player, destroy the minecart thing and harm player? 
-    }
 }
