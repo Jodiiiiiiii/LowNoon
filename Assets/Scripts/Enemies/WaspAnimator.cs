@@ -5,8 +5,6 @@ using UnityEngine;
 public class WaspAnimator : EnemyAnimator
 {
     [SerializeField] private GameObject _vanishEffect;
-    private CapsuleCollider _collider;
-    private float _maxHealth;
 
     private RangedAttack _rangedAttack;
     private RangedMovement _rangedMovement;
@@ -15,8 +13,6 @@ public class WaspAnimator : EnemyAnimator
     new void Start()
     {
         base.Start();
-        _maxHealth = _damageReceiver.HealthLevel; // Store max HP to use to revive later
-        _collider = GetComponent<CapsuleCollider>();
         _rangedMovement = GetComponent<RangedMovement>();
         _rangedAttack = GetComponent<RangedAttack>();
     }

@@ -5,24 +5,17 @@ using UnityEngine;
 public class AntAnimator : EnemyAnimator
 {
     [SerializeField] private GameObject _vanishEffect;
-    private CapsuleCollider _collider;
-    private float _maxHealth;
 
     private MeleeMovement _meleeMovement;
-    private MeleeAttack _meleeAttack;
     new void Start()
     {
         base.Start();
-        _maxHealth = _damageReceiver.HealthLevel; // Store max HP to use to revive later
-        _collider = GetComponent<CapsuleCollider>();
         _meleeMovement = GetComponent<MeleeMovement>();
-        _meleeAttack = GetComponent<MeleeAttack>();
     }
 
     // Update is called once per frame
     new void Update()
     {
-        _animator.SetFloat("HP", _damageReceiver.HealthLevel);
         _animator.SetBool("isMoving", !_meleeMovement.IsIdle);
         _animator.SetBool("isAttacking", _meleeMovement.IsAtPlayer);
 
