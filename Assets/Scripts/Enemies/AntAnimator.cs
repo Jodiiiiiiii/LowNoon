@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AntAnimator : EnemyAnimator
 {
+    [SerializeField] private GameObject _vanishEffect;
     private CapsuleCollider _collider;
     private float _maxHealth;
 
@@ -27,7 +28,7 @@ public class AntAnimator : EnemyAnimator
 
         if (prevHP > _damageReceiver.HealthLevel)    // If the enemy has been damaged
         {
-            if (_damageReceiver.HealthLevel <= 0) // If the enemy is dead
+            if (_damageReceiver.HealthLevel <= 0 && !_animator.GetBool("isDead")) // If the enemy is dead
             {
                 StartCoroutine(DoDeathAnim());
             }
@@ -37,5 +38,10 @@ public class AntAnimator : EnemyAnimator
             }
         }
         prevHP = _damageReceiver.HealthLevel;
+    }
+
+    private void OnDestroy()
+    {
+        Instantiate(_vanishEffect, this.transform.position, _vanishEffect.transform.rotation);
     }
 }

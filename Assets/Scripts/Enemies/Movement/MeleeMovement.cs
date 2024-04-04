@@ -14,6 +14,7 @@ public class MeleeMovement : MonoBehaviour
     public bool IsAtPlayer => _isAtPlayer;  
 
     private Rigidbody _rigidBody;
+    private DamageReceiver _damageReceiver;
 
     [Header("Player Detection")]
     [SerializeField, Tooltip("radius of sphere cast for obstruction detection")] private float _obstructionCheckRadius = .2f;
@@ -37,6 +38,7 @@ public class MeleeMovement : MonoBehaviour
     {
         _playerCollider = GameObject.Find("Player").GetComponent<Collider>();
         _rigidBody = GetComponent<Rigidbody>();
+        _damageReceiver = GetComponent<DamageReceiver>();
         _isIdle = true;
         _isAtPlayer = false;
         _trackingPosition = transform.position; // starts with no tracking
@@ -66,6 +68,11 @@ public class MeleeMovement : MonoBehaviour
         {
             _trackingPosition = closestHit.point;
             _isIdle = false;
+        }
+
+        if(_damageReceiver.HealthLevel <= 0) // Ant should not be moving if dead
+        {
+            _isIdle = true;
         }
 
         if (!_isIdle)
