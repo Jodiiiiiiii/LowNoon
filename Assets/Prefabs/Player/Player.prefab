@@ -147,7 +147,7 @@ MonoBehaviour:
   _maxShootCastRange: 100
   _ignoreMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 12288
 --- !u!114 &9080262972005425276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InvulnerabilityDuration: 2
+  _meleeEnemyDamage: 1
 --- !u!136 &5815269249637768015
 CapsuleCollider:
   m_ObjectHideFlags: 0
