@@ -20,7 +20,7 @@ public class AntAnimator : EnemyAnimator
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         _animator.SetFloat("HP", _damageReceiver.HealthLevel);
         _animator.SetBool("isMoving", !_meleeMovement.IsIdle);
@@ -39,9 +39,11 @@ public class AntAnimator : EnemyAnimator
         }
         prevHP = _damageReceiver.HealthLevel;
     }
-
-    private void OnDestroy()
+    protected override IEnumerator DoDeathAnim()
     {
+        _animator.SetBool("isDead", true);
+        yield return new WaitForSeconds(_deathAnimDuration);
         Instantiate(_vanishEffect, this.transform.position, _vanishEffect.transform.rotation);
+        Destroy(this.gameObject);
     }
 }

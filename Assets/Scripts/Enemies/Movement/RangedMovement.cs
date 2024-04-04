@@ -17,6 +17,7 @@ public class RangedMovement : MonoBehaviour
     [Header("Move State")]
     public RangeEnemyMoveState EnemyMoveState;
     public bool StayStill;
+    public bool Right;  // Direciton of zipping
 
     private GameObject _player;
     private Vector3 _playerPosition;
@@ -194,6 +195,10 @@ public class RangedMovement : MonoBehaviour
     {
         int temp = Random.Range(0, 2);
         temp = (temp == 0) ? -1 : 1;
+        if (temp == 1)  // Need to know direction for animation logic
+            Right = true;
+        else
+            Right = false;
         return temp;
     }
 
