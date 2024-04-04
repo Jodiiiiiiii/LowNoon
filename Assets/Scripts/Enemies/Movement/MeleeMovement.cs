@@ -109,10 +109,7 @@ public class MeleeMovement : MonoBehaviour
             }
         }
         else{
-            Vector3 goalVelocity = (transform.position).normalized;
-            goalVelocity.y = 0;
-            goalVelocity *= _moveSpeed;
-            _rigidBody.velocity = Vector3.zero;
+            _rigidBody.velocity = Vector3.zero; // complete stop - idle
         }
     }
 }
