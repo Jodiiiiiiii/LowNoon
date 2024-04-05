@@ -40,6 +40,16 @@ public class CameraController : MonoBehaviour
         _currentFollowPosition = _followTransform.position;
     }
 
+    private void OnEnable()
+    {
+        GameManager.onHubRevive += setRespawnPos;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onHubRevive -= setRespawnPos;
+    }
+
     // Update is called once per frame
     void LateUpdate() // TODO: test what this looks like if LateUpdate() is FixedUpdate() instead
     {
@@ -90,5 +100,13 @@ public class CameraController : MonoBehaviour
         // Apply calculated position (smoothed)
         Vector3 smoothTarget = Vector3.Lerp(_rb.position, targetPosition, 1f - Mathf.Exp(-_zoomSharpness * Time.fixedDeltaTime));
         _rb.MovePosition(smoothTarget);
+    }
+
+    private void setRespawnPos()
+    {
+        this.transform.position = new Vector3(-31.0645f, 1.666f, -32.692f);
+        this.transform.rotation = Quaternion.Euler(0, 59.9f, 0);
+
+        this.enabled = false;
     }
 }

@@ -167,25 +167,18 @@ public class GameManager : MonoBehaviour
         // If the scene is the hub
         if(scene.name == "0_Hub")
         {
-            if (!IsMainMenuLoaded) // If we have not been on the main menu yet, make a note of it
-            {
-                IsMainMenuLoaded = true;
-            }
-            else // If we have loaded the main menu before, that means that any re-entry of the hub is out of the coffin
-            {
-                //Set the UI view to InGame
-                ViewManager.Show<InGameUIView>(false);
-
-
+            if (IsMainMenuLoaded) {
                 // Invoke onHubRevive, which
                 // Plays the coffin-burst sequence for the coffin
                 // Plays the coffin-burst sequence for the fake worm
                 // Plays the coffin-burst sequence for the real worm
+                // Correctly swap the UI
                 // Disables the player until the animation is done
 
                 // And still needs to
-                // Lock the camera until the animation is done
-                // Correctly position the player in front of the grave
+                // Correctly set the music/ambient audio
+                // Correctly position and lock the camera
+
                 onHubRevive?.Invoke();
 
                 
@@ -201,8 +194,6 @@ public class GameManager : MonoBehaviour
 
             // This event also needs to (but doesn't currently)
             // Locks the camera until the animation is done
-
-
             onSceneBegin?.Invoke();
         }
     }

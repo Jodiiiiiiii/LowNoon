@@ -12,6 +12,8 @@ public class ManualCameraController : MonoBehaviour
     Vector3 _openingLogoPosition;
     Vector3 _mainMenuPosition = new Vector3(-6.33f, .68f, 2.05f);
     Vector3 _playerCameraPosition = new Vector3(1.7f, 4.015f, -10f);
+    //Vector3 _revivePosition = new Vector3(-6.33f, .68f, 2.05f);
+
 
     // Scripted rotational positions for certain scenarios
     private Vector3 _openingLogoRotation;                               // Rotation for the opening shot of the logo

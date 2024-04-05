@@ -145,13 +145,17 @@ public class PlayerAnimator : MonoBehaviour
 
     private IEnumerator DoRoomEnter(float waitTime) // Unique sequence for entering a room
     {
+        _playerController = GetComponent<PlayerController>();
         _isActiveCoroutine = true;
+        _playerController.enabled = false;
         _animator.Play("RoomEnter", 0, 0);
         _animator.SetFloat("roomEnterPause", 0);
         yield return new WaitForSeconds(waitTime);
         _animator.SetFloat("roomEnterPause", 1);
         //_animator.Play("RoomEnter", 0, 0);
         yield return new WaitForSeconds(RoomEnterDuration);
+        _playerController.enabled = true;
+        GameObject.Find("Player Camera").GetComponent<CameraController>().enabled = true;
         _playerController.Reenable();   // Give the player back control
         _animator.Play("Idle", 0, 0);
         _isActiveCoroutine = false; 

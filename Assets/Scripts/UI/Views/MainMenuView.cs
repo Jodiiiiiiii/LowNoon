@@ -21,17 +21,30 @@ public class MainMenuView : View
     private void OnEnable()
     {
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        _playerController.enabled = false;
+        //_playerController.enabled = false;
         _cameraController = GameObject.Find("Player Camera").GetComponent<CameraController>();
-        _cameraController.enabled = false;
+        //_cameraController.enabled = false;
         _manualCameraController = GameObject.Find("Player Camera").GetComponent<ManualCameraController>();
-    }
+        if (!GameManager.Instance.IsMainMenuLoaded)
+        {
+            _playerController.enabled = false;
+            _cameraController.enabled = false;
+        }
+
+            //GameManager.onHubRevive += Deactivate;
+
+        }
 
     private void OnDisable()
     {
         // necessary so that the camera is properly in normal player tracking mode when entering a new scene without main menu
-        _playerController.enabled = true;
-        _cameraController.enabled = true;
+        if (!GameManager.Instance.IsMainMenuLoaded)
+        {
+            _playerController.enabled = true;
+            _cameraController.enabled = true;
+        }
+
+        //GameManager.onHubRevive -= Deactivate;
     }
 
     void Start()
@@ -41,7 +54,10 @@ public class MainMenuView : View
 
     void Update()
     {
-        
+        if (GameManager.Instance.IsMainMenuLoaded)
+        {
+            Deactivate();
+        }
     }
 
     // Public methods for all of the buttons ---
@@ -77,6 +93,14 @@ public class MainMenuView : View
         _optionsMenu.SetActive(false);
     }
 
+    private void Deactivate()
+    {
+        Debug.Log("Ah");
+        //_playerController.enabled = true;
+        //_cameraController.enabled = true;
+        ViewManager.Show<InGameUIView>(false);
+    }
+
     IEnumerator DoStartGame()
     {
         GameObject.Find("Ambient Audio").GetComponent<MusicController>().FadeIn();
@@ -88,6 +112,7 @@ public class MainMenuView : View
         
         _playerController.enabled = true;
         _cameraController.enabled = true;
+        GameManager.Instance.IsMainMenuLoaded = true;
         ViewManager.Show<InGameUIView>(false);
         yield return null;
     }

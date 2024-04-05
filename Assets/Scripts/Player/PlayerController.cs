@@ -93,14 +93,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        _rb = GetComponent<Rigidbody>();
         SceneTransitionObject.onSceneTransition += HaltAndDisable;
         GameManager.onSceneBegin += HaltAndDisable;
+        GameManager.onHubRevive += HaltAndDisable;  
     }
 
     private void OnDisable()
     {
         SceneTransitionObject.onSceneTransition -= HaltAndDisable;
         GameManager.onSceneBegin -= HaltAndDisable;
+        GameManager.onHubRevive -= HaltAndDisable;
     }
 
     // Update is called once per frame
@@ -320,10 +323,12 @@ public class PlayerController : MonoBehaviour
     {
         State = CharacterState.DISABLED;
         _rb.velocity = Vector3.zero;
+        Debug.Log("Disabled");
     }
 
     public void Reenable() // For giving the player their agency back
     {
         State = CharacterState.STATIONARY;
+        Debug.Log("Reenabled");
     }
 }
