@@ -12,13 +12,14 @@ public class ManualCameraController : MonoBehaviour
     Vector3 _openingLogoPosition;
     Vector3 _mainMenuPosition = new Vector3(-6.33f, .68f, 2.05f);
     Vector3 _playerCameraPosition = new Vector3(1.7f, 4.015f, -10f);
-    //Vector3 _revivePosition = new Vector3(-6.33f, .68f, 2.05f);
+    Vector3 _revivePosition = new Vector3(-30.316f, 3.2999f, -33.238f);
 
 
     // Scripted rotational positions for certain scenarios
     private Vector3 _openingLogoRotation;                               // Rotation for the opening shot of the logo
     private Vector3 _mainMenuRotation = new Vector3(-13.925f, 90, 0);   // Rotation in main menu
     private Vector3 _playerCameraRotation = Vector3.zero;                              // Rotation to travel to before giving the player control
+    private Vector3 _reviveRotation = new Vector3(0f, 54.997f, 0);
 
     [SerializeField, Tooltip("Distance from targetPos at which camera will stop smoothing and snap to goal")] private float _cameraSmoothingThreshold = 0.05f;
 
@@ -46,6 +47,12 @@ public class ManualCameraController : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(DoCamPosition(_playerCameraPosition, 1f, _playerCameraRotation));
+    }
+
+    public void moveToReviveStart()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DoCamPosition(_revivePosition, .5f, _reviveRotation));
     }
 
     // The camera movement coroutine that all of the bespoke camera movements use

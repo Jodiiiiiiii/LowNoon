@@ -106,6 +106,10 @@ public class CameraController : MonoBehaviour
     {
         this.transform.position = new Vector3(-31.0645f, 1.666f, -32.692f);
         this.transform.rotation = Quaternion.Euler(0, 59.9f, 0);
+        //_targetPlanarDir = this.transform.rotation.eulerAngles.normalized;
+
+        _targetPlanarDir = GameObject.Find("Player Start Point").transform.forward;
+        //Debug.Log(_player.transform.forward);
 
         this.enabled = false;
     }

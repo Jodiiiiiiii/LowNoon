@@ -174,11 +174,8 @@ public class GameManager : MonoBehaviour
                 // Plays the coffin-burst sequence for the real worm
                 // Correctly swap the UI
                 // Disables the player until the animation is done
-
-                // And still needs to
-                // Correctly set the music/ambient audio
-                // Correctly position and lock the camera
-
+                // Correctly positions and locks the camera
+                // Correctly sets the music/ambient audio
                 onHubRevive?.Invoke();
 
                 

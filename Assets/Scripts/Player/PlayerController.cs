@@ -323,12 +323,10 @@ public class PlayerController : MonoBehaviour
     {
         State = CharacterState.DISABLED;
         _rb.velocity = Vector3.zero;
-        Debug.Log("Disabled");
     }
 
     public void Reenable() // For giving the player their agency back
     {
         State = CharacterState.STATIONARY;
-        Debug.Log("Reenabled");
     }
 }
