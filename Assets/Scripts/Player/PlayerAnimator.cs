@@ -50,8 +50,8 @@ public class PlayerAnimator : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         _shooting = GetComponent <PlayerShooting>();
         _audioSource = GetComponent<AudioSource>();
-        _hatAnimator = _hat.GetComponent<Animator>();
-        _lampAnimator = _lamp.GetComponent<Animator>(); 
+        //_hatAnimator = _hat.GetComponent<Animator>(); // TODO: add this back when it is actually there
+        //_lampAnimator = _lamp.GetComponent<Animator>(); // TODO: add this back when it is actually there
         _sixShotCount = 0;
     }
 
@@ -203,8 +203,8 @@ public class PlayerAnimator : MonoBehaviour
         GameObject.Find("Player Camera").GetComponent<CameraController>().enabled = false;
 
         _animator.Play("Death", 0, 0);
-        _hatAnimator.Play("Fall", 0, 0);
-        _lampAnimator.Play("Fall", 0, 0);
+        //_hatAnimator.Play("Fall", 0, 0); // TODO: add this back when it is actually there
+        //_lampAnimator.Play("Fall", 0, 0); // TODO: add this back when it is actually there
         yield return null;
     }
     #endregion
