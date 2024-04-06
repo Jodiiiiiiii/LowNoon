@@ -12,8 +12,11 @@ public class GameManager : MonoBehaviour
     // singleton instance
     private static GameManager _instance;
 
+    public bool IsMainMenuLoaded;
     public delegate void OnSceneBegin();
     public static event OnSceneBegin onSceneBegin;
+    public delegate void OnHubRevive();
+    public static event OnHubRevive onHubRevive;
 
     public static GameManager Instance
     {
@@ -164,7 +167,19 @@ public class GameManager : MonoBehaviour
         // If the scene is the hub
         if(scene.name == "0_Hub")
         {
-            // We need to decide whether we're loading the main menu, or busting out of the coffin
+            if (IsMainMenuLoaded) {
+                // Invoke onHubRevive, which
+                // Plays the coffin-burst sequence for the coffin
+                // Plays the coffin-burst sequence for the fake worm
+                // Plays the coffin-burst sequence for the real worm
+                // Correctly swap the UI
+                // Disables the player until the animation is done
+                // Correctly positions and locks the camera
+                // Correctly sets the music/ambient audio
+                onHubRevive?.Invoke();
+
+                
+            }
         }
 
         // Otherwise
@@ -172,11 +187,10 @@ public class GameManager : MonoBehaviour
         {
             //Invoke onSceneBegin, which
             // Plays the player "burrow down" enter animation
+            // Disables the player until the animation is done
 
             // This event also needs to (but doesn't currently)
             // Locks the camera until the animation is done
-            // Disables the player until the animation is done
-
             onSceneBegin?.Invoke();
         }
     }

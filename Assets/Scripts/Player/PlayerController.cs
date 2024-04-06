@@ -93,14 +93,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        _rb = GetComponent<Rigidbody>();
         SceneTransitionObject.onSceneTransition += HaltAndDisable;
         GameManager.onSceneBegin += HaltAndDisable;
+        GameManager.onHubRevive += HaltAndDisable;  
     }
 
     private void OnDisable()
     {
         SceneTransitionObject.onSceneTransition -= HaltAndDisable;
         GameManager.onSceneBegin -= HaltAndDisable;
+        GameManager.onHubRevive -= HaltAndDisable;
     }
 
     // Update is called once per frame
