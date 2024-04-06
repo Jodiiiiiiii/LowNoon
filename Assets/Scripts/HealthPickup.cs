@@ -17,10 +17,13 @@ public class HealthPickup : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider collider){
-        if (collider.tag == "Player"){
+        if (collider.CompareTag("Player")){
+            if(GameManager.Instance.PlayerData.CurrHealth < GameManager.Instance.PlayerData.MaxHealth){
             GameManager.Instance.PlayerData.CurrHealth++;
-            Destroy(gameObject);
+            }
+            Destroy(this.gameObject);
         }
-        
+    
     }
+
 }

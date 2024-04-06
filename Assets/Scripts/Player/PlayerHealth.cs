@@ -10,6 +10,9 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField, Tooltip("damage dealt to the player by enemy melee attacks (ants)")] private int _meleeEnemyDamage = 1;
 
+    [System.NonSerialized] public int ExplosionDmg;
+    
+
     // Start is called before the first frame update
     void Start()
     {   }
@@ -21,6 +24,10 @@ public class PlayerHealth : MonoBehaviour
         if (_timer > InvulnerabilityDuration) // check for invulnerability time expiration
         {
             IsInvulnerable = false;
+        }
+        if(ExplosionDmg > 0){
+            handleDamage(ExplosionDmg);
+            ExplosionDmg = 0;
         }
     }
 

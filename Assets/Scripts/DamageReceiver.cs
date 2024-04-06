@@ -16,6 +16,7 @@ public class DamageReceiver : MonoBehaviour
     double chance;
     GameObject pickup;
     public GameObject EffectParticles;
+    public bool ShouldSpawn;
 
 
     // Start is called before the first frame update
@@ -25,6 +26,8 @@ public class DamageReceiver : MonoBehaviour
         chance = Random.Range(0,1.0f);
         Player = GameObject.FindWithTag("Player");
         
+        
+        
     }
 
     // Update is called once per frame
@@ -32,9 +35,11 @@ public class DamageReceiver : MonoBehaviour
     {
         if (HealthLevel <= 0)
                 {
-                    if(IsDirectlyDestroyed)
-                        Destroy(gameObject);
-                    if(IsGoldenBarrel){
+                    /*if(IsDirectlyDestroyed)
+                        Destroy(gameObject);*/
+                    if(ShouldSpawn)
+                    {
+                        if(IsGoldenBarrel){
                         pickup = Instantiate(SpawnObject);
                         pickup.transform.position = gameObject.transform.position;
                         pickup.transform.rotation = Player.transform.rotation;
@@ -56,12 +61,13 @@ public class DamageReceiver : MonoBehaviour
                            
                         
     
+                        }
+                        else if(chance < DropRate){
+                            Spawn(); 
+                        }
                     }
-                    else if(chance < DropRate){
-                        //Debug.Log("drop");
-                        Spawn(); 
-                    }
-                    Destroy(gameObject);
+                    if(IsDirectlyDestroyed)
+                        Destroy(gameObject);
         }
     }
 
@@ -77,13 +83,10 @@ public class DamageReceiver : MonoBehaviour
             {
                 // destroy damage receiver only if it reaches 0 health
                 HealthLevel -= bulletStats.DamageLevel;
-                
-                    
-                        
-                }
-
-                
+                           
             }
+                
+        }
 
         }
     

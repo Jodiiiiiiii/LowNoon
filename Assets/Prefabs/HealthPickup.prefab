@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4936132091552957338}
   - component: {fileID: 1934525514249790234}
-  - component: {fileID: 4388759715296432587}
+  - component: {fileID: 2751626326958029972}
   m_Layer: 0
   m_Name: HealthPickup
   m_TagString: Untagged
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2c312ace4fd45d08ca70be1d1bf5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &4388759715296432587
+--- !u!65 &2751626326958029972
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
