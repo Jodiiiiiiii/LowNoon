@@ -95,7 +95,6 @@ public class MainMenuView : View
 
     private void Deactivate()
     {
-        Debug.Log("Ah");
         //_playerController.enabled = true;
         //_cameraController.enabled = true;
         ViewManager.Show<InGameUIView>(false);
