@@ -131,6 +131,7 @@ public class GameManager : MonoBehaviour
         public float EnemyVolume;
         public float EnvironmentVolume;
         public float MusicVolume;
+        public bool ReticleAlwaysOn;
     }
     public Data SaveData { get; private set; }
 
