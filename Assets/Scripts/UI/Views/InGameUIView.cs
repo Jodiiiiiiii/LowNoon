@@ -19,8 +19,7 @@ public class InGameUIView : View
     private int _prevUIHealth;          // player's health level displayed on UI in previous frame
     private int _prevUIArmor;           // amount of current armor displayed on UI in previous frame
 
-
-
+    [SerializeField] private Animator _sceneTransitionAnimator; // Animator for our scene transition element
 
     public override void Initialize()
     {
@@ -41,12 +40,14 @@ public class InGameUIView : View
 
     private void OnEnable()
     {
+        SceneTransitionObject.onSceneTransition += LeavingSceneTransition;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     private void OnDisable()
     {
+        SceneTransitionObject.onSceneTransition -= LeavingSceneTransition;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -91,6 +92,11 @@ public class InGameUIView : View
         _hpUnits.Add(unit);
     }
 
+    public void CallItemCard(int type) // For activating the card popup sequence
+    {
+        StartCoroutine(DoItemCard(type));
+    }
+
     /// <summary>
     /// sets HP units in UI to active or inactive based on current health
     /// </summary>
@@ -121,10 +127,10 @@ public class InGameUIView : View
         }
     }
 
-    public void CallItemCard(int type) // For activating the card popup sequence
+    private void LeavingSceneTransition()
     {
-        StartCoroutine(DoItemCard(type));
-    }
+        _sceneTransitionAnimator.Play("StandardExit", 0, 0);
+    }    
 
     private IEnumerator DoItemCard(int type)
     {
@@ -145,5 +151,6 @@ public class InGameUIView : View
 
         card.Hide();
     }
+
 
 }

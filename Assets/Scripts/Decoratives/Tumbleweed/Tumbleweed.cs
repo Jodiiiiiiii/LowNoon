@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Tumbleweed : MonoBehaviour
 {
-    [SerializeField] private float _speed = 15f; // How fast the tumbleweed is going
+    public float Speed = 15f; // How fast the tumbleweed is going
     [SerializeField] private float _lifetime = 45f;  // How long the tumbleweed is active before it despawns naturally
     [SerializeField] private GameObject deathParticles;
 
@@ -26,7 +26,7 @@ public class Tumbleweed : MonoBehaviour
 
     void Update()
     {
-        _rb.velocity = new Vector3(this._rb.velocity.x, this._rb.velocity.y, _speed);
+        _rb.velocity = transform.forward * Speed;
         if(_receiver.HealthLevel <= 0)
         {
             Instantiate(deathParticles, this.transform.position, this.transform.rotation);

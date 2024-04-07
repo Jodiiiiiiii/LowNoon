@@ -11,11 +11,15 @@ public class LanternController : MonoBehaviour
 
     [SerializeField] private float _minIntensity = .3f;   // Intensity range of light
     [SerializeField] private float _maxIntensity = 1.5f;
-    [SerializeField] private float _flickerSpeed = .002f;    // How fast the candle flickers
+    [SerializeField] private float _flickerSpeedMin = .002f;    // How fast the candle flickers
+    [SerializeField] private float _flickerSpeedMax = .004f;    // How fast the candle flickers
+    private float _actualFlickerSpeed;
     private bool _isLightRising = true;  // Internal bool to keep track of whether the candle is brightening or dimming
 
     void Start()
     {
+        _actualFlickerSpeed = Random.Range(_flickerSpeedMin, _flickerSpeedMax);
+
         if (IsLit) // The candle sprite changes depending on whether or not it's lit, as do its emissive properties
         {
             _candleLight.gameObject.SetActive(true);
@@ -31,16 +35,23 @@ public class LanternController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Logic for flickering the candlelight
-        if (_isLightRising)
-            _candleLight.intensity += _flickerSpeed;
+        if (isActiveAndEnabled)
+        {
+            // Logic for flickering the candlelight
+            if (_isLightRising)
+                _candleLight.intensity += _actualFlickerSpeed;
+            else
+                _candleLight.intensity -= _actualFlickerSpeed;
+
+            if (_candleLight.intensity > _maxIntensity)
+                _isLightRising = false;
+            if (_candleLight.intensity < _minIntensity)
+            {
+                _isLightRising = true;
+                _actualFlickerSpeed = Random.Range(_flickerSpeedMin, _flickerSpeedMax);
+            }
+        }
         else
-            _candleLight.intensity -= _flickerSpeed;
-
-        if(_candleLight.intensity > _maxIntensity)
-            _isLightRising = false;
-        if (_candleLight.intensity < _minIntensity)
-            _isLightRising = true;
-
+            _candleLight.intensity = 0;
     }
 }
