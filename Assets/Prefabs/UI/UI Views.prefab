@@ -5531,7 +5531,7 @@ MonoBehaviour:
   _masterVolumeSlider: {fileID: 1371954224507282374}
   _playerVolumeSlider: {fileID: 2170557789862031159}
   _enemyVolumeSlider: {fileID: 522138247824225264}
-  _environmentVolumeSlider: {fileID: 0}
+  _environmentVolumeSlider: {fileID: 2076652787540812598}
   _musicVolumeSlider: {fileID: 8441450941420722662}
   _mainView: {fileID: 6032495534169130272}
 --- !u!1 &3259984358946119446
@@ -8628,7 +8628,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4265995834806262576}
         m_TargetAssemblyTypeName: PauseMenuView, Assembly-CSharp
-        m_MethodName: WormFacts
+        m_MethodName: Settings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

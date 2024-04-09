@@ -235,18 +235,8 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    private void Update()
-    {
-        // TODO: remove this in place of some sort of a pause menu with a quit button
-        // quit application from any scene with escape
-        /*if (Input.GetKeyDown(KeyCode.Escape))
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-            Application.Quit();
-        }*/
-    }
+    private void Update() { }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
