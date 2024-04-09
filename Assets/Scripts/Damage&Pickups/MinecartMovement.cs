@@ -26,7 +26,7 @@ public class MinecartMovement : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision){
-        if(collision.collider.tag == "Player" || collision.collider.tag == "Enemy"){
+        if(collision.collider.tag == "Player" || collision.collider.tag == "Enemy" || collision.collider.tag == "PlayerBullet" || collision.collider.tag == "EnemyBullet"){
             Instantiate(_explosionParticles, gameObject.transform.position, gameObject.transform.rotation);
             Collider[] damagedObjects = Physics.OverlapSphere(transform.position, ExplosionRadius);
             foreach (var obj in damagedObjects)
