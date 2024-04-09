@@ -9,14 +9,12 @@ public class MaterialChanger : MonoBehaviour
     [SerializeField] private Texture _normalTexture;
     [SerializeField] private Texture _gummyTexture;
 
-    private bool _materialChanged = false;
-
     private void Start()
     {
         _wormMaterial = GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material;
         if(_wormMaterial.mainTexture.name == "WormGummy")
         {
-            _materialChanged = true;
+            GameManager.IsGummy = true;
         }
     }
 
@@ -24,12 +22,16 @@ public class MaterialChanger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (_materialChanged)
+            if (GameManager.IsGummy)
+            {
                 _wormMaterial.mainTexture = _normalTexture;
+                GameManager.IsGummy = false;
+            }
             else
+            {
                 _wormMaterial.mainTexture = _gummyTexture;
-
-            _materialChanged = !_materialChanged;
+                GameManager.IsGummy = true;
+            }
         } 
     }
 }
