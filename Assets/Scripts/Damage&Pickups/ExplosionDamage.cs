@@ -6,19 +6,6 @@ public class ExplosionDamage : MonoBehaviour
 {
     public float ExplosionRadius;
     public int DamageAmount;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-     
-     
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnDestroy(){
         Collider[] damagedObjects = Physics.OverlapSphere(transform.position, ExplosionRadius);
@@ -27,15 +14,9 @@ public class ExplosionDamage : MonoBehaviour
             if(obj.tag == "Player"){
                 obj.GetComponent<PlayerHealth>().ExplosionDmg = DamageAmount;
             }
-            else if(obj.GetComponent<DamageReceiver>() != null){
-                //Debug.Log("enemy");
-                // question mark question mark question mark
-                DamageReceiver healthLevel = obj.GetComponent<DamageReceiver>();
-                healthLevel.HealthLevel -= (float)DamageAmount;
-                //Debug.Log("Other health: " + healthLevel.HealthLevel);
-
+            else if(obj.TryGetComponent<DamageReceiver>(out DamageReceiver receiver)){
+                receiver.HealthLevel -= (float) DamageAmount;
             }
         }
     }
-    
 }
