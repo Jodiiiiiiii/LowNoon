@@ -81,7 +81,7 @@ public class InGameUIView : View
             ViewManager.Show<PauseMenuView>(true);
         }
 
-        // Add if statement to check ammount of health and display game over if dead
+        // TODO: Add if statement to check ammount of health and display game over if dead
     }
 
     public void MaxHPUp()
