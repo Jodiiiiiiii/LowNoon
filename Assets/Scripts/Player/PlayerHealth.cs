@@ -51,6 +51,15 @@ public class PlayerHealth : MonoBehaviour
         {
             handleDamage(_meleeEnemyDamage);
         }
+
+        if (other.CompareTag("HealthPickup"))
+        {
+            if (GameManager.Instance.PlayerData.CurrHealth < GameManager.Instance.PlayerData.MaxHealth)
+            {
+                GameManager.Instance.PlayerData.CurrHealth++;
+            }
+            Destroy(other.gameObject);
+        }
     }
 
     private void handleDamage(int dmgAmount)

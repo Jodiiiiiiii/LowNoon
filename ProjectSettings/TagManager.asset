@@ -12,6 +12,7 @@ TagManager:
   - EntryPoint
   - Recording Camera
   - MeleeAttack
+  - HealthPickup
   layers:
   - Default
   - TransparentFX
