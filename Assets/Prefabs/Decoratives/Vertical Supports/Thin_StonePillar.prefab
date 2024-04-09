@@ -421,7 +421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9156402400083150558}
   m_Layer: 0
-  m_Name: StonePillar
+  m_Name: Thin_StonePillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,8 +436,8 @@ Transform:
   m_GameObject: {fileID: 8383947499979529316}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.417717, y: -1.3386302, z: 45.626015}
-  m_LocalScale: {x: 1, y: 1.7885, z: 1}
+  m_LocalPosition: {x: -30.458, y: -9.1361, z: 45.626015}
+  m_LocalScale: {x: 2.6258626, y: 2.6258626, z: 2.6258626}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4626085962803886232}
