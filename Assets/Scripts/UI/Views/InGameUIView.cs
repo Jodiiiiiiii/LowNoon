@@ -18,6 +18,7 @@ public class InGameUIView : View
     [SerializeField, Tooltip("How long the card stays active for (includes startup time")] private float cardTime = 3f;
     private int _prevUIHealth;          // player's health level displayed on UI in previous frame
     private int _prevUIArmor;           // amount of current armor displayed on UI in previous frame
+    [SerializeField] private RectTransform _uiCanvas;
 
     [SerializeField] private Animator _sceneTransitionAnimator; // Animator for our scene transition element
 
@@ -32,10 +33,7 @@ public class InGameUIView : View
             _hpUnits.Add(Instantiate(_hpUnit, _hpParent));
         UpdateHealthUI();
         _prevUIHealth = _stats.CurrHealth; // start at max for prev value
-        _prevUIArmor = _stats.Armor;
-
-        _leftBookend.transform.position = new Vector2(_hpUnits[0].GetComponent<RectTransform>().position.x - 70, _hpUnits[0].GetComponent<RectTransform>().position.y - 45);
-        _rightBookend.transform.position = new Vector2(_hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.x + 90, _hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.y - 45);       
+        _prevUIArmor = _stats.Armor;    
     }
 
     private void OnEnable()
@@ -62,9 +60,9 @@ public class InGameUIView : View
     {
         // re-gather new player stats every frame
         _stats = GameManager.Instance.PlayerData;
-
-        _leftBookend.transform.position = new Vector2(_hpUnits[0].GetComponent<RectTransform>().position.x - 70, _hpUnits[0].GetComponent<RectTransform>().position.y - 45);
-        _rightBookend.transform.position = new Vector2(_hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.x + 90, _hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.y - 45);
+        //Debug.Log(_uiCanvas.rect.width + " " + _uiCanvas.rect.height);
+        //_leftBookend.transform.position = new Vector2(_hpUnits[0].GetComponent<RectTransform>().position.x - (_uiCanvas.rect.width / 18) , _hpUnits[0].GetComponent<RectTransform>().position.y - (_uiCanvas.rect.height / 18));
+        //_rightBookend.transform.position = new Vector2(_hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.x + 90, _hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.y - 45);
         _upgrades[0].setUpgradeCount(_playerStats.getDamageUpgradeCount());
         _upgrades[1].setUpgradeCount(_stats.FireRateUpgradeCount);
         _upgrades[2].setUpgradeCount(_playerStats.getMoveSpdUpgradeCount());
