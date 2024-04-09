@@ -6,6 +6,7 @@ public class PlayerAnimator : MonoBehaviour
 {
     // Player animations essentials
     private PlayerController _playerController;
+    private PlayerShooting _shooting;
     private AudioSource _audioSource;
     [SerializeField] private Animator _animator;
     [Tooltip("Audio clip order list: 0 = standard gunshot; 1 = Standard reload; 2 = six shot reload")]
@@ -33,6 +34,7 @@ public class PlayerAnimator : MonoBehaviour
         PlayerShooting.onBulletFire += fireGun;
         SceneTransitionObject.onSceneTransition += burrowDown;
         GameManager.onSceneBegin += roomEnter;
+        GameManager.onHubRevive += hubEnter;
     }
 
     private void OnDisable()
@@ -40,12 +42,16 @@ public class PlayerAnimator : MonoBehaviour
         PlayerShooting.onBulletFire -= fireGun;
         SceneTransitionObject.onSceneTransition -= burrowDown;
         GameManager.onSceneBegin -= roomEnter;
+        GameManager.onHubRevive -= hubEnter;
     }
 
     void Start()
     {
         _playerController = GetComponent<PlayerController>();
+        _shooting = GetComponent <PlayerShooting>();
         _audioSource = GetComponent<AudioSource>();
+        //_hatAnimator = _hat.GetComponent<Animator>(); // TODO: add this back when it is actually there
+        //_lampAnimator = _lamp.GetComponent<Animator>(); // TODO: add this back when it is actually there
         _sixShotCount = 0;
     }
 
@@ -55,6 +61,11 @@ public class PlayerAnimator : MonoBehaviour
         if (!_isActiveCoroutine)
         {
             _animator.SetFloat("moveSpdMult", GameManager.Instance.PlayerData.MoveSpeed); // Move speed multiplier so animation stays tuned to actual speed
+
+            if(GameManager.Instance.PlayerData.CurrHealth <= 0)
+            {
+                defeat();
+            }
 
             if (_playerController.enabled == false)  // If the player lacks control, default the animation to the idle
             {
@@ -103,7 +114,20 @@ public class PlayerAnimator : MonoBehaviour
     {
         StopAllCoroutines();
         //_animator.Play("Idle", 0, 0);
-        StartCoroutine(DoRoomEnter());
+        StartCoroutine(DoRoomEnter(0, false));
+    }
+
+    private void hubEnter()
+    {
+        StopAllCoroutines();
+        //_animator.Play("Idle", 0, 0);
+        StartCoroutine(DoRoomEnter(4, true));
+    }
+
+    private void defeat()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DoDefeat());
     }
 
     #region COROUTINES
@@ -134,15 +158,54 @@ public class PlayerAnimator : MonoBehaviour
         yield return new WaitForSeconds(BurrowDownDuration); // Unity, why is there not a way to tell when an animation is done, it would save me so much heartache
     }
 
-    private IEnumerator DoRoomEnter() // Unique sequence for entering a room
+    private IEnumerator DoRoomEnter(float waitTime, bool revive) // Unique sequence for entering a room
+    {
+        _playerController = GetComponent<PlayerController>();
+        _shooting = GetComponent<PlayerShooting>();
+        _isActiveCoroutine = true;
+
+        _playerController.enabled = false;
+        _shooting.enabled = false;
+        if (revive)
+        {
+            GameObject.Find("Title Music Audio").SetActive(false);
+        }
+            
+
+       _animator.Play("RoomEnter", 0, 0);
+        _animator.SetFloat("roomEnterPause", 0);
+        yield return new WaitForSeconds(waitTime);
+
+        _animator.SetFloat("roomEnterPause", 1);
+        if (revive)
+        {
+            GameObject.Find("Player Camera").GetComponent<ManualCameraController>().moveToReviveStart();
+            GameObject.Find("Ambient Audio").GetComponent<MusicController>().FadeIn();
+        }
+            
+        yield return new WaitForSeconds(RoomEnterDuration);
+
+        GameObject.Find("Player Camera").GetComponent<CameraController>().enabled = true;
+        _playerController.enabled = true;
+        _shooting.enabled = true;
+
+        _playerController.Reenable();   // Give the player back control
+
+        _animator.Play("Idle", 0, 0);
+        _isActiveCoroutine = false; 
+    }
+
+    private IEnumerator DoDefeat()
     {
         _isActiveCoroutine = true;
-        _animator.Play("RoomEnter", 0, 0);
-        yield return new WaitForSeconds(RoomEnterDuration);
-        _playerController.Reenable();   // Give the player back control
-        _animator.Play("Idle", 0, 0);
-        _isActiveCoroutine = false;
-        
+        _playerController.enabled = false;
+        _shooting.enabled = false;
+        GameObject.Find("Player Camera").GetComponent<CameraController>().enabled = false;
+
+        _animator.Play("Death", 0, 0);
+        //_hatAnimator.Play("Fall", 0, 0); // TODO: add this back when it is actually there
+        //_lampAnimator.Play("Fall", 0, 0); // TODO: add this back when it is actually there
+        yield return null;
     }
     #endregion
 }

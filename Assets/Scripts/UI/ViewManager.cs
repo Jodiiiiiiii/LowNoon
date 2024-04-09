@@ -12,7 +12,7 @@ public class ViewManager : MonoBehaviour
 {
     private static ViewManager _instance;
 
-    [SerializeField] private View startingView; // The menu we begin on
+    [SerializeField] public View startingView; // The menu we begin on
     [SerializeField] private View[] views;      // List of all menus
 
     private View currentView;                   // Pretty self-explanatory
@@ -36,7 +36,7 @@ public class ViewManager : MonoBehaviour
     {                                                       // you don't need to input the paramenter, but I'm doing it differently for
         for (int i = 0; i < _instance.views.Length; i++)     // internal consistency
         {                                                   // Method is used to hide the current view and show a new one
-            if (_instance.views[i] is T)
+            if (_instance.views[i] is T && _instance.views[i] != null)
             {
                 if (_instance.currentView != null)   // If the current view isn't null
                 {

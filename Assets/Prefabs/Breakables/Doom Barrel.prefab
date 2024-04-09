@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.99
+      value: -7.3687534
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.34
+      value: -0.3127103
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.94
+      value: -5.4052124
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
       propertyPath: m_Name
-      value: barrel4
+      value: Doom Barrel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -58,10 +58,95 @@ PrefabInstance:
     - {fileID: -8700617353114198275, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4242528647844812291}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5316254167141939388}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 278585184152641454}
     - targetCorrespondingSourceObject: {fileID: -5568371526223589888, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4496150220075727613}
   m_SourcePrefab: {fileID: 100100000, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
+--- !u!1 &4711268030168930194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}
+  m_PrefabInstance: {fileID: 5593647337790679747}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4242528647844812291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711268030168930194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15cd12fc83617463e9f3a5b665be5e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthLevel: 1
+  IsDirectlyDestroyed: 1
+  IsImmune: 0
+  DropRate: 1
+  SpawnObject: {fileID: 7435636785152514567, guid: e55de1a409b744c52943cd05a99582b6, type: 3}
+  IsGoldenBarrel: 0
+  Animated: 1
+  EffectParticles: {fileID: 6187283044357450411, guid: e6df6be456493c440af7fac15718c740, type: 3}
+  ShouldSpawn: 0
+--- !u!54 &5316254167141939388
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711268030168930194}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!136 &278585184152641454
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711268030168930194}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9158504181392843971 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5568371526223589888, guid: 8dd7c15c49c993e45945fbddf79b2b44, type: 3}

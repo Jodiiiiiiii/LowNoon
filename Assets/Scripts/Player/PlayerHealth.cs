@@ -10,6 +10,9 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField, Tooltip("damage dealt to the player by enemy melee attacks (ants)")] private int _meleeEnemyDamage = 1;
 
+    [System.NonSerialized] public int ExplosionDmg;
+    
+
     // Start is called before the first frame update
     void Start()
     {   }
@@ -21,6 +24,10 @@ public class PlayerHealth : MonoBehaviour
         if (_timer > InvulnerabilityDuration) // check for invulnerability time expiration
         {
             IsInvulnerable = false;
+        }
+        if(ExplosionDmg > 0){
+            handleDamage(ExplosionDmg);
+            ExplosionDmg = 0;
         }
     }
 
@@ -44,6 +51,15 @@ public class PlayerHealth : MonoBehaviour
         {
             handleDamage(_meleeEnemyDamage);
         }
+
+        if (other.CompareTag("HealthPickup"))
+        {
+            if (GameManager.Instance.PlayerData.CurrHealth < GameManager.Instance.PlayerData.MaxHealth)
+            {
+                GameManager.Instance.PlayerData.CurrHealth++;
+            }
+            Destroy(other.gameObject);
+        }
     }
 
     private void handleDamage(int dmgAmount)
@@ -64,6 +80,7 @@ public class PlayerHealth : MonoBehaviour
             // player dies
             // TODO: integrate animations and death state transition to restart scene
             gameObject.SetActive(false); // temporary death behavior for testing purposes
+            ViewManager.Show<GameOverView>(false);
         }
     }
 }

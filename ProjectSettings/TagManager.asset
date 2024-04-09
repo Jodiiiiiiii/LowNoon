@@ -12,6 +12,8 @@ TagManager:
   - EntryPoint
   - Recording Camera
   - MeleeAttack
+  - HealthPickup
+  - Minecart
   layers:
   - Default
   - TransparentFX
@@ -27,7 +29,7 @@ TagManager:
   - EnemyBullet
   - InvisWall
   - TumbleweedDestroyer
-  - 
+  - Minecart
   - 
   - 
   - 

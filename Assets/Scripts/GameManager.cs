@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.IO;
 using UnityEngine;
@@ -12,41 +13,32 @@ public class GameManager : MonoBehaviour
     // singleton instance
     private static GameManager _instance;
 
+    public bool IsMainMenuLoaded;
     public delegate void OnSceneBegin();
     public static event OnSceneBegin onSceneBegin;
+    public delegate void OnHubRevive();
+    public static event OnHubRevive onHubRevive;
 
     public static GameManager Instance
     {
         get
         {
-            // setup SavePointManager as a singleton class
+            // setup GameManager as a singleton class
             if (_instance == null)
             {
                 // create new game manager object
                 GameObject newManager = new();
+                newManager.name = "Game Manager";
                 newManager.AddComponent<GameManager>();
                 DontDestroyOnLoad(newManager);
                 _instance = newManager.GetComponent<GameManager>();
-
-                // initialize and load save data
-                _instance.SaveData = new();
-                string path = Application.persistentDataPath + "/savedata.json";
-                if (File.Exists(path))
-                {
-                    // read json file into data object
-                    string json = File.ReadAllText(path);
-                    _instance.SaveData = JsonUtility.FromJson<Data>(json);
-                }
-                else // default save file configuration (no save data found)
-                {
-                    _instance.SaveData.NumOfRuns = 0;
-                }
             }
             return _instance;
         }
     }
 
     public static bool IsPaused = false;
+    public static bool IsGummy = false;
 
     #region PLAYER DATA
     // Player Data (saved between scenes)
@@ -120,11 +112,112 @@ public class GameManager : MonoBehaviour
 
     #region SAVE DATA
     // save data (saved between sessions)
+    [System.Serializable]
     public class Data
     {
         public int NumOfRuns; // adds one each time the player dies
+        public float MasterVolumeSlider;
+        public float PlayerVolumeSlider;
+        public float EnemyVolumeSlider;
+        public float EnvironmentVolumeSlider;
+        public float MusicVolumeSlider;
+        public bool ReticleAlwaysOn;
     }
-    public Data SaveData { get; private set; }
+    private Data _saveData;
+
+    public Data SaveData
+    {
+        get
+        {
+            // initialize if necessary and possible
+            if (_saveData == null)
+            {
+                // initialize and load save data
+                Data newSaveData = new Data();
+               
+                // default save file configuration (in case some/all save data is missing)
+                newSaveData.NumOfRuns = 0;
+                newSaveData.MasterVolumeSlider = 0.5f;
+                newSaveData.PlayerVolumeSlider = 0.5f;
+                newSaveData.EnemyVolumeSlider = 0.5f;
+                newSaveData.EnvironmentVolumeSlider = 0.5f;
+                newSaveData.MusicVolumeSlider = 0.5f;
+
+                // read existing save data (if it exists)
+                string path = Application.persistentDataPath + "/savedata.json";
+                if (File.Exists(path))
+                {
+                    // read json file into data object
+                    string json = File.ReadAllText(path);
+                    newSaveData = JsonUtility.FromJson<Data>(json);
+                }
+                Instance._saveData = newSaveData; // set private save data on current instance
+            }
+
+            return _saveData;
+        }
+        private set
+        {
+            _saveData = value;
+        }
+    }
+
+    public void SetMasterVolumeSlider(float val)
+    {
+        SaveData.MasterVolumeSlider = val;
+    }
+
+    public void SetPlayerVolumeSlider(float val)
+    {
+        SaveData.PlayerVolumeSlider = val;
+    }
+
+    public void SetEnemyVolumeSlider(float val)
+    {
+        SaveData.EnemyVolumeSlider = val;
+    }
+
+    public void SetEnvironmentVolumeSlider(float val)
+    {
+        SaveData.EnvironmentVolumeSlider = val;
+    }
+
+    public void SetMusicVolumeSlider(float val)
+    {
+        SaveData.MusicVolumeSlider = val;
+    }
+
+    /// <summary>
+    /// accounts for stacking with master volume
+    /// </summary>
+    public float GetPlayerVolume()
+    {
+        return SaveData.PlayerVolumeSlider * SaveData.MasterVolumeSlider;
+    }
+
+    /// <summary>
+    /// accounts for stacking with master volume
+    /// </summary>
+    public float GetEnemyVolume()
+    {
+        return SaveData.EnemyVolumeSlider * SaveData.MasterVolumeSlider;
+    }
+
+    /// <summary>
+    /// accounts for stacking with master volume
+    /// </summary>
+    public float GetEnvironmentVolume()
+    {
+        return SaveData.EnvironmentVolumeSlider * SaveData.MasterVolumeSlider;
+    }
+
+    /// <summary>
+    /// accounts for stacking with master volume
+    /// </summary>
+    public float GetMusicVolume()
+    {
+        return SaveData.MusicVolumeSlider * SaveData.MasterVolumeSlider;
+    }
 
     private void OnApplicationQuit()
     {
@@ -142,18 +235,8 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    private void Update()
-    {
-        // TODO: remove this in place of some sort of a pause menu with a quit button
-        // quit application from any scene with escape
-        /*if (Input.GetKeyDown(KeyCode.Escape))
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#endif
-            Application.Quit();
-        }*/
-    }
+    private void Update() { }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -164,7 +247,19 @@ public class GameManager : MonoBehaviour
         // If the scene is the hub
         if(scene.name == "0_Hub")
         {
-            // We need to decide whether we're loading the main menu, or busting out of the coffin
+            if (IsMainMenuLoaded) {
+                // Invoke onHubRevive, which
+                // Plays the coffin-burst sequence for the coffin
+                // Plays the coffin-burst sequence for the fake worm
+                // Plays the coffin-burst sequence for the real worm
+                // Correctly swap the UI
+                // Disables the player until the animation is done
+                // Correctly positions and locks the camera
+                // Correctly sets the music/ambient audio
+                onHubRevive?.Invoke();
+
+                
+            }
         }
 
         // Otherwise
@@ -172,11 +267,10 @@ public class GameManager : MonoBehaviour
         {
             //Invoke onSceneBegin, which
             // Plays the player "burrow down" enter animation
+            // Disables the player until the animation is done
 
             // This event also needs to (but doesn't currently)
             // Locks the camera until the animation is done
-            // Disables the player until the animation is done
-
             onSceneBegin?.Invoke();
         }
     }

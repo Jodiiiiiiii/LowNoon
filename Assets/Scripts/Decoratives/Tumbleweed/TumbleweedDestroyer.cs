@@ -8,7 +8,7 @@ public class TumbleweedDestroyer : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Tumbleweed"))
+        if (collision.gameObject.CompareTag("Tumbleweed") || collision.gameObject.CompareTag("Minecart"))
         {
             Destroy(collision.gameObject);
         }
