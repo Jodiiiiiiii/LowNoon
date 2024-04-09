@@ -33,17 +33,25 @@ public class DamageReceiver : MonoBehaviour
             if(ShouldSpawn)
             {
                 if(IsGoldenBarrel){
-                    GameObject pickup = Instantiate(SpawnObject);
-                    pickup.transform.position = gameObject.transform.position;
-                    pickup.transform.rotation = Player.transform.rotation;
-                        
-                    GameObject pickup2 = Instantiate(SpawnObject);
-                    pickup2.transform.position = pickup.transform.position;
+                    GameObject parent = new();
+                    parent.transform.position = gameObject.transform.position;
+                    parent.transform.rotation = Player.transform.rotation;
+                    parent.name = "Upgrade Options";
+                    parent.AddComponent<DestroyWithAnyChild>();
+
+                    GameObject pickup1 = Instantiate(SpawnObject, parent.transform);
+                    pickup1.transform.position = parent.transform.position;
+                    pickup1.transform.rotation = parent.transform.rotation;
+                    
+                    GameObject pickup2 = Instantiate(SpawnObject, parent.transform);
+                    pickup2.transform.position = parent.transform.position;
+                    pickup2.transform.rotation = parent.transform.rotation;
                     UpgradeMove upgrade1 = pickup2.AddComponent<UpgradeMove>();
                     upgrade1.Direction = -1.0f;
 
-                    GameObject pickup3 = Instantiate(SpawnObject);
-                    pickup3.transform.position = pickup.transform.position;
+                    GameObject pickup3 = Instantiate(SpawnObject, parent.transform);
+                    pickup3.transform.position = parent.transform.position;
+                    pickup3.transform.rotation = parent.transform.rotation;
                     UpgradeMove upgrade2 = pickup3.AddComponent<UpgradeMove>();
                     upgrade2.Direction = 1.0f;
                 }

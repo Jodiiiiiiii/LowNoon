@@ -18,7 +18,7 @@ public class UpgradeMove : MonoBehaviour
         
     }
     private IEnumerator DoUpgradeMove(){//}, Vector3 direction){
-        float goalPosition = 2.5f;
+        float goalPosition = 4.5f;
         float increment = 0.05f;
         float counter = 0.0f;
 
