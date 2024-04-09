@@ -16,6 +16,8 @@ public class DamageReceiver : MonoBehaviour
     double chance;
     public GameObject EffectParticles;
     public bool ShouldSpawn;
+    private bool alreadySpawned = false;
+    [SerializeField, Tooltip("Height at which the health pickup spawns (to prevent out of reach pickups)")] private float _pickupHeight = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -81,8 +83,12 @@ public class DamageReceiver : MonoBehaviour
     }
 
     private void Spawn(){
-        GameObject healthPickup = Instantiate(SpawnObject);
-        healthPickup.transform.position = gameObject.transform.position;
+        if(!alreadySpawned)
+        {
+            GameObject healthPickup = Instantiate(SpawnObject);
+            healthPickup.transform.position = new Vector3(gameObject.transform.position.x, _pickupHeight, gameObject.transform.position.z);
+            alreadySpawned = true;
+        }
     }
     
     private void OnDestroy(){
