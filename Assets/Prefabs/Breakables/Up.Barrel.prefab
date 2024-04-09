@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 845d7e81436213749b9f122a165e57d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.48
+      value: 8.256861
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 845d7e81436213749b9f122a165e57d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.33
+      value: -0.31270766
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 845d7e81436213749b9f122a165e57d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.3
+      value: -4.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 845d7e81436213749b9f122a165e57d0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -95,8 +95,8 @@ MonoBehaviour:
   SpawnObject: {fileID: 3812024170061985498, guid: 981132291f293f34a94facb227446b2d, type: 3}
   IsGoldenBarrel: 1
   Animated: 1
-  Player: {fileID: 0}
   EffectParticles: {fileID: 3581966198562017846, guid: 186de8bb85053054ca0b0d25479a670a, type: 3}
+  ShouldSpawn: 1
 --- !u!136 &5888553856507486281
 CapsuleCollider:
   m_ObjectHideFlags: 0
