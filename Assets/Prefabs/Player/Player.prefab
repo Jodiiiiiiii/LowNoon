@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57e6b77a401afd4b863f5196e132c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gummyWorm: {fileID: 2800000, guid: a6cc1c2aac8f26342bce30c4667dde45, type: 3}
   _cameraTransform: {fileID: 0}
   _movingRotationSharpness: 1.5
   _stationaryRotationSharpness: 5
