@@ -706,10 +706,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4836188430229160516, guid: ec4f26ca3adee054dbc773b60d02dd6d, type: 3}
-      propertyPath: ShouldSpawn
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6112573639518065201, guid: ec4f26ca3adee054dbc773b60d02dd6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.256861
@@ -1024,10 +1020,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doom Barrel
       objectReference: {fileID: 0}
-    - target: {fileID: 4711268030168930194, guid: 6d401821e38db634dbe44cfc0bac04dd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5344112372614155560, guid: 6d401821e38db634dbe44cfc0bac04dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.3687534
@@ -1071,10 +1063,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4711268030168930194, guid: 6d401821e38db634dbe44cfc0bac04dd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1416971530}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d401821e38db634dbe44cfc0bac04dd, type: 3}
 --- !u!1 &1264376279
 GameObject:
@@ -1400,25 +1389,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3c1b274eba59a54596f2912b447c2c4, type: 3}
---- !u!1 &1416971529 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4711268030168930194, guid: 6d401821e38db634dbe44cfc0bac04dd, type: 3}
-  m_PrefabInstance: {fileID: 1237953425}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1416971530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1416971529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401084d00206b485eb9a13f442ee9bb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExplosionRadius: 100
-  DamageAmount: 2
 --- !u!1 &1480935879
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,25 +2160,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2066364416 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6721338641322304116, guid: f36c87b2af83571429aadeaced41f819, type: 3}
-  m_PrefabInstance: {fileID: 2103423824}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2066364417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2066364416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 401084d00206b485eb9a13f442ee9bb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExplosionRadius: 15
-  DamageAmount: 2
 --- !u!1001 &2103423824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2261,17 +2212,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exp.Barrel
       objectReference: {fileID: 0}
-    - target: {fileID: 6721338641322304116, guid: f36c87b2af83571429aadeaced41f819, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6721338641322304116, guid: f36c87b2af83571429aadeaced41f819, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2066364417}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f36c87b2af83571429aadeaced41f819, type: 3}
 --- !u!1 &2113083315
 GameObject:
