@@ -159,11 +159,11 @@ MonoBehaviour:
   IsDirectlyDestroyed: 1
   IsImmune: 0
   DropRate: 1
-  SpawnObject: {fileID: 0}
+  SpawnObject: {fileID: 7435636785152514567, guid: e55de1a409b744c52943cd05a99582b6, type: 3}
   IsGoldenBarrel: 0
   Animated: 1
-  Player: {fileID: 0}
   EffectParticles: {fileID: 3581966198562017846, guid: 186de8bb85053054ca0b0d25479a670a, type: 3}
+  ShouldSpawn: 1
 --- !u!54 &8300991845910977890
 Rigidbody:
   m_ObjectHideFlags: 0

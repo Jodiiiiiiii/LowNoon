@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7db062966e1159340b49c30ca52a9f6e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5141287
+      value: 4.2378683
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7db062966e1159340b49c30ca52a9f6e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7db062966e1159340b49c30ca52a9f6e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.2
+      value: -11.948725
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7db062966e1159340b49c30ca52a9f6e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -52,8 +52,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate
       objectReference: {fileID: 0}
+    - target: {fileID: 4083501151425157549, guid: 7db062966e1159340b49c30ca52a9f6e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.22
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 7db062966e1159340b49c30ca52a9f6e, type: 3}
+    - {fileID: -8700617353114198275, guid: 7db062966e1159340b49c30ca52a9f6e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7db062966e1159340b49c30ca52a9f6e, type: 3}
@@ -164,8 +170,8 @@ MonoBehaviour:
   IsDirectlyDestroyed: 1
   IsImmune: 0
   DropRate: 1
-  SpawnObject: {fileID: 0}
+  SpawnObject: {fileID: 7435636785152514567, guid: e55de1a409b744c52943cd05a99582b6, type: 3}
   IsGoldenBarrel: 0
   Animated: 1
-  Player: {fileID: 0}
   EffectParticles: {fileID: 3581966198562017846, guid: 186de8bb85053054ca0b0d25479a670a, type: 3}
+  ShouldSpawn: 1

@@ -14,10 +14,8 @@ public class DamageReceiver : MonoBehaviour
     public bool Animated;
     private GameObject Player;
     double chance;
-    GameObject pickup;
     public GameObject EffectParticles;
     public bool ShouldSpawn;
-
 
     // Start is called before the first frame update
     void Start()
@@ -25,49 +23,36 @@ public class DamageReceiver : MonoBehaviour
         IsImmune = false;
         chance = Random.Range(0,1.0f);
         Player = GameObject.FindWithTag("Player");
-        
-        
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         if (HealthLevel <= 0)
-                {
-                    /*if(IsDirectlyDestroyed)
-                        Destroy(gameObject);*/
-                    if(ShouldSpawn)
-                    {
-                        if(IsGoldenBarrel){
-                        pickup = Instantiate(SpawnObject);
-                        pickup.transform.position = gameObject.transform.position;
-                        pickup.transform.rotation = Player.transform.rotation;
+        {
+            if(ShouldSpawn)
+            {
+                if(IsGoldenBarrel){
+                    GameObject pickup = Instantiate(SpawnObject);
+                    pickup.transform.position = gameObject.transform.position;
+                    pickup.transform.rotation = Player.transform.rotation;
                         
-                        
-                        GameObject pickup2 = Instantiate(SpawnObject);
-                        pickup2.transform.position = pickup.transform.position;
-                        UpgradeMove upgrade1 = pickup2.AddComponent<UpgradeMove>();
-                        upgrade1.Direction = -1.0f;
-                        
-                        
-                        
-                        
-                        GameObject pickup3 = Instantiate(SpawnObject);
-                        pickup3.transform.position = pickup.transform.position;
-                        UpgradeMove upgrade2 = pickup3.AddComponent<UpgradeMove>();
-                        upgrade2.Direction = 1.0f;
-                        
-                           
-                        
-    
-                        }
-                        else if(chance < DropRate){
-                            Spawn(); 
-                        }
-                    }
-                    if(IsDirectlyDestroyed)
-                        Destroy(gameObject);
+                    GameObject pickup2 = Instantiate(SpawnObject);
+                    pickup2.transform.position = pickup.transform.position;
+                    UpgradeMove upgrade1 = pickup2.AddComponent<UpgradeMove>();
+                    upgrade1.Direction = -1.0f;
+
+                    GameObject pickup3 = Instantiate(SpawnObject);
+                    pickup3.transform.position = pickup.transform.position;
+                    UpgradeMove upgrade2 = pickup3.AddComponent<UpgradeMove>();
+                    upgrade2.Direction = 1.0f;
+                }
+                else if(chance < DropRate){
+                    Spawn(); 
+                }
+            }
+            if(IsDirectlyDestroyed)
+                Destroy(gameObject);
         }
     }
 
@@ -82,30 +67,20 @@ public class DamageReceiver : MonoBehaviour
             if (!IsImmune)
             {
                 // destroy damage receiver only if it reaches 0 health
-                HealthLevel -= bulletStats.DamageLevel;
-                           
+                HealthLevel -= bulletStats.DamageLevel;       
             }
-                
         }
-
-        }
-    
+    }
 
     private void Spawn(){
-        
         GameObject healthPickup = Instantiate(SpawnObject);
         healthPickup.transform.position = gameObject.transform.position;
-        
-        
-        
     }
     
     private void OnDestroy(){
-            if(Animated){
+        if(Animated) {
             Instantiate(EffectParticles, gameObject.transform.position, gameObject.transform.rotation);
-            }
-            
-        
+        }
     }
 }
 
