@@ -160,6 +160,13 @@ MonoBehaviour:
   HealthLevel: 3
   IsDirectlyDestroyed: 0
   IsImmune: 0
+  DropRate: 0.25
+  SpawnObject: {fileID: 7435636785152514567, guid: e55de1a409b744c52943cd05a99582b6, type: 3}
+  IsGoldenBarrel: 0
+  Animated: 0
+  EffectParticles: {fileID: 0}
+  ShouldSpawn: 1
+  _pickupHeight: 0.5
 --- !u!114 &1841968315185491616
 MonoBehaviour:
   m_ObjectHideFlags: 0
