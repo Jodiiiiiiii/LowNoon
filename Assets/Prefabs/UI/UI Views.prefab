@@ -5531,7 +5531,7 @@ MonoBehaviour:
   _masterVolumeSlider: {fileID: 1371954224507282374}
   _playerVolumeSlider: {fileID: 2170557789862031159}
   _enemyVolumeSlider: {fileID: 522138247824225264}
-  _enviromentVolumeSlider: {fileID: 2076652787540812598}
+  _environmentVolumeSlider: {fileID: 0}
   _musicVolumeSlider: {fileID: 8441450941420722662}
   _mainView: {fileID: 6032495534169130272}
 --- !u!1 &3259984358946119446
@@ -7411,7 +7411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d1046f19d82e24985ec0c5b40e53a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingView: {fileID: 33539492442636142}
+  startingView: {fileID: 5684296065610793620}
   views:
   - {fileID: 33539492442636142}
   - {fileID: 5684296065610793620}
@@ -15097,7 +15097,7 @@ MonoBehaviour:
   _masterVolumeSlider: {fileID: 7953054850355078963}
   _playerVolumeSlider: {fileID: 8662137327529859133}
   _enemyVolumeSlider: {fileID: 536641780067592672}
-  _enviromentVolumeSlider: {fileID: 7396602594966785915}
+  _environmentVolumeSlider: {fileID: 7396602594966785915}
   _musicVolumeSlider: {fileID: 6238575050066184736}
   _mainView: {fileID: 8475538568335068298}
 --- !u!1 &8864173329443692156
