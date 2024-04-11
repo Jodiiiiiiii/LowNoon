@@ -62,6 +62,12 @@ public class GameManager : MonoBehaviour
         public float LightFOV; // Base FOV + Light Upgrades
         public float LightIntensity; // Base Intensity + Light Upgrades
         public int LightUpgradeCount;   // How many light upgrades we have
+
+        // for tracking levels that have been navigated
+        public bool HadBarrelRoom;
+        public bool HadMinecartRoom;
+        public bool HadMazeRoom;
+        public int NumRooms; // number of cave rooms which have been entered so far
     }
     private Stats _playerData;
 
@@ -91,6 +97,10 @@ public class GameManager : MonoBehaviour
         if (GameObject.Find("Player"))
         {
             Instance._playerData = GameObject.Find("Player").GetComponent<PlayerStats>().GetBasePlayerData();
+            Instance._playerData.HadBarrelRoom = false;
+            Instance._playerData.HadMazeRoom = false;
+            Instance._playerData.HadMinecartRoom = false;
+            Instance._playerData.NumRooms = 0;
         }
         else
             Debug.LogError("Error: trying to access PlayerStats with no player in scene");
@@ -134,7 +144,7 @@ public class GameManager : MonoBehaviour
             {
                 // initialize and load save data
                 Data newSaveData = new Data();
-               
+
                 // default save file configuration (in case some/all save data is missing)
                 newSaveData.NumOfRuns = 0;
                 newSaveData.MasterVolumeSlider = 0.5f;
@@ -219,19 +229,19 @@ public class GameManager : MonoBehaviour
         return SaveData.MusicVolumeSlider * SaveData.MasterVolumeSlider;
     }
 
-    private void OnApplicationQuit()
-    {
-        // save SavePointData to json file
-        string json = JsonUtility.ToJson(SaveData);
-        File.WriteAllText(Application.persistentDataPath + "/savedata.json", json);
-    }
-
     /// <summary>
     /// increments NumOfRuns counter in Data
     /// </summary>
     public void AddRun()
     {
         SaveData.NumOfRuns++;
+    }
+
+    private void OnApplicationQuit()
+    {
+        // save SavePointData to json file
+        string json = JsonUtility.ToJson(SaveData);
+        File.WriteAllText(Application.persistentDataPath + "/savedata.json", json);
     }
     #endregion
 

@@ -28501,6 +28501,10 @@ PrefabInstance:
       propertyPath: SceneName
       value: 0_Hub
       objectReference: {fileID: 0}
+    - target: {fileID: 7374257857207407473, guid: 299e097cae5539d4a8514c0d4bd44d4a, type: 3}
+      propertyPath: _isStartPatch
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
