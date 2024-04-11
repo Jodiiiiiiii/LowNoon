@@ -11,6 +11,7 @@ public class DamageReceiver : MonoBehaviour
     [Tooltip("Likelihood that object spawns health pickup")] public float DropRate = 1.0f;
     public GameObject SpawnObject;
     public bool IsGoldenBarrel;
+    [SerializeField, Tooltip("Special type of golden barrel that only spawns one item")] private bool _isExtraGoldenBarrel = false;
     public bool Animated;
     private GameObject Player;
     double chance;
@@ -56,6 +57,12 @@ public class DamageReceiver : MonoBehaviour
                     pickup3.transform.rotation = parent.transform.rotation;
                     UpgradeMove upgrade2 = pickup3.AddComponent<UpgradeMove>();
                     upgrade2.Direction = 1.0f;
+                }
+                else if(_isExtraGoldenBarrel) // found randomly within maze levels
+                {
+                    GameObject pickup1 = Instantiate(SpawnObject);
+                    pickup1.transform.position = gameObject.transform.position;
+                    pickup1.transform.rotation = gameObject.transform.rotation;
                 }
                 else if(chance < DropRate){
                     Spawn(); 
