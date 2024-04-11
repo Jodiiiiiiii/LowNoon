@@ -30,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/0_Hub.unity
     guid: a57baec6192f26242912241bf03b1167
   - enabled: 1
-    path: Assets/Scenes/1_TestRoom.unity
+    path: Assets/Scenes/TEMPLATE-LevelBuilding.unity
     guid: f4ef6df310ef2854f93d12341378eb70
   m_configObjects: {}
