@@ -96,7 +96,7 @@ public class DamageReceiver : MonoBehaviour
     }
     
     private void OnDestroy(){
-        if(Animated) {
+        if(Animated && gameObject.scene.isLoaded) {
             Instantiate(EffectParticles, gameObject.transform.position, gameObject.transform.rotation);
         }
     }
