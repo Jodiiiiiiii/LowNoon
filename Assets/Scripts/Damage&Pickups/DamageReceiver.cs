@@ -40,7 +40,7 @@ public class DamageReceiver : MonoBehaviour
                     parent.transform.position = gameObject.transform.position;
                     parent.transform.rotation = Player.transform.rotation;
                     parent.name = "Upgrade Options";
-                    parent.AddComponent<DestroyWithAnyChild>();
+                    parent.AddComponent<UpgradeBarrelPickups>();
 
                     GameObject pickup1 = Instantiate(SpawnObject, parent.transform);
                     pickup1.transform.position = parent.transform.position;
