@@ -30,7 +30,7 @@ public class RangedAttack : MonoBehaviour
         _cooldownTimer = ShotTimer + TimerRandom();
         _shotTimerRandom = ShotTimer + TimerRandom();
 
-        _bulletStats = BulletObject.GetComponent<BulletStats>();
+        _bulletStats = BulletObject.GetComponentInChildren<BulletStats>();
     }
 
     // Update is called once per frame

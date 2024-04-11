@@ -80,6 +80,10 @@ public class DamageReceiver : MonoBehaviour
         if (DamagerObject.CompareTag("PlayerBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
+            if(bulletStats == null)
+            {
+                bulletStats = DamagerObject.GetComponentInChildren<BulletStats>();
+            }
 
             if (!IsImmune)
             {

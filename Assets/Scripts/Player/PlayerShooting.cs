@@ -68,7 +68,7 @@ public class PlayerShooting : MonoBehaviour
 
             // align and apply force
             newBullet.transform.LookAt(newBullet.transform.position + projectileDirection);
-            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.GetComponent<BulletStats>().InitialForce * newBullet.transform.forward, ForceMode.Impulse);
+            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.GetComponentInChildren<BulletStats>().InitialForce * newBullet.transform.forward, ForceMode.Impulse);
 
             _timer = 0.0f; // reset cooldown timer
             onBulletFire?.Invoke();
