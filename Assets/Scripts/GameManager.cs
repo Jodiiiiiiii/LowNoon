@@ -247,6 +247,7 @@ public class GameManager : MonoBehaviour
         // If the scene is the hub
         if(scene.name == "0_Hub")
         {
+            ResetPlayerStats();
             if (IsMainMenuLoaded) {
                 // Invoke onHubRevive, which
                 // Plays the coffin-burst sequence for the coffin
