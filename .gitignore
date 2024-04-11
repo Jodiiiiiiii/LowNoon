@@ -31,6 +31,8 @@
 
 # IntelliJ
 .idea/
+# VS Code
+.vscode/
 
 # Apple folder atributes file.
 .DS_Store
