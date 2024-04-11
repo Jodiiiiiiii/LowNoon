@@ -8,6 +8,7 @@ public class ManualCameraController : MonoBehaviour
     public bool activeCoroutine;
     private CameraController _cameraController;
     private Transform _playerTransform;
+    private Camera _camera;
     // Scripted transform positions (or transform values relative to the player) for certain scenarios
     Vector3 _openingLogoPosition;
     Vector3 _mainMenuPosition = new Vector3(-6.33f, .68f, 2.05f);
@@ -29,6 +30,7 @@ public class ManualCameraController : MonoBehaviour
         _playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         _mainMenuPosition = _playerTransform.position + _mainMenuPosition;
         _playerCameraPosition = _playerTransform.position + _playerCameraPosition;
+        _camera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -88,6 +90,20 @@ public class ManualCameraController : MonoBehaviour
         }
         transform.position = targetPos; // snap to goal value
         activeCoroutine = false;
+        yield return null;
+    }
+
+    private IEnumerator DoCamFOV(float targetFOV, float travelTime)
+    {
+        float velocity = 0 ;
+        while (Mathf.Abs(targetFOV - _camera.fieldOfView) >= _cameraSmoothingThreshold)
+        {
+            _camera.fieldOfView = Mathf.SmoothDamp(_camera.fieldOfView, targetFOV, ref velocity, travelTime); // Move camera position
+
+            yield return null;
+        }
+
+        _camera.fieldOfView = targetFOV;
         yield return null;
     }
 }

@@ -30,7 +30,8 @@ public class FinalBossMaster : MonoBehaviour
     // 3 - Need mole model and animations
     // 6 - Add correct GameManager volume
     // 7 - Turn mole around
-    // 8 - All
+    // 8 - Camera FOV, move the mole
+    // 8.5 - Turn the mole around
     // 9 - Add correct enemy gunshot, add correct volumes
     // 10 - All
     // 11 - All
@@ -94,13 +95,18 @@ public class FinalBossMaster : MonoBehaviour
         // 8 - Start the camera moving and the duelers walking
         // TODO - Camera
         // Set both of them moving and playing their walk animations at an appropriate speed
-        //Transform wormPos2 = GameObject.Find("WormPos2").transform;
-        //_worm.TravelToPositionAndRotation(wormPos2.position, wormPos2.rotation.eulerAngles, 12f);
-        //_worm.SetCurrentAnimation("Move");
+        Transform wormPos2 = GameObject.Find("WormPos2").transform;
+        _worm.TravelToPositionAndRotation(wormPos2.position, wormPos2.rotation.eulerAngles, 12f);
+        _worm.SetCurrentAnimation("Move");
 
         //TODO - Mole version of that
         // Slowly fade out the instruction text
         ViewManager.GetView<FinalBossView>().FadeText();
+
+        // 8.5 - Whip the duelers around after a certain amount of time has passed
+        yield return new WaitUntil(() => (_finalTimer <= 10.6));
+        _worm.SetCurrentAnimation("Move");
+        _worm.TravelToPositionAndRotation(_worm.transform.position, new Vector3(0, -90, 0), 1f);
 
         // 9 - Wait until either the player has correctly fired, or the time has passed for them to do so
         yield return new WaitUntil(() => (_playerWon || _finalTimer <= 0));
@@ -120,7 +126,8 @@ public class FinalBossMaster : MonoBehaviour
         {
             // 11 - Play the mole defeat anim
             // Pull the camera over to the worm
-            // Set GameManager BeenToMainMenu to false so we don't die when we get back to the town
+            
+            GameManager.Instance.IsMainMenuLoaded = false; // Set GameManager BeenToMainMenu to false so we don't die when we get back to the town
             // Fade to credits after holding for a little
         }
         else // If the worm lost...
