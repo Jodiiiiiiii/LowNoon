@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1801581072506399870, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
       propertyPath: m_Name
-      value: Shift Tutorial (2)
+      value: Shoot Tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 2754784937520590241, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -209,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8a428a5b5ea483b4f987396e429ee1d3, type: 2}
     - target: {fileID: 8584132786589300736, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3081,7 +3081,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a631cab7c2cc099418c31f5a691a80eb, type: 2}
     - target: {fileID: 8584132786589300736, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18816,6 +18816,72 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &931719689
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1482322578}
+    m_Modifications:
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -102.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 57.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2190982
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.029764703
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9682717
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.116447486
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 13.801
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -154.547
+      objectReference: {fileID: 0}
+    - target: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801581072506399870, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_Name
+      value: Game Premise
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080930766579025888, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 54faa30f918002445b909c8703dcc5e7, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+--- !u!4 &931719690 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1318236222539167428, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
+  m_PrefabInstance: {fileID: 931719689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &935630149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30424,6 +30490,7 @@ Transform:
   m_Children:
   - {fileID: 1116264073}
   - {fileID: 868324295}
+  - {fileID: 931719690}
   - {fileID: 16940939}
   - {fileID: 708309318}
   - {fileID: 1696760670}
@@ -37558,7 +37625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1801581072506399870, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
       propertyPath: m_Name
-      value: Shift Tutorial (1)
+      value: W Tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 2754784937520590241, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -37590,7 +37657,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 5aa2e17bd61d6c5409a71429c3ff5576, type: 2}
     - target: {fileID: 8584132786589300736, guid: 11be60d19274c524fbaed5d66f3541e3, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
