@@ -55,10 +55,11 @@ MonoBehaviour:
   _maxObstructions: 32
   _obstructionLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 257
   _aggroRange: 50
+  _spherecastOrigin: {fileID: 3811104293766507842}
   _moveSpeed: 5
-  _stoppingRange: 2
+  _stoppingRange: 1
   _rotationSharpness: 4
   _velocitySharpness: 1
   _stoppingSharpness: 10
@@ -147,6 +148,7 @@ MonoBehaviour:
   DropRate: 0.25
   SpawnObject: {fileID: 7435636785152514567, guid: e55de1a409b744c52943cd05a99582b6, type: 3}
   IsGoldenBarrel: 0
+  _isExtraGoldenBarrel: 0
   Animated: 0
   EffectParticles: {fileID: 0}
   ShouldSpawn: 1
@@ -180,7 +182,7 @@ GameObject:
   - component: {fileID: 7315198424026703087}
   - component: {fileID: 3443993669406571640}
   - component: {fileID: 764123328108336958}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Attack Zone
   m_TagString: MeleeAttack
   m_Icon: {fileID: 0}
@@ -196,8 +198,8 @@ Transform:
   m_GameObject: {fileID: 2810133243443433763}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0199, y: 0.226, z: 1.7855}
-  m_LocalScale: {x: 0.8119259, y: 0.26891, z: 1.3726026}
+  m_LocalPosition: {x: 0.0199, y: 0.226, z: 2.1363}
+  m_LocalScale: {x: 0.8119259, y: 0.26891, z: 2.0741398}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8446200792990488619}
