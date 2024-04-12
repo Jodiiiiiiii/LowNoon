@@ -12,7 +12,7 @@ public class MeleeAttack : MonoBehaviour
     [Tooltip("How long between each attack")]public float AttackCooldown;
     [Tooltip("Distance from the player when the enemy will initiate an attack")] public float AttackRange;
 
-    private GameObject _player;
+    private Collider _player;
     private float _attackTimer;
     private bool _duringAttack;
     public bool DuringAttack => _duringAttack;
@@ -20,9 +20,10 @@ public class MeleeAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindWithTag("Player");
+        _player = GameObject.FindWithTag("Player").GetComponent<Collider>();
         _duringAttack = false;
         _attackTimer = 0;
+        AttackCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -38,7 +39,7 @@ public class MeleeAttack : MonoBehaviour
             _attackTimer = 0;
         }
 
-        if (Vector3.Distance(_player.transform.position, transform.position) <= AttackRange) // if close to player
+        if (Vector3.Distance(AttackCollider.transform.position, _player.ClosestPoint(AttackCollider.transform.position)) <= AttackRange) // if close to player
         {
             if (!_duringAttack && _attackTimer > AttackCooldown) // if attack is off cooldown and ready
             {
