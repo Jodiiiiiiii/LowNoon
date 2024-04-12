@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 7315198424026703087}
   - component: {fileID: 3443993669406571640}
   - component: {fileID: 764123328108336958}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Attack Zone
   m_TagString: MeleeAttack
   m_Icon: {fileID: 0}

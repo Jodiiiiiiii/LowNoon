@@ -38,10 +38,14 @@ public class PlayerHealth : MonoBehaviour
         if (DamagerObject.CompareTag("EnemyBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
-
-            Destroy(DamagerObject); // supposed to slightly mitigate effecct of bullet pushing player when it hits briefly
+            if (bulletStats == null)
+            {
+                bulletStats = DamagerObject.GetComponentInChildren<BulletStats>();
+            }
 
             handleDamage((int)bulletStats.DamageLevel);
+
+            Destroy(DamagerObject); // supposed to slightly mitigate effecct of bullet pushing player when it hits briefly
         }
     }
 

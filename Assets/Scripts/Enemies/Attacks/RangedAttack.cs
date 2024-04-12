@@ -17,7 +17,7 @@ public class RangedAttack : MonoBehaviour
     [Tooltip("Minimum amount of time to change the shot timer by")] public float MinShotVar;
     [Tooltip("Maximum amount of time to change the shot timer by")] public float MaxShotVar;
     
-    private GameObject _player;
+    private Collider _player;
     private float _cooldownTimer;
     private float _shotTimerRandom;
 
@@ -26,7 +26,7 @@ public class RangedAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.FindWithTag("Player");
+        _player = GameObject.FindWithTag("Player").GetComponent<Collider>();
         _cooldownTimer = ShotTimer + TimerRandom();
         _shotTimerRandom = ShotTimer + TimerRandom();
 
@@ -48,8 +48,8 @@ public class RangedAttack : MonoBehaviour
 
             // create bullet at enemy, facing player
             GameObject bullet = Instantiate(BulletObject);
-            bullet.transform.position = transform.position; // TODO: parameters/equation to make bullet align with enemy gun
-            bullet.transform.LookAt(_player.transform.position);
+            bullet.transform.position = transform.position;
+            bullet.transform.LookAt(_player.ClosestPoint(bullet.transform.position)); // actually aims at center of player hitbox instead of at offset.
 
             // randomize y (planar) rotation within BulletSpread range
             Vector3 bulletRotation = bullet.transform.rotation.eulerAngles;
