@@ -79,7 +79,6 @@ public class PlayerHealth : MonoBehaviour
         {
             // player dies
             // TODO: integrate animations and death state transition to restart scene
-            gameObject.SetActive(false); // temporary death behavior for testing purposes
             ViewManager.Show<GameOverView>(false);
         }
     }
