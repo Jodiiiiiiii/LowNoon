@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         // Light
         public float LightFOV; // Base FOV + Light Upgrades
         public float LightIntensity; // Base Intensity + Light Upgrades
+        public float LightRange; // Base Range + Light Upgrades
         public int LightUpgradeCount;   // How many light upgrades we have
 
         // for tracking levels that have been navigated
