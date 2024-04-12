@@ -98,7 +98,7 @@ public class DamageReceiver : MonoBehaviour
                 // check if wasp needs to be woken
                 else if(gameObject.TryGetComponent<RangedMovement>(out RangedMovement wasp))
                 {
-
+                    wasp.WakeUp();
                 }
             }
         }
