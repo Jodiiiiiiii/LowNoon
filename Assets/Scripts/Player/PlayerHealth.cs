@@ -11,11 +11,14 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField, Tooltip("damage dealt to the player by enemy melee attacks (ants)")] private int _meleeEnemyDamage = 1;
 
     [System.NonSerialized] public int ExplosionDmg;
+    private PlayerController _player;
     
 
     // Start is called before the first frame update
     void Start()
-    {   }
+    {
+        _player = gameObject.GetComponent<PlayerController>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -51,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("MeleeAttack"))
+        if (other.CompareTag("MeleeAttack") && _player.State != CharacterState.DASH)
         {
             handleDamage(_meleeEnemyDamage);
         }
