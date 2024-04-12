@@ -8,6 +8,7 @@ public class MeleeMovement : MonoBehaviour
 {
     private Collider _playerCollider;
     private Vector3 _trackingPosition;
+    private float _height;
     private bool _isIdle;
     private bool _isAtPlayer; // Exists for animation purposes
     public bool IsIdle => _isIdle;
@@ -42,6 +43,7 @@ public class MeleeMovement : MonoBehaviour
         _isIdle = true;
         _isAtPlayer = false;
         _trackingPosition = transform.position; // starts with no tracking
+        _height = transform.position.y; // to prevent y value change
     }
 
     // Update is called once per frame
@@ -49,6 +51,9 @@ public class MeleeMovement : MonoBehaviour
     // https://discussions.unity.com/t/fastest-way-to-set-z-axis-rotation-to-0-c/220293
     void Update()
     {
+        // lock ants to initial height (y) level
+        transform.position = new Vector3(transform.position.x, _height, transform.position.z);
+
         // CHECK FOR NEW TRACKING POSITION (update only if player is visible, otherwise track to last known location)
         // Handle Obstructions
         RaycastHit closestHit = new();
