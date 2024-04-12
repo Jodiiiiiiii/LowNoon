@@ -60,7 +60,7 @@ MonoBehaviour:
   _aggroRange: 50
   _spherecastOrigin: {fileID: 5510997408097737255}
   _moveSpeed: 5
-  _stoppingRange: 1
+  _stoppingRange: 2.5
   _rotationSharpness: 4
   _velocitySharpness: 1
   _stoppingSharpness: 10
