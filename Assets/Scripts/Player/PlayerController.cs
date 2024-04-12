@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
         {
             GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material.mainTexture = _gummyWorm;
         }
+
+        // set starting val of prevHeight
+        _prevHeight = transform.position.y;
     }
 
     #region CHARACTER-STATES
@@ -123,6 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateRotation();
         UpdateVelocity();
+        PreventHeightIncrease();
     }
 
     #region GATHER-INPUT
@@ -322,6 +326,20 @@ public class PlayerController : MonoBehaviour
                 _rb.velocity = Vector3.zero;
                 break;
         }
+    }
+    #endregion
+
+    #region PREVENT HEIGHT INCREASE
+    private float _prevHeight;
+
+    void PreventHeightIncrease()
+    {
+        // allow height to decrease but not increase
+        if (transform.position.y > _prevHeight)
+            transform.position = new Vector3(transform.position.x, _prevHeight, transform.position.z);
+
+        // update prevHeight for next frame
+        _prevHeight = transform.position.y;
     }
     #endregion
 
