@@ -118,4 +118,16 @@ public class MeleeMovement : MonoBehaviour
             _rigidBody.velocity = Vector3.zero; // complete stop - idle
         }
     }
+
+    /// <summary>
+    /// used for making ant move towards bullet that hit them if they are shot and they do not see player
+    /// </summary>
+    public void SetTrackingPositionIfIdle(Vector3 newPos)
+    {
+        if(_isIdle)
+        {
+            _trackingPosition = (newPos - _spherecastOrigin.position).normalized; // move slightly in direction of where bullet came from
+            _isIdle = false;
+        }
+    }
 }
