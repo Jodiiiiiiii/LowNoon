@@ -90,33 +90,35 @@ public class RangedMovement : MonoBehaviour
         _stillVar = StillRando();
 
         EnemyMoveState = RangeEnemyMoveState.IDLE;
+        StayStill = false; // prevents shooting in RangedAttack.cs while idle
     }
 
     // Update is called once per frame
     void Update()
     {
-        _timer += Time.deltaTime;
-        if (_timer > StillTimer + _stillVar && StayStill)
-        {
-            _timer = 0;
-            StayStill = false;
-            _zippyVar = ZippyRando();
-            _leftOrRight = ChangeDirection();
-        }
-        else if (_timer > ZippyTimer + _zippyVar && !StayStill)
-        {
-            _timer = 0;
-            StayStill = true;
-            _stillVar = StillRando();
-        }
         _playerPosition = _player.transform.position;
         
-
         // The enemies will first try to move away from the enemy 
         // Ranged enemies will spawn with a random direction either left or right
         // They will circle around the player in the direction they spawned with
         if (EnemyMoveState != RangeEnemyMoveState.IDLE)
         {
+            // handled here because in IDLE, there is no zippy state
+            _timer += Time.deltaTime;
+            if (_timer > StillTimer + _stillVar && StayStill)
+            {
+                _timer = 0;
+                StayStill = false;
+                _zippyVar = ZippyRando();
+                _leftOrRight = ChangeDirection();
+            }
+            else if (_timer > ZippyTimer + _zippyVar && !StayStill)
+            {
+                _timer = 0;
+                StayStill = true;
+                _stillVar = StillRando();
+            }
+
             // Set enemy rotation to face player
             transform.LookAt(_playerPosition);
             Vector3 eulerAngles = transform.rotation.eulerAngles;
@@ -211,12 +213,12 @@ public class RangedMovement : MonoBehaviour
     {
         return Random.Range(StillTimerMin, StillTimerMax);
     }
-
-    // TODO
-    // X Make max hover vary each time it floats up 
-    // X Make range variables public
-    // X Make random ranges public
-    // - Make left and right movement more jittery
-    // - - Have a timer for wait time and move time
-    // - -  Make enemies change directions when they start moving again
+    
+    /// <summary>
+    /// exits idle state. useful for if wasp is out of range/vision but is shot by player
+    /// </summary>
+    public void WakeUp()
+    {
+        EnemyMoveState = RangeEnemyMoveState.STILL;
+    }
 }

@@ -122,11 +122,11 @@ MonoBehaviour:
   _movingRotationSharpness: 1.5
   _stationaryRotationSharpness: 5
   _moveForce: 180
-  _maxMoveSpeed: 15
+  _maxMoveSpeed: 10
   _frictionForce: 5
   _dashCooldown: 1.5
   _dashForce: 300
-  _maxDashSpeed: 30
+  _maxDashSpeed: 18
   _dashDuration: 0.8
   _movingThreshold: 3
   _stoppingSharpness: 4
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61d33ca232a74c19a4e8dc3638914f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletObject: {fileID: 4230674095138438074, guid: b8533a1d0dfcf402b82884529ed43741, type: 3}
+  BulletObject: {fileID: 8002994329316266430, guid: 6d568312f6ff8034ab401d08dbc7f300, type: 3}
   _gunPosition: {fileID: 209009088689183073}
   _maxShootCastRange: 100
   _ignoreMask:

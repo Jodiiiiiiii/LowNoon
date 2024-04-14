@@ -30,10 +30,13 @@ public class PlayerStats : MonoBehaviour
     [Header("Light")]
     [SerializeField, Tooltip("Base light FOV stat")] private float _baseLightFOV = 45f;
     [SerializeField, Tooltip("Max light FOV stat")] private float _maxLightFOV = 160f;
-    [SerializeField, Tooltip("Interpolation ratio for increasing FOV from current to max (90 degrees)")] private float _lightFOVLerpRatio = 0.3f;
+    [SerializeField, Tooltip("Interpolation ratio for increasing FOV from current to max")] private float _lightFOVLerpRatio = 0.3f;
     [SerializeField, Tooltip("Base light intensity stat")] private float _baseLightIntensity = 0.5f;
-    [SerializeField, Tooltip("Max light intensity stat")] private float _maxIntensity = 4.0f;
-    [SerializeField, Tooltip("Interpolation ratio for increasing intensity from current to max (= 1)")] private float _lightIntensityLerpRatio = 0.3f;
+    [SerializeField, Tooltip("Max light intensity stat")] private float _maxIntensity = 1.0f;
+    [SerializeField, Tooltip("Interpolation ratio for increasing intensity from current to max")] private float _lightIntensityLerpRatio = 0.3f;
+    [SerializeField, Tooltip("Base light range stat")] private float _baseLightRange = 50f;
+    [SerializeField, Tooltip("Max light range stat")] private float _maxLightRange = 130f;
+    [SerializeField, Tooltip("Interpolation ratio for increasing range from current to max")] private float _lightRangeLerpRatio = 0.25f;
     private int _baseLightUpgradeCount = 0;
 
     /// <summary>
@@ -60,6 +63,7 @@ public class PlayerStats : MonoBehaviour
         baseData.LightFOV = _baseLightFOV;
         baseData.LightIntensity = _baseLightIntensity;
         baseData.LightUpgradeCount = _baseLightUpgradeCount;
+        baseData.LightRange = _baseLightRange;
 
         return baseData;
     }
@@ -93,8 +97,9 @@ public class PlayerStats : MonoBehaviour
                 playerData.DashDamage += _dashDamagePerUpgrade;
                 break;
             case UpgradeController.UpgradeType.Light:
-                playerData.LightFOV = Mathf.Lerp(playerData.LightFOV, _maxLightFOV, _lightFOVLerpRatio); // 90 = max FOV
-                playerData.LightIntensity = Mathf.Lerp(playerData.LightIntensity, _maxIntensity, _lightIntensityLerpRatio); // 1 = max intensity
+                playerData.LightFOV = Mathf.Lerp(playerData.LightFOV, _maxLightFOV, _lightFOVLerpRatio);
+                playerData.LightIntensity = Mathf.Lerp(playerData.LightIntensity, _maxIntensity, _lightIntensityLerpRatio);
+                playerData.LightRange = Mathf.Lerp(playerData.LightRange, _maxLightRange, _lightRangeLerpRatio);
                 playerData.LightUpgradeCount++;
                 break;
         }

@@ -11,6 +11,7 @@ public class DamageReceiver : MonoBehaviour
     [Tooltip("Likelihood that object spawns health pickup")] public float DropRate = 1.0f;
     public GameObject SpawnObject;
     public bool IsGoldenBarrel;
+    [SerializeField, Tooltip("Special type of golden barrel that only spawns one item")] private bool _isExtraGoldenBarrel = false;
     public bool Animated;
     private GameObject Player;
     double chance;
@@ -39,7 +40,7 @@ public class DamageReceiver : MonoBehaviour
                     parent.transform.position = gameObject.transform.position;
                     parent.transform.rotation = Player.transform.rotation;
                     parent.name = "Upgrade Options";
-                    parent.AddComponent<DestroyWithAnyChild>();
+                    parent.AddComponent<UpgradeBarrelPickups>();
 
                     GameObject pickup1 = Instantiate(SpawnObject, parent.transform);
                     pickup1.transform.position = parent.transform.position;
@@ -57,6 +58,12 @@ public class DamageReceiver : MonoBehaviour
                     UpgradeMove upgrade2 = pickup3.AddComponent<UpgradeMove>();
                     upgrade2.Direction = 1.0f;
                 }
+                else if(_isExtraGoldenBarrel) // found randomly within maze levels
+                {
+                    GameObject pickup1 = Instantiate(SpawnObject);
+                    pickup1.transform.position = gameObject.transform.position;
+                    pickup1.transform.rotation = gameObject.transform.rotation;
+                }
                 else if(chance < DropRate){
                     Spawn(); 
                 }
@@ -73,11 +80,26 @@ public class DamageReceiver : MonoBehaviour
         if (DamagerObject.CompareTag("PlayerBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
+            if(bulletStats == null)
+            {
+                bulletStats = DamagerObject.GetComponentInChildren<BulletStats>();
+            }
 
             if (!IsImmune)
             {
                 // destroy damage receiver only if it reaches 0 health
-                HealthLevel -= bulletStats.DamageLevel;       
+                HealthLevel -= bulletStats.DamageLevel;    
+                
+                // check if ant needs to be woken
+                if(gameObject.TryGetComponent<MeleeMovement>(out MeleeMovement ant))
+                {
+                    ant.SetTrackingPositionIfIdle(collision.transform.position);
+                }
+                // check if wasp needs to be woken
+                else if(gameObject.TryGetComponent<RangedMovement>(out RangedMovement wasp))
+                {
+                    wasp.WakeUp();
+                }
             }
         }
     }
@@ -92,7 +114,7 @@ public class DamageReceiver : MonoBehaviour
     }
     
     private void OnDestroy(){
-        if(Animated) {
+        if(Animated && gameObject.scene.isLoaded) {
             Instantiate(EffectParticles, gameObject.transform.position, gameObject.transform.rotation);
         }
     }
