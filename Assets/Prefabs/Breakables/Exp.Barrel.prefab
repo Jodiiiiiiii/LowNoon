@@ -147,9 +147,11 @@ MonoBehaviour:
   DropRate: 1
   SpawnObject: {fileID: 7435636785152514567, guid: e55de1a409b744c52943cd05a99582b6, type: 3}
   IsGoldenBarrel: 0
+  _isExtraGoldenBarrel: 0
   Animated: 1
   EffectParticles: {fileID: 6187283044357450411, guid: e6df6be456493c440af7fac15718c740, type: 3}
   ShouldSpawn: 0
+  _pickupHeight: 0.5
 --- !u!114 &6762277340464856984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,8 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 401084d00206b485eb9a13f442ee9bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplosionRadius: 15
-  DamageAmount: 2
+  ExplosionRadius: 10
+  DamageAmount: 10
 --- !u!1 &7151363997409300773 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5568371526223589888, guid: ececdc2de08639c4994e66755a54fd55, type: 3}

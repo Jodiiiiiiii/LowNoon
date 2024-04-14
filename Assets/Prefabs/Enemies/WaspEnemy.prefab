@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1841968315185491616}
   m_Layer: 10
   m_Name: WaspEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RangedMovement: {fileID: 7342240563325101585}
-  BulletObject: {fileID: 810306296418750875, guid: c43674987985c499ba29ce257b91c62c, type: 3}
-  BulletSpread: 10
+  BulletObject: {fileID: 5275346113376254193, guid: 1ba7a699f5bd9fd4e88c8ff67a975266, type: 3}
+  BulletSpread: 7
   ShotTimer: 5
   MinShotVar: -2
   MaxShotVar: 3
@@ -163,6 +163,7 @@ MonoBehaviour:
   DropRate: 0.25
   SpawnObject: {fileID: 7435636785152514567, guid: e55de1a409b744c52943cd05a99582b6, type: 3}
   IsGoldenBarrel: 0
+  _isExtraGoldenBarrel: 0
   Animated: 0
   EffectParticles: {fileID: 0}
   ShouldSpawn: 1
