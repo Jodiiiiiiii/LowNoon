@@ -347,11 +347,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7955169015034184292, guid: ce644abf537a882479958f074025d6a9, type: 3}
   m_PrefabInstance: {fileID: 233820188}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &496114073 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4399934670163845733, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-  m_PrefabInstance: {fileID: 2100709042}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &577405193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -949,10 +944,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 33539492442636142, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: _uiCanvas
-      value: 
-      objectReference: {fileID: 496114073}
     - target: {fileID: 2894776623557861686, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -993,37 +984,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7025783233782876031, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7025783233782876031, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_ScreenMatchMode
+    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7025783233782876031, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 0
+    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Spacing
+      value: 32.8
       objectReference: {fileID: 0}
-    - target: {fileID: 7025783233782876031, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
+    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Padding.m_Top
+      value: -65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: -961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7653165854891223724, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_Name
       value: UI Views
-      objectReference: {fileID: 0}
-    - target: {fileID: 8338786992426657849, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8338786992426657849, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8338786992426657849, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 1382
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
