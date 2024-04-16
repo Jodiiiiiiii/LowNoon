@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
         public bool HadBarrelRoom;
         public bool HadMinecartRoom;
         public bool HadMazeRoom;
+        public bool HadSmallCombatRoom;
+        public bool HadLargeCombatRoom;
         public int NumRooms; // number of cave rooms which have been entered so far
     }
     private Stats _playerData;
@@ -101,6 +103,8 @@ public class GameManager : MonoBehaviour
             Instance._playerData.HadBarrelRoom = false;
             Instance._playerData.HadMazeRoom = false;
             Instance._playerData.HadMinecartRoom = false;
+            Instance._playerData.HadSmallCombatRoom = false;
+            Instance._playerData.HadLargeCombatRoom = false;
             Instance._playerData.NumRooms = 0;
         }
         else

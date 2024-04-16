@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 public class SceneTransitionObject : MonoBehaviour
 {
     [Header("Scenes")]
-    [SerializeField] private List<string> _combatLevels;
+    /*[SerializeField] private List<string> _combatLevels;
     [SerializeField] private List<string> _barrelLevels;
     [SerializeField] private List<string> _mazeLevels;
-    [SerializeField] private List<string> _minecartLevels;
-
-    [Header("Randomization Weights")]
+    [SerializeField] private List<string> _minecartLevels;*/
+    [SerializeField] private List<string> _levels;
+    /*[Header("Randomization Weights")]
     [SerializeField] private float _combatProb = 0.4f;
     [SerializeField] private float _barrelProb = 0.2f;
     [SerializeField] private float _mazeProb = 0.2f;
-    [SerializeField] private float _minecartProb = 0.2f;
+    [SerializeField] private float _minecartProb = 0.2f;*/
 
     [Header("Boss Level")]
     [SerializeField] private string _bossLevel;
@@ -37,14 +37,58 @@ public class SceneTransitionObject : MonoBehaviour
             GameManager.Instance.AddRun();
 
         // check if it is time for the boss
-        if (GameManager.Instance.PlayerData.NumRooms >= _roomsBeforeBoss)
+        if (GameManager.Instance.PlayerData.NumRooms > _roomsBeforeBoss)
             _sceneToLoad = _bossLevel;
         else // determine random scene to load
         {
             // increment number of rooms traversed
             GameManager.Instance.PlayerData.NumRooms++;
-
-            float rand = Random.Range(0f, 1.0f);
+            _sceneToLoad = "null";
+            while(_sceneToLoad == "null")
+            {
+                int rand = Random.Range(0, 5);
+                Debug.Log("Lpp");
+                if(rand == 0) // 0 - Combat small
+                {
+                    if (!GameManager.Instance.PlayerData.HadSmallCombatRoom)
+                    {  // already done
+                        _sceneToLoad = _levels[0];
+                        GameManager.Instance.PlayerData.HadSmallCombatRoom = true;
+                    }
+                }
+                else if(rand == 1) // 1 - Minecarts 
+                {
+                    if (!GameManager.Instance.PlayerData.HadMinecartRoom)
+                    {  // already done
+                        _sceneToLoad = _levels[1];
+                        GameManager.Instance.PlayerData.HadMinecartRoom = true;
+                    }
+                }
+                else if(rand == 2) // 2 - Barrels
+                {
+                    if (!GameManager.Instance.PlayerData.HadBarrelRoom) {  // already done
+                        _sceneToLoad = _levels[2];
+                        GameManager.Instance.PlayerData.HadBarrelRoom = true;
+                    }
+                }
+                else if(rand == 3) // 3 - Combat large
+                {
+                    if (!GameManager.Instance.PlayerData.HadLargeCombatRoom)
+                    {  // already done
+                        _sceneToLoad = _levels[3];
+                        GameManager.Instance.PlayerData.HadLargeCombatRoom = true;
+                    }
+                }
+                else // 4 - Maze
+                {
+                    if (!GameManager.Instance.PlayerData.HadMazeRoom)
+                    {  // already done
+                        _sceneToLoad = _levels[4];
+                        GameManager.Instance.PlayerData.HadMazeRoom = true;
+                    }
+                }
+            }
+            /*float rand = Random.Range(0f, 1.0f);
 
             if (rand < _combatProb) // Combat Room
                 _sceneToLoad = _combatLevels[Random.Range(0, _combatLevels.Count)];
@@ -77,7 +121,7 @@ public class SceneTransitionObject : MonoBehaviour
                     _sceneToLoad = _minecartLevels[Random.Range(0, _minecartLevels.Count)];
                     GameManager.Instance.PlayerData.HadMinecartRoom = true;
                 }
-            }
+            }*/
         }
     }
 
