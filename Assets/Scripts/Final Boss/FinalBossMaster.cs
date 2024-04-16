@@ -65,15 +65,21 @@ public class FinalBossMaster : MonoBehaviour
         _camera.moveToGivenPos(camPos1.position, camPos1.rotation.eulerAngles, 2f);
         yield return new WaitForSeconds(4f);
 
-        // 3 - TODO
-        // ...who does a dramatic turnaround and laughs.
-        // (To do this, play the step animation while rotating the mole with another animation)
-
         // 4 - Move the worm model over to a position near the mole (use SetPositionAndRotation because otherwise the worm's light makes things very obvious)
         Transform wormPos1 = GameObject.Find("WormPos1").transform;
         _worm.TravelToPositionAndRotation(wormPos1.position, wormPos1.rotation.eulerAngles, 3f);
 
-        yield return new WaitForSeconds(4f); // Wait for the mole to turn around & laugh and the worm to arrive
+        // 3 - TODO
+        // ...who does a dramatic turnaround and laughs.
+        // (To do this, play the step animation while rotating the mole with another animation)
+        _mole.SetCurrentAnimation("Move");
+        _mole.TravelToPositionAndRotation(_mole.transform.position, new Vector3(0, 0, 0), 1.7f);
+
+        
+        yield return new WaitForSeconds(4f); // Wait for the mole to turn around
+        _mole.SetCurrentAnimation("Move");  // Set mole back to idle
+        // TODO - Play laugh SFX
+        yield return new WaitForSeconds(4f);
 
         // 5 - Pull the camera out so that it's centered between them (and give it a little time to do so)
         Transform camPos2 = GameObject.Find("CameraPos2").transform;
@@ -88,7 +94,8 @@ public class FinalBossMaster : MonoBehaviour
 
         // 7 - TODO: Between the beginning of the music and the first stroke of the bell, turn the characters around so they face away from each other
         _worm.TravelToPositionAndRotation(wormPos1.position, new Vector3(0, 90, 0), 2f);
-
+        _mole.SetCurrentAnimation("Move");
+        _mole.TravelToPositionAndRotation(_mole.transform.position, new Vector3(0, 180, 0), 2f);
         // Wait so that we don't start the movement until the right time in the song
         yield return new WaitForSeconds(4f);
 
@@ -99,7 +106,11 @@ public class FinalBossMaster : MonoBehaviour
         _worm.TravelToPositionAndRotation(wormPos2.position, wormPos2.rotation.eulerAngles, 12f);
         _worm.SetCurrentAnimation("Move");
 
-        //TODO - Mole version of that
+        // Mole version of that
+        Transform molePos1 = GameObject.Find("MolePos1").transform;
+        _mole.TravelToPositionAndRotation(molePos1.position, _mole.transform.rotation.eulerAngles, 12f);
+
+
         // Slowly fade out the instruction text
         ViewManager.GetView<FinalBossView>().FadeText();
 

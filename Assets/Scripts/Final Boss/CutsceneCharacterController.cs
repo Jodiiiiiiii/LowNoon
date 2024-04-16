@@ -39,7 +39,7 @@ public class CutsceneCharacterController : MonoBehaviour
     public void SetCurrentAnimation(string name)
     {
         _animator = GetComponent<Animator>();
-        if(gameObject.tag == "Player" && name == "Move")
+        if(name == "Move")
         {
             _animator.SetBool("isMoving", !_animator.GetBool("isMoving"));
             _animator.SetFloat("moveSpdMult", .5f);
