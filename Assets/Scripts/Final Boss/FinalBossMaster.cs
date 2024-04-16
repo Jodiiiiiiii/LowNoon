@@ -17,6 +17,8 @@ public class FinalBossMaster : MonoBehaviour
     [SerializeField] private AudioClip _finalTrack;
     [SerializeField] private AudioClip _playerShot;
     [SerializeField] private AudioClip _enemyShot;
+    [SerializeField] private AudioClip _laugh1;
+    [SerializeField] private AudioClip _laugh2;
     void Start()
     {
         _finalTimer = _timerValue;
@@ -27,11 +29,9 @@ public class FinalBossMaster : MonoBehaviour
     }
 
     // TODO
-    // 3 - Need mole to laugh
-    // 6 - Add correct GameManager volume
-    // 9 - Add correct enemy gunshot, add correct volumes
-    // 11 - All
-    // 12 - All
+    // All sounds - add correct GameManager volume
+
+    // 11 - Camera motion, fade to credits, mole defeat
 
     void Update()
     {
@@ -74,8 +74,9 @@ public class FinalBossMaster : MonoBehaviour
         
         yield return new WaitForSeconds(4f); // Wait for the mole to turn around
         _mole.SetCurrentAnimation("Move");  // Set mole back to idle
-        // TODO - Play laugh SFX
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
+        _source.PlayOneShot(_laugh1, .5f);
+        yield return new WaitForSeconds(3f);
 
         // 5 - Pull the camera out so that it's centered between them (and give it a little time to do so)
         Transform camPos2 = GameObject.Find("CameraPos2").transform;
@@ -143,6 +144,7 @@ public class FinalBossMaster : MonoBehaviour
         {
             // 11 - Play the mole defeat anim
             _mole.SetCurrentAnimation("Defeat");
+            _source.PlayOneShot(_laugh2, .5f);
             // Pull the camera over to the worm
             // -168.914
 
@@ -154,7 +156,7 @@ public class FinalBossMaster : MonoBehaviour
             // Play worm defeat anim
             _worm.SetCurrentAnimation("Death");
             yield return new WaitForSeconds(1f);
-            // Play mole laugh
+            _source.PlayOneShot(_laugh2, .5f);
             yield return new WaitForSeconds(1f);
             // 12 - Go to game over 
             ViewManager.Show<GameOverView>(false);

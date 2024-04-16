@@ -1192,7 +1192,9 @@ MonoBehaviour:
   _camera: {fileID: 6827444257332443158}
   _finalTrack: {fileID: 8300000, guid: 967922a4d07b0da4a93bfdf829984d4f, type: 3}
   _playerShot: {fileID: 8300000, guid: 98bae596eaef4114d8e913df1f342262, type: 3}
-  _enemyShot: {fileID: 8300000, guid: 20ec375b98f4b8f41a5617f7d9d9ff1d, type: 3}
+  _enemyShot: {fileID: 8300000, guid: a6bf865425ac4e74180d729122b7663b, type: 3}
+  _laugh1: {fileID: 8300000, guid: 6d9ec25eb6b8bba4d9238ee1527d10ce, type: 3}
+  _laugh2: {fileID: 8300000, guid: 098156647f59ef94dbd672f32bfd354e, type: 3}
 --- !u!82 &1049476216
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3134,6 +3136,9 @@ MonoBehaviour:
   _baseLightIntensity: 0.5
   _maxIntensity: 4
   _lightIntensityLerpRatio: 0.3
+  _baseLightRange: 50
+  _maxLightRange: 130
+  _lightRangeLerpRatio: 0.25
 --- !u!114 &6827444257332443158
 MonoBehaviour:
   m_ObjectHideFlags: 0
