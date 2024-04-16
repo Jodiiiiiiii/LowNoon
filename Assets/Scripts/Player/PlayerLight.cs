@@ -15,16 +15,13 @@ public class PlayerLight : MonoBehaviour
     void Update()
     {
         if (PlayerLightSource.spotAngle != GameManager.Instance.PlayerData.LightFOV)
-        {
            PlayerLightSource.spotAngle = GameManager.Instance.PlayerData.LightFOV;
-        }
 
         if (PlayerLightSource.intensity != GameManager.Instance.PlayerData.LightIntensity)
-        {
             PlayerLightSource.intensity = GameManager.Instance.PlayerData.LightIntensity;
-        }
 
-
+        if (PlayerLightSource.range != GameManager.Instance.PlayerData.LightRange)
+            PlayerLightSource.range = GameManager.Instance.PlayerData.LightRange;
     }
 
 }
