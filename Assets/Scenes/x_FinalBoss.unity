@@ -1195,6 +1195,7 @@ MonoBehaviour:
   _enemyShot: {fileID: 8300000, guid: a6bf865425ac4e74180d729122b7663b, type: 3}
   _laugh1: {fileID: 8300000, guid: 6d9ec25eb6b8bba4d9238ee1527d10ce, type: 3}
   _laugh2: {fileID: 8300000, guid: 098156647f59ef94dbd672f32bfd354e, type: 3}
+  _defeat: {fileID: 8300000, guid: e7d8c2a162f3e3c45b79524a22841726, type: 3}
 --- !u!82 &1049476216
 AudioSource:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class FinalBossMaster : MonoBehaviour
     [SerializeField] private AudioClip _enemyShot;
     [SerializeField] private AudioClip _laugh1;
     [SerializeField] private AudioClip _laugh2;
+    [SerializeField] private AudioClip _defeat;
     void Start()
     {
         _finalTimer = _timerValue;
@@ -31,7 +32,7 @@ public class FinalBossMaster : MonoBehaviour
     // TODO
     // All sounds - add correct GameManager volume
 
-    // 11 - Camera motion, fade to credits, mole defeat
+    // 11 - Camera motion, fade to credits, mole defeat SFX
 
     void Update()
     {
@@ -144,9 +145,12 @@ public class FinalBossMaster : MonoBehaviour
         {
             // 11 - Play the mole defeat anim
             _mole.SetCurrentAnimation("Defeat");
-            _source.PlayOneShot(_laugh2, .5f);
+            _source.PlayOneShot(_defeat, .5f);
             // Pull the camera over to the worm
             // -168.914
+            yield return new WaitForSeconds(2f);
+            Transform camPos4 = GameObject.Find("CameraPos4").transform;
+            _camera.moveToGivenPos(camPos4.position, camPos4.rotation.eulerAngles, 2f);
 
             GameManager.Instance.IsMainMenuLoaded = false; // Set GameManager BeenToMainMenu to false so we don't die when we get back to the town
             // Fade to credits after holding for a little
