@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4936132091552957338}
-  - component: {fileID: 2751626326958029972}
   - component: {fileID: 8333801176640268082}
+  - component: {fileID: 5387265528248043370}
   m_Layer: 0
   m_Name: HealthPickup
   m_TagString: HealthPickup
@@ -34,27 +34,6 @@ Transform:
   - {fileID: 3788650833933767816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2751626326958029972
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7435636785152514567}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.8997436, z: 1.764972}
-  m_Center: {x: 0, y: -0.26716065, z: 0.38248622}
 --- !u!95 &8333801176640268082
 Animator:
   serializedVersion: 5
@@ -76,6 +55,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &5387265528248043370
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7435636785152514567}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.0948757
+  m_Height: 2.421507
+  m_Direction: 1
+  m_Center: {x: 0.023123382, y: -0.12466165, z: 0.3605782}
 --- !u!1001 &7726928284661541079
 PrefabInstance:
   m_ObjectHideFlags: 0
