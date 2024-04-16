@@ -39,11 +39,10 @@ public class GameOverView : View
 
     private void OnEnable()
     {
-        Time.timeScale = 0f;
+        // time scale should not be frozen, or player death animation won't play out
     }
 
     private void OnDisable()
     {
-        Time.timeScale = 1f;
     }
 }

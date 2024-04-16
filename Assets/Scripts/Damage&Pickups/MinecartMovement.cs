@@ -8,6 +8,7 @@ public class MinecartMovement : MonoBehaviour
     [SerializeField] private float _speed = 50.0f;
     [SerializeField] private GameObject _explosionParticles;
     [SerializeField] private float _lifetime = 15.0f;
+    private const int PlayerExplosionDamage = 2; // hard coded to prevent player from being one-shot
 
     public float ExplosionRadius;
     public int DamageAmount;
@@ -32,7 +33,7 @@ public class MinecartMovement : MonoBehaviour
             foreach (var obj in damagedObjects)
             {
                 if(obj.tag == "Player"){
-                    obj.GetComponent<PlayerHealth>().ExplosionDmg = DamageAmount;
+                    obj.GetComponent<PlayerHealth>().ExplosionDmg = PlayerExplosionDamage;
                 }
                 else if(obj.TryGetComponent<DamageReceiver>(out DamageReceiver receiver)){
                     receiver.HealthLevel -= (float)DamageAmount;

@@ -9,11 +9,13 @@ public class MinecartSpawner : MonoBehaviour
     private float _timer;
     [SerializeField] private GameObject _minecartPrefab;
     [SerializeField, Tooltip("Height of spawner object for best alignment with tracks")] private float _spawnerHeight = 0.8f;
+    [SerializeField, Tooltip("whether spawner height variable is used or default position of object")] private bool _useSpawnerHeight = true;
    
     void Start()
     {
         // set spawner height
-        transform.position = new Vector3(transform.position.x, _spawnerHeight, transform.position.z);
+        if(_useSpawnerHeight)
+            transform.position = new Vector3(transform.position.x, _spawnerHeight, transform.position.z);
 
         _timer = Random.Range(_spawnIntervalMin, _spawnIntervalMax);
     }

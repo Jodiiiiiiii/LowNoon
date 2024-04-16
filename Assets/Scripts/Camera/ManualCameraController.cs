@@ -55,6 +55,12 @@ public class ManualCameraController : MonoBehaviour
         StartCoroutine(DoCamPosition(_revivePosition, .5f, _reviveRotation));
     }
 
+    public void moveToGivenPos(Vector3 pos, Vector3 rot, float speed)
+    {
+        StopAllCoroutines();
+        StartCoroutine(DoCamPosition(pos, speed, rot));
+    }
+
     // The camera movement coroutine that all of the bespoke camera movements use
     IEnumerator DoCamPosition(Vector3 targetPos, float travelTime, Vector3 targetRotation)
     {

@@ -11,11 +11,14 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField, Tooltip("damage dealt to the player by enemy melee attacks (ants)")] private int _meleeEnemyDamage = 1;
 
     [System.NonSerialized] public int ExplosionDmg;
+    private PlayerController _player;
     
 
     // Start is called before the first frame update
     void Start()
-    {   }
+    {
+        _player = gameObject.GetComponent<PlayerController>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -38,16 +41,20 @@ public class PlayerHealth : MonoBehaviour
         if (DamagerObject.CompareTag("EnemyBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
-
-            Destroy(DamagerObject); // supposed to slightly mitigate effecct of bullet pushing player when it hits briefly
+            if (bulletStats == null)
+            {
+                bulletStats = DamagerObject.GetComponentInChildren<BulletStats>();
+            }
 
             handleDamage((int)bulletStats.DamageLevel);
+
+            Destroy(DamagerObject); // supposed to slightly mitigate effecct of bullet pushing player when it hits briefly
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("MeleeAttack"))
+        if (other.CompareTag("MeleeAttack") && _player.State != CharacterState.DASH)
         {
             handleDamage(_meleeEnemyDamage);
         }
@@ -79,7 +86,6 @@ public class PlayerHealth : MonoBehaviour
         {
             // player dies
             // TODO: integrate animations and death state transition to restart scene
-            gameObject.SetActive(false); // temporary death behavior for testing purposes
             ViewManager.Show<GameOverView>(false);
         }
     }
