@@ -63,6 +63,11 @@ public class ManualCameraController : MonoBehaviour
         StartCoroutine(DoCamPosition(pos, speed, rot));
     }
 
+    public void lerpToFOV(float FOV, float time)
+    {
+        StartCoroutine(DoCamFOV(FOV, time));
+    }
+
     // The camera movement coroutine that all of the bespoke camera movements use
     IEnumerator DoCamPosition(Vector3 targetPos, float travelTime, Vector3 targetRotation)
     {

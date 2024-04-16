@@ -27,13 +27,9 @@ public class FinalBossMaster : MonoBehaviour
     }
 
     // TODO
-    // 3 - Need mole model and animations
+    // 3 - Need mole to laugh
     // 6 - Add correct GameManager volume
-    // 7 - Turn mole around
-    // 8 - Camera FOV, move the mole
-    // 8.5 - Turn the mole around
     // 9 - Add correct enemy gunshot, add correct volumes
-    // 10 - All
     // 11 - All
     // 12 - All
 
@@ -92,7 +88,7 @@ public class FinalBossMaster : MonoBehaviour
         _source.PlayOneShot(_finalTrack, .5f); //  GameManager.Instance.GetMusicVolume()
         _timerActive = true;
 
-        // 7 - TODO: Between the beginning of the music and the first stroke of the bell, turn the characters around so they face away from each other
+        // 7 - Between the beginning of the music and the first stroke of the bell, turn the characters around so they face away from each other
         _worm.TravelToPositionAndRotation(wormPos1.position, new Vector3(0, 90, 0), 2f);
         _mole.SetCurrentAnimation("Move");
         _mole.TravelToPositionAndRotation(_mole.transform.position, new Vector3(0, 180, 0), 2f);
@@ -100,7 +96,10 @@ public class FinalBossMaster : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         // 8 - Start the camera moving and the duelers walking
-        // TODO - Camera
+        _camera.lerpToFOV(75, 8.1f);
+        Transform camPos3 = GameObject.Find("CameraPos3").transform;
+        _camera.moveToGivenPos(camPos3.position, camPos2.rotation.eulerAngles, 6.1f);
+
         // Set both of them moving and playing their walk animations at an appropriate speed
         Transform wormPos2 = GameObject.Find("WormPos2").transform;
         _worm.TravelToPositionAndRotation(wormPos2.position, wormPos2.rotation.eulerAngles, 12f);
@@ -115,14 +114,18 @@ public class FinalBossMaster : MonoBehaviour
         ViewManager.GetView<FinalBossView>().FadeText();
 
         // 8.5 - Whip the duelers around after a certain amount of time has passed
-        yield return new WaitUntil(() => (_finalTimer <= 10.6));
+        yield return new WaitUntil(() => (_finalTimer <= 12.6));
         _worm.SetCurrentAnimation("Move");
         _worm.TravelToPositionAndRotation(_worm.transform.position, new Vector3(0, -90, 0), 1f);
+        _mole.TravelToPositionAndRotation(_mole.transform.position, new Vector3(0, 0, 0), 1f);
+        yield return new WaitForSeconds(4f);
+        _mole.SetCurrentAnimation("Move");
 
         // 9 - Wait until either the player has correctly fired, or the time has passed for them to do so
         yield return new WaitUntil(() => (_playerWon || _finalTimer <= 0));
         // Cut to black and play a gunshot
         ViewManager.GetView<FinalBossView>().ShowPanel();
+        
         if (_playerWon)
         {
             _source.PlayOneShot(_playerShot, .5f);
@@ -132,19 +135,29 @@ public class FinalBossMaster : MonoBehaviour
             _source.PlayOneShot(_enemyShot, .5f);
         }
 
-        // 10 - Hold on it for a few seconds, during which time re rotate the characters to face each other, then fade out
+        // 10 - Hold on it for a few seconds, then fade out
+        yield return new WaitForSeconds(4f);
+        ViewManager.GetView<FinalBossView>().FadePanel();
+        yield return new WaitForSeconds(2f);
         if (_playerWon) // If the worm won...
         {
             // 11 - Play the mole defeat anim
+            _mole.SetCurrentAnimation("Defeat");
             // Pull the camera over to the worm
-            
+            // -168.914
+
             GameManager.Instance.IsMainMenuLoaded = false; // Set GameManager BeenToMainMenu to false so we don't die when we get back to the town
             // Fade to credits after holding for a little
         }
         else // If the worm lost...
         {
             // Play worm defeat anim
+            _worm.SetCurrentAnimation("Death");
+            yield return new WaitForSeconds(1f);
+            // Play mole laugh
+            yield return new WaitForSeconds(1f);
             // 12 - Go to game over 
+            ViewManager.Show<GameOverView>(false);
         }
         
         yield return null;
