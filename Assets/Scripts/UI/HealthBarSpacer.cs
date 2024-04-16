@@ -17,6 +17,7 @@ public class HealthBarSpacer : MonoBehaviour
         int healthBars = GameManager.Instance.PlayerData.MaxHealth;
 
         _hpBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (healthBars * 200) + ((healthBars - 1) * 15));
+        _hpBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, -85);
         _rectTransform.localPosition = new Vector3(-((healthBars / 2f * 200) + ((healthBars / 2f - 1) * 15)), 20, 0);
     }
 
@@ -27,7 +28,7 @@ public class HealthBarSpacer : MonoBehaviour
 
         _hpBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (healthBars * 200) + ((healthBars - 1) * 15));
 
-        _rectTransform.localPosition = new Vector3(-((healthBars / 2f * 200) + ((healthBars / 2f - 1) * 15)), 5, 0);
+        _rectTransform.localPosition = new Vector3(-((healthBars / 2f * 200) + ((healthBars / 2f - 1) * 15)) -135, 5, 0);
 
     }
 }
