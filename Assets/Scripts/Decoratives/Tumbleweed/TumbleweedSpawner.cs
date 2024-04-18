@@ -13,13 +13,9 @@ public class TumbleweedSpawner : MonoBehaviour
     private float _timer;
     [SerializeField] private GameObject _tumbleweedPrefab;   // The tumbleweed to spawn
 
-    private float _min;  // The leftmost extent of the spawn line
-    private float _max;  // The rightmost extent of the spawn line
     void Start()
     {
         // Setting all of our variables using the inputs from the Inspector window
-        _min = this.transform.position.x - _length;
-        _max = this.transform.position.x + _length;
         _timer = Random.Range(_spawnIntervalMin, _spawnIntervalMax);
     }
 
@@ -37,7 +33,8 @@ public class TumbleweedSpawner : MonoBehaviour
 
     void SpawnTumbleweed()
     {
-        GameObject tumbleweed = Instantiate(_tumbleweedPrefab, new Vector3(Random.Range(_min, _max + 1), this.transform.position.y, this.transform.position.z), _tumbleweedPrefab.transform.rotation);
+        Vector3 spawnPos = transform.position + transform.right * Random.Range(-_length, _length);
+        GameObject tumbleweed = Instantiate(_tumbleweedPrefab, spawnPos, _tumbleweedPrefab.transform.rotation);
         tumbleweed.transform.LookAt(tumbleweed.transform.position + transform.forward);
     }
 }
