@@ -497,26 +497,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_Spacing
-      value: 32.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_Padding.m_Top
-      value: -65
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_Padding.m_Left
-      value: -961
-      objectReference: {fileID: 0}
-    - target: {fileID: 3798539321915394774, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_Padding.m_Bottom
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7653165854891223724, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_Name
       value: UI Views
