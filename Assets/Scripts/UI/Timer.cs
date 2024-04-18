@@ -25,7 +25,7 @@ public class Timer : MonoBehaviour
 
         if ( _time >= _timer)
         {
-            // Do a game over thing
+            // TODO: Do a game over thing
         }
 
         _image.fillAmount = _time / _timer;
