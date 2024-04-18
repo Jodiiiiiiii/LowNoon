@@ -147,8 +147,8 @@ public class PlayerController : MonoBehaviour
         PlayerInput.DashDown = Input.GetKeyDown(KeyCode.LeftShift);
 
         // Camera inputs
-        PlayerInput.LookAxisRight = Input.GetAxisRaw(MOUSE_RIGHT);
-        PlayerInput.LookAxisUp = Input.GetAxisRaw(MOUSE_UP);
+        PlayerInput.LookAxisRight = Input.GetAxisRaw(MOUSE_RIGHT) * GameManager.Instance.SaveData.HorizontalSensitivity;
+        PlayerInput.LookAxisUp = Input.GetAxisRaw(MOUSE_UP) * GameManager.Instance.SaveData.VerticalSensitivity;
     }
     #endregion
 

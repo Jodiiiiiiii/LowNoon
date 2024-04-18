@@ -132,7 +132,8 @@ public class GameManager : MonoBehaviour
         public float EnemyVolumeSlider;
         public float EnvironmentVolumeSlider;
         public float MusicVolumeSlider;
-        public bool ReticleAlwaysOn;
+        public float HorizontalSensitivity;
+        public float VerticalSensitivity;
     }
     private Data _saveData;
 
@@ -153,6 +154,8 @@ public class GameManager : MonoBehaviour
                 newSaveData.EnemyVolumeSlider = 0.5f;
                 newSaveData.EnvironmentVolumeSlider = 0.5f;
                 newSaveData.MusicVolumeSlider = 0.5f;
+                newSaveData.HorizontalSensitivity = 1f;
+                newSaveData.VerticalSensitivity = 1f;
 
                 // read existing save data (if it exists)
                 string path = Application.persistentDataPath + "/savedata.json";
