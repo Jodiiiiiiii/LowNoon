@@ -23,7 +23,7 @@ public class Settings : MonoBehaviour
         _environmentVolumeSlider.value = GameManager.Instance.SaveData.EnvironmentVolumeSlider * 100;
         _musicVolumeSlider.value = GameManager.Instance.SaveData.MusicVolumeSlider * 100;
         _horizontalSensSlider.value = GameManager.Instance.SaveData.HorizontalSensitivity;
-        _verticalSensSlider.value = GameManager.Instance.SaveData .VerticalSensitivity;
+        _verticalSensSlider.value = GameManager.Instance.SaveData.VerticalSensitivity;
     }
 
     // Update is called once per frame
