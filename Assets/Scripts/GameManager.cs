@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
         public bool HadSmallCombatRoom;
         public bool HadLargeCombatRoom;
         public int NumRooms; // number of cave rooms which have been entered so far
+
+        public bool CrumblingDeath;
     }
     private Stats _playerData;
 
@@ -106,6 +108,7 @@ public class GameManager : MonoBehaviour
             Instance._playerData.HadSmallCombatRoom = false;
             Instance._playerData.HadLargeCombatRoom = false;
             Instance._playerData.NumRooms = 0;
+            Instance._playerData.CrumblingDeath = false;
         }
         else
             Debug.LogError("Error: trying to access PlayerStats with no player in scene");

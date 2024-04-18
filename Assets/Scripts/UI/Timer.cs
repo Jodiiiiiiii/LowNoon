@@ -28,7 +28,12 @@ public class Timer : MonoBehaviour
 
         if ( _time >= _timer)
         {
-            // TODO: Do a game over thing
+            // player dies
+            ViewManager.Show<GameOverView>(false);
+            GameManager.Instance.PlayerData.CrumblingDeath = true; // ensure fade to black in game over screen
+            GameObject.Find("Player").GetComponent<PlayerController>().enabled = false; // ensure player loses control
+
+            // TODO: add room crumbling sound effect
         }
 
         _image.fillAmount = _time / _timer;

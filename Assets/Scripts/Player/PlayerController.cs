@@ -113,6 +113,17 @@ public class PlayerController : MonoBehaviour
         SceneTransitionObject.onSceneTransition -= HaltAndDisable;
         GameManager.onSceneBegin -= HaltAndDisable;
         GameManager.onHubRevive -= HaltAndDisable;
+
+        // set all inputs to zero in case other scripts are still trying to access them
+        // Character inputs
+        PlayerInput.MoveAxisForward = 0;
+        PlayerInput.DashDown = false;
+        // Camera inputs
+        PlayerInput.LookAxisRight = 0;
+        PlayerInput.LookAxisUp = 0;
+
+        // stop velocity to prevent rigidbody sliding
+        _rb.velocity = Vector3.zero;
     }
 
     // Update is called once per frame
