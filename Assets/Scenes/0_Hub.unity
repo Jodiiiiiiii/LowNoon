@@ -12716,25 +12716,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1420582415326779304, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: _mainView
-      value: 
-      objectReference: {fileID: 1640926078}
-    - target: {fileID: 2195943898826826081, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195943898826826081, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195943898826826081, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195943898826826081, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
+    - target: {fileID: 2205882962643777833, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2647753080575191667, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: startingView
@@ -12778,10 +12762,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2894776623557861686, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3200656744288450033, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7419644012985367002, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
@@ -33449,11 +33429,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 923811365232550224, guid: fb0a4d132e7be8e49beda8e24ddced2a, type: 3}
   m_PrefabInstance: {fileID: 1638608699}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1640926078 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8475538568335068298, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
-  m_PrefabInstance: {fileID: 642870630}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1640975019
 PrefabInstance:
