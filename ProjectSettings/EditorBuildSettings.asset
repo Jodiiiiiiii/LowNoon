@@ -41,4 +41,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/6_MazeRoom.unity
     guid: 3ee88cc834d6ef9499d52e2f93e2e16c
+  - enabled: 1
+    path: Assets/Scenes/x_FinalBoss.unity
+    guid: 115995d5ce07d7e4dab526881cbd1f78
+  - enabled: 1
+    path: Assets/Scenes/xx_Credits.unity
+    guid: 54f79804bb6e55e49858d532b7c10e73
   m_configObjects: {}

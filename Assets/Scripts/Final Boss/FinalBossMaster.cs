@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinalBossMaster : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class FinalBossMaster : MonoBehaviour
     // TODO
     // All sounds - add correct GameManager volume
 
-    // 11 - Camera motion, fade to credits, mole defeat SFX
+    // 11 - Fade to credits
 
     void Update()
     {
@@ -154,6 +155,11 @@ public class FinalBossMaster : MonoBehaviour
 
             GameManager.Instance.IsMainMenuLoaded = false; // Set GameManager BeenToMainMenu to false so we don't die when we get back to the town
             // Fade to credits after holding for a little
+            yield return new WaitForSeconds(5f);
+            ViewManager.GetView<FinalBossView>().LeaveSceneTransition();
+            yield return new WaitForSeconds(3f);
+            SceneManager.LoadScene("xx_Credits");
+            
         }
         else // If the worm lost...
         {

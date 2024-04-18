@@ -614,6 +614,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3276207721011333109, guid: ef2420e690f8e7e4dabba5d83f82c262, type: 3}
   m_PrefabInstance: {fileID: 465517539}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &517418039 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3749128294966056690, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+  m_PrefabInstance: {fileID: 2100709042}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &526415967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1136,6 +1141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorial: {fileID: 1176453817}
   blackPanel: {fileID: 1090106051}
+  _sceneTransitionAnimator: {fileID: 517418039}
 --- !u!4 &987270037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2671174201580075819, guid: 683ebfeac96fea941b802446bdf5b6cf, type: 3}
@@ -2601,7 +2607,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 506880169874192559, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1196260919010456625, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2647753080575191667, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: startingView

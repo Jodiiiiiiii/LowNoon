@@ -2927,6 +2927,7 @@ MonoBehaviour:
   _fb3Time: 36
   _fb4Time: 60
   _closingTime: 70
+  _sceneTransitionAnimator: {fileID: 2106174461}
 --- !u!1 &1342998500
 GameObject:
   m_ObjectHideFlags: 0
@@ -4404,7 +4405,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 506880169874192559, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1196260919010456625, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2647753080575191667, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: startingView
@@ -4477,6 +4482,11 @@ PrefabInstance:
 --- !u!224 &2106174460 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4399934670163845733, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+  m_PrefabInstance: {fileID: 2106174459}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2106174461 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3749128294966056690, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
   m_PrefabInstance: {fileID: 2106174459}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807

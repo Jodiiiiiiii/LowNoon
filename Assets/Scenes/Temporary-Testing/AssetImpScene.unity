@@ -377,6 +377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minecart (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6416409744962525146, guid: 7cc3929abe3af204d924c69b4ec74ea1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6912691848805455114, guid: 7cc3929abe3af204d924c69b4ec74ea1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.94
@@ -8159,9 +8163,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 262834871462118554, guid: 7cc3929abe3af204d924c69b4ec74ea1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6099281476828385200, guid: 7cc3929abe3af204d924c69b4ec74ea1, type: 3}
       propertyPath: m_Name
       value: Minecart
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416409744962525146, guid: 7cc3929abe3af204d924c69b4ec74ea1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6912691848805455114, guid: 7cc3929abe3af204d924c69b4ec74ea1, type: 3}
       propertyPath: m_LocalPosition.x

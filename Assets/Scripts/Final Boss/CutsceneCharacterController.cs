@@ -42,7 +42,8 @@ public class CutsceneCharacterController : MonoBehaviour
         if(name == "Move")
         {
             _animator.SetBool("isMoving", !_animator.GetBool("isMoving"));
-            _animator.SetFloat("moveSpdMult", .5f);
+            if(gameObject.name == "Player")
+                _animator.SetFloat("moveSpdMult", .5f);
         }
         else
         {

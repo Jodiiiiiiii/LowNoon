@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CreditsView : View
 {
@@ -17,7 +18,10 @@ public class CreditsView : View
     [SerializeField] private float _fb4Time;
     [SerializeField] private float _closingTime;
 
+    [SerializeField] private Animator _sceneTransitionAnimator; // Animator for our scene transition element
+
     private float _timer;
+    private bool _isTheEnd;
 
     public override void Initialize()
     {
@@ -41,9 +45,16 @@ public class CreditsView : View
             _fb3.SetActive(true);
         if (_timer > _fb4Time)
             _fb4.SetActive(true);
-        if (_timer > _closingTime)
+
+        // And we begin again
+        if (_timer > _closingTime && !_isTheEnd)
         {
-            // Go back to the main menu
+            _sceneTransitionAnimator.Play("StandardExit", 0, 0);
+            _isTheEnd = true;
+        }
+        if(_timer > _closingTime + 3f)
+        {
+            SceneManager.LoadScene("0_Hub");
         }
     }
 }
