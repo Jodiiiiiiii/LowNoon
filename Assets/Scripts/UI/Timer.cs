@@ -34,6 +34,8 @@ public class Timer : MonoBehaviour
             GameObject.Find("Player").GetComponent<PlayerController>().enabled = false; // ensure player loses control
 
             // TODO: add room crumbling sound effect
+
+            // TODO: initiate camera shake effect here during fade to black
         }
 
         _image.fillAmount = _time / _timer;
