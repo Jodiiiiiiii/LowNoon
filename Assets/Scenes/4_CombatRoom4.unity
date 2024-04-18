@@ -7466,6 +7466,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit
       objectReference: {fileID: 0}
+    - target: {fileID: 6372405424471417641, guid: 299e097cae5539d4a8514c0d4bd44d4a, type: 3}
+      propertyPath: _transitionCollider
+      value: 
+      objectReference: {fileID: 1043938382}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13735,7 +13739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &347210824
 Transform:
   m_ObjectHideFlags: 0
@@ -26598,7 +26602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &677521278
 Transform:
   m_ObjectHideFlags: 0
@@ -39036,6 +39040,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 827769140448814351, guid: 526f1bc84bf85bf438697e0366797fd0, type: 3}
   m_PrefabInstance: {fileID: 1042617457}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1043938382 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 7350164877092880138, guid: 299e097cae5539d4a8514c0d4bd44d4a, type: 3}
+  m_PrefabInstance: {fileID: 188892109}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1044122835
 GameObject:
   m_ObjectHideFlags: 0
@@ -42439,7 +42448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1148541802
 Transform:
   m_ObjectHideFlags: 0
@@ -59584,7 +59593,7 @@ GameObject:
   - component: {fileID: 1558638422}
   - component: {fileID: 1558638423}
   m_Layer: 0
-  m_Name: End
+  m_Name: End (All children must be disabled by default)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
