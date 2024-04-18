@@ -5543,8 +5543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _numToActivate: 1
-  _requiredObjsInGroup:
-  - {fileID: 1974979911}
+  _requiredObjsInGroup: []
 --- !u!1001 &133496623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15176,7 +15175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &347210824
 Transform:
   m_ObjectHideFlags: 0
@@ -30314,7 +30313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &677521278
 Transform:
   m_ObjectHideFlags: 0
@@ -48162,7 +48161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1148541802
 Transform:
   m_ObjectHideFlags: 0
