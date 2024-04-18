@@ -60,9 +60,7 @@ public class InGameUIView : View
     {
         // re-gather new player stats every frame
         _stats = GameManager.Instance.PlayerData;
-        //Debug.Log(_uiCanvas.rect.width + " " + _uiCanvas.rect.height);
-        //_leftBookend.transform.position = new Vector2(_hpUnits[0].GetComponent<RectTransform>().position.x - (_uiCanvas.rect.width / 18) , _hpUnits[0].GetComponent<RectTransform>().position.y - (_uiCanvas.rect.height / 18));
-        //_rightBookend.transform.position = new Vector2(_hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.x + 90, _hpUnits[_hpUnits.Count - 1].GetComponent<RectTransform>().position.y - 45);
+        
         _upgrades[0].setUpgradeCount(_playerStats.getDamageUpgradeCount());
         _upgrades[1].setUpgradeCount(_stats.FireRateUpgradeCount);
         _upgrades[2].setUpgradeCount(_playerStats.getMoveSpdUpgradeCount());
