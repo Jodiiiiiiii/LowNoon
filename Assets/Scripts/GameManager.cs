@@ -51,7 +51,8 @@ public class GameManager : MonoBehaviour
         // Armor
         public int Armor; // Armor Upgrades (temporary/consumable)
         // Damage
-        public float BulletDamage; // Base Damage + Damage Upgrades
+        public float BulletDamageMult; // Base Damage + Damage Upgrades
+        public int DamageUpgradeCount;
         // Fire Speed
         public float BulletCooldown; // Base Cooldown + Fire Speed Upgrades
         public int FireRateUpgradeCount; // How many fire rate upgrades we have

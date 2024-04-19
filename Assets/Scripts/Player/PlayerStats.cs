@@ -50,7 +50,8 @@ public class PlayerStats : MonoBehaviour
         // armor
         baseData.Armor = _baseArmor;
         // bullet damage
-        baseData.BulletDamage = _baseBulletDamage;
+        baseData.BulletDamageMult = _baseBulletDamage;
+        baseData.DamageUpgradeCount = 0;
         // fire rate
         baseData.BulletCooldown = _baseBulletCooldown;
         baseData.FireRateUpgradeCount = _baseFireRateUpgradeCount;
@@ -83,7 +84,8 @@ public class PlayerStats : MonoBehaviour
                 playerData.Armor += _armorPerUpgrade;
                 break;
             case UpgradeController.UpgradeType.Damage:
-                playerData.BulletDamage += _bulletDamagePerUpgrade;
+                playerData.BulletDamageMult *= (1 + _bulletDamagePerUpgrade);
+                playerData.DamageUpgradeCount++;
                 break;
             case UpgradeController.UpgradeType.FireSpeed:
                 playerData.BulletCooldown *= _bulletCooldownUpgradeFactor;
@@ -101,12 +103,6 @@ public class PlayerStats : MonoBehaviour
         }
 
         return playerData;
-    }
-
-    public int getDamageUpgradeCount()
-    {
-        GameManager.Stats playerData = GameManager.Instance.PlayerData;
-        return (int)((playerData.BulletDamage - _baseBulletDamage) / _bulletDamagePerUpgrade);
     }
 
     public int getMoveSpdUpgradeCount()
