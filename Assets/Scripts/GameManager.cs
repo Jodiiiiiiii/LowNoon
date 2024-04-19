@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
                 newSaveData.VerticalSensitivity = 1f;
 
                 // read existing save data (if it exists)
-                string path = Application.persistentDataPath + "/savedata.json";
+                string path = Application.persistentDataPath + "\\savedata.json";
                 if (File.Exists(path))
                 {
                     // read json file into data object
@@ -252,7 +252,7 @@ public class GameManager : MonoBehaviour
     {
         // save SavePointData to json file
         string json = JsonUtility.ToJson(SaveData);
-        File.WriteAllText(Application.persistentDataPath + "/savedata.json", json);
+        File.WriteAllText(Application.persistentDataPath + "\\savedata.json", json);
     }
     #endregion
 
