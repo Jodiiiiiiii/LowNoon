@@ -187,8 +187,8 @@ MonoBehaviour:
   _armorPerUpgrade: 1
   _baseBulletDamage: 1
   _bulletDamagePerUpgrade: 0.5
-  _baseBulletCooldown: 0.8
-  _bulletCooldownUpgradeFactor: 0.8
+  _baseBulletCooldown: 1
+  _bulletCooldownUpgradeFactor: 0.85
   _baseMoveSpeed: 1
   _moveSpeedPerUpgrade: 0.12
   _baseLightFOV: 60
