@@ -66,6 +66,7 @@ public class RangedMovement : MonoBehaviour
 
     private Rigidbody _rigidBody;
     private int _leftOrRight;
+    private Quaternion _initialRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +92,8 @@ public class RangedMovement : MonoBehaviour
 
         EnemyMoveState = RangeEnemyMoveState.IDLE;
         StayStill = false; // prevents shooting in RangedAttack.cs while idle
+
+        _initialRotation = gameObject.transform.rotation;
     }
 
     // Update is called once per frame
@@ -158,6 +161,9 @@ public class RangedMovement : MonoBehaviour
             // exit idle mode if player detected with no obstructions
             if (closestHit.distance < Mathf.Infinity && closestHit.collider.CompareTag("Player"))
                 EnemyMoveState = RangeEnemyMoveState.STILL;
+
+            // lock rotation while still in idle mode (prevents spinning out of control if bumped)
+            transform.rotation = _initialRotation;
         }
 
         Vector3 direction = Vector3.zero; // stays zero if in still state

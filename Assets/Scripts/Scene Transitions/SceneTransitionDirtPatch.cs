@@ -5,13 +5,13 @@ using UnityEngine;
 public class SceneTransitionDirtPatch : MonoBehaviour
 {
 
-    [SerializeField] GameObject _transitionCollider;
+    [SerializeField] Collider _transitionCollider;
     [SerializeField] GameObject _glowParticles;
 
     public bool CanMoveOn; // When we "clear" a scene, just toggle this
     void Start()
     {
-        _transitionCollider.SetActive(false);
+        _transitionCollider.enabled = false;
         _glowParticles.SetActive(false);
     }
 
@@ -20,7 +20,7 @@ public class SceneTransitionDirtPatch : MonoBehaviour
     {
         if (CanMoveOn)
         {
-            _transitionCollider.SetActive(true);
+            _transitionCollider.enabled = true;
             _glowParticles.SetActive(true);
         }
     }

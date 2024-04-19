@@ -39,9 +39,12 @@ EditorBuildSettings:
     path: Assets/Scenes/3_MinecartRoom.unity
     guid: 84d155f51f3c7fe488ff92e5fdc79e7f
   - enabled: 1
-    path: Assets/Scenes/5_BarrelRoom.unity
-    guid: 2d1821a8eb532445eb2380e1130d4379
+    path: Assets/Scenes/4_CombatRoom4.unity
+    guid: bceabc4dc6363ba4881c9413c7040234
   - enabled: 1
     path: Assets/Scenes/6_MazeRoom.unity
     guid: 3ee88cc834d6ef9499d52e2f93e2e16c
+  - enabled: 1
+    path: Assets/Scenes/FinalBoss.unity
+    guid: 115995d5ce07d7e4dab526881cbd1f78
   m_configObjects: {}
