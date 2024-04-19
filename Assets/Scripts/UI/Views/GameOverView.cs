@@ -36,12 +36,13 @@ public class GameOverView : View
 
     public void RetryButton()
     {
-        //IDK how to get this to not load the main menu
+        GameManager.Instance.IsMainMenuLoaded = true; // makes player come out of coffin
         SceneManager.LoadScene("0_Hub");
     }
 
     public void MainMenu()
     {
+        GameManager.Instance.IsMainMenuLoaded = false; // makes player go to main menu (not coffin)
         SceneManager.LoadScene("0_Hub");
     }
 
