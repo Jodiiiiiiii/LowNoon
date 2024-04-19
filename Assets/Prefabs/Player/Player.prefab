@@ -197,8 +197,8 @@ MonoBehaviour:
   _baseLightIntensity: 0.5
   _maxIntensity: 1.1
   _lightIntensityLerpRatio: 0.25
-  _baseLightRange: 80
-  _maxLightRange: 200
+  _baseLightRange: 90
+  _maxLightRange: 250
   _lightRangeLerpRatio: 0.25
 --- !u!114 &5754108205002651285
 MonoBehaviour:
