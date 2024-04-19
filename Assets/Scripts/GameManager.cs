@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
         public int FireRateUpgradeCount; // How many fire rate upgrades we have
         // Move Speed
         public float MoveSpeed; // Base MoveSpeed + MoveSpeed Upgrades
-        public float DashDamage; // Basse Damage + MoveSpeed Upgrades
         // Light
         public float LightFOV; // Base FOV + Light Upgrades
         public float LightIntensity; // Base Intensity + Light Upgrades

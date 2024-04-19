@@ -240,16 +240,16 @@ public class PlayerController : MonoBehaviour
         {
             case CharacterState.MOVING: // character tracks rotation to camera at a certain rate
                 // smoothing planar rotation
-                // turning speed also scales with move speed stat
+                // turning speed also scales with move speed stat (but at a higher rate -> so turning actually feels sharper with upgrades)
                 _rb.MoveRotation(Quaternion.Slerp(transform.rotation, planarCameraQuaternion,
-                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed)));
+                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed * GameManager.Instance.PlayerData.MoveSpeed)));
 
                 break;
             case CharacterState.STATIONARY: // character rotates faster tracking camera
                 // smooth planar rotation
-                // speed also scales with move speed stat
+                // turning speed also scales with move speed stat (but at a higher rate -> so turning actually feels sharper with upgrades)
                 _rb.MoveRotation(Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
-                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed)));
+                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed * GameManager.Instance.PlayerData.MoveSpeed)));
 
                 break;
             case CharacterState.DASH: // camera locked at current 'dashing' direction

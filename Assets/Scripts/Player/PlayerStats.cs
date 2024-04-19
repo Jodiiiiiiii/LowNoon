@@ -24,8 +24,6 @@ public class PlayerStats : MonoBehaviour
     [Header("Move Speed")]
     [SerializeField, Tooltip("Base move speed stat - influences move force, max speed, and turning speeds multiplicatively")] private float _baseMoveSpeed = 1f;
     [SerializeField, Tooltip("Move speed per upgrade")] private float _moveSpeedPerUpgrade = 0.1f;
-    [SerializeField, Tooltip("Base dash damage stat")] private float _baseDashDamage = 2f;
-    [SerializeField, Tooltip("Dash damage per upgrade")] private float _dashDamagePerUpgrade = 1f;
 
     [Header("Light")]
     [SerializeField, Tooltip("Base light FOV stat")] private float _baseLightFOV = 45f;
@@ -58,7 +56,6 @@ public class PlayerStats : MonoBehaviour
         baseData.FireRateUpgradeCount = _baseFireRateUpgradeCount;
         // move speed
         baseData.MoveSpeed = _baseMoveSpeed;
-        baseData.DashDamage = _baseDashDamage;
         // light
         baseData.LightFOV = _baseLightFOV;
         baseData.LightIntensity = _baseLightIntensity;
@@ -94,7 +91,6 @@ public class PlayerStats : MonoBehaviour
                 break;
             case UpgradeController.UpgradeType.MoveSpeed:
                 playerData.MoveSpeed += _moveSpeedPerUpgrade;
-                playerData.DashDamage += _dashDamagePerUpgrade;
                 break;
             case UpgradeController.UpgradeType.Light:
                 playerData.LightFOV = Mathf.Lerp(playerData.LightFOV, _maxLightFOV, _lightFOVLerpRatio);
@@ -116,7 +112,7 @@ public class PlayerStats : MonoBehaviour
     public int getMoveSpdUpgradeCount()
     {
         GameManager.Stats playerData = GameManager.Instance.PlayerData;
-        return (int)((playerData.MoveSpeed- _baseMoveSpeed) / _moveSpeedPerUpgrade);
+        return Mathf.RoundToInt((playerData.MoveSpeed- _baseMoveSpeed) / _moveSpeedPerUpgrade);
     }
 
 }

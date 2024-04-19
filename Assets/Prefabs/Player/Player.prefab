@@ -190,9 +190,7 @@ MonoBehaviour:
   _baseBulletCooldown: 0.8
   _bulletCooldownUpgradeFactor: 0.8
   _baseMoveSpeed: 1
-  _moveSpeedPerUpgrade: 0.1
-  _baseDashDamage: 2
-  _dashDamagePerUpgrade: 1
+  _moveSpeedPerUpgrade: 0.12
   _baseLightFOV: 60
   _maxLightFOV: 150
   _lightFOVLerpRatio: 0.25
