@@ -201,7 +201,7 @@ MonoBehaviour:
   _attackAnimDuration: 0
   _clips:
   - {fileID: 8300000, guid: a49b1c0ac5892481489efd74a93469b0, type: 3}
-  - {fileID: 8300000, guid: 4eff0e18557b0405aa4e5116eeb16e61, type: 3}
+  - {fileID: 8300000, guid: d8e505c036eae4decb8b0fe5a7c7a583, type: 3}
   _reviveAnimDuration: 0.5
 --- !u!54 &2891620797312053039
 Rigidbody:
