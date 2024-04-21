@@ -16,6 +16,8 @@ public class MeleeAttack : MonoBehaviour
     private float _attackTimer;
     private bool _duringAttack;
     public bool DuringAttack => _duringAttack;
+    private AudioSource _audioSource;
+    [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class MeleeAttack : MonoBehaviour
         _duringAttack = false;
         _attackTimer = 0;
         AttackCollider.enabled = false;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -44,6 +47,7 @@ public class MeleeAttack : MonoBehaviour
             if (!_duringAttack && _attackTimer > AttackCooldown) // if attack is off cooldown and ready
             {
                 // initiate attack
+                _audioSource.PlayOneShot(_clips[0]);
                 _duringAttack = true;
                 AttackCollider.enabled = true;
                 _attackTimer = 0;

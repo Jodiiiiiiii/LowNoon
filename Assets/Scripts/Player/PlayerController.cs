@@ -20,6 +20,9 @@ public class PlayerCharacterInputs
 
 public class PlayerController : MonoBehaviour
 {
+    private AudioSource _audioSource;
+    [Tooltip("Audio clip order list: 0 = dash sound")]
+    [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
     // Components
     private Rigidbody _rb;
     [SerializeField] private Texture _gummyWorm;
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _audioSource = GetComponent<AudioSource>();
 
         State = CharacterState.STATIONARY;
 
@@ -182,6 +186,7 @@ public class PlayerController : MonoBehaviour
                 // Not DASH -> DASH
                 if (PlayerInput.DashDown && _dashTimer <= 0f && !GameManager.IsPaused)
                 {
+                    _audioSource.PlayOneShot(_clips[0],GameManager.Instance.SaveData.PlayerVolumeSlider);
                     // start dash duration timer
                     _dashTimer = _dashDuration;
                     // set velocity to zero first to ensure consistent dash behavior/distance whether dashing from moving or stationary
@@ -300,7 +305,6 @@ public class PlayerController : MonoBehaviour
 
                 break;
             case CharacterState.DASH: // fixed velocity in fixed direction
-
                 // apply dashing force (only if dash duration hasn't expired)
                 if (_dashTimer > 0)
                 {

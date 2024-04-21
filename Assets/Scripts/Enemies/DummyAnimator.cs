@@ -8,11 +8,14 @@ public class DummyAnimator : EnemyAnimator
     [SerializeField] protected float _reviveAnimDuration;
     private float _maxHealth;
     private BoxCollider _collider;
+    
+    
     new void Start()
     {
         base.Start();
         _maxHealth = _damageReceiver.HealthLevel; // Store max HP to use to revive later
         _collider = GetComponent<BoxCollider>();
+        
     }
 
     // Update is called once per frame
@@ -26,7 +29,9 @@ public class DummyAnimator : EnemyAnimator
         _collider.enabled = false;
         _damageReceiver.IsImmune = true;
         _animator.SetBool("isDead", true);
+        _audioSource.PlayOneShot(_clips[1], 1.0f);
         yield return new WaitForSeconds(_deathAnimDuration);
+        
         _animator.SetBool("isDead", false);
         _damageReceiver.HealthLevel = _maxHealth;
         _damageReceiver.IsImmune = false;
