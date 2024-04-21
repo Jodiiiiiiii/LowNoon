@@ -17,8 +17,9 @@ public class EnemyAnimator : MonoBehaviour
     [SerializeField] protected float _deathAnimDuration;
     [SerializeField] protected float _attackAnimDuration;
     protected AudioSource _audioSource;
-    [Tooltip("Audio clip order list: 0 = Damage Sound; 1 = Falling sound")]
+    [Tooltip("Audio clip order list: 0 = Hurt Sound; 1 = Death sound")]
     [SerializeField] protected List<AudioClip> _clips = new List<AudioClip>();
+    
     // Start is called before the first frame update
     protected void Start()
     {
@@ -56,7 +57,9 @@ public class EnemyAnimator : MonoBehaviour
     protected virtual IEnumerator DoHurtAnim() {
 
         _animator.SetBool("isHurting", true);
+        if(_clips!=null){
         _audioSource.PlayOneShot(_clips[0], 1.0f);
+        }
         yield return new WaitForSeconds(_hurtAnimDuration);
         _animator.SetBool("isHurting", false);
     }

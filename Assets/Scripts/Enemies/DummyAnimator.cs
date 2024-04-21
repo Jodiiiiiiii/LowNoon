@@ -10,6 +10,7 @@ public class DummyAnimator : EnemyAnimator
     private BoxCollider _collider;
     
     
+    
     new void Start()
     {
         base.Start();
