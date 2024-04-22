@@ -194,7 +194,7 @@ MonoBehaviour:
   _baseLightFOV: 60
   _maxLightFOV: 150
   _lightFOVLerpRatio: 0.25
-  _baseLightIntensity: 0.5
+  _baseLightIntensity: 0.75
   _maxIntensity: 1.1
   _lightIntensityLerpRatio: 0.25
   _baseLightRange: 90
