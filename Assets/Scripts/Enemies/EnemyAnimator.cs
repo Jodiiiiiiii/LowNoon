@@ -17,7 +17,7 @@ public class EnemyAnimator : MonoBehaviour
     [SerializeField] protected float _deathAnimDuration;
     [SerializeField] protected float _attackAnimDuration;
     protected AudioSource _audioSource;
-    [Tooltip("Audio clip order list: 0 = Hurt Sound; 1 = Death sound")]
+    [Tooltip("Audio clip order list: 0 = Hurt Sound; 1 = Death sound, 2 = Movement Sound")]
     [SerializeField] protected List<AudioClip> _clips = new List<AudioClip>();
     
     // Start is called before the first frame update

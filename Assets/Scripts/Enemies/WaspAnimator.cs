@@ -10,16 +10,23 @@ public class WaspAnimator : EnemyAnimator
     private RangedMovement _rangedMovement;
 
     private bool _isActiveCoroutine;
+    private float _timer = 0.0f;
+    
     new void Start()
     {
         base.Start();
         _rangedMovement = GetComponent<RangedMovement>();
         _rangedAttack = GetComponent<RangedAttack>();
+        
     }
 
     // Update is called once per frame
     new void Update()
-    {
+    {   _timer -= Time.deltaTime;
+        if(_timer <= 0){
+            _audioSource.PlayOneShot(_clips[2], GameManager.Instance.SaveData.EnemyVolumeSlider);
+            _timer = 5.88f;
+        }
         if(_rangedMovement.EnemyMoveState == RangedMovement.RangeEnemyMoveState.ZIPPY) // Movement animations
         {
             if (_rangedMovement.Right)
