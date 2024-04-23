@@ -247,6 +247,7 @@ MonoBehaviour:
   _ignoreMask:
     serializedVersion: 2
     m_Bits: 12288
+  _inputBuffer: 0.25
 --- !u!114 &9080262972005425276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InvulnerabilityDuration: 2
   _meleeEnemyDamage: 1
+  _healthPickupAudio: {fileID: 8300000, guid: 967c7e6d5ecf5fd4793c077d91982640, type: 3}
 --- !u!136 &5815269249637768015
 CapsuleCollider:
   m_ObjectHideFlags: 0
