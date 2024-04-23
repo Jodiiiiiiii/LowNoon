@@ -16,6 +16,11 @@ public class PlayerShooting : MonoBehaviour
 
     [Header("Raycast Exclusions")]
     [SerializeField, Tooltip("Layer that the raycast should not hit")] private LayerMask _ignoreMask;
+
+    [Header("Input Buffer")]
+    [SerializeField, Tooltip("Window within which input buffer will store input to check for cooldown")] private float _inputBuffer = 0.25f;
+    private float _bufferTimer;
+
     public float PlayerAngleOffset { get; private set; } = 0;
 
     private PlayerController _playerController;
@@ -41,8 +46,16 @@ public class PlayerShooting : MonoBehaviour
         if (PlayerAngleOffset < -180) PlayerAngleOffset += 360;
         else if (PlayerAngleOffset > 180) PlayerAngleOffset -= 360;
 
-        // shooting input AND not during cooldown time AND in stationary state
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > GameManager.Instance.PlayerData.BulletCooldown && _playerController.State == CharacterState.STATIONARY 
+        // Input buffer
+        _bufferTimer -= Time.deltaTime;
+        // reset input buffer on mouse input - but also check player state
+        if (Input.GetKeyDown(KeyCode.Mouse0)) _bufferTimer = _inputBuffer;
+
+        // cancel buffer if not stationary
+        if (_playerController.State != CharacterState.STATIONARY) _bufferTimer = 0;
+
+        // shooting input buffer AND not during cooldown time
+        if (_bufferTimer > 0 && _timer > GameManager.Instance.PlayerData.BulletCooldown 
             && !GameManager.IsPaused && !GameManager.Instance.PlayerData.CrumblingDeath)
         {
             // create new bullet
