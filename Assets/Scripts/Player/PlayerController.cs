@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     // Components
     private Rigidbody _rb;
     [SerializeField] private Texture _gummyWorm;
+    private bool _isCoolingDown = false;
+
+    public delegate void OnDashRecharge();
+    public static event OnDashRecharge onDashRecharge;
 
     public CharacterState State { get; private set; } // tracks the players current state; likely useful for animator
 
@@ -32,11 +36,6 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         State = CharacterState.STATIONARY;
-
-        if (GameManager.IsGummy)
-        {
-            GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material.mainTexture = _gummyWorm;
-        }
 
         // set starting val of prevHeight
         _prevHeight = transform.position.y;
@@ -183,6 +182,7 @@ public class PlayerController : MonoBehaviour
                 if (_dashTimer <= 0 && _rb.velocity.magnitude < actualMovingThreshold) // dash has hit max duration and player has come to a stop
                 {
                     _dashTimer = _dashCooldown; // start dash cooldown cooldown timer
+                    _isCoolingDown = true;
                     TransitionToState(CharacterState.STATIONARY);
                 }
                 else // update duration timer
@@ -215,6 +215,14 @@ public class PlayerController : MonoBehaviour
                     {
                         TransitionToState(CharacterState.STATIONARY);
                     }
+                }
+
+                if(_dashTimer <= 0f && _isCoolingDown)
+                {
+                    _isCoolingDown = false;
+                    // Broadcast an event which gives the visual cue that the dash is re-upped
+                    onDashRecharge?.Invoke();
+
                 }
             }
         }

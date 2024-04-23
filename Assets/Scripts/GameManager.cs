@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     }
 
     public static bool IsPaused = false;
-    public static bool IsGummy = false;
+    public bool IsGummy = false;
 
     #region PLAYER DATA
     // Player Data (saved between scenes)

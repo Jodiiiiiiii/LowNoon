@@ -8,6 +8,8 @@ public class FinalBossView : View
 {
     [SerializeField] private TextMeshProUGUI tutorial;
     [SerializeField] private GameObject blackPanel;
+
+    [SerializeField] private Animator _sceneTransitionAnimator; // Animator for our scene transition element
     public override void Initialize()
     {
         //throw new System.NotImplementedException();
@@ -43,6 +45,11 @@ public class FinalBossView : View
     public void FadePanel()
     {
         StartCoroutine(FadeOutElement(blackPanel.GetComponent<CanvasGroup>(), .4f));
+    }
+
+    public void LeaveSceneTransition()
+    {
+        _sceneTransitionAnimator.Play("StandardExit", 0, 0);
     }
 
     private IEnumerator FadeOutElement(CanvasGroup group, float rate)
