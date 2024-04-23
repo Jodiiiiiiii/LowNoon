@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Temporary-Testing/ShootingTestScene.unity
     guid: f974ef73d6eeb48cd9c8b1407db3bf6d
   - enabled: 0
-    path: Assets/Scenes/TEMPLATE-LevelBuilding.unity
+    path: Assets/Scenes/Temporary-Testing/TEMPLATE-LevelBuilding.unity
     guid: f4ef6df310ef2854f93d12341378eb70
   - enabled: 1
     path: Assets/Scenes/0_Hub.unity
