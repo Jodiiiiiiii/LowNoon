@@ -42,7 +42,8 @@ public class PlayerShooting : MonoBehaviour
         else if (PlayerAngleOffset > 180) PlayerAngleOffset -= 360;
 
         // shooting input AND not during cooldown time AND in stationary state
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > GameManager.Instance.PlayerData.BulletCooldown && _playerController.State == CharacterState.STATIONARY && !GameManager.IsPaused)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _timer > GameManager.Instance.PlayerData.BulletCooldown && _playerController.State == CharacterState.STATIONARY 
+            && !GameManager.IsPaused && !GameManager.Instance.PlayerData.CrumblingDeath)
         {
             // create new bullet
             GameObject newBullet = Instantiate(BulletObject);

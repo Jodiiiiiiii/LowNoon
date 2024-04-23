@@ -13,6 +13,7 @@ public class MeleeAttack : MonoBehaviour
     [Tooltip("Distance from the player when the enemy will initiate an attack")] public float AttackRange;
 
     private Collider _player;
+    private DamageReceiver health;
     private float _attackTimer;
     private bool _duringAttack;
     public bool DuringAttack => _duringAttack;
@@ -21,6 +22,7 @@ public class MeleeAttack : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Collider>();
+        health = GetComponent<DamageReceiver>();
         _duringAttack = false;
         _attackTimer = 0;
         AttackCollider.enabled = false;
@@ -49,5 +51,9 @@ public class MeleeAttack : MonoBehaviour
                 _attackTimer = 0;
             }
         }
+
+        // disable attack collider if dead
+        if (health.HealthLevel <= 0)
+            AttackCollider.enabled = false;
     }
 }

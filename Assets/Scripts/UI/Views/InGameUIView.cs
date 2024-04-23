@@ -61,7 +61,7 @@ public class InGameUIView : View
         // re-gather new player stats every frame
         _stats = GameManager.Instance.PlayerData;
         
-        _upgrades[0].setUpgradeCount(_playerStats.getDamageUpgradeCount());
+        _upgrades[0].setUpgradeCount(_stats.DamageUpgradeCount);
         _upgrades[1].setUpgradeCount(_stats.FireRateUpgradeCount);
         _upgrades[2].setUpgradeCount(_playerStats.getMoveSpdUpgradeCount());
         _upgrades[3].setUpgradeCount(_stats.LightUpgradeCount);

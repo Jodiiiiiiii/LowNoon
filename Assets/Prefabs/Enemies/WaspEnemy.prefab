@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cd12fc83617463e9f3a5b665be5e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthLevel: 3
+  HealthLevel: 4
   IsDirectlyDestroyed: 0
   IsImmune: 0
   DropRate: 0.25

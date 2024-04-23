@@ -6,16 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneTransitionObject : MonoBehaviour
 {
     [Header("Scenes")]
-    [SerializeField] private List<string> _combatLevels;
-    [SerializeField] private List<string> _barrelLevels;
-    [SerializeField] private List<string> _mazeLevels;
-    [SerializeField] private List<string> _minecartLevels;
-
-    [Header("Randomization Weights")]
-    [SerializeField] private float _combatProb = 0.4f;
-    [SerializeField] private float _barrelProb = 0.2f;
-    [SerializeField] private float _mazeProb = 0.2f;
-    [SerializeField] private float _minecartProb = 0.2f;
+    [SerializeField] private List<string> _levels;
 
     [Header("Boss Level")]
     [SerializeField] private string _bossLevel;
@@ -44,38 +35,48 @@ public class SceneTransitionObject : MonoBehaviour
             // increment number of rooms traversed
             GameManager.Instance.PlayerData.NumRooms++;
 
-            float rand = Random.Range(0f, 1.0f);
-
-            if (rand < _combatProb) // Combat Room
-                _sceneToLoad = _combatLevels[Random.Range(0, _combatLevels.Count)];
-            else if (rand < _combatProb + _barrelProb) // Barrel Room
+            _sceneToLoad = "null";
+            while(_sceneToLoad == "null")
             {
-                if (GameManager.Instance.PlayerData.HadBarrelRoom) // already done
-                    _sceneToLoad = _combatLevels[Random.Range(0, _combatLevels.Count)];
-                else // not done yet
+                int rand = Random.Range(0, 5);
+                if(rand == 0) // 0 - Combat small
                 {
-                    _sceneToLoad = _barrelLevels[Random.Range(0, _barrelLevels.Count)];
-                    GameManager.Instance.PlayerData.HadBarrelRoom = true;
+                    if (!GameManager.Instance.PlayerData.HadSmallCombatRoom)
+                    {  // already done
+                        _sceneToLoad = _levels[0];
+                        GameManager.Instance.PlayerData.HadSmallCombatRoom = true;
+                    }
                 }
-            }
-            else if (rand < _combatProb + _barrelProb + _mazeProb) // Maze Room
-            {
-                if (GameManager.Instance.PlayerData.HadMazeRoom) // already done
-                    _sceneToLoad = _combatLevels[Random.Range(0, _combatLevels.Count)];
-                else // not done yet
+                else if(rand == 1) // 1 - Minecarts 
                 {
-                    _sceneToLoad = _mazeLevels[Random.Range(0, _mazeLevels.Count)];
-                    GameManager.Instance.PlayerData.HadMazeRoom = true;
+                    if (!GameManager.Instance.PlayerData.HadMinecartRoom)
+                    {  // already done
+                        _sceneToLoad = _levels[1];
+                        GameManager.Instance.PlayerData.HadMinecartRoom = true;
+                    }
                 }
-            }
-            else if (rand < _combatProb + _barrelProb + _mazeProb + _minecartProb) // Minecart Room
-            {
-                if (GameManager.Instance.PlayerData.HadMinecartRoom) // already done
-                    _sceneToLoad = _combatLevels[Random.Range(0, _combatLevels.Count)];
-                else // not done yet
+                else if(rand == 2) // 2 - Barrels
                 {
-                    _sceneToLoad = _minecartLevels[Random.Range(0, _minecartLevels.Count)];
-                    GameManager.Instance.PlayerData.HadMinecartRoom = true;
+                    if (!GameManager.Instance.PlayerData.HadBarrelRoom) {  // already done
+                        _sceneToLoad = _levels[2];
+                        GameManager.Instance.PlayerData.HadBarrelRoom = true;
+                    }
+                }
+                else if(rand == 3) // 3 - Combat large
+                {
+                    if (!GameManager.Instance.PlayerData.HadLargeCombatRoom)
+                    {  // already done
+                        _sceneToLoad = _levels[3];
+                        GameManager.Instance.PlayerData.HadLargeCombatRoom = true;
+                    }
+                }
+                else // 4 - Maze
+                {
+                    if (!GameManager.Instance.PlayerData.HadMazeRoom)
+                    {  // already done
+                        _sceneToLoad = _levels[4];
+                        GameManager.Instance.PlayerData.HadMazeRoom = true;
+                    }
                 }
             }
         }

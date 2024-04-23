@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
-using Microsoft.Unity.VisualStudio.Editor;
 
 public class Timer : MonoBehaviour
 {
+    [Header("Timer")]
     [SerializeField] private float _timer;
     [SerializeField] private GameObject _timerObj;
+
+    [Header("Color")]
+    [SerializeField, Tooltip("color at start of room")] private Color _startColor;
+    [SerializeField, Tooltip("color at end of timer")] private Color _endColor;
     private UnityEngine.UI.Image _image;
+
     private float _time;
     // Start is called before the first frame update
     void Start()
@@ -25,10 +28,17 @@ public class Timer : MonoBehaviour
 
         if ( _time >= _timer)
         {
-            // TODO: Do a game over thing
+            // player dies
+            ViewManager.Show<GameOverView>(false);
+            GameManager.Instance.PlayerData.CrumblingDeath = true; // ensure fade to black in game over screen
+            GameObject.Find("Player").GetComponent<PlayerController>().enabled = false; // ensure player loses control
+
+            // TODO: add room crumbling sound effect
+
+            // TODO: initiate camera shake effect here during fade to black
         }
 
         _image.fillAmount = _time / _timer;
-
+        _image.color = Color.Lerp(_startColor, _endColor, _time / _timer);
     }
 }

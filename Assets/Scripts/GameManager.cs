@@ -51,13 +51,13 @@ public class GameManager : MonoBehaviour
         // Armor
         public int Armor; // Armor Upgrades (temporary/consumable)
         // Damage
-        public float BulletDamage; // Base Damage + Damage Upgrades
+        public float BulletDamageMult; // Base Damage + Damage Upgrades
+        public int DamageUpgradeCount;
         // Fire Speed
         public float BulletCooldown; // Base Cooldown + Fire Speed Upgrades
         public int FireRateUpgradeCount; // How many fire rate upgrades we have
         // Move Speed
         public float MoveSpeed; // Base MoveSpeed + MoveSpeed Upgrades
-        public float DashDamage; // Basse Damage + MoveSpeed Upgrades
         // Light
         public float LightFOV; // Base FOV + Light Upgrades
         public float LightIntensity; // Base Intensity + Light Upgrades
@@ -68,7 +68,11 @@ public class GameManager : MonoBehaviour
         public bool HadBarrelRoom;
         public bool HadMinecartRoom;
         public bool HadMazeRoom;
+        public bool HadSmallCombatRoom;
+        public bool HadLargeCombatRoom;
         public int NumRooms; // number of cave rooms which have been entered so far
+
+        public bool CrumblingDeath;
     }
     private Stats _playerData;
 
@@ -101,7 +105,10 @@ public class GameManager : MonoBehaviour
             Instance._playerData.HadBarrelRoom = false;
             Instance._playerData.HadMazeRoom = false;
             Instance._playerData.HadMinecartRoom = false;
+            Instance._playerData.HadSmallCombatRoom = false;
+            Instance._playerData.HadLargeCombatRoom = false;
             Instance._playerData.NumRooms = 0;
+            Instance._playerData.CrumblingDeath = false;
         }
         else
             Debug.LogError("Error: trying to access PlayerStats with no player in scene");
@@ -158,7 +165,7 @@ public class GameManager : MonoBehaviour
                 newSaveData.VerticalSensitivity = 1f;
 
                 // read existing save data (if it exists)
-                string path = Application.persistentDataPath + "/savedata.json";
+                string path = Application.persistentDataPath + "\\savedata.json";
                 if (File.Exists(path))
                 {
                     // read json file into data object
@@ -245,7 +252,7 @@ public class GameManager : MonoBehaviour
     {
         // save SavePointData to json file
         string json = JsonUtility.ToJson(SaveData);
-        File.WriteAllText(Application.persistentDataPath + "/savedata.json", json);
+        File.WriteAllText(Application.persistentDataPath + "\\savedata.json", json);
     }
     #endregion
 
