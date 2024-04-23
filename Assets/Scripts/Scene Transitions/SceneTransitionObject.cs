@@ -23,10 +23,6 @@ public class SceneTransitionObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // increment number of runs if necessary
-        if (_isStartPatch)
-            GameManager.Instance.AddRun();
-
         // check if it is time for the boss
         if (GameManager.Instance.PlayerData.NumRooms >= _roomsBeforeBoss)
             _sceneToLoad = _bossLevel;
@@ -104,6 +100,10 @@ public class SceneTransitionObject : MonoBehaviour
 
         // Wait until the player animation and UI scene transition animation are done
         yield return new WaitForSeconds(player.GetComponent<PlayerAnimator>().BurrowDownDuration + 1f);
+        
+        // on scene load, increment number of runs if necessary
+        if (_isStartPatch)
+            GameManager.Instance.AddRun();
 
         SceneManager.LoadScene(_sceneToLoad);
         yield return null;
