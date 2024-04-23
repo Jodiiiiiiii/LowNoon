@@ -11,15 +11,12 @@ public class GummyWorm : MonoBehaviour
 
     void Start()
     {
-
-       // _wormMaterial = GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material;
         _wormMaterial.mainTexture = _gummyTexture;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //_wormMaterial = GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material;
         if (!GameManager.Instance.IsGummy)
         {
             _wormMaterial.mainTexture = _normalTexture;
@@ -28,6 +25,5 @@ public class GummyWorm : MonoBehaviour
         {
             _wormMaterial.mainTexture = _gummyTexture;
         }
-       // GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material = _wormMaterial;
     }
 }
