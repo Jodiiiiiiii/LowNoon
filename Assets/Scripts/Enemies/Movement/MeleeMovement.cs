@@ -36,6 +36,8 @@ public class MeleeMovement : MonoBehaviour
 
     [Header("Sound")]
     private AudioSource _audioSource;
+    
+    //Just movement sound
     [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
     private float _soundTimer = 0.0f;
 

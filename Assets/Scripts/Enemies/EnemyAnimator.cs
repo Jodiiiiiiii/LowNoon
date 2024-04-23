@@ -17,6 +17,8 @@ public class EnemyAnimator : MonoBehaviour
     [SerializeField] protected float _deathAnimDuration;
     [SerializeField] protected float _attackAnimDuration;
     protected AudioSource _audioSource;
+
+    //Dummies only use 0-1
     [Tooltip("Audio clip order list: 0 = Hurt Sound; 1 = Death sound, 2 = Movement Sound, 3 = Attack  sound")]
     [SerializeField] protected List<AudioClip> _clips = new List<AudioClip>();
     

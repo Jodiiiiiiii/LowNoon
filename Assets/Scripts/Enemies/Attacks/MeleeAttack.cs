@@ -18,6 +18,7 @@ public class MeleeAttack : MonoBehaviour
     private bool _duringAttack;
     public bool DuringAttack => _duringAttack;
     private AudioSource _audioSource;
+    //Just attack sound
     [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
     
     // Start is called before the first frame update
