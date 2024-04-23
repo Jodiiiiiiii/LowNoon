@@ -153,7 +153,7 @@ MonoBehaviour:
   ShouldSpawn: 0
   _pickupHeight: 0.5
   _clips:
-  - {fileID: 8300000, guid: bb9b38fcd7d509841aaec0c9d6927a28, type: 3}
+  - {fileID: 8300000, guid: b45b647fa93c14748ac5304273d6220b, type: 3}
 --- !u!114 &6762277340464856984
 MonoBehaviour:
   m_ObjectHideFlags: 0
