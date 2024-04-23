@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,12 +18,13 @@ public class DamageReceiver : MonoBehaviour
     public bool ShouldSpawn;
     private bool alreadySpawned = false;
     [SerializeField, Tooltip("Height at which the health pickup spawns (to prevent out of reach pickups)")] private float _pickupHeight = 0.5f;
+    [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
 
     // Start is called before the first frame update
     void Start()
     {
         IsImmune = false;
-        chance = Random.Range(0,1.0f);
+        chance = Random.Range(0, 1.0f);
         Player = GameObject.FindWithTag("Player");
     }
 
@@ -33,9 +33,10 @@ public class DamageReceiver : MonoBehaviour
     {
         if (HealthLevel <= 0)
         {
-            if(ShouldSpawn)
+            if (ShouldSpawn)
             {
-                if(IsGoldenBarrel){
+                if (IsGoldenBarrel)
+                {
                     GameObject parent = new();
                     parent.transform.position = gameObject.transform.position;
                     parent.transform.rotation = Player.transform.rotation;
@@ -45,7 +46,7 @@ public class DamageReceiver : MonoBehaviour
                     GameObject pickup1 = Instantiate(SpawnObject, parent.transform);
                     pickup1.transform.position = parent.transform.position;
                     pickup1.transform.rotation = parent.transform.rotation;
-                    
+
                     GameObject pickup2 = Instantiate(SpawnObject, parent.transform);
                     pickup2.transform.position = parent.transform.position;
                     pickup2.transform.rotation = parent.transform.rotation;
@@ -58,18 +59,25 @@ public class DamageReceiver : MonoBehaviour
                     UpgradeMove upgrade2 = pickup3.AddComponent<UpgradeMove>();
                     upgrade2.Direction = 1.0f;
                 }
-                else if(_isExtraGoldenBarrel) // found randomly within maze levels
+                else if (_isExtraGoldenBarrel) // found randomly within maze levels
                 {
                     GameObject pickup1 = Instantiate(SpawnObject);
                     pickup1.transform.position = gameObject.transform.position;
                     pickup1.transform.rotation = gameObject.transform.rotation;
                 }
-                else if(chance < DropRate){
-                    Spawn(); 
+                else if (chance < DropRate)
+                {
+                    Spawn();
                 }
             }
-            if(IsDirectlyDestroyed)
+            if (IsDirectlyDestroyed)
+            {
                 Destroy(gameObject);
+                GameObject soundObj = new GameObject();
+                soundObj.transform.position = transform.position;
+                AudioSource audioSource = soundObj.AddComponent<AudioSource>();
+                audioSource.PlayOneShot(_clips[0], GameManager.Instance.GetEnvironmentVolume());
+            }
         }
     }
 
@@ -80,7 +88,7 @@ public class DamageReceiver : MonoBehaviour
         if (DamagerObject.CompareTag("PlayerBullet"))
         {
             BulletStats bulletStats = DamagerObject.GetComponent<BulletStats>();
-            if(bulletStats == null)
+            if (bulletStats == null)
             {
                 bulletStats = DamagerObject.GetComponentInChildren<BulletStats>();
             }
@@ -88,15 +96,15 @@ public class DamageReceiver : MonoBehaviour
             if (!IsImmune)
             {
                 // destroy damage receiver only if it reaches 0 health
-                HealthLevel -= bulletStats.DamageLevel * GameManager.Instance.PlayerData.BulletDamageMult;    
-                
+                HealthLevel -= bulletStats.DamageLevel * GameManager.Instance.PlayerData.BulletDamageMult;
+
                 // check if ant needs to be woken
-                if(gameObject.TryGetComponent<MeleeMovement>(out MeleeMovement ant))
+                if (gameObject.TryGetComponent<MeleeMovement>(out MeleeMovement ant))
                 {
                     ant.SetTrackingPositionIfIdle(collision.transform.position);
                 }
                 // check if wasp needs to be woken
-                else if(gameObject.TryGetComponent<RangedMovement>(out RangedMovement wasp))
+                else if (gameObject.TryGetComponent<RangedMovement>(out RangedMovement wasp))
                 {
                     wasp.WakeUp();
                 }
@@ -104,17 +112,20 @@ public class DamageReceiver : MonoBehaviour
         }
     }
 
-    private void Spawn(){
-        if(!alreadySpawned)
+    private void Spawn()
+    {
+        if (!alreadySpawned)
         {
             GameObject healthPickup = Instantiate(SpawnObject);
             healthPickup.transform.position = new Vector3(gameObject.transform.position.x, _pickupHeight, gameObject.transform.position.z);
             alreadySpawned = true;
         }
     }
-    
-    private void OnDestroy(){
-        if(Animated && gameObject.scene.isLoaded) {
+
+    private void OnDestroy()
+    {
+        if (Animated && gameObject.scene.isLoaded)
+        {
             Instantiate(EffectParticles, gameObject.transform.position, gameObject.transform.rotation);
         }
     }
