@@ -22,6 +22,9 @@ public class InGameUIView : View
 
     [SerializeField] private Animator _sceneTransitionAnimator; // Animator for our scene transition element
     [SerializeField] private Animator _dashRechargeAnimator;
+
+    private AudioSource _source;
+    [SerializeField] private AudioClip _dashRecharge;
     public override void Initialize()
     {
         _hpUnits = new List<GameObject>();
@@ -54,7 +57,7 @@ public class InGameUIView : View
 
     void Start()
     {
-
+        _source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -133,6 +136,7 @@ public class InGameUIView : View
     private void DashRechargedIndicator()
     {
         _dashRechargeAnimator.Play("Recharge", 0, 0);
+        _source.PlayOneShot(_dashRecharge, GameManager.Instance.GetPlayerVolume());
     }
 
     private IEnumerator DoItemCard(int type)
