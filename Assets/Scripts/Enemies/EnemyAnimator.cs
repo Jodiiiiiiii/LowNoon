@@ -60,7 +60,7 @@ public class EnemyAnimator : MonoBehaviour
 
         _animator.SetBool("isHurting", true);
         if(_clips[0]!=null){
-        _audioSource.PlayOneShot(_clips[0], 0.8f * GameManager.Instance.GetEnemyVolume());
+            _audioSource.PlayOneShot(_clips[0], 0.8f * GameManager.Instance.GetEnemyVolume());
         }
         yield return new WaitForSeconds(_hurtAnimDuration);
         _animator.SetBool("isHurting", false);
