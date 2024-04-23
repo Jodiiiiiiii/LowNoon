@@ -136,7 +136,7 @@ public class InGameUIView : View
     private void DashRechargedIndicator()
     {
         _dashRechargeAnimator.Play("Recharge", 0, 0);
-        _source.PlayOneShot(_dashRecharge, GameManager.Instance.GetPlayerVolume());
+        _source.PlayOneShot(_dashRecharge, 0.75f * GameManager.Instance.GetPlayerVolume()); // tuned down slightly
     }
 
     private IEnumerator DoItemCard(int type)
