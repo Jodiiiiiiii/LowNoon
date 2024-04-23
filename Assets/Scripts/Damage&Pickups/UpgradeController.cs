@@ -18,6 +18,9 @@ public class UpgradeController : MonoBehaviour
     };
 
     [SerializeField] private List<GameObject> _modelOptions;
+    [SerializeField] private AudioSource _audioSoure;
+    [Tooltip("0 = Health Pickup, 1 = Badge Pickup, 2 = Other Pickups")]
+    [SerializeField] private List<AudioClip> _clips;
 
     public bool RandomizeOnStartup = true;  // When this upgrade spawns, its type is randomly selected if this is true
     public UpgradeType Type; // What upgrade is this?
@@ -29,6 +32,7 @@ public class UpgradeController : MonoBehaviour
             RandomlyChooseType();
         }
         setModel(Type);
+        _audioSoure.volume = GameManager.Instance.GetEnvironmentVolume();
     }
 
     // Update is called once per frame
@@ -67,7 +71,27 @@ public class UpgradeController : MonoBehaviour
         {
             GameManager.Instance.ApplyUpgradeToStats(Type);
             ViewManager.GetView<InGameUIView>().CallItemCard((int)Type);
-            
+
+            AudioClip clip;
+
+            if (Type == UpgradeType.Health)
+            {
+                clip = _clips[0];
+            }
+            else if (Type == UpgradeType.Armor)
+            {
+                clip = _clips[1];
+            }
+            else
+            {
+                clip = _clips[2];
+            }
+
+            GameObject soundObj = new GameObject();
+            soundObj.transform.position = transform.position;
+            AudioSource audioSource = soundObj.AddComponent<AudioSource>();
+            audioSource.PlayOneShot(clip, GameManager.Instance.GetPlayerVolume());
+
             Destroy(this.gameObject);
         }
     }

@@ -34,6 +34,13 @@ public class MeleeMovement : MonoBehaviour
     [SerializeField, Tooltip("'snappiness' of coming to a stop when at target position")] private float _stoppingSharpness = 10f;
     [SerializeField, Tooltip("speed at which velocity is snapped back to zero")] private float _stoppingSpeedThreshold = 0.1f;
 
+    [Header("Sound")]
+    private AudioSource _audioSource;
+    
+    //Just movement sound
+    [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
+    private float _soundTimer = 0.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +52,8 @@ public class MeleeMovement : MonoBehaviour
         _isAtPlayer = false;
         _trackingPosition = transform.position; // starts with no tracking
         _height = transform.position.y; // to prevent y value change
+        _audioSource = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -82,7 +91,10 @@ public class MeleeMovement : MonoBehaviour
         }
 
         if (!_isIdle)
-        {
+        {   if(_soundTimer <= 0){
+            _audioSource.PlayOneShot(_clips[0], GameManager.Instance.GetEnemyVolume());
+            _soundTimer = 1.2f;
+            }
             // Smoothly rotate to goal
             Quaternion goalRot = Quaternion.LookRotation(_trackingPosition - _spherecastOrigin.position, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, goalRot, 1f - Mathf.Exp(-_rotationSharpness * Time.deltaTime));
@@ -117,6 +129,7 @@ public class MeleeMovement : MonoBehaviour
         else{
             _rigidBody.velocity = Vector3.zero; // complete stop - idle
         }
+        _soundTimer -= Time.deltaTime;
     }
 
     /// <summary>

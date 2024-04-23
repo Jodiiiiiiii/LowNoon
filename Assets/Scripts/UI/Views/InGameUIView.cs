@@ -21,7 +21,10 @@ public class InGameUIView : View
     [SerializeField] private RectTransform _uiCanvas;
 
     [SerializeField] private Animator _sceneTransitionAnimator; // Animator for our scene transition element
+    [SerializeField] private Animator _dashRechargeAnimator;
 
+    private AudioSource _source;
+    [SerializeField] private AudioClip _dashRecharge;
     public override void Initialize()
     {
         _hpUnits = new List<GameObject>();
@@ -39,6 +42,7 @@ public class InGameUIView : View
     private void OnEnable()
     {
         SceneTransitionObject.onSceneTransition += LeavingSceneTransition;
+        PlayerController.onDashRecharge += DashRechargedIndicator;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -46,13 +50,14 @@ public class InGameUIView : View
     private void OnDisable()
     {
         SceneTransitionObject.onSceneTransition -= LeavingSceneTransition;
+        PlayerController.onDashRecharge -= DashRechargedIndicator;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
     void Start()
     {
-
+        _source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -127,6 +132,12 @@ public class InGameUIView : View
     {
         _sceneTransitionAnimator.Play("StandardExit", 0, 0);
     }    
+
+    private void DashRechargedIndicator()
+    {
+        _dashRechargeAnimator.Play("Recharge", 0, 0);
+        _source.PlayOneShot(_dashRecharge, 0.75f * GameManager.Instance.GetPlayerVolume()); // tuned down slightly
+    }
 
     private IEnumerator DoItemCard(int type)
     {

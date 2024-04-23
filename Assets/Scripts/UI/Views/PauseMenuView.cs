@@ -7,6 +7,8 @@ public class PauseMenuView : View
 {
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _settings;
+
+    [SerializeField] private Animator _sceneTransitionAnimator; // Animator for our scene transition element
     public override void Initialize()
     {
         _pauseMenu.SetActive(true);
@@ -37,7 +39,7 @@ public class PauseMenuView : View
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("0_Hub");
+        StartCoroutine(DoLeaveScene());
     }
 
     public void Settings()
@@ -61,5 +63,17 @@ public class PauseMenuView : View
     {
         Time.timeScale = 1f;
         GameManager.IsPaused = false;
+    }
+
+    private IEnumerator DoLeaveScene()
+    {
+        _sceneTransitionAnimator.Play("StandardExit", 0, 0);
+        GameObject.Find("Player Camera").GetComponent<CameraController>().enabled = false;
+        Time.timeScale = 1f;
+        yield return new WaitForSeconds(2f);
+        GameManager.IsPaused = false;
+        SceneManager.LoadScene("0_Hub");
+        //Debug.Log("Loading to hub");
+        yield return null;
     }
 }

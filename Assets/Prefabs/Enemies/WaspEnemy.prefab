@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2063803544641493541}
   - component: {fileID: 1400957773795705166}
   - component: {fileID: 1841968315185491616}
+  - component: {fileID: 4940905606776950850}
   m_Layer: 10
   m_Name: WaspEnemy
   m_TagString: Enemy
@@ -168,6 +169,7 @@ MonoBehaviour:
   EffectParticles: {fileID: 0}
   ShouldSpawn: 1
   _pickupHeight: 0.5
+  _clips: []
 --- !u!114 &1841968315185491616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +186,117 @@ MonoBehaviour:
   _hurtAnimDuration: 0
   _deathAnimDuration: 0.45
   _attackAnimDuration: 0.5
+  _clips:
+  - {fileID: 8300000, guid: 75b02587156854d22a7801125ab3bfb4, type: 3}
+  - {fileID: 8300000, guid: 75b02587156854d22a7801125ab3bfb4, type: 3}
+  - {fileID: 8300000, guid: 056acb0c559284c549a0bafdb5e87051, type: 3}
+  - {fileID: 8300000, guid: 57cd6f471ff774cf3b89e3f1a0049980, type: 3}
   _vanishEffect: {fileID: 6744784352308396917, guid: 37b34de3e4a7be548893514f490ff184, type: 3}
+--- !u!82 &4940905606776950850
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266889165913323094}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 100
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.1
+      value: 1
+      inSlope: 0.09882074
+      outSlope: 0.09882074
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.40067536
+    - serializedVersion: 3
+      time: 0.44275463
+      value: 0.3603148
+      inSlope: -1.1111113
+      outSlope: -1.1111113
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.07753759
+      outSlope: -0.07753759
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.27277035
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &2478824161975017174
 PrefabInstance:
   m_ObjectHideFlags: 0

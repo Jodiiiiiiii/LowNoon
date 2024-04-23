@@ -39,9 +39,11 @@ public class CutsceneCharacterController : MonoBehaviour
     public void SetCurrentAnimation(string name)
     {
         _animator = GetComponent<Animator>();
-        if(gameObject.tag == "Player" && name == "Move")
+        if(name == "Move")
         {
             _animator.SetBool("isMoving", !_animator.GetBool("isMoving"));
+            if(gameObject.name == "Player")
+                _animator.SetFloat("moveSpdMult", .5f);
         }
         else
         {
@@ -52,6 +54,7 @@ public class CutsceneCharacterController : MonoBehaviour
 
     IEnumerator DoGradualPosition(Vector3 targetPos, float travelTime, Vector3 targetRotation)
     {
+        
         float xAngle;
         float yAngle;
         float zAngle;
@@ -61,10 +64,10 @@ public class CutsceneCharacterController : MonoBehaviour
         float yVelocity = 0f;
         float zVelocity = 0f;
 
-        while (Vector3.Distance(transform.position, targetPos) >= _threshold)
+        while (Vector3.Distance(transform.position, targetPos) >= _threshold || Vector3.Distance(transform.rotation.eulerAngles, targetRotation) >= _threshold)
         {
             transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, travelTime); // Move position
-
+            //Debug.Log(targetRotation.y);
             xAngle = Mathf.SmoothDampAngle(transform.eulerAngles.x, targetRotation.x, ref xVelocity, travelTime);
             yAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation.y, ref yVelocity, travelTime);
             zAngle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetRotation.z, ref zVelocity, travelTime);

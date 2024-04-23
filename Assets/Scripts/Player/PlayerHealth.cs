@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
 
     [System.NonSerialized] public int ExplosionDmg;
     private PlayerController _player;
+    private bool _isDead = false;
     
 
     // Start is called before the first frame update
@@ -82,9 +83,10 @@ public class PlayerHealth : MonoBehaviour
         }
 
         // check if player reaches 0 health
-        if (GameManager.Instance.PlayerData.CurrHealth <= 0)
+        if (GameManager.Instance.PlayerData.CurrHealth <= 0 && !_isDead)
         {
             // player dies
+            _isDead = true;
             ViewManager.Show<GameOverView>(false);
 
             // TODO: Death sound (if we want one)

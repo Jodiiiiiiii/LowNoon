@@ -32,11 +32,11 @@ public class WindSoundKnob : MonoBehaviour
             }
             else if (Vector3.Distance(_saloonSoundSource.position, _player.position) > _maxVolumeDistance)
             {
-                _soundSource.volume = 1;
+                _soundSource.volume = 1 * GameManager.Instance.GetEnvironmentVolume();
             }
             else
             {
-                _soundSource.volume = ((Vector3.Distance(_saloonSoundSource.position, _player.position) - _tooCloseDistance) / _maxVolumeDistance);
+                _soundSource.volume = ((Vector3.Distance(_saloonSoundSource.position, _player.position) - _tooCloseDistance) / _maxVolumeDistance) * GameManager.Instance.GetEnvironmentVolume();
             }
         }
         
