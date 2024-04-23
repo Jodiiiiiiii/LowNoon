@@ -40,12 +40,12 @@ public class MusicController : MonoBehaviour
 
     IEnumerator DoFadeIn()
     {
-        while(_music.volume < 1)
+        while(_music.volume < GameManager.Instance.GetEnvironmentVolume())
         {
-            _music.volume += Time.deltaTime * _fadeRate;
+            _music.volume += Time.deltaTime * _fadeRate * GameManager.Instance.GetEnvironmentVolume();
             yield return null;
         }
-        _music.volume = 1; // clamp to 1
+        _music.volume = 1 * GameManager.Instance.GetEnvironmentVolume(); // clamp to 1
         IsOn = true;
     }
 
@@ -53,7 +53,7 @@ public class MusicController : MonoBehaviour
     {
         while (_music.volume > 0)
         {
-            _music.volume -= Time.deltaTime * _fadeRate;
+            _music.volume -= Time.deltaTime * _fadeRate * GameManager.Instance.GetEnvironmentVolume();
             yield return null;
         }
         _music.volume = 0; // clamp to 0

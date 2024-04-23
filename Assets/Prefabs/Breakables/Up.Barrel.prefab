@@ -5034,6 +5034,8 @@ MonoBehaviour:
   EffectParticles: {fileID: 3581966198562017846, guid: 186de8bb85053054ca0b0d25479a670a, type: 3}
   ShouldSpawn: 1
   _pickupHeight: 0.5
+  _clips:
+  - {fileID: 0}
 --- !u!136 &5888553856507486281
 CapsuleCollider:
   m_ObjectHideFlags: 0
