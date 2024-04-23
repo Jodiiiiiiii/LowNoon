@@ -8,6 +8,7 @@ public class PlayerAnimator : MonoBehaviour
     private PlayerController _playerController;
     private PlayerShooting _shooting;
     private AudioSource _audioSource;
+    private PlayAudioAfterDelay _delayAudio;
     [SerializeField] private Animator _animator;
     [Tooltip("Audio clip order list: 0 = standard gunshot; 1 = Standard reload; 2 = six shot reload")]
     [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
@@ -50,6 +51,7 @@ public class PlayerAnimator : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         _shooting = GetComponent <PlayerShooting>();
         _audioSource = GetComponent<AudioSource>();
+        _delayAudio = GetComponent<PlayAudioAfterDelay>();
         //_hatAnimator = _hat.GetComponent<Animator>(); // TODO: add this back when it is actually there
         //_lampAnimator = _lamp.GetComponent<Animator>(); // TODO: add this back when it is actually there
         _sixShotCount = 0;
@@ -100,7 +102,7 @@ public class PlayerAnimator : MonoBehaviour
     private void fireGun() // Methods that do prep for the coroutines and call them (can't call a coroutine with a delegate)
     {
         StopAllCoroutines();
-        _animator.Play("Idle", 0, 0);
+        //_animator.Play("Idle", 0, 0);
         StartCoroutine(DoFireGun());
     }
 
@@ -136,18 +138,21 @@ public class PlayerAnimator : MonoBehaviour
         _audioSource.PlayOneShot(_clips[0], _gunFireVolume);
         _animator.Play("Fire", 0, 0);
         _sixShotCount++;
-        
-        yield return new WaitForSeconds(GameManager.Instance.PlayerData.BulletCooldown - _reloadClickOffset); // make sure click finishes right when you can fire again
-        if(_sixShotCount >= 6) // >= so that it doesn't skip 6 when it skips audio due to moving (why does it do this exactly?)
+
+        if (_sixShotCount >= 6) // >= so that it doesn't skip 6 when it skips audio due to moving (why does it do this exactly?)
         {
-            _audioSource.PlayOneShot(_clips[2]);
+            // TODO: make sound volume work with settings
+            _delayAudio.DoDelayedAudio(_audioSource, _clips[2], 1f, GameManager.Instance.PlayerData.BulletCooldown - _reloadClickOffset);
             _sixShotCount = 0;
         }
         else
         {
-            _audioSource.PlayOneShot(_clips[1]);
+            // TODO: make sound volume work with settings
+            _delayAudio.DoDelayedAudio(_audioSource, _clips[1], 1f, GameManager.Instance.PlayerData.BulletCooldown - _reloadClickOffset);
         }
-            
+
+        // allow fire animation to play through
+        yield return new WaitForSeconds(GameManager.Instance.PlayerData.BulletCooldown - _reloadClickOffset);
         _animator.Play("Idle", 0, 0);
     }
 
