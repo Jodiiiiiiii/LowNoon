@@ -24,8 +24,6 @@ public class PlayerStats : MonoBehaviour
     [Header("Move Speed")]
     [SerializeField, Tooltip("Base move speed stat - influences move force, max speed, and turning speeds multiplicatively")] private float _baseMoveSpeed = 1f;
     [SerializeField, Tooltip("Move speed per upgrade")] private float _moveSpeedPerUpgrade = 0.1f;
-    [SerializeField, Tooltip("Base dash damage stat")] private float _baseDashDamage = 2f;
-    [SerializeField, Tooltip("Dash damage per upgrade")] private float _dashDamagePerUpgrade = 1f;
 
     [Header("Light")]
     [SerializeField, Tooltip("Base light FOV stat")] private float _baseLightFOV = 45f;
@@ -52,13 +50,13 @@ public class PlayerStats : MonoBehaviour
         // armor
         baseData.Armor = _baseArmor;
         // bullet damage
-        baseData.BulletDamage = _baseBulletDamage;
+        baseData.BulletDamageMult = _baseBulletDamage;
+        baseData.DamageUpgradeCount = 0;
         // fire rate
         baseData.BulletCooldown = _baseBulletCooldown;
         baseData.FireRateUpgradeCount = _baseFireRateUpgradeCount;
         // move speed
         baseData.MoveSpeed = _baseMoveSpeed;
-        baseData.DashDamage = _baseDashDamage;
         // light
         baseData.LightFOV = _baseLightFOV;
         baseData.LightIntensity = _baseLightIntensity;
@@ -86,7 +84,8 @@ public class PlayerStats : MonoBehaviour
                 playerData.Armor += _armorPerUpgrade;
                 break;
             case UpgradeController.UpgradeType.Damage:
-                playerData.BulletDamage += _bulletDamagePerUpgrade;
+                playerData.BulletDamageMult *= (1 + _bulletDamagePerUpgrade);
+                playerData.DamageUpgradeCount++;
                 break;
             case UpgradeController.UpgradeType.FireSpeed:
                 playerData.BulletCooldown *= _bulletCooldownUpgradeFactor;
@@ -94,7 +93,6 @@ public class PlayerStats : MonoBehaviour
                 break;
             case UpgradeController.UpgradeType.MoveSpeed:
                 playerData.MoveSpeed += _moveSpeedPerUpgrade;
-                playerData.DashDamage += _dashDamagePerUpgrade;
                 break;
             case UpgradeController.UpgradeType.Light:
                 playerData.LightFOV = Mathf.Lerp(playerData.LightFOV, _maxLightFOV, _lightFOVLerpRatio);
@@ -107,16 +105,10 @@ public class PlayerStats : MonoBehaviour
         return playerData;
     }
 
-    public int getDamageUpgradeCount()
-    {
-        GameManager.Stats playerData = GameManager.Instance.PlayerData;
-        return (int)((playerData.BulletDamage - _baseBulletDamage) / _bulletDamagePerUpgrade);
-    }
-
     public int getMoveSpdUpgradeCount()
     {
         GameManager.Stats playerData = GameManager.Instance.PlayerData;
-        return (int)((playerData.MoveSpeed- _baseMoveSpeed) / _moveSpeedPerUpgrade);
+        return Mathf.RoundToInt((playerData.MoveSpeed- _baseMoveSpeed) / _moveSpeedPerUpgrade);
     }
 
 }

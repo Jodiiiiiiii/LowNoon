@@ -85,8 +85,9 @@ public class PlayerHealth : MonoBehaviour
         if (GameManager.Instance.PlayerData.CurrHealth <= 0)
         {
             // player dies
-            // TODO: integrate animations and death state transition to restart scene
             ViewManager.Show<GameOverView>(false);
+
+            // TODO: Death sound (if we want one)
         }
     }
 }
