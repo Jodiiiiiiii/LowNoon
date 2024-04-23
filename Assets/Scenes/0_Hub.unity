@@ -4015,6 +4015,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Dummy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
+      propertyPath: DopplerLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5151,6 +5163,14 @@ PrefabInstance:
     - target: {fileID: 2238942177203734004, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
       propertyPath: m_Name
       value: Big Dummy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10344,6 +10364,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1706436104}
     m_Modifications:
+    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1209865070423057951, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -21997,6 +22025,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1706436104}
     m_Modifications:
+    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1209865070423057951, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -22017,6 +22053,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lil Dummy
       objectReference: {fileID: 0}
+    - target: {fileID: 2456068823694340888, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
+      propertyPath: _clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: d8e505c036eae4decb8b0fe5a7c7a583, type: 3}
     - target: {fileID: 2975405349093464695, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.7000002
@@ -30266,6 +30306,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1706436104}
     m_Modifications:
+    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
+      propertyPath: rolloffMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2450261430926246093, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
       propertyPath: m_Name
       value: Lil Dummy (2)
@@ -38982,6 +39030,14 @@ PrefabInstance:
       propertyPath: _cameraTransform
       value: 
       objectReference: {fileID: 1414500449}
+    - target: {fileID: 5754108205002651285, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
+      propertyPath: _clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754108205002651285, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
+      propertyPath: _clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 51d0cb8b76f58458db66a75a4f0f0e16, type: 3}
     - target: {fileID: 6196059899672709530, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.89
@@ -39022,10 +39078,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8847152209835682657, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: IsDisabled
-      value: 1
+    - target: {fileID: 7179307920419429564, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
+      propertyPath: _clips.Array.size
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7179307920419429564, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
+      propertyPath: _clips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 24c0262a549de4b0c9d25c5d623e8536, type: 3}
+    - target: {fileID: 7179307920419429564, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
+      propertyPath: _clips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 51d0cb8b76f58458db66a75a4f0f0e16, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

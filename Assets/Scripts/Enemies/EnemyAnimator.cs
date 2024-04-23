@@ -16,6 +16,12 @@ public class EnemyAnimator : MonoBehaviour
     [SerializeField] protected float _hurtAnimDuration;
     [SerializeField] protected float _deathAnimDuration;
     [SerializeField] protected float _attackAnimDuration;
+    protected AudioSource _audioSource;
+
+    //Dummies only use 0-1
+    [Tooltip("Audio clip order list: 0 = Hurt Sound; 1 = Death sound, 2 = Movement Sound, 3 = Attack  sound")]
+    [SerializeField] protected List<AudioClip> _clips = new List<AudioClip>();
+    
     // Start is called before the first frame update
     protected void Start()
     {
@@ -25,6 +31,7 @@ public class EnemyAnimator : MonoBehaviour
             _animator = GetComponent<Animator>();
         }
         prevHP = _damageReceiver.HealthLevel;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,6 +59,9 @@ public class EnemyAnimator : MonoBehaviour
     protected virtual IEnumerator DoHurtAnim() {
 
         _animator.SetBool("isHurting", true);
+        if(_clips[0]!=null){
+            _audioSource.PlayOneShot(_clips[0], 0.8f * GameManager.Instance.GetEnemyVolume());
+        }
         yield return new WaitForSeconds(_hurtAnimDuration);
         _animator.SetBool("isHurting", false);
     }
