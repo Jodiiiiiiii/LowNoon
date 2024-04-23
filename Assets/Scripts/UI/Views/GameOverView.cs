@@ -9,6 +9,8 @@ public class GameOverView : View
     [SerializeField, Tooltip("Object to be faded in for fade to black death")] private Image _blackImage;
     private const float _fadeToBlackDuration = 3f;
     private float _timer;
+    private bool _selectionMade = false;
+    [SerializeField] private Animator _sceneTransitionAnimator; // Animator for our scene transition element
 
     public override void Initialize()
     {
@@ -36,14 +38,26 @@ public class GameOverView : View
 
     public void RetryButton()
     {
-        GameManager.Instance.IsMainMenuLoaded = true; // makes player come out of coffin
-        SceneManager.LoadScene("0_Hub");
+        if (!_selectionMade)
+        {
+            _selectionMade = true;
+            GameManager.Instance.IsMainMenuLoaded = true; // makes player come out of coffin
+            //StopAllCoroutines();
+            StartCoroutine(DoLeaveScene());
+        }
+        
     }
 
     public void MainMenu()
     {
-        GameManager.Instance.IsMainMenuLoaded = false; // makes player go to main menu (not coffin)
-        SceneManager.LoadScene("0_Hub");
+        if (!_selectionMade)
+        {
+            _selectionMade = true;  
+            GameManager.Instance.IsMainMenuLoaded = false; // makes player go to main menu (not coffin)
+            //StopAllCoroutines();
+            StartCoroutine(DoLeaveScene());
+        }
+        
     }
 
     public void ExitGameButton()
@@ -58,5 +72,19 @@ public class GameOverView : View
 
     private void OnDisable()
     {
+    }
+
+    private IEnumerator DoLeaveScene()
+    {
+        _sceneTransitionAnimator.Play("StandardExit", 0, 0);
+        float timer = 2;
+        while(timer > 0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        SceneManager.LoadScene("0_Hub");
+        //Debug.Log("Loading to hub");
+        yield return null;
     }
 }
