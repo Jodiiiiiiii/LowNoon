@@ -9,7 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     private PlayerShooting _shooting;
     private AudioSource _audioSource;
     [SerializeField] private Animator _animator;
-    [Tooltip("Audio clip order list: 0 = standard gunshot; 1 = Standard reload; 2 = six shot reload")]
+    [Tooltip("Audio clip order list: 0 = standard gunshot; 1 = Standard reload; 2 = six shot reload; 3 = burrowing sound")]
     [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
 
     // TODO: figure out actual value to make click sound time out best; currently 0 because of fire animation interruption issue (there is a bug card on Trello)
@@ -85,6 +85,7 @@ public class PlayerAnimator : MonoBehaviour
                 {
                     StopAllCoroutines();
                     _animator.SetBool("isDashing", true);
+                    
 
                 }
                 else // moving (not STATIONARY or DASH)
@@ -156,6 +157,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         _isActiveCoroutine = true;
         _animator.SetBool("isBurrowDown", true);
+        _audioSource.PlayOneShot(_clips[3],GameManager.Instance.GetPlayerVolume());
         yield return new WaitForSeconds(BurrowDownDuration); // Unity, why is there not a way to tell when an animation is done, it would save me so much heartache
     }
 
