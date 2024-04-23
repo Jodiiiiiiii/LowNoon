@@ -14,6 +14,9 @@ public class FinalBossMaster : MonoBehaviour
     [SerializeField] private CutsceneCharacterController _mole;
     [SerializeField] private ManualCameraController _camera;
 
+    [SerializeField] private Animator _clockMin;
+    [SerializeField] private Animator _clockHour;
+
     private AudioSource _source;
     [SerializeField] private AudioClip _finalTrack;
     [SerializeField] private AudioClip _playerShot;
@@ -90,6 +93,8 @@ public class FinalBossMaster : MonoBehaviour
         // Start the music and the timer at the same time
         _source.PlayOneShot(_finalTrack, .5f); //  GameManager.Instance.GetMusicVolume()
         _timerActive = true;
+        _clockHour.Play("HourTurn", 0, 0);
+        _clockMin.Play("MinuteTurn", 0, 0);
 
         // 7 - Between the beginning of the music and the first stroke of the bell, turn the characters around so they face away from each other
         _worm.TravelToPositionAndRotation(wormPos1.position, new Vector3(0, 90, 0), 2f);

@@ -17,7 +17,7 @@ public class WindSoundKnob : MonoBehaviour
     private MusicController _musicController;
     void Start()
     {
-        _player = GameObject.Find("WormFinal1").GetComponent<Transform>();
+        _player = GameObject.Find("WormFinal2").GetComponent<Transform>();
         _soundSource = GetComponent<AudioSource>();
         _musicController = GetComponent<MusicController>();
     }
