@@ -61,8 +61,9 @@ public class PlayerAnimator : MonoBehaviour
         if (!_isActiveCoroutine)
         {
             _animator.SetFloat("moveSpdMult", GameManager.Instance.PlayerData.MoveSpeed); // Move speed multiplier so animation stays tuned to actual speed
+            _animator.SetFloat("fireSpdMult", ((1 / GameManager.Instance.PlayerData.BulletCooldown)) * ((1 / GameManager.Instance.PlayerData.BulletCooldown)));
 
-            if(GameManager.Instance.PlayerData.CurrHealth <= 0)
+            if (GameManager.Instance.PlayerData.CurrHealth <= 0)
             {
                 defeat();
             }
@@ -134,6 +135,7 @@ public class PlayerAnimator : MonoBehaviour
     private IEnumerator DoFireGun() // Unique sequence for firing the gun
     {
         _audioSource.PlayOneShot(_clips[0], _gunFireVolume);
+        
         _animator.Play("Fire", 0, 0);
         _sixShotCount++;
         

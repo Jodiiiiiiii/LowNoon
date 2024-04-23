@@ -12,9 +12,10 @@ public class MaterialChanger : MonoBehaviour
     private void Start()
     {
         _wormMaterial = GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material;
-        if(_wormMaterial.mainTexture.name == "WormGummy")
+        //_wormMaterial.mainTexture = _gummyTexture;
+        if (_wormMaterial.mainTexture.name == "WormGummy")
         {
-            GameManager.IsGummy = true;
+            GameManager.Instance.IsGummy = true;
         }
     }
 
@@ -22,16 +23,18 @@ public class MaterialChanger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (GameManager.IsGummy)
+            
+            if (GameManager.Instance.IsGummy)
             {
-                _wormMaterial.mainTexture = _normalTexture;
-                GameManager.IsGummy = false;
+                //_wormMaterial.mainTexture = (Texture)Resources.Load("Worm2");
+                GameManager.Instance.IsGummy = false;
             }
             else
             {
-                _wormMaterial.mainTexture = _gummyTexture;
-                GameManager.IsGummy = true;
+                //_wormMaterial.mainTexture = (Texture)Resources.Load("WormGummy");
+                GameManager.Instance.IsGummy = true;
             }
+            //GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material = _wormMaterial;
         } 
     }
 }
