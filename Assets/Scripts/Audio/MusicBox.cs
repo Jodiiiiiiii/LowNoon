@@ -62,7 +62,12 @@ public class MusicBox : MonoBehaviour
         {
             if (!silent)
             {
-                _audioSource.volume = GameManager.Instance.GetMusicVolume() * _localVolume;
+                // lowered relative volume of combat music
+                if(_audioSource.clip == _fightingMusic)
+                    _audioSource.volume = GameManager.Instance.GetMusicVolume() * _localVolume * 0.3f;
+                else
+                    _audioSource.volume = GameManager.Instance.GetMusicVolume() * _localVolume;
+
                 if (GameManager.Instance.PlayerData.CurrHealth <= 0)
                 {
                     StartCoroutine(DoFadeOut());
