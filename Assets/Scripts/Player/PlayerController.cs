@@ -113,6 +113,17 @@ public class PlayerController : MonoBehaviour
         SceneTransitionObject.onSceneTransition -= HaltAndDisable;
         GameManager.onSceneBegin -= HaltAndDisable;
         GameManager.onHubRevive -= HaltAndDisable;
+
+        // set all inputs to zero in case other scripts are still trying to access them
+        // Character inputs
+        PlayerInput.MoveAxisForward = 0;
+        PlayerInput.DashDown = false;
+        // Camera inputs
+        PlayerInput.LookAxisRight = 0;
+        PlayerInput.LookAxisUp = 0;
+
+        // stop velocity to prevent rigidbody sliding
+        _rb.velocity = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -229,16 +240,16 @@ public class PlayerController : MonoBehaviour
         {
             case CharacterState.MOVING: // character tracks rotation to camera at a certain rate
                 // smoothing planar rotation
-                // turning speed also scales with move speed stat
+                // turning speed also scales with move speed stat (but at a higher rate -> so turning actually feels sharper with upgrades)
                 _rb.MoveRotation(Quaternion.Slerp(transform.rotation, planarCameraQuaternion,
-                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed)));
+                    1f - Mathf.Exp(-_movingRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed * GameManager.Instance.PlayerData.MoveSpeed)));
 
                 break;
             case CharacterState.STATIONARY: // character rotates faster tracking camera
                 // smooth planar rotation
-                // speed also scales with move speed stat
+                // turning speed also scales with move speed stat (but at a higher rate -> so turning actually feels sharper with upgrades)
                 _rb.MoveRotation(Quaternion.Slerp(transform.rotation, planarCameraQuaternion, 
-                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed)));
+                    1f - Mathf.Exp(-_stationaryRotationSharpness * Time.deltaTime * GameManager.Instance.PlayerData.MoveSpeed * GameManager.Instance.PlayerData.MoveSpeed)));
 
                 break;
             case CharacterState.DASH: // camera locked at current 'dashing' direction

@@ -88,7 +88,7 @@ public class DamageReceiver : MonoBehaviour
             if (!IsImmune)
             {
                 // destroy damage receiver only if it reaches 0 health
-                HealthLevel -= bulletStats.DamageLevel;    
+                HealthLevel -= bulletStats.DamageLevel * GameManager.Instance.PlayerData.BulletDamageMult;    
                 
                 // check if ant needs to be woken
                 if(gameObject.TryGetComponent<MeleeMovement>(out MeleeMovement ant))
