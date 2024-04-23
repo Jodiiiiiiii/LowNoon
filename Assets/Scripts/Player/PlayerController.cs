@@ -37,11 +37,6 @@ public class PlayerController : MonoBehaviour
 
         State = CharacterState.STATIONARY;
 
-        //if (GameManager.IsGummy)
-        //{
-            //GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material.mainTexture = _gummyWorm;
-        //}
-
         // set starting val of prevHeight
         _prevHeight = transform.position.y;
     }

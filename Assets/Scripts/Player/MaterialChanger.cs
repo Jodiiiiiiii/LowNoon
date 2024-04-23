@@ -5,18 +5,18 @@ using UnityEngine;
 public class MaterialChanger : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Material _wormMaterial;
+    //private Material _wormMaterial;
     [SerializeField] private Texture _normalTexture;
     [SerializeField] private Texture _gummyTexture;
 
     private void Start()
     {
-        _wormMaterial = GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material;
+        //_wormMaterial = GameObject.Find("4_Worm").GetComponent<SkinnedMeshRenderer>().material;
         //_wormMaterial.mainTexture = _gummyTexture;
-        if (_wormMaterial.mainTexture.name == "WormGummy")
-        {
-            GameManager.Instance.IsGummy = true;
-        }
+        //if (_wormMaterial.mainTexture.name == "WormGummy")
+        //{
+        //    GameManager.Instance.IsGummy = true;
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
