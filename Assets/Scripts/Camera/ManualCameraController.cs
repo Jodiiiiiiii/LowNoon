@@ -9,8 +9,11 @@ public class ManualCameraController : MonoBehaviour
     private CameraController _cameraController;
     private Transform _playerTransform;
     private Camera _camera;
-    // Scripted transform positions (or transform values relative to the player) for certain scenarios
+    
     Vector3 _openingLogoPosition;
+    Vector3 _startPosition = new Vector3(12.79f, 2f, -71f);
+
+    // Scripted transform positions (or transform values relative to the player) for certain scenarios
     Vector3 _mainMenuPosition = new Vector3(-6.33f, .68f, 2.05f);
     Vector3 _playerCameraPosition = new Vector3(1.7f, 4.015f, -10f);
     Vector3 _revivePosition = new Vector3(-30.316f, 3.2999f, -33.238f);
@@ -42,7 +45,7 @@ public class ManualCameraController : MonoBehaviour
     public void moveToMainMenu()
     {
         StopAllCoroutines();
-        StartCoroutine(DoCamPosition(_mainMenuPosition, 1f, _mainMenuRotation));
+        StartCoroutine(DoCamPosition(_mainMenuPosition, 2f, _mainMenuRotation));
     }
 
     public void moveToGameStart()
