@@ -9,7 +9,7 @@ public class PlayerAnimator : MonoBehaviour
     private PlayerShooting _shooting;
     private AudioSource _audioSource;
     [SerializeField] private Animator _animator;
-    [Tooltip("Audio clip order list: 0 = standard gunshot; 1 = Standard reload; 2 = six shot reload; 3 = burrowing sound; 4 = dash sound")]
+    [Tooltip("Audio clip order list: 0 = standard gunshot; 1 = Standard reload; 2 = six shot reload; 3 = burrowing sound")]
     [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
 
     // TODO: figure out actual value to make click sound time out best; currently 0 because of fire animation interruption issue (there is a bug card on Trello)
@@ -134,19 +134,19 @@ public class PlayerAnimator : MonoBehaviour
     #region COROUTINES
     private IEnumerator DoFireGun() // Unique sequence for firing the gun
     {
-        _audioSource.PlayOneShot(_clips[0], _gunFireVolume);
+        _audioSource.PlayOneShot(_clips[0], _gunFireVolume * GameManager.Instance.GetPlayerVolume());
         _animator.Play("Fire", 0, 0);
         _sixShotCount++;
         
         yield return new WaitForSeconds(GameManager.Instance.PlayerData.BulletCooldown - _reloadClickOffset); // make sure click finishes right when you can fire again
         if(_sixShotCount >= 6) // >= so that it doesn't skip 6 when it skips audio due to moving (why does it do this exactly?)
         {
-            _audioSource.PlayOneShot(_clips[2]);
+            _audioSource.PlayOneShot(_clips[2], _gunFireVolume * GameManager.Instance.GetPlayerVolume());
             _sixShotCount = 0;
         }
         else
         {
-            _audioSource.PlayOneShot(_clips[1]);
+            _audioSource.PlayOneShot(_clips[1], _gunFireVolume * GameManager.Instance.GetPlayerVolume());
         }
             
         _animator.Play("Idle", 0, 0);
@@ -156,7 +156,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         _isActiveCoroutine = true;
         _animator.SetBool("isBurrowDown", true);
-        _audioSource.PlayOneShot(_clips[3],GameManager.Instance.SaveData.PlayerVolumeSlider);
+        _audioSource.PlayOneShot(_clips[3],GameManager.Instance.GetPlayerVolume());
         yield return new WaitForSeconds(BurrowDownDuration); // Unity, why is there not a way to tell when an animation is done, it would save me so much heartache
     }
 

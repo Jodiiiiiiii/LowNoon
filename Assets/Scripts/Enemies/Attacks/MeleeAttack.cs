@@ -47,7 +47,7 @@ public class MeleeAttack : MonoBehaviour
             if (!_duringAttack && _attackTimer > AttackCooldown) // if attack is off cooldown and ready
             {
                 // initiate attack
-                _audioSource.PlayOneShot(_clips[0], GameManager.Instance.SaveData.EnemyVolumeSlider);
+                _audioSource.PlayOneShot(_clips[0], 0.6f*GameManager.Instance.GetEnemyVolume());
                 _duringAttack = true;
                 AttackCollider.enabled = true;
                 _attackTimer = 0;

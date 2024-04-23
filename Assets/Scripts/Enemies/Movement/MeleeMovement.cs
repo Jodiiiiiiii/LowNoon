@@ -90,7 +90,7 @@ public class MeleeMovement : MonoBehaviour
 
         if (!_isIdle)
         {   if(_soundTimer <= 0){
-            _audioSource.PlayOneShot(_clips[0],GameManager.Instance.SaveData.EnemyVolumeSlider);
+            _audioSource.PlayOneShot(_clips[0],GameManager.Instance.GetEnemyVolume());
             _soundTimer = 1.2f;
             }
             // Smoothly rotate to goal

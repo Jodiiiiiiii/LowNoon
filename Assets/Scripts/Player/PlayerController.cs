@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
                 // Not DASH -> DASH
                 if (PlayerInput.DashDown && _dashTimer <= 0f && !GameManager.IsPaused)
                 {
-                    _audioSource.PlayOneShot(_clips[0],GameManager.Instance.SaveData.PlayerVolumeSlider);
+                    _audioSource.PlayOneShot(_clips[0],GameManager.Instance.GetPlayerVolume());
                     // start dash duration timer
                     _dashTimer = _dashDuration;
                     // set velocity to zero first to ensure consistent dash behavior/distance whether dashing from moving or stationary

@@ -30,7 +30,7 @@ public class DummyAnimator : EnemyAnimator
         _collider.enabled = false;
         _damageReceiver.IsImmune = true;
         _animator.SetBool("isDead", true);
-        _audioSource.PlayOneShot(_clips[1], 1.0f);
+        _audioSource.PlayOneShot(_clips[1], GameManager.Instance.GetEnemyVolume());
         yield return new WaitForSeconds(_deathAnimDuration);
         
         _animator.SetBool("isDead", false);

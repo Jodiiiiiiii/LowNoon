@@ -186,9 +186,10 @@ MonoBehaviour:
   _deathAnimDuration: 0.45
   _attackAnimDuration: 0.5
   _clips:
-  - {fileID: 8300000, guid: 3639df83a1d1646eebb16eac99c19eff, type: 3}
-  - {fileID: 8300000, guid: 3639df83a1d1646eebb16eac99c19eff, type: 3}
-  - {fileID: 8300000, guid: 424c2eb2fb7814409a82d579da9cf570, type: 3}
+  - {fileID: 8300000, guid: 75b02587156854d22a7801125ab3bfb4, type: 3}
+  - {fileID: 8300000, guid: 75b02587156854d22a7801125ab3bfb4, type: 3}
+  - {fileID: 8300000, guid: 056acb0c559284c549a0bafdb5e87051, type: 3}
+  - {fileID: 8300000, guid: 57cd6f471ff774cf3b89e3f1a0049980, type: 3}
   _vanishEffect: {fileID: 6744784352308396917, guid: 37b34de3e4a7be548893514f490ff184, type: 3}
 --- !u!82 &4940905606776950850
 AudioSource:
