@@ -36,11 +36,11 @@ public class PlayerMovementSound : MonoBehaviour
             _audioSource.volume = _startVolume;
         }
 
-        if (_playerController.State == CharacterState.MOVING)
+        if (_playerController.enabled && _playerController.State == CharacterState.MOVING)
         {
             if (_timer <= 0f)
             {
-                _audioSource.PlayOneShot(_movementSound, 0.1f * GameManager.Instance.GetPlayerVolume());
+                _audioSource.PlayOneShot(_movementSound, 0.05f * GameManager.Instance.GetPlayerVolume());
                 _timer = _repeatDuration;
             }
             _timer -= Time.deltaTime;
