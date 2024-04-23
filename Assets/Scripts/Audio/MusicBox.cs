@@ -14,7 +14,7 @@ public class MusicBox : MonoBehaviour
     [SerializeField] private AudioClip _creditsMusic;
     private AudioClip _currentMusic;
 
-    private float _localVolume;
+    private float _localVolume = 1;
 
     public static MusicBox Instance
     {
@@ -42,8 +42,18 @@ public class MusicBox : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
 
-        newSceneCheck();
+    }
 
+    private void OnEnable()
+    {
+        GameManager.onSceneBegin += newSceneCheck;
+        GameManager.onHubRevive += newSceneCheck;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onSceneBegin -= newSceneCheck;
+        GameManager.onHubRevive -= newSceneCheck;
     }
 
     private void Update()
@@ -52,7 +62,11 @@ public class MusicBox : MonoBehaviour
         {
             if (!silent)
             {
-                _audioSource.volume = GameManager.Instance.masterVolume * GameManager.Instance.musicVolume;
+                _audioSource.volume = GameManager.Instance.GetMusicVolume() * _localVolume;
+                if (GameManager.Instance.PlayerData.CurrHealth <= 0)
+                {
+                    StartCoroutine(DoFadeOut());
+                }
             }
             else
             {
@@ -65,45 +79,54 @@ public class MusicBox : MonoBehaviour
 
     public void newSceneCheck()
     {
+        _audioSource = GetComponent<AudioSource>();
+        activeCoroutine = false;
         if (wrongSceneCheck())
         {
+            Debug.Log("Shut up");
             silent = true;
-            _audioSource.volume = 0f;
+            _localVolume = 0f;
             if (_audioSource.isPlaying)
                 _audioSource.Stop();
         }
         else
         {
-            silent = false;
-            _audioSource.clip = standard;
-            _audioSource.volume = GameManager.Instance.masterVolume * GameManager.Instance.musicVolume;
-            if (!_audioSource.isPlaying)
-                _audioSource.Play();
+            if(!(SceneManager.GetActiveScene().name == "xx_Credits"))
+            {
+                _audioSource.loop = true;
+                silent = false;
+                _audioSource.clip = _fightingMusic;
+                _audioSource.volume = GameManager.Instance.GetMusicVolume() * _localVolume;
+                if (!_audioSource.isPlaying)
+                    _audioSource.Play();
+
+            }
+
+            if (SceneManager.GetActiveScene().name == "x_FinalBoss")
+            {
+                FadeOut();
+            }
+
+
         }
     }
 
     public void FadeOut()
     {
-
+        StopAllCoroutines();
+        StartCoroutine(DoFadeOut());
     }
 
-    /*public void StartBattleFade()
+    public void RollCredits()
     {
-        StopAllCoroutines();
-        StartCoroutine(DoBattleBegin());
+        _currentMusic = _creditsMusic;
+        _audioSource.clip = _currentMusic;
+        _localVolume = 1;
+        _audioSource.volume = GameManager.Instance.GetMusicVolume() * _localVolume;
+        silent = false;
+        _audioSource.loop = false;
+        _audioSource.Play();
     }
-
-    public void EndBattleFade()
-    {
-        StopAllCoroutines();
-        StartCoroutine(DoBattlePeacefulEnd());
-    }
-
-    public void ReturnToNormal()
-    {
-        StopAllCoroutines();
-        StartCoroutine(DoReturnToNormal());
-    }*/
 
     public void HardStop()
     {
@@ -119,48 +142,15 @@ public class MusicBox : MonoBehaviour
         return false;
     }
 
-    /*private IEnumerator DoBattlePeacefulEnd()
+    private IEnumerator DoFadeOut()
     {
         activeCoroutine = true;
-        while (_audioSource.volume > 0f)
+        while (_localVolume > 0f)
         {
-            _audioSource.volume -= Time.deltaTime * 2f;
+            _localVolume -= Time.deltaTime * 2f;
             yield return null;
         }
-
-        _audioSource.clip = standard;
-        _audioSource.time = songTime;
-
+        _audioSource.Stop();
+        silent = true;
     }
-
-    private IEnumerator DoReturnToNormal()
-    {
-        while (_audioSource.volume < GameManager.Instance.masterVolume * GameManager.Instance.musicVolume)
-        {
-            _audioSource.volume += Time.deltaTime / 3f;
-            yield return null;
-        }
-        _audioSource.Play();
-        _audioSource.time = songTime;
-        activeCoroutine = false;
-        yield return null;
-    }
-
-    private IEnumerator DoBattleBegin()
-    {
-        activeCoroutine = true;
-        songTime = _audioSource.time;
-        while (_audioSource.volume > 0f)
-        {
-            _audioSource.volume -= Time.deltaTime * 2f;
-            yield return null;
-        }
-
-        _audioSource.clip = battle;
-        yield return new WaitForSeconds(.5f);
-        _audioSource.volume = GameManager.Instance.masterVolume * GameManager.Instance.musicVolume;
-        _audioSource.Play();
-        activeCoroutine = false; // Cuz then we go hard into the battle music
-        yield return null;
-    }*/
 }
