@@ -267,7 +267,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 63.0187, y: 63.0187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7279092204779508995
 CanvasRenderer:
@@ -5940,7 +5940,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 63.0187, y: 63.0187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9211283982878507926
 CanvasRenderer:
@@ -5994,10 +5994,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHorizontalOffset: 2000
   _maxFadeDistance: 500
-  _maxAlpha: 0.4
+  _maxAlpha: 0.6
   _transparencySharpness: 10
   _reticleOutline: {fileID: 5300110787509380310}
-  _maxOutlineAlpha: 0.2
+  _maxOutlineAlpha: 0.25
 --- !u!1 &6404973085513389788
 GameObject:
   m_ObjectHideFlags: 0
