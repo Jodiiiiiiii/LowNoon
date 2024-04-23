@@ -83,7 +83,6 @@ public class MusicBox : MonoBehaviour
         activeCoroutine = false;
         if (wrongSceneCheck())
         {
-            Debug.Log("Shut up");
             silent = true;
             _localVolume = 0f;
             if (_audioSource.isPlaying)
