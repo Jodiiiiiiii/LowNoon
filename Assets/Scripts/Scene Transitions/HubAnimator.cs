@@ -9,6 +9,8 @@ public class HubAnimator : MonoBehaviour
     [SerializeField] private float _duration; // How long this animation takes
     [SerializeField] private string _name;  // The name of the animation we're playing
     [SerializeField] private bool _isDestroyed; // Whether this object is destroyed at the end of its animation
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _clip;
     private Animator _animator;
     private void OnEnable()
     {
@@ -39,6 +41,7 @@ public class HubAnimator : MonoBehaviour
     private IEnumerator DoAnimation()
     {
         yield return new WaitForSeconds(_delay);
+        _audioSource.PlayOneShot(_clip, GameManager.Instance.GetEnvironmentVolume() * 1.5f);
         _animator.Play(_name, 0, 0);
         yield return new WaitForSeconds(_duration);
         if( _isDestroyed)
