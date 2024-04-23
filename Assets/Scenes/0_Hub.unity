@@ -12786,6 +12786,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1973864863177712170, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: _maxAlpha
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973864863177712170, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: _maxOutlineAlpha
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2205882962643777833, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -12832,6 +12840,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2894776623557861686, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911114919753339665, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911114919753339665, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2911114919753339665, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300110787509380310, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300110787509380310, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300110787509380310, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7419644012985367002, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
