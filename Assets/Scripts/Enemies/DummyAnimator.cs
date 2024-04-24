@@ -37,8 +37,8 @@ public class DummyAnimator : EnemyAnimator
         _damageReceiver.HealthLevel = _maxHealth;
         _damageReceiver.IsImmune = false;
         _collider.enabled = true;
+        // rebound sfx
+        _audioSource.PlayOneShot(_clips[1], 0.5f * GameManager.Instance.GetEnemyVolume());
         yield return new WaitForSeconds(_reviveAnimDuration);
-        
-
     }
 }

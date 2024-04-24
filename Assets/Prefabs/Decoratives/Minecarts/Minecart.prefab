@@ -305,7 +305,7 @@ MonoBehaviour:
   _speed: 20
   _explosionParticles: {fileID: 6187283044357450411, guid: e6df6be456493c440af7fac15718c740, type: 3}
   _lifetime: 15
-  _clip: {fileID: 8300000, guid: bb9b38fcd7d509841aaec0c9d6927a28, type: 3}
+  _clip: {fileID: 8300000, guid: b45b647fa93c14748ac5304273d6220b, type: 3}
   _audioSource: {fileID: 2887035663502901491}
   ExplosionRadius: 10
   DamageAmount: 10

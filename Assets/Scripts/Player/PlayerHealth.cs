@@ -13,12 +13,15 @@ public class PlayerHealth : MonoBehaviour
     [System.NonSerialized] public int ExplosionDmg;
     private PlayerController _player;
     private bool _isDead = false;
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip _healthPickupAudio;
     
 
     // Start is called before the first frame update
     void Start()
     {
         _player = gameObject.GetComponent<PlayerController>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -66,6 +69,10 @@ public class PlayerHealth : MonoBehaviour
             {
                 GameManager.Instance.PlayerData.CurrHealth++;
             }
+
+            // play health pickup sound
+            _audioSource.PlayOneShot(_healthPickupAudio, GameManager.Instance.GetEnvironmentVolume());
+
             Destroy(other.gameObject);
         }
     }
