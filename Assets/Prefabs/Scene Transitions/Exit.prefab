@@ -4991,6 +4991,10 @@ PrefabInstance:
       value: x_FinalBoss
       objectReference: {fileID: 0}
     - target: {fileID: 664856852505322790, guid: 2fb38b98488c92e4c863167ad0762d6b, type: 3}
+      propertyPath: _roomsBeforeBoss
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 664856852505322790, guid: 2fb38b98488c92e4c863167ad0762d6b, type: 3}
       propertyPath: _levels.Array.size
       value: 5
       objectReference: {fileID: 0}
