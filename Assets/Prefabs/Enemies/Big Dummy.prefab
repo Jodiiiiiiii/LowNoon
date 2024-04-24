@@ -183,6 +183,7 @@ MonoBehaviour:
   EffectParticles: {fileID: 0}
   ShouldSpawn: 0
   _pickupHeight: 0.5
+  _clips: []
 --- !u!114 &8303980438249107970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +202,7 @@ MonoBehaviour:
   _attackAnimDuration: 0
   _clips:
   - {fileID: 8300000, guid: a49b1c0ac5892481489efd74a93469b0, type: 3}
-  - {fileID: 8300000, guid: d8e505c036eae4decb8b0fe5a7c7a583, type: 3}
+  - {fileID: 8300000, guid: 0d9b86dc6b8f967488bdb801355f543b, type: 3}
   _reviveAnimDuration: 0.5
 --- !u!54 &2891620797312053039
 Rigidbody:

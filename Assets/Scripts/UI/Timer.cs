@@ -13,6 +13,9 @@ public class Timer : MonoBehaviour
     [SerializeField, Tooltip("color at end of timer")] private Color _endColor;
     private UnityEngine.UI.Image _image;
 
+    [Header("Audio")]
+    [SerializeField, Tooltip("sound played when timer runs out - same as tremors")] private AudioClip _tremorSound;
+
     private float _time;
     // Start is called before the first frame update
     void Start()
@@ -33,9 +36,11 @@ public class Timer : MonoBehaviour
             GameManager.Instance.PlayerData.CrumblingDeath = true; // ensure fade to black in game over screen
             GameObject.Find("Player").GetComponent<PlayerController>().enabled = false; // ensure player loses control
 
-            // TODO: add room crumbling sound effect
-
-            // TODO: initiate camera shake effect here during fade to black
+            GameObject cam = GameObject.Find("ActualCamera");
+            // visual
+            cam.GetComponent<Animator>().SetTrigger("Shake");
+            // sfx
+            cam.GetComponent<AudioSource>().PlayOneShot(_tremorSound, GameManager.Instance.GetEnvironmentVolume());
         }
 
         _image.fillAmount = _time / _timer;

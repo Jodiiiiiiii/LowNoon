@@ -39429,6 +39429,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3102009881588417682, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5754108205002651285, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
       propertyPath: _cameraTransform
       value: 
@@ -39441,6 +39445,10 @@ PrefabInstance:
       propertyPath: _clips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 51d0cb8b76f58458db66a75a4f0f0e16, type: 3}
+    - target: {fileID: 5980273737611912633, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6196059899672709530, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.89

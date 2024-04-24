@@ -10,7 +10,7 @@ public class PlayerAnimator : MonoBehaviour
     private AudioSource _audioSource;
     private PlayAudioAfterDelay _delayAudio;
     [SerializeField] private Animator _animator;
-    [Tooltip("Audio clip order list: 0 = standard gunshot; 1 = Standard reload; 2 = six shot reload; 3 = burrowing sound")]
+    [Tooltip("Audio clip order list: 0 = standard gunshot; 1 = Standard reload; 2 = six shot reload; 3 = burrowing sound; 4 = movement")]
     [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
 
     // TODO: figure out actual value to make click sound time out best; currently 0 because of fire animation interruption issue (there is a bug card on Trello)
