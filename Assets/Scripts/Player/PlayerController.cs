@@ -156,13 +156,21 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void GatherInput()
     {
-        // Character inputs
-        PlayerInput.MoveAxisForward = Input.GetAxisRaw(VERTICAL_INPUT);
-        PlayerInput.DashDown = Input.GetKeyDown(KeyCode.LeftShift);
+        if(!GameManager.IsPaused) // freeze inputs when paused
+        {
+            // Character inputs
+            PlayerInput.MoveAxisForward = Input.GetAxisRaw(VERTICAL_INPUT);
+            PlayerInput.DashDown = Input.GetKeyDown(KeyCode.LeftShift);
 
-        // Camera inputs
-        PlayerInput.LookAxisRight = Input.GetAxisRaw(MOUSE_RIGHT) * GameManager.Instance.SaveData.HorizontalSensitivity;
-        PlayerInput.LookAxisUp = Input.GetAxisRaw(MOUSE_UP) * GameManager.Instance.SaveData.VerticalSensitivity;
+            // Camera inputs
+            PlayerInput.LookAxisRight = Input.GetAxisRaw(MOUSE_RIGHT) * GameManager.Instance.SaveData.HorizontalSensitivity;
+            PlayerInput.LookAxisUp = Input.GetAxisRaw(MOUSE_UP) * GameManager.Instance.SaveData.VerticalSensitivity;
+        }
+        else // stops camera tracking mouse movement while paused
+        {
+            PlayerInput.LookAxisRight = 0;
+            PlayerInput.LookAxisUp = 0;
+        }
     }
     #endregion
 
