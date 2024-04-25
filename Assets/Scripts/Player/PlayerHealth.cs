@@ -15,7 +15,8 @@ public class PlayerHealth : MonoBehaviour
     private bool _isDead = false;
     private AudioSource _audioSource;
     [SerializeField] private AudioClip _healthPickupAudio;
-    
+    [SerializeField] private List<AudioClip> _clips = new List<AudioClip>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -82,8 +83,16 @@ public class PlayerHealth : MonoBehaviour
         if (!IsInvulnerable)
         {
             // consume 1 armor if any present, otherwise simply apply damage to health
-            if (GameManager.Instance.PlayerData.Armor > 0) GameManager.Instance.PlayerData.Armor -= 1;
-            else GameManager.Instance.PlayerData.CurrHealth -= dmgAmount;
+            if (GameManager.Instance.PlayerData.Armor > 0)
+            {
+                _audioSource.PlayOneShot(_clips[0], GameManager.Instance.GetPlayerVolume());
+                GameManager.Instance.PlayerData.Armor -= 1;
+            }
+            else
+            {
+                _audioSource.PlayOneShot(_clips[1],  GameManager.Instance.GetPlayerVolume());
+                GameManager.Instance.PlayerData.CurrHealth -= dmgAmount;
+            }
 
             IsInvulnerable = true;
             _timer = 0.0f; // resets timer

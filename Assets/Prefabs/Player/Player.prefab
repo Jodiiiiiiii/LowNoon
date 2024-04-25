@@ -265,6 +265,9 @@ MonoBehaviour:
   InvulnerabilityDuration: 2
   _meleeEnemyDamage: 1
   _healthPickupAudio: {fileID: 8300000, guid: 967c7e6d5ecf5fd4793c077d91982640, type: 3}
+  _clips:
+  - {fileID: 8300000, guid: 27b09bc87537cf04aa53b638d74631b5, type: 3}
+  - {fileID: 8300000, guid: 1e672bb2b9e9b0544ba5df82c46b6de6, type: 3}
 --- !u!136 &5815269249637768015
 CapsuleCollider:
   m_ObjectHideFlags: 0
