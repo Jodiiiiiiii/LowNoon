@@ -57,12 +57,18 @@ public class PauseMenuView : View
     {
         Time.timeScale = 0;
         GameManager.IsPaused = true;
+
+        // disable player shooting - prevent instant fire on resume
+        GameObject.Find("Player").GetComponent<PlayerShooting>().enabled = false;
     }
 
     void OnDisable()
     {
         Time.timeScale = 1f;
         GameManager.IsPaused = false;
+
+        // enable player shooting - prevent instant fire on resume
+        GameObject.Find("Player").GetComponent<PlayerShooting>().enabled = true;
     }
 
     private IEnumerator DoLeaveScene()
