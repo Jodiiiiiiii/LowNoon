@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitionCollider: {fileID: 7350164877092880138}
   _glowParticles: {fileID: 4776913056154308933}
+  _enemyCheckRadius: 60
   CanMoveOn: 0
 --- !u!1 &4776913056154308933
 GameObject:
