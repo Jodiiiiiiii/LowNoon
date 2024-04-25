@@ -9798,7 +9798,7 @@ PrefabInstance:
     - target: {fileID: 7505429179399386570, guid: ffef8cdc3b207f440896ae7ec4f4de18, type: 3}
       propertyPath: _clip
       value: 
-      objectReference: {fileID: 8300000, guid: 0a86f1f045c79cb4d8e85185b8424443, type: 3}
+      objectReference: {fileID: 8300000, guid: 6776e0d333294394bab9e93f093d44c7, type: 3}
     - target: {fileID: 7505429179399386570, guid: ffef8cdc3b207f440896ae7ec4f4de18, type: 3}
       propertyPath: _audioSource
       value: 
@@ -13157,6 +13157,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 811715715777743900, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1025364020095230628, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -13250,6 +13254,10 @@ PrefabInstance:
     - target: {fileID: 2304444061691138288, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_AnchorMin.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453671348352869044, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 77.19
       objectReference: {fileID: 0}
     - target: {fileID: 2647753080575191667, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: startingView
@@ -13365,7 +13373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3851313218807008371, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5049789201582490797, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_AnchorMax.x
@@ -13487,6 +13495,20 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7521890302249710642, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_text
+      value: 'Pixabay
+
+        WombatNoisesAudio'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7521890302249710642, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7521890302249710642, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 7653165854891223724, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_Name
       value: UI Views
@@ -13558,6 +13580,10 @@ PrefabInstance:
     - target: {fileID: 8362702827565622449, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8475538568335068298, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8561717566345235902, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_AnchorMax.x
