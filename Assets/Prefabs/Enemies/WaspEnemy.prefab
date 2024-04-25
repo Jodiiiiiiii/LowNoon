@@ -166,10 +166,12 @@ MonoBehaviour:
   IsGoldenBarrel: 0
   _isExtraGoldenBarrel: 0
   Animated: 0
+  Enemy: 1
   EffectParticles: {fileID: 0}
   ShouldSpawn: 1
   _pickupHeight: 0.5
-  _clips: []
+  _clips:
+  - {fileID: 8300000, guid: 0ba9764267f0f154d9c20e95d872c638, type: 3}
 --- !u!114 &1841968315185491616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,8 +189,8 @@ MonoBehaviour:
   _deathAnimDuration: 0.45
   _attackAnimDuration: 0.5
   _clips:
-  - {fileID: 8300000, guid: 75b02587156854d22a7801125ab3bfb4, type: 3}
-  - {fileID: 8300000, guid: 75b02587156854d22a7801125ab3bfb4, type: 3}
+  - {fileID: 8300000, guid: 0ba9764267f0f154d9c20e95d872c638, type: 3}
+  - {fileID: 8300000, guid: daade08165e8e84468cbd9a54b115157, type: 3}
   - {fileID: 8300000, guid: 056acb0c559284c549a0bafdb5e87051, type: 3}
   - {fileID: 8300000, guid: 57cd6f471ff774cf3b89e3f1a0049980, type: 3}
   _vanishEffect: {fileID: 6744784352308396917, guid: 37b34de3e4a7be548893514f490ff184, type: 3}

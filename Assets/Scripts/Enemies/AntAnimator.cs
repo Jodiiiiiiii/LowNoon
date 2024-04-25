@@ -27,7 +27,7 @@ public class AntAnimator : EnemyAnimator
             }
             else // If only hurt
             {
-                // Ant has no hurt anim, 2 small, but there WILL be a sound
+                _audioSource.PlayOneShot(_clips[0], GameManager.Instance.GetEnemyVolume());
             }
         }
         prevHP = _damageReceiver.HealthLevel;
@@ -35,6 +35,7 @@ public class AntAnimator : EnemyAnimator
     protected override IEnumerator DoDeathAnim()
     {
         _animator.SetBool("isDead", true);
+        _audioSource.PlayOneShot(_clips[1], GameManager.Instance.GetEnemyVolume());
         yield return new WaitForSeconds(_deathAnimDuration);
         Instantiate(_vanishEffect, this.transform.position, _vanishEffect.transform.rotation);
         Destroy(this.gameObject);
