@@ -13197,7 +13197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1287960091693590493, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_Alpha
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1506038824823771390, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -39611,7 +39611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b903f40d24e320344ad53d8a795410fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stoppingThreshold: 100
   _turnTime: 2
   _targetRotation: {x: 0, y: 0, z: 0}
 --- !u!1001 &1910653228
