@@ -190,6 +190,10 @@ public class PlayerAnimator : MonoBehaviour
             GameObject.Find("Player Camera").GetComponent<ManualCameraController>().moveToReviveStart();
             GameObject.Find("Ambient Audio").GetComponent<MusicController>().FadeIn();
         }
+        else
+        {
+            GameObject.Find("Player Camera").GetComponent<CameraController>().SetTransitionPos(this.transform.rotation);
+        }
             
         yield return new WaitForSeconds(RoomEnterDuration);
 

@@ -113,4 +113,10 @@ public class CameraController : MonoBehaviour
 
         this.enabled = false;
     }
+
+    public void SetTransitionPos(Quaternion rotation)
+    {
+        _targetPlanarDir = GameObject.Find("Player Start Point").transform.forward;
+        this.transform.rotation = rotation;
+    }
 }
