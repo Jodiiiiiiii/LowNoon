@@ -11970,7 +11970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooCloseDistance: 30
-  _maxVolumeDistance: 100
+  _maxVolumeDistance: 70
   _saloonSoundSource: {fileID: 1144355832}
 --- !u!114 &555402929
 MonoBehaviour:
