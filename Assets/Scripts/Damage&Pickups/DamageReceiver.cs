@@ -72,7 +72,6 @@ public class DamageReceiver : MonoBehaviour
             }
             if (IsDirectlyDestroyed)
             {
-                Destroy(gameObject);
                 GameObject soundObj = new GameObject();
                 soundObj.transform.position = transform.position;
                 AudioSource audioSource = soundObj.AddComponent<AudioSource>();

@@ -41,7 +41,8 @@ public class HubAnimator : MonoBehaviour
     private IEnumerator DoAnimation()
     {
         yield return new WaitForSeconds(_delay);
-        _audioSource.PlayOneShot(_clip, GameManager.Instance.GetEnvironmentVolume() * 1.5f);
+        if(_clip != null)
+            _audioSource.PlayOneShot(_clip, GameManager.Instance.GetEnvironmentVolume() * 1.5f);
         _animator.Play(_name, 0, 0);
         yield return new WaitForSeconds(_duration);
         if( _isDestroyed)
