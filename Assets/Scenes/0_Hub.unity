@@ -39516,14 +39516,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7179307920419429564, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: _clips.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7179307920419429564, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: _clips.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 24c0262a549de4b0c9d25c5d623e8536, type: 3}
-    - target: {fileID: 7179307920419429564, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
       propertyPath: _clips.Array.data[4]
       value: 
       objectReference: {fileID: 8300000, guid: 51d0cb8b76f58458db66a75a4f0f0e16, type: 3}
