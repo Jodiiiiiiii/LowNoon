@@ -4015,18 +4015,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Dummy (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
-      propertyPath: rolloffMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
-      propertyPath: DopplerLevel
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5163,14 +5151,6 @@ PrefabInstance:
     - target: {fileID: 2238942177203734004, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
       propertyPath: m_Name
       value: Big Dummy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
-      propertyPath: rolloffMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7889736026374432836, guid: 252d317094eb2bc48b60345f475dfe72, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10449,14 +10429,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1706436104}
     m_Modifications:
-    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
-      propertyPath: rolloffMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1209865070423057951, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -22545,14 +22517,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1706436104}
     m_Modifications:
-    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
-      propertyPath: rolloffMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1209865070423057951, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -22573,10 +22537,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lil Dummy
       objectReference: {fileID: 0}
-    - target: {fileID: 2456068823694340888, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
-      propertyPath: _clips.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: d8e505c036eae4decb8b0fe5a7c7a583, type: 3}
     - target: {fileID: 2975405349093464695, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.7000002
@@ -30827,14 +30787,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1706436104}
     m_Modifications:
-    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
-      propertyPath: rolloffMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 877886363317112532, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2450261430926246093, guid: 5aa230b273ca91542a7e9eb0a335c98d, type: 3}
       propertyPath: m_Name
       value: Lil Dummy (2)
