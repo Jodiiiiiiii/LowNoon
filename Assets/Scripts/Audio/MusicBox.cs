@@ -58,8 +58,8 @@ public class MusicBox : MonoBehaviour
 
     private void Update()
     {
-        if (!activeCoroutine)
-        {
+        /*if (!activeCoroutine)
+        {*/
             if (!silent)
             {
                 // lowered relative volume of combat music
@@ -78,7 +78,7 @@ public class MusicBox : MonoBehaviour
 
                 _audioSource.volume = 0f;
             }
-        }
+       // }
 
     }
 
@@ -97,6 +97,7 @@ public class MusicBox : MonoBehaviour
         {
             if(!(SceneManager.GetActiveScene().name == "xx_Credits"))
             {
+                _localVolume = 1f;
                 _audioSource.loop = true;
                 silent = false;
                 _audioSource.clip = _fightingMusic;
@@ -151,7 +152,7 @@ public class MusicBox : MonoBehaviour
         activeCoroutine = true;
         while (_localVolume > 0f)
         {
-            _localVolume -= Time.deltaTime * 2f;
+            _localVolume -= Time.deltaTime * .5f;
             yield return null;
         }
         _audioSource.Stop();

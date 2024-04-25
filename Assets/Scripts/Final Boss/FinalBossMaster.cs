@@ -157,10 +157,12 @@ public class FinalBossMaster : MonoBehaviour
             yield return new WaitForSeconds(2f);
             Transform camPos4 = GameObject.Find("CameraPos4").transform;
             _camera.moveToGivenPos(camPos4.position, camPos4.rotation.eulerAngles, 2f);
-            MusicBox.Instance.RollCredits();
+            
             GameManager.Instance.IsMainMenuLoaded = false; // Set GameManager BeenToMainMenu to false so we don't die when we get back to the town
             // Fade to credits after holding for a little
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
+            MusicBox.Instance.RollCredits();
+            yield return new WaitForSeconds(3f);
             ViewManager.GetView<FinalBossView>().LeaveSceneTransition();
             yield return new WaitForSeconds(3f);
             SceneManager.LoadScene("xx_Credits");

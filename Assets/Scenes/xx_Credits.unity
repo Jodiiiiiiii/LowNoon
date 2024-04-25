@@ -2933,8 +2933,8 @@ MonoBehaviour:
   _fb1Time: 5
   _fb2Time: 16
   _fb3Time: 36
-  _fb4Time: 60
-  _closingTime: 70
+  _fb4Time: 55
+  _closingTime: 65
   _sceneTransitionAnimator: {fileID: 2106174461}
 --- !u!1 &1342998500
 GameObject:
