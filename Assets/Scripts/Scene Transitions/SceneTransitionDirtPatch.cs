@@ -27,10 +27,26 @@ public class SceneTransitionDirtPatch : MonoBehaviour
         foreach (var obj in nearbyObjs)
         {
             // make sure it is an enemy and NOT a dummy target
-            if (obj.CompareTag("Enemy") && (obj.TryGetComponent(out RangedMovement compWasp) || (obj.TryGetComponent(out MeleeMovement compAnt))))
+            if (obj.CompareTag("Enemy"))
             {
-                enemiesNearby = true;
-                break;
+                // wasps
+                if(obj.TryGetComponent(out RangedMovement wasp))
+                {
+                    if (wasp.EnemyMoveState != RangedMovement.RangeEnemyMoveState.IDLE)
+                    {
+                        enemiesNearby = true;
+                        break;
+                    }
+                }
+                // ants
+                if(obj.TryGetComponent(out MeleeMovement ant))
+                {
+                    if(!ant.IsIdle)
+                    {
+                        enemiesNearby = true;
+                        break;
+                    }
+                }
             }
         }
 
