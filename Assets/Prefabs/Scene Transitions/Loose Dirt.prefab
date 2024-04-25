@@ -47,18 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e231dfec054b4f1687c7b4c7a105a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _combatLevels:
-  - 2_CombatRoom2
-  _barrelLevels:
-  - TEMPLATE-LevelBuilding
-  _mazeLevels:
-  - 6_MazeRoom
-  _minecartLevels:
-  - 3_MinecartRoom
-  _combatProb: 0.4
-  _barrelProb: 0.2
-  _mazeProb: 0.2
-  _minecartProb: 0.2
+  _levels:
+  - 4_CombatRoom4
+  - 4_CombatRoom4
+  - 4_CombatRoom4
+  - 4_CombatRoom4
+  - 4_CombatRoom4
   _bossLevel: 0_Hub
   _roomsBeforeBoss: 5
   _isStartPatch: 0
