@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneTransitionDirtPatch : MonoBehaviour
 {
@@ -32,7 +33,8 @@ public class SceneTransitionDirtPatch : MonoBehaviour
             }
         }
 
-        if (CanMoveOn && !enemiesNearby)
+        // enemies can be nearby in maze room to avoid issues if enemies are on other side of wall
+        if (CanMoveOn && (!enemiesNearby || SceneManager.GetActiveScene().name == "6_MazeRoom"))
         {
             _transitionCollider.enabled = true;
             _glowParticles.SetActive(true);
