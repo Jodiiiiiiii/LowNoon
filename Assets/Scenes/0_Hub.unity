@@ -13159,7 +13159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 811715715777743900, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1025364020095230628, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_AnchorMax.x
@@ -13194,6 +13194,14 @@ PrefabInstance:
     - target: {fileID: 1176775863498607513, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_margin.z
       value: -392.1344
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287960091693590493, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506038824823771390, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 1636252651846722952, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_AnchorMax.x
@@ -13373,7 +13381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3851313218807008371, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5049789201582490797, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_AnchorMax.x
@@ -13499,7 +13507,9 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Pixabay
 
-        WombatNoisesAudio'
+        WombatNoisesAudio
+
+        Zapsplat'
       objectReference: {fileID: 0}
     - target: {fileID: 7521890302249710642, guid: 12ea3ef88ac52774c99149e8a500d154, type: 3}
       propertyPath: m_fontSize
@@ -39543,14 +39553,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7179307920419429564, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: _clips.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7179307920419429564, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
-      propertyPath: _clips.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 24c0262a549de4b0c9d25c5d623e8536, type: 3}
     - target: {fileID: 7179307920419429564, guid: c1d52bc82986e334ebdf6c1dbff55b72, type: 3}
       propertyPath: _clips.Array.data[4]
       value: 

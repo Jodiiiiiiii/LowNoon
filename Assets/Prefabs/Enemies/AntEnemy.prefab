@@ -159,6 +159,7 @@ MonoBehaviour:
   EffectParticles: {fileID: 0}
   ShouldSpawn: 1
   _pickupHeight: 0.5
+  _clips: []
 --- !u!114 &8850345630138564579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +176,9 @@ MonoBehaviour:
   _hurtAnimDuration: 0
   _deathAnimDuration: 1
   _attackAnimDuration: 0
-  _clips: []
+  _clips:
+  - {fileID: 8300000, guid: fa8576226828da54ea256330ece49e9f, type: 3}
+  - {fileID: 8300000, guid: f6b7012f77f3b354e9f28ceb50c1bb07, type: 3}
   _vanishEffect: {fileID: 6744784352308396917, guid: 37b34de3e4a7be548893514f490ff184, type: 3}
 --- !u!82 &8782991439345267854
 AudioSource:
@@ -198,9 +201,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 100
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -208,10 +211,19 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.09882074
+      outSlope: 0.09882074
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.40067536
+    - serializedVersion: 3
+      time: 0.44275463
+      value: 0.3603148
+      inSlope: -1.1111113
+      outSlope: -1.1111113
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
@@ -219,12 +231,12 @@ AudioSource:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.07753759
+      outSlope: -0.07753759
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.27277035
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

@@ -1406,7 +1406,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -27.5}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &568023239
 MonoBehaviour:
@@ -1428,9 +1428,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Pixabay
+  m_text: 'Andrew Kohler (Enemy Voices)
 
-    Andrew Kohler
+    Pixabay
+
+    Zapslat
 
 '
   m_isRightToLeft: 0
