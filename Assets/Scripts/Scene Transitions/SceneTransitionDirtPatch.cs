@@ -26,7 +26,8 @@ public class SceneTransitionDirtPatch : MonoBehaviour
         Collider[] nearbyObjs = Physics.OverlapSphere(transform.position, _enemyCheckRadius);
         foreach (var obj in nearbyObjs)
         {
-            if (obj.CompareTag("Enemy"))
+            // make sure it is an enemy and NOT a dummy target
+            if (obj.CompareTag("Enemy") && (obj.TryGetComponent(out RangedMovement compWasp) || (obj.TryGetComponent(out MeleeMovement compAnt))))
             {
                 enemiesNearby = true;
                 break;
