@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuView : View
 {
+    [Header("Buttons")]
+    [SerializeField] private Button _startButton;
+    [SerializeField] private Button _optionsButton;
+    [SerializeField] private Button _creditsButton;
+    [SerializeField] private Button _quitButton;
+
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _optionsMenu;
     [SerializeField] private GameObject _creditsMenu;
@@ -38,10 +45,15 @@ public class MainMenuView : View
         StopAllCoroutines();
         StartCoroutine(DoMenuLoad());
 
-        
 
-            //GameManager.onHubRevive += Deactivate;
 
+        //GameManager.onHubRevive += Deactivate;
+
+        // disable all buttons on start - they activate when UI is visible
+        _startButton.interactable = false;
+        _optionsButton.interactable = false;
+        _creditsButton.interactable = false;
+        _quitButton.interactable = false;
     }
 
     private void OnDisable()
@@ -138,7 +150,11 @@ public class MainMenuView : View
             _cGroup.alpha += Time.deltaTime;
             yield return null;
         }
-        
-        
+
+        // enable all buttons after fade-in - they activate when UI is visible
+        _startButton.interactable = true;
+        _optionsButton.interactable = true;
+        _creditsButton.interactable = true;
+        _quitButton.interactable = true;
     }
 }
