@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     // singleton instance
     private static GameManager _instance;
 
-    public bool IsMainMenuLoaded = true;
+    public bool IsMainMenuLoaded = false;
     public delegate void OnSceneBegin();
     public static event OnSceneBegin onSceneBegin;
     public delegate void OnHubRevive();
