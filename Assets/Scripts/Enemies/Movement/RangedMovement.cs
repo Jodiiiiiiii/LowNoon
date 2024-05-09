@@ -68,6 +68,10 @@ public class RangedMovement : MonoBehaviour
     private int _leftOrRight;
     private Quaternion _initialRotation;
 
+    // prevent player from being instantly shot at
+    private float _delayTimer = 0;
+    private const float _delayTime = 2f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -146,24 +150,29 @@ public class RangedMovement : MonoBehaviour
         }
         else
         {
-            // Handle Obstructions
-            RaycastHit closestHit = new();
-            closestHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
-            RaycastHit[] obstructions = new RaycastHit[_maxObstructions];
-            int obstructionCount = Physics.SphereCastNonAlloc(transform.position, _obstructionCheckRadius, (_playerPosition - transform.position).normalized, 
-                obstructions, _aggroRange, _obstructionLayers, QueryTriggerInteraction.Ignore);
-            // find closest obstruction
-            for (int i = 0; i < obstructionCount; i++)
+            if (_delayTimer > _delayTime) // require short time to pass before leaving idle - prevent spawn shooting player
             {
-                if (obstructions[i].distance < closestHit.distance && obstructions[i].distance > 0) closestHit = obstructions[i];
+                // Handle Obstructions
+                RaycastHit closestHit = new();
+                closestHit.distance = Mathf.Infinity; // collision distance (infinity by default = no collision)
+                RaycastHit[] obstructions = new RaycastHit[_maxObstructions];
+                int obstructionCount = Physics.SphereCastNonAlloc(transform.position, _obstructionCheckRadius, (_playerPosition - transform.position).normalized,
+                    obstructions, _aggroRange, _obstructionLayers, QueryTriggerInteraction.Ignore);
+                // find closest obstruction
+                for (int i = 0; i < obstructionCount; i++)
+                {
+                    if (obstructions[i].distance < closestHit.distance && obstructions[i].distance > 0) closestHit = obstructions[i];
+                }
+
+                // exit idle mode if player detected with no obstructions
+                if (closestHit.distance < Mathf.Infinity && closestHit.collider.CompareTag("Player"))
+                    EnemyMoveState = RangeEnemyMoveState.ZIPPY;
+
+                // lock rotation while still in idle mode (prevents spinning out of control if bumped)
+                transform.rotation = _initialRotation;
             }
-
-            // exit idle mode if player detected with no obstructions
-            if (closestHit.distance < Mathf.Infinity && closestHit.collider.CompareTag("Player"))
-                EnemyMoveState = RangeEnemyMoveState.STILL;
-
-            // lock rotation while still in idle mode (prevents spinning out of control if bumped)
-            transform.rotation = _initialRotation;
+            else
+                _delayTimer += Time.deltaTime;
         }
 
         Vector3 direction = Vector3.zero; // stays zero if in still state

@@ -187,7 +187,7 @@ MonoBehaviour:
   _baseHealth: 5
   _healthPerUpgrade: 1
   _baseArmor: 0
-  _armorPerUpgrade: 1
+  _armorPerUpgrade: 2
   _baseBulletDamage: 1
   _bulletDamagePerUpgrade: 0.34
   _baseBulletCooldown: 1

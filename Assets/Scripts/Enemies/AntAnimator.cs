@@ -19,7 +19,7 @@ public class AntAnimator : EnemyAnimator
         _animator.SetBool("isMoving", !_meleeMovement.IsIdle);
         _animator.SetBool("isAttacking", _meleeMovement.IsAtPlayer);
 
-        if (prevHP > _damageReceiver.HealthLevel)    // If the enemy has been damaged
+        if (prevHP > _damageReceiver.HealthLevel && !_animator.GetBool("isDead"))    // If the enemy has been damaged
         {
             if (_damageReceiver.HealthLevel <= 0 && !_animator.GetBool("isDead")) // If the enemy is dead
             {

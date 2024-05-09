@@ -48,12 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levels:
+  - 2_CombatRoom2
+  - 3_MinecartRoom
   - 4_CombatRoom4
-  - 4_CombatRoom4
-  - 4_CombatRoom4
-  - 4_CombatRoom4
-  - 4_CombatRoom4
-  _bossLevel: 0_Hub
+  - 5_BarrelRoom
+  - 6_MazeRoom
+  _bossLevel: x_FinalBoss
   _roomsBeforeBoss: 5
   _isStartPatch: 0
 --- !u!33 &665705252202585903
@@ -125,5 +125,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 5.0063252, z: 1}
+  m_Center: {x: 0, y: 2.0031643, z: 0}

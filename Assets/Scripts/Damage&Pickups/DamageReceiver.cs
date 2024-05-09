@@ -75,9 +75,11 @@ public class DamageReceiver : MonoBehaviour
                 GameObject soundObj = new GameObject();
                 soundObj.transform.position = transform.position;
                 AudioSource audioSource = soundObj.AddComponent<AudioSource>();
-                audioSource.PlayOneShot(_clips[0], GameManager.Instance.GetEnvironmentVolume());
+                if(_clips[0] != null) // prevent null audio playing for objects that don't use this sound
+                    audioSource.PlayOneShot(_clips[0], GameManager.Instance.GetEnvironmentVolume());
+
+                // get rid of it
                 Destroy(gameObject);
-                
             }
         }
     }

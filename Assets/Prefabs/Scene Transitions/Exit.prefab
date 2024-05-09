@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitionCollider: {fileID: 7350164877092880138}
   _glowParticles: {fileID: 4776913056154308933}
+  _enemyCheckRadius: 60
   CanMoveOn: 0
 --- !u!1 &4776913056154308933
 GameObject:
@@ -4986,30 +4987,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120373973619698884}
     m_Modifications:
-    - target: {fileID: 664856852505322790, guid: 2fb38b98488c92e4c863167ad0762d6b, type: 3}
-      propertyPath: _bossLevel
-      value: x_FinalBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 664856852505322790, guid: 2fb38b98488c92e4c863167ad0762d6b, type: 3}
-      propertyPath: _roomsBeforeBoss
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 664856852505322790, guid: 2fb38b98488c92e4c863167ad0762d6b, type: 3}
-      propertyPath: _levels.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 664856852505322790, guid: 2fb38b98488c92e4c863167ad0762d6b, type: 3}
-      propertyPath: _levels.Array.data[2]
-      value: 4_CombatRoom4
-      objectReference: {fileID: 0}
-    - target: {fileID: 679379133754968413, guid: 2fb38b98488c92e4c863167ad0762d6b, type: 3}
-      propertyPath: m_Size.y
-      value: 5.0063252
-      objectReference: {fileID: 0}
-    - target: {fileID: 679379133754968413, guid: 2fb38b98488c92e4c863167ad0762d6b, type: 3}
-      propertyPath: m_Center.y
-      value: 2.0031643
-      objectReference: {fileID: 0}
     - target: {fileID: 6834198661180615332, guid: 2fb38b98488c92e4c863167ad0762d6b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.14999999
